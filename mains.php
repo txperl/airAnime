@@ -386,7 +386,7 @@ function DMHY($title){
 	return $dmhy;
 }
 //判断
-function ifsrh($title,$ifrun){
+function asrh($title,$ifrun){
 	$urls=array();
 		$none='http://7vzp04.com1.z0.glb.clouddn.com/none.txt';
 		//if ($ifrun[0]=='true') {

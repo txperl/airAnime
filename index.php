@@ -122,8 +122,8 @@ if(is_array($_GET)&&count($_GET)>0){
 			$title=getSubstr($title,'',' exc:');
 		}
 		echo '<h2 class="content-sub-heading">'.$title.'</h2>';
-		// 判断
-		$webd=ifsrh($title,$ifrun);
+		// 抓取网页
+		$webd=asrh($title,$ifrun);
 		// bilibili 结果
 		//if ($ifrun[0]=='true') {
 			$r_bilibili=bilibiliS($webd[0]);
