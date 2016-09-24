@@ -58,7 +58,7 @@
 						</div>
 						<h2 class="content-sub-heading">More info.</h2>
 						<div class="table-responsive">
-							<table class="table" title="A basic table">
+							<table class="table">
 								<thead>
 									<tr>
 										<th>Function</th>
@@ -75,17 +75,17 @@
 									<tr>
 										<td>搜索指令</td>
 										<td>0.1</td>
-										<td>2016/09/03</td>
+										<td>2016/09/15</td>
 									</tr>
 									<tr>
 										<td>网页样式</td>
 										<td>1.0</td>
-										<td>2016/08/29</td>
+										<td>2016/09/15</td>
 									</tr>
 									<tr>
 										<td>托管服务器</td>
 										<td>SAE</td>
-										<td>2016/08/30</td>
+										<td>2016/09/15</td>
 									</tr>
 								</tbody>
 							</table>
@@ -95,10 +95,10 @@
 							<div class="card-main">
 								<div class="card-inner">
 									<p>1.0 beta1.5 (beta2先行版,此次更新算入beta2)</p>
-									<p>1.优化 内部代码结果</p>
+									<p>1.优化 内部代码结构</p>
 									<p>2.优化 百度协助搜索规则</p>
 									<p>3.新增 腾讯视频数据源</p>
-									<p>启用短网址: airs.im</p>
+									<p>启用短网址: <span style="font-weight:bold;">airs.im</span></p>
 									<hr>
 									<p>1.0 beta1</p>
 									<p>All</p>

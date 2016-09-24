@@ -245,9 +245,9 @@ if(is_array($_GET)&&count($_GET)>0){
 				</div>
 			<div class="card-action">
 				<div class="card-action-btn pull-left">
-					<a class="btn btn-flat waves-attach" href="./start.html">开始</a>
-					<a class="btn btn-flat waves-attach" href="./if.html">数据源</a>
-					<a class="btn btn-flat waves-attach" href="./srhcode.html">搜索指令</a>
+					<a class="btn btn-flat waves-attach" href="./start.php">开始</a>
+					<a class="btn btn-flat waves-attach" href="./if.php">数据源</a>
+					<a class="btn btn-flat waves-attach" href="./srhcode.php">搜索指令</a>
 				</div>
 			</div></div></div>
 		</div>
