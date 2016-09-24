@@ -1,6 +1,6 @@
 <?php
 //添加数据源思路：
-//1.写 ifsrh 中代码
+//1.写 asrh 中代码
 //2.添加搜索指令 ifrun
 //3.index中整合数据(站内搜索还需写匹配代码)
 //4.结果总数
@@ -58,16 +58,13 @@ function dilidiliS($title){
 
 	$webtext=$title;
 	$webtext=str_replace(' ','',$webtext);
-	preg_match_all('/>(.*?)在线&amp;下载(.+?)嘀哩嘀哩/',$webtext,$rst);
-	$number=$number+count($rst[1])/2;
+	preg_match_all('/{"title":"(.*?)在线&amp;下载(.+?)嘀哩嘀哩","url":"(.*?)"}/',$webtext,$rst);
+	$number=$number+count($rst[0]);
 		// 载入 标题 链接
-		for ($i=0; $i<count($rst[1])/2; $i++) { 
-			$t=str_replace('-','',$rst[1][$i*2]);
-			$t=str_replace('<em>','',$t);
-			$t=str_replace('</em>','',$t);
+		for ($i=0; $i<count($rst[0]); $i++) { 
+			$t=str_replace('-','',$rst[1][$i]);
 			array_push($rst_t,$t);
-
-			$l=getSubstr($rst[1][($i*2)+1],'_blank"href="','"class=');
+			$l=$rst[3][$i];
 			array_push($rst_l,$l);
 
 /*
@@ -172,18 +169,14 @@ function baiduS($title,$zz,$page,$wst){
   $webtext=$title;
   $webtext=str_replace(' ','',$webtext);
   preg_match_all($zz,$webtext,$rst);
-  $number=$number+count($rst[1])/2;
+  $number=$number+count($rst[0]);
     // 载入 标题 链接
-    for ($i=0; $i<count($rst[1])/2; $i++) { 
-    	$t=str_replace('','',$rst[1][$i*2]);
-      	$t=str_replace('<em>','',$t);
-      	$t=str_replace('</em>','',$t);
+    for ($i=0; $i<count($rst[0]); $i++) { 
+    	$t=$rst[1][$i];
       	array_push($rst_t,$t);
-
-      	$l=getSubstr($rst[1][($i*2)+1],'_blank"href="','"class=');
+      	$l=$rst[3][$i];
       	array_push($rst_l,$l);
     }
-
   }
   array_push($baiduS,$rst_t);
   array_push($baiduS,$rst_l);
@@ -225,8 +218,8 @@ function loaclSS($title,$nowout,$name,$cname,$n_name,$l_name,$t_name){
 		echo '</div></div></div></div></div>';
 }
 //特殊代码功能
-//only:\b\d\f\p\l\i\y\bda/
-//exc:\b\d\f\p\l\i\y\bda/
+//only:\b\d\f\p\l\i\y\bda\t/
+//exc:\b\d\f\p\l\i\y\bda\t/
 //0.0.bilibili
 //0.1.dilidili
 //0.2.fcdm
@@ -235,6 +228,7 @@ function loaclSS($title,$nowout,$name,$cname,$n_name,$l_name,$t_name){
 //0.5.iqiyi
 //0.6.youku
 //0.7.baiduall
+//0.8.tencenttv
 function ifcode($title){
 	$ifrun=array();
 	if (substr_count($title,'only:')==1) {
@@ -282,6 +276,12 @@ function ifcode($title){
 			}
 
 			if (substr_count($scode,'\bda')==1) {
+				array_push($ifrun,'true');
+			} else {
+				array_push($ifrun,'false');
+			}
+
+			if (substr_count($scode,'\t')==1) {
 				array_push($ifrun,'true');
 			} else {
 				array_push($ifrun,'false');
@@ -335,8 +335,14 @@ function ifcode($title){
 			} else {
 				array_push($ifrun,'true');
 			}
+
+			if (substr_count($scode,'\t')==1) {
+				array_push($ifrun,'false');
+			} else {
+				array_push($ifrun,'true');
+			}
 	} else{
-		for ($i=0; $i < 8; $i++) { 
+		for ($i=0; $i < 9; $i++) { 
 			array_push($ifrun,'true');
 		}
 	}
@@ -440,6 +446,12 @@ function asrh($title,$ifrun){
 			$stitle=$none;
 		}
 		array_push($urls,$stitle);//8
+		if ($ifrun[8]=='true') {
+			$stitle='http://www.baidu.com/s?wd=site%3Av.qq.com%20'.urlencode($title).'&pn=0';
+		}	else{
+			$stitle=$none;
+		}
+		array_push($urls,$stitle);//9
 	//获取网页数据
 		$frst=curl_multi($urls);
 		$rst=array();
@@ -451,6 +463,7 @@ function asrh($title,$ifrun){
 		array_push($rst,$frst[6]);//iqiyi
 		array_push($rst,$frst[7]);//youku
 		array_push($rst,$frst[8]);//baiduall
+		array_push($rst,$frst[9]);//tencenttv
 	return $rst;
 }
 ?>

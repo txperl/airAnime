@@ -21,8 +21,8 @@ require 'function.php';
             echo ' <a style="text-decoration:none;" href="#" id="srhauto'.$i.'" name="'.$f.'"><span class="label">'.$f.'</span></a> ';
             $scr=$scr.'$(function(){$("#srhauto'.$i.'").click(function(){var text=document.getElementById("srhauto'.$i.'").name;document.getElementById("title").value=text;});});';
         }
-            echo '<script>'.$scr.'</script>';
+            echo '<script>'.$scr.'</script><!--'; //SAE未实名特殊处理
     } else{
-        echo '<span class="label">none</span>';
+        echo '<span class="label">none</span><!--'; //SAE未实名特殊处理
     }
 ?>

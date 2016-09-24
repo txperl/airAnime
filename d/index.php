@@ -240,7 +240,7 @@ p {
  <section class="list-wrap">
 
    <label for="search-text">Search the list</label>
-  <input type="text" id="search-text" placeholder="search" class="search-box">
+  <input type="text" id="search-text" class="search-box">
     <span class="list-count"></span>
     
     
