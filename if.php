@@ -108,6 +108,16 @@
 										<td>TRUE</td>
 										<td>站内搜索(RSS)</td>
 									</tr>
+									<tr>
+										<td>DMZJ(动漫之家)_漫画源</td>
+										<td>TRUE</td>
+										<td>百度协助搜索</td>
+									</tr>
+									<tr>
+										<td>BKMH(布卡漫画)_漫画源</td>
+										<td>TRUE</td>
+										<td>百度协助搜索</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>

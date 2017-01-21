@@ -46,7 +46,8 @@
 							<div class="card">
 								<div class="card-main">
 									<div class="card-inner">
-										<p class="card-heading">搜索</p>
+										<p class="card-heading">认识&搜索</p>
+										<p>airAnime可以聚合(全局)搜索已有的动漫数据源，准确率约为90%。</p>
 										<p>在文本框中输入您所要搜索的番剧，按 Enter 或 点击SEARCH 即可开始搜索。</p>
 										<p>这里有一点需要注明，因为是在线抓取网页数据并分析，暂未加入数据库，所以 每次搜索速度未知。</p>
 									</div>

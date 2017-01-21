@@ -42,7 +42,7 @@
 											<input class="form-control" id="title" type="text" name='title' autocomplete="off">
 											</div>
 											<br>
-											搜索指令(点击添加): <code><a href="#" id="addsconly">only:\?/</a></code> <code><a href="#" id="addscexc">exc:\?/</a></code>
+											搜索指令(点击添加): <code><a href="#" id="addsctype">type:\?/</a></code> <code><a href="#" id="addscexc">exc:\?/</a></code> <code><a href="#" id="addsctj">comic</a></code>
 											<div style="text-align:right;">
 											<a class="btn btn-brand waves-attach waves-light" href="#" id="btnS"> Search </a>
 											</div>
@@ -63,21 +63,48 @@
 							</div>
 					</div>
 <?php
+include("./functions/chttochs/convert.php");
 require "./functions/mains.php";
 if(is_array($_GET)&&count($_GET)>0){ 
 	if(isset($_GET["title"])){
 		$title=$_GET["title"];
-		if ($title!='') {
+	 if ($title!='') {
+		//!image
+		if (substr_count($title,'!image:')==1) {
+			$picurl=getSubstr($title,'!image:',';');
+			$rst=picS($picurl);
+			$name=unicode_decode(getSubstr($rst,'title_chinese":"','","')); //繁体
+			$name=zhconversion_hans($name);  //简体
+			$title=str_replace('!image:'.$picurl.';',$name,$title);
+		}
+		//iftype
+		$iftype=iftype($title);
+		if (substr_count($title,'type:')==1) {
+			$scode=' type:'.getSubstr($title,' type:','/').'/';
+			$title=str_replace($scode,'',$title);
+		}
+		//ifrun
 		$ifrun=ifcode($title);
 		if (substr_count($title,'only:')==1) {
-			$title=getSubstr($title,'',' only:');
+			$scode=' only:'.getSubstr($title,' only:','/').'/';
+			$title=str_replace($scode,'',$title);
 		}
 		if (substr_count($title,'exc:')==1) {
-			$title=getSubstr($title,'',' exc:');
+			$scode=' exc:'.getSubstr($title,' exc:','/').'/';
+			$title=str_replace($scode,'',$title);
 		}
-		echo '<h2 class="content-sub-heading">'.$title.'</h2>';
+		if ($iftype=='c') {
+			echo '<h2 class="content-sub-heading">'.$title.' [Comic]</h2>';
+		} elseif ($iftype=='n') {
+			echo '<h2 class="content-sub-heading">'.$title.' [Novel]</h2>';
+		} else{
+			echo '<h2 class="content-sub-heading">'.$title.'</h2>';
+		}
+		
 		// 抓取网页
-		$webd=asrh($title,$ifrun);
+			//动画
+		if ($iftype=='a') {
+			$webd=asrh($title,$ifrun);
 		// bilibili 结果
 		//if ($ifrun[0]=='true') {
 			$r_bilibili=bilibiliS($webd[0]);
@@ -112,6 +139,12 @@ if(is_array($_GET)&&count($_GET)>0){
 			$n_letv=$r_letv[2];
 			$t_letv=$r_letv[0];
 			$l_letv=$r_letv[1];
+			if ($n_letv=='') {
+				$r_letv=baiduS($webd[4],'/{"title":"(.*?)-在线观看-动漫(.*?)","url":"(.*?)"}/',1,'www.le.com');// 1 参数暂时无用，下同
+				$n_letv=$r_letv[2];
+				$t_letv=$r_letv[0];
+				$l_letv=$r_letv[1];
+			}
 		}
 		// iqiyi 结果
 		if ($ifrun[5]=='true'){
@@ -119,6 +152,12 @@ if(is_array($_GET)&&count($_GET)>0){
 			$n_iqiyi=$r_iqiyi[2];
 			$t_iqiyi=$r_iqiyi[0];
 			$l_iqiyi=$r_iqiyi[1];
+			if ($n_iqiyi==0) {
+				$r_iqiyi=baiduS($webd[5],'/{"title":"(.*?)-全集在线观看-动漫(.*?)","url":"(.*?)"}/',1,'www.iqiyi.com');
+				$n_iqiyi=$r_iqiyi[2];
+				$t_iqiyi=$r_iqiyi[0];
+				$l_iqiyi=$r_iqiyi[1];
+			}
 		}
 		// youku 结果
 		if ($ifrun[6]=='true'){
@@ -139,6 +178,12 @@ if(is_array($_GET)&&count($_GET)>0){
 			$n_tencenttv=$r_tencenttv[2];
 			$t_tencenttv=$r_tencenttv[0];
 			$l_tencenttv=$r_tencenttv[1];
+			if ($n_tencenttv==0) {
+				$r_tencenttv=baiduS($webd[8],'/{"title":"(.*?)-动漫(.*?)","url":"(.*?)"}/',1,'v.qq.com');
+				$n_tencenttv=$r_tencenttv[2];
+				$t_tencenttv=$r_tencenttv[0];
+				$l_tencenttv=$r_tencenttv[1];
+			}
 		}
 
 		$statol=$n_bilibili+$n_dilidili+$n_baiduall+$n_letv+$n_iqiyi+$n_pptv+$n_fcdm+$n_youku+$n_tencenttv;
@@ -147,7 +192,7 @@ if(is_array($_GET)&&count($_GET)>0){
     		echo '<div class="tile-inner">在已有数据源中找到 '.$statol.' 项匹配结果.</div>';
 		echo '</div></div>';
 
-	// 结果
+		// 结果
 		$nowout='';
 		echo '<h2 class="content-sub-heading">Results</h2>';
 		//bilibili 保留示范
@@ -237,8 +282,38 @@ if(is_array($_GET)&&count($_GET)>0){
 					echo '<a href="./d/?'.$title.'" target="_blank">动漫花园</a>';
 				echo '</div></div>';
 		echo '</div></div></div>';
-	// 结束
+		// 结束
 		}
+			//漫画
+		if ($iftype=='c') {
+			$webd=csrh($title);
+			//动漫之家
+			$r_dmzj=baiduS($webd[0],'/{"title":"(.*?)漫画-动漫之家(.*?)","url":"(.*?)"}/',1,'manhua.dmzj.com');
+			$n_dmzj=$r_dmzj[2];
+			$t_dmzj=$r_dmzj[0];
+			$l_dmzj=$r_dmzj[1];
+			//布卡漫画
+			$r_bkmh=baiduS($webd[1],'/{"title":"(.*?)-布卡漫画(.*?)","url":"(.*?)"}/',1,'www.buka.cn');
+			$n_bkmh=$r_bkmh[2];
+			$t_bkmh=$r_bkmh[0];
+			$l_bkmh=$r_bkmh[1];
+
+			$statol=$n_dmzj+$n_bkmh;
+			// 简要 数量
+			echo '<div class="tile-wrap"><div class="tile">';
+    			echo '<div class="tile-inner">在已有数据源中找到 '.$statol.' 项匹配结果.</div>';
+			echo '</div></div>';
+
+			//输出结果
+				echo '<h2 class="content-sub-heading">Results</h2>';
+				//动漫之家
+				echo '<div class="tile-wrap">';
+				baiduSS($title,'manhua.dmzj.com','DMZJ','动漫之家',$n_dmzj,$l_dmzj,$t_dmzj);
+				//布卡漫画
+				baiduSS($title,'www.buka.cn','BKMH','布卡漫画',$n_bkmh,$l_bkmh,$t_bkmh);
+				echo '</div>';
+		}
+	 }
 	} 
 }
 ?>
@@ -250,7 +325,7 @@ if(is_array($_GET)&&count($_GET)>0){
 			<div class="card-main">
 				<div class="card-inner">
 					<p class="card-heading">Welcome</p>
-					<p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 beta2,<br><span style="font-weight:bold;">Airs.im</span> 可跳转于此哦.</p>
+					<p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 beta3,<br><span style="font-weight:bold;">假期愉快</span>,这里有<a href="/notice.php">告示</a>哦~</p>
 				</div>
 			<div class="card-action">
 				<div class="card-action-btn pull-left">
@@ -279,11 +354,11 @@ if(is_array($_GET)&&count($_GET)>0){
             });
         });
         $(function(){
-            $("#addsconly").click(function(){
+            $("#addsctype").click(function(){
                 var obj=document.getElementById("title");
 				var val=obj.value;
 				if (val != '')
-					obj.value=val+" only:\\/";
+					obj.value=val+" type:\\/";
             });
         });
         $(function(){
@@ -295,11 +370,11 @@ if(is_array($_GET)&&count($_GET)>0){
             });
         });
         $(function(){
-            $("#sgtn").click(function(){
+            $("#addsctj").click(function(){
                 var obj=document.getElementById("title");
 				var val=obj.value;
 				if (val != '')
-					obj.value=val+" exc:\\i\\y/";
+					obj.value=val+" type:\\c/";
             });
         });
         var a = location.href;if(a=='http://airanime.applinzi.com/'){$('#ifhomea').show();}else $('#ifhomea').hide();

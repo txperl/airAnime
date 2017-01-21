@@ -33,7 +33,7 @@ function bilibiliS($title){
 
 		for ($n=0; $n<$number; $n++) {
 			$f='<div class="left-img">'.getSubstr($webtext,'<div class="left-img">','</div>').'</div>';
-			$l='http://bangumi.bilibili.com/anime/'.getSubstr($f,'http://bangumi.bilibili.com/anime/','" ');
+			$l='http://bangumi.bilibili.com/anime/'.getSubstr($f,'//bangumi.bilibili.com/anime/','" ');
 			$t=getSubstr($f,'title="','" ');
 			$webtext=str_replace($f,'',$webtext);
 			array_push($rst_l,$l);
@@ -221,6 +221,7 @@ function loaclSS($title,$nowout,$name,$cname,$n_name,$l_name,$t_name){
 			echo '<a target="_blank" class="btn btn-flat waves-attach" href="https://www.google.com/#q=site%3A'.$nowout.'%20'.$title.'">谷歌</a>';
 		echo '</div></div></div></div></div>';
 }
+//////////////////////////////////////////////////
 //特殊代码功能
 //only:\b\d\f\p\l\i\y\bda\t/
 //exc:\b\d\f\p\l\i\y\bda\t/
@@ -352,6 +353,45 @@ function ifcode($title){
 	}
 	return $ifrun;
 }
+
+function iftype($title){
+	$iftype='a';
+	if (substr_count($title,'type:')==1) {
+		$scode=getSubstr($title,'type:','/');
+			if ($scode=='\c') {
+				$iftype='c';
+			} elseif ($scode=='\n') {
+				$iftype='n';
+			}
+	}
+	return $iftype;
+}
+
+function picS($picurl){
+	if ($picurl!='') {
+	$image_file = $picurl;
+	$image_info = getimagesize($image_file);
+	$type = pathinfo($image_file, PATHINFO_EXTENSION);
+	if ($type=='jpg') {
+		$type='jpeg';
+	}
+	$imgbase64 = 'data:image/'.$type.';base64,' . chunk_split(base64_encode(file_get_contents($image_file)));
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={...}');
+    curl_setopt($curl, CURLOPT_HEADER, 1);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    $post_data = array(
+        "image" => $imgbase64
+        );
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
+    $data = curl_exec($curl);
+    curl_close($curl);
+    return $data;
+	}
+}
+//////////////////////////////////////////////////
 // Download Info
 // 0.标题
 // 1.链接
@@ -468,6 +508,20 @@ function asrh($title,$ifrun){
 		array_push($rst,$frst[7]);//youku
 		array_push($rst,$frst[8]);//baiduall
 		array_push($rst,$frst[9]);//tencenttv
+	return $rst;
+}
+function csrh($title){
+	$urls=array();
+		$stitle='http://www.baidu.com/s?wd=site%3Amanhua.dmzj.com%20'.urlencode($title).'&pn=0'; //动漫之家
+		array_push($urls,$stitle);//0
+
+		$stitle='http://www.baidu.com/s?wd=site%3Awww.buka.cn%20'.urlencode($title).'&pn=0'; //布卡漫画
+		array_push($urls,$stitle);//1
+	//获取网页数据
+		$frst=curl_multi($urls);
+		$rst=array();
+		array_push($rst,$frst[0]);//动漫之家
+		array_push($rst,$frst[1]);//布卡漫画
 	return $rst;
 }
 ?>

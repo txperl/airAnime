@@ -32,6 +32,9 @@ print <<<EOT
 						<a class="collapsed waves-attach" href="./about.php">About</a>
 					</li>
 					<li>
+						<a class="collapsed waves-attach" href="./notice.php">Notice</a>
+					</li>
+					<li>
 						<a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_extras">Docs</a>
 						<ul class="menu-collapse collapse" id="ui_menu_extras">
 							<li>
@@ -51,6 +54,7 @@ print <<<EOT
 					<li>
 						<a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_xinfan">新番</a>
 						<ul class="menu-collapse collapse" id="ui_menu_xinfan">
+							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=18100&categoryId=800&realCategoryId=1&subCategoryId=5" target="_blank">2017年01月冬季</a></li>
 							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=15697&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年10月秋季</a></li>
 							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=15445&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年07月夏季</a></li>
 							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=14444&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年04月春季</a></li>
@@ -84,7 +88,7 @@ print <<<EOT
 			<div class="fbtn-dropup">
 				<a class="fbtn waves-attach waves-circle" href="https://github.com/txperl/airAnime" target="_blank"><span class="fbtn-text fbtn-text-left">Fork me on GitHub</span><span class="icon">code</span></a>
 				<a class="fbtn fbtn-brand waves-attach waves-circle waves-light" href="https://twitter.com/txperl" target="_blank"><span class="fbtn-text fbtn-text-left">Twitter</span><span class="icon">share</span></a>
-				<a class="fbtn fbtn-green waves-attach waves-circle" href="https://loli.am/" target="_blank"><span class="fbtn-text fbtn-text-left">Blog</span><span class="icon">link</span></a>
+				<a class="fbtn fbtn-green waves-attach waves-circle" href="http://yumoe.com/" target="_blank"><span class="fbtn-text fbtn-text-left">Blog</span><span class="icon">link</span></a>
 			</div>
 		</div>
 		</div>

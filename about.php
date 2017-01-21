@@ -36,8 +36,9 @@
 							<div class="card-main">
 								<div class="card-inner">
 									<p>airAnime是一款集合番剧搜索程序,借助于各网站的数据及各网站的搜索功能进行指定搜索,以减少搜索番剧的时间。</p>
+									<hr>
 									<p>此版本是WEB版airAnime(airAnime Online).</p>
-									<p>Windows版现已发布 <a href="https://loli.am/airanime/" target="_blank">beta版本</a> 。</p>
+									<p>Windows版现已发布 <a href="http://yumoe.com/airanime/" target="_blank">beta版本</a> 。</p>
 									<p>前端基于 <a href="https://github.com/Daemonite/material" target="_blank">Material框架</a> ，后端PHP。</p>
 									<p>这是一个开源程序，您可以到我的GitHub主页下载。</p>
 									<p>请使用现代浏览器以达到最佳体验效果。</p>
@@ -50,8 +51,8 @@
 							<div class="card-main">
 								<div class="card-inner">
 									<p>如有BUG欢迎反馈交流。</p>
-									<p>我的个人页: Hsia.in & 博客: loli.am.</p>
-									<p>我的邮箱: i#loli.am or txperl#gmail.com.</p>
+									<p>我的博客: yumoe.com</p>
+									<p>我的邮箱: txperl#gmail.com</p>
 									<p>感谢。</p>
 								</div>
 							</div>
@@ -69,23 +70,23 @@
 								<tbody>
 									<tr>
 										<td>airAnime Online</td>
-										<td>1.0 beta2</td>
-										<td>2016/10/01</td>
+										<td>1.0 beta3</td>
+										<td>2017/01/22</td>
 									</tr>
 									<tr>
 										<td>搜索指令</td>
-										<td>0.1</td>
-										<td>2016/09/15</td>
+										<td>0.2</td>
+										<td>2017/01/22</td>
 									</tr>
 									<tr>
 										<td>网页样式</td>
-										<td>1.0</td>
-										<td>2016/09/15</td>
+										<td>1.1</td>
+										<td>2017/01/2?</td>
 									</tr>
 									<tr>
 										<td>托管服务器</td>
 										<td>SAE</td>
-										<td>2016/09/15</td>
+										<td>NONE</td>
 									</tr>
 								</tbody>
 							</table>
@@ -94,6 +95,13 @@
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
+									<p>1.0 beta3</p>
+									<p>1.优化 指令搜索代码结构</p>
+									<p>2.优化 百度协助搜索(精度提高约至90%)</p>
+									<p>3.新增 image[未开放],type指令</p>
+									<p>5.新增 漫画搜索(动漫之家,布卡漫画)</p>
+									<p>6.新增 以图搜番测试版[未开放]</p>
+									<hr>
 									<p>1.0 beta2</p>
 									<p>1.优化 内部代码结构</p>
 									<p>2.优化 百度协助搜索规则(更加精准稳定)</p>

@@ -71,15 +71,6 @@
               </li>
             </ul>
           </li>
-          <li>
-            <a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_xinfan">新番</a>
-            <ul class="menu-collapse collapse" id="ui_menu_xinfan">
-              <li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=15697&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年10月秋季</a></li>
-              <li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=15445&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年07月夏季</a></li>
-              <li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=14444&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年04月春季</a></li>
-              <li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=12914&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年01月冬季</a></li>
-            </ul>
-          </li>
         </ul>
       </div>
     </div>
