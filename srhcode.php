@@ -41,7 +41,7 @@
 								</div>
 							</div>
 						</div>
-						<h2 class="content-sub-heading">指定搜索源（一次搜索中只可使用其一）</h2>
+						<h2 class="content-sub-heading">指定搜索源</h2>
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
@@ -59,7 +59,7 @@
 							</div>
 						</div>
 
-						<h2 class="content-sub-heading">type类型</h2>
+						<h2 class="content-sub-heading">Type类型</h2>
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
@@ -68,9 +68,9 @@
 									<p>此代码必须<span style="font-weight:bold;">小写</span>，并且用 <span style="font-weight:bold;">空格</span> 隔开。开始: 'type:' ,结束: '/'.</p>
 									<p>通用形式：title codes</p> 
 									<hr>
-									<p><span style="font-weight:bold;">类型代码：</span><br>动画(Anime): \a<br>漫画(Comic): \c<br>小说(Novel): \n</p>
+									<p><span style="font-weight:bold;">类型代码：</span><br>动画(Anime): \a<br>漫画(Comic): \c<br>小说(Novel): \n<br>下载(Download): \d</p>
 									<hr>
-									<p>若不存在此指令，则默认 动画(Anime) 搜索。小说搜索暂不可用。</p>
+									<p>若不存在此指令，则默认 动画(Anime) 搜索。</p>
 								</div>
 							</div>
 						</div>
@@ -84,12 +84,12 @@
 									<p><span style="font-weight:bold;">此代码为全局指令,不可与普通搜索(名称搜索)方式并用</span>，与其他指令用 <span style="font-weight:bold;">空格</span> 隔开。开始: '!image:' ,结束: ';'.</p>
 									<p>通用形式：!image:?; codes</p> 
 									<hr>
-									<p>此功能用了whatanime.ga API，所以存在单位时间使用限制。这个功能运气好的话可以在beta4版本呈现，但最不好的情况就是取消。主要原因还是因为API问题。</p>
+									<p>此功能用了whatanime.ga API，所以存在单位时间使用限制。这个功能运气好的话可以在之后某一版本呈现，但最不好的情况就是取消。主要原因还是因为API问题。</p>
 								</div>
 							</div>
 						</div>
 
-						<h3 class="content-sub-heading">以上代码皆可同时使用</h3>
+						<h3 class="content-sub-heading">以上代码皆可同时使用，但每种类型只可使用一次</h3>
 
 						<h2 class="content-sub-heading">指令集</h2>
 						<div class="table-responsive">
@@ -118,7 +118,7 @@
 										<td>散华礼弥 type:\c/</td>
 									</tr>
 									<tr>
-										<td>!image:?;[未开放]</td>
+										<td>!image:?;</td>
 										<td>以指定的图片链接搜索番剧</td>
 										<td>!image:url;</td>
 									</tr>

@@ -1,5 +1,4 @@
 <?php
-
 /*以下是取中间文本的函数 
   getSubstr=调用名称
   $str=预取全文本 
@@ -14,6 +13,14 @@ function getSubstr($str, $leftStr, $rightStr)
     //echo '<br>右边:'.$right;
     if($left < 0 or $right < $left) return '';
     return substr($str, $left + strlen($leftStr), $right-$left-strlen($leftStr));
+}
+/*以下是取中间文本的函数(正则) 
+*/
+function getNeedBetween($data,$zz){
+    $str = $data;
+    preg_match($zz, $str, $a);
+    $b = $a[1];
+    return $b;
 }
 function getHTTPS($url) {
   $ch = curl_init();

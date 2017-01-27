@@ -41,9 +41,9 @@
 									<hr>
 									<p>TRUE:拥有针对性匹配代码，搜索匹配率高。</p>
 									<p>uTRUE:拥有半针对性匹配代码，搜索匹配率高，但内容相关度未知。</p>
-									<p>WARN:通常为通用匹配代码，搜索匹配率中，稳定性差(可能因为匹配失败导致样式漂移)。</p>
 									<p>EXTRA:可有可无。</p>
-									<p>!:暂时不可用。</p>
+									<p>?:因特殊原因(如目标服务器或百度收录问题)暂时无法确定稳定性。</p>
+									<p>!:暂不可用。</p>
 								</div>
 							</div>
 						</div>
@@ -65,7 +65,7 @@
 									</tr>
 									<tr>
 										<td>Dilidili(嘀哩嘀哩)</td>
-										<td>TRUE</td>
+										<td>?TRUE</td>
 										<td>百度协助搜索</td>
 									</tr>
 									<tr>
@@ -104,17 +104,27 @@
 										<td>百度</td>
 									</tr>
 									<tr>
-										<td>DMHY(动漫花园)_下载源</td>
+										<td>MGJH(蜜柑计划)_下载源</td>
 										<td>TRUE</td>
 										<td>站内搜索(RSS)</td>
 									</tr>
 									<tr>
-										<td>DMZJ(动漫之家)_漫画源</td>
+										<td>DMZJ(动漫之家)_漫画&小说源</td>
 										<td>TRUE</td>
 										<td>百度协助搜索</td>
 									</tr>
 									<tr>
 										<td>BKMH(布卡漫画)_漫画源</td>
+										<td>TRUE</td>
+										<td>百度协助搜索</td>
+									</tr>
+									<tr>
+										<td>DMW(动漫屋)_漫画源</td>
+										<td>TRUE</td>
+										<td>百度协助搜索</td>
+									</tr>
+									<tr>
+										<td>TXDM(腾讯动漫)_小说源</td>
 										<td>TRUE</td>
 										<td>百度协助搜索</td>
 									</tr>

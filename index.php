@@ -1,4 +1,4 @@
-<!DOCTYPE HTML> 
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -42,7 +42,7 @@
 											<input class="form-control" id="title" type="text" name='title' autocomplete="off">
 											</div>
 											<br>
-											搜索指令(点击添加): <code><a href="#" id="addsctype">type:\?/</a></code> <code><a href="#" id="addscexc">exc:\?/</a></code> <code><a href="#" id="addsctj">comic</a></code>
+											搜索指令(点击添加): <code><a href="#" id="addscmh">&comic</a></code> <code><a href="#" id="addscxs">&novel</a></code> <code><a href="#" id="addscxz">&download</a></code>
 											<div style="text-align:right;">
 											<a class="btn btn-brand waves-attach waves-light" href="#" id="btnS"> Search </a>
 											</div>
@@ -97,6 +97,8 @@ if(is_array($_GET)&&count($_GET)>0){
 			echo '<h2 class="content-sub-heading">'.$title.' [Comic]</h2>';
 		} elseif ($iftype=='n') {
 			echo '<h2 class="content-sub-heading">'.$title.' [Novel]</h2>';
+		} elseif ($iftype=='d') {
+			echo '<h2 class="content-sub-heading">'.$title.' [InfoDownload] Searching...</h2>';
 		} else{
 			echo '<h2 class="content-sub-heading">'.$title.'</h2>';
 		}
@@ -165,6 +167,12 @@ if(is_array($_GET)&&count($_GET)>0){
 			$n_youku=$r_youku[2];
 			$t_youku=$r_youku[0];
 			$l_youku=$r_youku[1];
+			if ($n_youku==0) {
+				$r_youku=baiduS($webd[6],'/{"title":"(.*?)—日本—动漫(.*?)","url":"(.*?)"}/',1,'www.youku.com');
+				$n_youku=$r_youku[2];
+				$t_youku=$r_youku[0];
+				$l_youku=$r_youku[1];
+			}
 		}
 		// 百度集合搜索 结果
 		if ($ifrun[7]=='true'){
@@ -276,10 +284,10 @@ if(is_array($_GET)&&count($_GET)>0){
 		//下载源地址测试
 		echo '<div class="tile tile-collapse"><div data-target="#infodownload" data-toggle="tile"><div class="tile-inner"><div class="text-overflow">InfoDownload</div></div></div><div class="tile-active-show collapse" id="infodownload"><div class="tile-sub">';
 				echo '<div class="tile"><div class="tile-inner">';
-					echo '<a href="./d/?'.$title.' BDRIP" target="_blank">动漫花园_BDRIP</a>';
+					echo '<a href="./d/?'.$title.'" target="_blank">蜜柑计划</a>';
 				echo '</div></div>';
 				echo '<div class="tile"><div class="tile-inner">';
-					echo '<a href="./d/?'.$title.'" target="_blank">动漫花园</a>';
+					echo '<a href="#" target="_blank">动漫花园BDRIP[未开放]</a>';
 				echo '</div></div>';
 		echo '</div></div></div>';
 		// 结束
@@ -288,17 +296,34 @@ if(is_array($_GET)&&count($_GET)>0){
 		if ($iftype=='c') {
 			$webd=csrh($title);
 			//动漫之家
-			$r_dmzj=baiduS($webd[0],'/{"title":"(.*?)漫画-动漫之家(.*?)","url":"(.*?)"}/',1,'manhua.dmzj.com');
+			$r_dmzj=baiduS($webd[0],'/{"title":"(.*?)_动漫之家(.*?)","url":"(.*?)"}/',1,'manhua.dmzj.com');
 			$n_dmzj=$r_dmzj[2];
 			$t_dmzj=$r_dmzj[0];
 			$l_dmzj=$r_dmzj[1];
+			if ($n_dmzj==0) {
+				$r_dmzj=baiduS($webd[0],'/{"title":"(.*?)-动漫之家(.*?)","url":"(.*?)"}/',1,'manhua.dmzj.com');
+				$n_dmzj=$r_dmzj[2];
+				$t_dmzj=$r_dmzj[0];
+				$l_dmzj=$r_dmzj[1];
+			}
 			//布卡漫画
 			$r_bkmh=baiduS($webd[1],'/{"title":"(.*?)-布卡漫画(.*?)","url":"(.*?)"}/',1,'www.buka.cn');
 			$n_bkmh=$r_bkmh[2];
 			$t_bkmh=$r_bkmh[0];
 			$l_bkmh=$r_bkmh[1];
+			//动漫屋
+			$r_dmw=baiduS($webd[2],'/{"title":"(.*?)-动漫屋(.*?)","url":"(.*?)"}/',1,'www.dm5.com');
+			$n_dmw=$r_dmw[2];
+			$t_dmw=$r_dmw[0];
+			$l_dmw=$r_dmw[1];
+			if ($n_dmw==0) {
+				$r_dmw=baiduS($webd[2],'/{"title":"(.*?)漫画_(.*?)","url":"(.*?)"}/',1,'www.dm5.com');
+				$n_dmw=$r_dmw[2];
+				$t_dmw=$r_dmw[0];
+				$l_dmw=$r_dmw[1];
+			}
 
-			$statol=$n_dmzj+$n_bkmh;
+			$statol=$n_dmzj+$n_bkmh+$n_dmw;
 			// 简要 数量
 			echo '<div class="tile-wrap"><div class="tile">';
     			echo '<div class="tile-inner">在已有数据源中找到 '.$statol.' 项匹配结果.</div>';
@@ -311,7 +336,47 @@ if(is_array($_GET)&&count($_GET)>0){
 				baiduSS($title,'manhua.dmzj.com','DMZJ','动漫之家',$n_dmzj,$l_dmzj,$t_dmzj);
 				//布卡漫画
 				baiduSS($title,'www.buka.cn','BKMH','布卡漫画',$n_bkmh,$l_bkmh,$t_bkmh);
+				//动漫屋
+				baiduSS($title,'www.dm5.com','DMW','动漫屋',$n_dmw,$l_dmw,$t_dmw);
 				echo '</div>';
+		//结束
+		}
+			//小说
+		if ($iftype=='n') {
+			$webd=nsrh($title);
+			//腾讯动漫
+			$r_txdm=baiduS($webd[0],'/{"title":"(.*?)_腾讯动漫(.*?)","url":"(.*?)"}/',1,'ac.qq.com');
+			$n_txdm=$r_txdm[2];
+			$t_txdm=$r_txdm[0];
+			$l_txdm=$r_txdm[1];
+			//动漫之家
+			$r_dmzjn=baiduS($webd[1],'/{"title":"(.*?)\|(.*?)","url":"(.*?)"}/',1,'xs.dmzj.com');
+			$n_dmzjn=$r_dmzjn[2];
+			$t_dmzjn=$r_dmzjn[0];
+			$l_dmzjn=$r_dmzjn[1];
+
+			$statol=$n_dmzjn+$n_txdm;
+			// 简要 数量
+			echo '<div class="tile-wrap"><div class="tile">';
+    			echo '<div class="tile-inner">在已有数据源中找到 '.$statol.' 项匹配结果.</div>';
+			echo '</div></div>';
+
+			//输出结果
+				echo '<h2 class="content-sub-heading">Results</h2>';
+				//动漫之家
+				echo '<div class="tile-wrap">';
+				baiduSS($title,'xs.dmzj.com','DMZJ','动漫之家',$n_dmzjn,$l_dmzjn,$t_dmzjn);
+				//腾讯动漫
+				baiduSS($title,'ac.qq.com','TXDM','腾讯动漫',$n_txdm,$l_txdm,$t_txdm);
+				echo '</div>';
+			//结束
+		}
+		if ($iftype=='d') {
+			$url='./d/?'.$title;
+			echo "<script language='Javascript'>"; 
+			echo "location.href='$url'"; 
+			echo "</script>"; 
+			//结束
 		}
 	 }
 	} 
@@ -325,7 +390,7 @@ if(is_array($_GET)&&count($_GET)>0){
 			<div class="card-main">
 				<div class="card-inner">
 					<p class="card-heading">Welcome</p>
-					<p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 beta3,<br><span style="font-weight:bold;">假期愉快</span>,这里有<a href="/notice.php">告示</a>哦~</p>
+					<p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 beta4,<br><span style="font-weight:bold;">新年快乐</span>,这里有<a href="/notice.php">告示</a>哦~</p>
 				</div>
 			<div class="card-action">
 				<div class="card-action-btn pull-left">
@@ -354,23 +419,23 @@ if(is_array($_GET)&&count($_GET)>0){
             });
         });
         $(function(){
-            $("#addsctype").click(function(){
+            $("#addscxz").click(function(){
                 var obj=document.getElementById("title");
 				var val=obj.value;
 				if (val != '')
-					obj.value=val+" type:\\/";
+					obj.value=val+" type:\\d/";
             });
         });
         $(function(){
-            $("#addscexc").click(function(){
+            $("#addscxs").click(function(){
                 var obj=document.getElementById("title");
 				var val=obj.value;
 				if (val != '')
-					obj.value=val+" exc:\\/";
+					obj.value=val+" type:\\n/";
             });
         });
         $(function(){
-            $("#addsctj").click(function(){
+            $("#addscmh").click(function(){
                 var obj=document.getElementById("title");
 				var val=obj.value;
 				if (val != '')

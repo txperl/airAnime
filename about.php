@@ -37,12 +37,11 @@
 								<div class="card-inner">
 									<p>airAnime是一款集合番剧搜索程序,借助于各网站的数据及各网站的搜索功能进行指定搜索,以减少搜索番剧的时间。</p>
 									<hr>
-									<p>此版本是WEB版airAnime(airAnime Online).</p>
-									<p>Windows版现已发布 <a href="http://yumoe.com/airanime/" target="_blank">beta版本</a> 。</p>
 									<p>前端基于 <a href="https://github.com/Daemonite/material" target="_blank">Material框架</a> ，后端PHP。</p>
 									<p>这是一个开源程序，您可以到我的GitHub主页下载。</p>
 									<p>请使用现代浏览器以达到最佳体验效果。</p>
 									<p>第一次使用务必阅读Docs中各文档。</p>
+									<p>背景图来自 <a href="http://www.pixiv.net/member.php?id=1565632" target="_blank">@Kantoku</a> 。
 								</div>
 							</div>
 						</div>
@@ -70,18 +69,18 @@
 								<tbody>
 									<tr>
 										<td>airAnime Online</td>
-										<td>1.0 beta3</td>
-										<td>2017/01/22</td>
+										<td>1.0 beta4</td>
+										<td>2017/01/27</td>
 									</tr>
 									<tr>
 										<td>搜索指令</td>
-										<td>0.2</td>
-										<td>2017/01/22</td>
+										<td>1.0</td>
+										<td>2017/01/27</td>
 									</tr>
 									<tr>
 										<td>网页样式</td>
 										<td>1.1</td>
-										<td>2017/01/2?</td>
+										<td>2017/01/27</td>
 									</tr>
 									<tr>
 										<td>托管服务器</td>
@@ -95,7 +94,15 @@
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
-									<p>1.0 beta3</p>
+									<p>1.0 beta4 -新年快乐</p>
+									<p>1.优化 百度协助搜索-漫画(精度提高约至92%)</p>
+									<p>2.优化 InfoDownload(数据基于蜜柑计划)[beta]</p>
+									<p>3.新增 小说源(动漫之家,腾讯动漫)</p>
+									<p>4.新增 漫画源(动漫屋)</p>
+									<p>5.新增 背景图与毛玻璃效果</p>
+									<p>6.待定 以图搜番测试版[未开放]</p>
+									<hr>
+									<p>1.0 beta3 -假期愉快</p>
 									<p>1.优化 指令搜索代码结构</p>
 									<p>2.优化 百度协助搜索(精度提高约至90%)</p>
 									<p>3.新增 image[未开放],type指令</p>

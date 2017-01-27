@@ -19,7 +19,7 @@ require "function.php";
 // file_get_contents
 $timeout = stream_context_create(array(    
    'http' => array(    
-       'timeout' => 5 //设置一个超时时间，单位为秒    
+       'timeout' => 6 //设置一个超时时间，单位为秒    
        )    
    )    
 );
@@ -362,6 +362,8 @@ function iftype($title){
 				$iftype='c';
 			} elseif ($scode=='\n') {
 				$iftype='n';
+			} elseif ($scode=='\d') {
+				$iftype='d';
 			}
 	}
 	return $iftype;
@@ -392,7 +394,7 @@ function picS($picurl){
 	}
 }
 //////////////////////////////////////////////////
-// Download Info
+// Download Info old
 // 0.标题
 // 1.链接
 // 2.时间
@@ -434,6 +436,62 @@ function DMHY($title){
 	array_push($dmhy,$number);
 
 	return $dmhy;
+}
+// Download Info
+// 0.标题
+// 1.BT
+// 2.Size
+// 3.字幕组
+// 4.数量
+function MGJH($title){
+  	$rst_t=array("标题");
+  	$rst_bt=array("BT");
+  	$rst_size=array("Size");
+  	$rst_ori=array("字幕组");
+  	$mgjh=array();
+	$link='http://mikanani.me/RSS/Search?searchstr='.$title;
+	$link=curl_get_contents($link);
+	$number=substr_count($link,'<item>');
+
+	for ($i=0; $i<$number; $i++) { 
+		// 暂时数据
+		$f='<item>'.getSubstr($link,'<item>','</item>').'</item>';
+		// 取标题
+		$t=getSubstr($f,'<title>','</title>');
+		// 取BT
+		$bt=getSubstr($f,'<link>','</link>');
+		// 取描述
+		$des=getSubstr($f,'<description>','</description>');
+		// 取大小
+		$size=str_replace($t,'',$des);
+		// 取字幕组
+		$fori=getNeedBetween($des,"/\【(.*?)\】(.*?)/");
+		if ($fori=='') {
+			$fori=getNeedBetween($des,"/\[(.*?)\](.*?)/");
+		}
+		if (substr_count($ori,$fori)==0) {
+			$ori=$ori.','.$fori;
+			if (substr_count($fori,'&amp;')!=0) {
+				$fori=str_replace('&amp;','&',$fori);
+			}
+			array_push($rst_ori,$fori);
+		}
+		// 替换
+		$link=str_replace($f,'',$link);
+
+		array_push($rst_t,$t);
+		array_push($rst_bt,$bt);
+		array_push($rst_size,$size);
+	}
+	array_push($rst_ori,'720');
+	array_push($rst_ori,'1080');
+	array_push($mgjh,$rst_t);
+	array_push($mgjh,$rst_bt);
+	array_push($mgjh,$rst_size);
+	array_push($mgjh,$rst_ori);
+	array_push($mgjh,$number);
+
+	return $mgjh;
 }
 //抓取数据
 function asrh($title,$ifrun){
@@ -517,11 +575,29 @@ function csrh($title){
 
 		$stitle='http://www.baidu.com/s?wd=site%3Awww.buka.cn%20'.urlencode($title).'&pn=0'; //布卡漫画
 		array_push($urls,$stitle);//1
+
+		$stitle='http://www.baidu.com/s?wd=site%3Awww.dm5.com%20'.urlencode($title).'&pn=0'; //动漫屋
+		array_push($urls,$stitle);//2
 	//获取网页数据
 		$frst=curl_multi($urls);
 		$rst=array();
 		array_push($rst,$frst[0]);//动漫之家
 		array_push($rst,$frst[1]);//布卡漫画
+		array_push($rst,$frst[2]);//动漫屋
+	return $rst;
+}
+function nsrh($title){
+	$urls=array();
+		$stitle='http://www.baidu.com/s?wd=site%3Aac.qq.com%20'.urlencode($title).'&pn=0'; //腾讯动漫
+		array_push($urls,$stitle);//0
+
+		$stitle='http://www.baidu.com/s?wd=site%3Axs.dmzj.com%20'.urlencode($title).'&pn=0'; //动漫之家
+		array_push($urls,$stitle);//1
+	//获取网页数据
+		$frst=curl_multi($urls);
+		$rst=array();
+		array_push($rst,$frst[0]);//腾讯动漫
+		array_push($rst,$frst[1]);//动漫之家
 	return $rst;
 }
 ?>
