@@ -72,7 +72,7 @@ Download包含如下数据源:MGJH(蜜柑计划).
 * 新增 InfoS(动漫信息搜索)[beta,未开放]
 * 新增 漫画源(图库漫画)
 * 新增 AJAX异步数据提交
-<p>* 新增 PicSearch(以图搜番)[beta]
+* 新增 PicSearch(以图搜番)[beta]
 
 ####v1 beta4
 * 优化 百度协助搜索-漫画(精度提高约至92%)
