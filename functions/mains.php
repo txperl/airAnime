@@ -23,6 +23,8 @@ $timeout = stream_context_create(array(
        )    
    )    
 );
+//////////////////////////////////////////////////
+// 动画站内搜索
 // 哔哩哔哩集合搜索
 function bilibiliS($title){
 	$webtext=$title;
@@ -127,7 +129,32 @@ function pptvS($title){
 		array_push($pptv,$number);
 		return $pptv;
 }
+//////////////////////////////////////////////////
+// 漫画站内搜索
+// 图库漫画
+function tkmhS($title){
+	$webtext=$title;
+	$number=substr_count($webtext,'<div class="book-list">');
+	$rst_t=array("图库漫画标题");
+	$rst_l=array("图库漫画链接");
+	$tkmh=array();
 
+		for ($n=0; $n<$number; $n++) {
+			$f='<div class="book-list">'.getSubstr($webtext,'<div class="book-list">','</div>').'</div>';
+			$l=getSubstr($f,'<a href="','">');
+			$t=getSubstr($f,$l.'">','</a>');
+			$l='http://m.tuku.cc'.$l;
+			$webtext=str_replace($f,'',$webtext);
+			array_push($rst_l,$l);
+			array_push($rst_t,$t);
+		}
+
+		array_push($tkmh,$rst_t);
+		array_push($tkmh,$rst_l);
+		array_push($tkmh,$number);
+		return $tkmh;
+}
+//////////////////////////////////////////////////
 //百度集合搜索
 function baiduallS($title)
 {
@@ -369,7 +396,7 @@ function iftype($title){
 	return $iftype;
 }
 
-function picS($picurl){
+function picS($picurl){ //参考文档及API token获取:https://soruly.github.io/whatanime.ga/
 	if ($picurl!='') {
 	$image_file = $picurl;
 	$image_info = getimagesize($image_file);
@@ -380,7 +407,7 @@ function picS($picurl){
 	$imgbase64 = 'data:image/'.$type.';base64,' . chunk_split(base64_encode(file_get_contents($image_file)));
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={...}');
+    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={your_token}'); //API token获取:https://soruly.github.io/whatanime.ga/
     curl_setopt($curl, CURLOPT_HEADER, 1);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POST, 1);
@@ -449,7 +476,7 @@ function MGJH($title){
   	$rst_size=array("Size");
   	$rst_ori=array("字幕组");
   	$mgjh=array();
-	$link='http://mikanani.me/RSS/Search?searchstr='.$title;
+	$link='http://airanime.host.smartgslb.com/d/?'.$title;
 	$link=curl_get_contents($link);
 	$number=substr_count($link,'<item>');
 
@@ -493,6 +520,7 @@ function MGJH($title){
 
 	return $mgjh;
 }
+//////////////////////////////////////////////////
 //抓取数据
 function asrh($title,$ifrun){
 	$urls=array();
@@ -554,18 +582,22 @@ function asrh($title,$ifrun){
 			$stitle=$none;
 		}
 		array_push($urls,$stitle);//9
+		$stitle=$none;
+		//$stitle='http://bgm.tv/subject_search/'.urlencode($title).'?cat=2';
+		array_push($urls,$stitle);//10
 	//获取网页数据
 		$frst=curl_multi($urls);
 		$rst=array();
-		array_push($rst,$frst[0]);//bilibili
-		array_push($rst,$frst[1].$frst[2]);//dilidili
-		array_push($rst,$frst[3]);//fcdm
-		array_push($rst,$frst[4]);//pptv
-		array_push($rst,$frst[5]);//letv
-		array_push($rst,$frst[6]);//iqiyi
-		array_push($rst,$frst[7]);//youku
-		array_push($rst,$frst[8]);//baiduall
-		array_push($rst,$frst[9]);//tencenttv
+		array_push($rst,$frst[0]);//bilibili 0
+		array_push($rst,$frst[1].$frst[2]);//dilidili 1
+		array_push($rst,$frst[3]);//fcdm 2
+		array_push($rst,$frst[4]);//pptv 3
+		array_push($rst,$frst[5]);//letv 4
+		array_push($rst,$frst[6]);//iqiyi 5
+		array_push($rst,$frst[7]);//youku 6
+		array_push($rst,$frst[8]);//baiduall 7
+		array_push($rst,$frst[9]);//tencenttv 8
+		array_push($rst,$frst[10]);//bangumi info 9
 	return $rst;
 }
 function csrh($title){
@@ -578,12 +610,21 @@ function csrh($title){
 
 		$stitle='http://www.baidu.com/s?wd=site%3Awww.dm5.com%20'.urlencode($title).'&pn=0'; //动漫屋
 		array_push($urls,$stitle);//2
+
+		$stitle='http://m.tuku.cc/comic/search?word='.urlencode($title); //图库漫画
+		array_push($urls,$stitle);//3
+
+		$stitle=$none;
+		//$stitle='http://bgm.tv/subject_search/'.urlencode($title).'?cat=1';
+		array_push($urls,$stitle);//4
 	//获取网页数据
 		$frst=curl_multi($urls);
 		$rst=array();
-		array_push($rst,$frst[0]);//动漫之家
-		array_push($rst,$frst[1]);//布卡漫画
-		array_push($rst,$frst[2]);//动漫屋
+		array_push($rst,$frst[0]);//动漫之家 0
+		array_push($rst,$frst[1]);//布卡漫画 1
+		array_push($rst,$frst[2]);//动漫屋 2
+		array_push($rst,$frst[3]);//图库漫画 3
+		array_push($rst,$frst[4]);//bangumi info 4
 	return $rst;
 }
 function nsrh($title){
@@ -593,11 +634,39 @@ function nsrh($title){
 
 		$stitle='http://www.baidu.com/s?wd=site%3Axs.dmzj.com%20'.urlencode($title).'&pn=0'; //动漫之家
 		array_push($urls,$stitle);//1
+
+		$stitle=$none;
+		//$stitle='http://bgm.tv/subject_search/'.urlencode($title).'?cat=1';
+		array_push($urls,$stitle);//2
 	//获取网页数据
 		$frst=curl_multi($urls);
 		$rst=array();
-		array_push($rst,$frst[0]);//腾讯动漫
-		array_push($rst,$frst[1]);//动漫之家
+		array_push($rst,$frst[0]);//腾讯动漫 0
+		array_push($rst,$frst[1]);//动漫之家 1
+		array_push($rst,$frst[2]);//bangumi info 2
+	return $rst;
+}
+//////////////////////////////////////////////////
+//Bangumi Info
+function infoS($title){
+	$rst=array();
+	$webtext=$title;
+	$number=substr_count($webtext,'<h3>');
+	if ($number!=0) {
+		$flink=getSubstr($webtext,'<h3>','</h3>');
+		$flink=getSubstr($flink,'<a href="','" '); // /subject/18629
+
+	$APIurl='http://api.bgm.tv'.$flink.'?responseGroup=simple';
+	$webtext=curl_get_contents($APIurl);
+
+	$name=unicode_decode(getSubstr($webtext,'"name_cn":"','","'));
+	$des=unicode_decode(getSubstr($webtext,'"summary":"','","'));
+	$des=str_replace('rn','<br>',$des);
+	$des=str_replace('　　','　',$des);
+
+	array_push($rst,$name);//0
+	array_push($rst,$des); //1
+	}
 	return $rst;
 }
 ?>

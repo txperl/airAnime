@@ -65,20 +65,17 @@
 								</div>
 							</div>
 						</div>
-						<!--
 						<div class="col-lg-4 col-sm-6">
 							<div class="card">
 								<div class="card-main">
 									<div class="card-inner">
-										<p class="card-heading">Info Download</p>
-										<p>将「|」放在两个或以上关键字之间，只要标题包含其中一个关键字，便会在搜寻结果中显示出来。(使用方法：番剧|BDRIP)</p>
-										<p>将「 」(半形空格) 放在两个或以上关键字之间，标题包含所有关键字，便会在搜寻结果中显示出来。(使用方法：番剧 BDRIP)</p>
-										<p>以上只适用于 动漫花园 数据源。</p>
+										<p class="card-heading">PicSearch(以图搜番)</p>
+										<p>此功能用了whatanime.ga API，限制为10次/min。具体使用说明请阅读<a target="_blank" href="https://whatanime.ga/faq">这个</a>。</p>
+										<p>在首页点击 UPLOAD 可上传图片(最大为1MB)。</p>
 									</div>
 								</div>
 							</div>
 						</div>
-						-->
 						<div class="col-lg-4 col-sm-6">
 
 						</div>

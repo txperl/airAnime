@@ -34,13 +34,12 @@ function getHTTPS($url) {
   curl_close($ch);
   return $result;
 }
-function curl_get_contents($url)   
-{   
+function curl_get_contents($url) {   
     $ch = curl_init();   
     curl_setopt($ch, CURLOPT_URL, $url);            //设置访问的url地址   
     //curl_setopt($ch,CURLOPT_HEADER,1);            //是否显示头部信息   
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);           //设置超时   
-    //curl_setopt($ch, CURLOPT_USERAGENT, _USERAGENT_);   //用户访问代理 User-Agent   
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko');   //用户访问代理 User-Agent   
     //curl_setopt($ch, CURLOPT_REFERER,_REFERER_);        //设置 referer   
     curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);      //跟踪301   
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);        //返回结果   
@@ -65,8 +64,8 @@ function curl_multi($urls) {
         curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);  
         curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, 1);//是否采集301、302之后的页面  
         curl_setopt ($ch, CURLOPT_MAXREDIRS, 5);//查找次数，防止查找太深  
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); // 对认证证书来源的检查  
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); // 从证书中检查SSL加密算法是否存在         
+        curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, FALSE); // 对认证证书来源的检查  
+        curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, FALSE); // 从证书中检查SSL加密算法是否存在         
         curl_setopt ($ch, CURLOPT_TIMEOUT, 20);  
         curl_setopt ($ch, CURLOPT_HEADER, 0);//输出头部  
         return $ch;  
@@ -101,30 +100,10 @@ function curl_multi($urls) {
     return $text;  
 }
 // 转换编码，将Unicode编码转换成可以浏览的utf-8编码
-function unicode_decode($name)
-{
-    $pattern = '/([\w]+)|(\\\u([\w]{4}))/i';
-    preg_match_all($pattern, $name, $matches);
-    if (!empty($matches))
-    {
-        $name = '';
-        for ($j = 0; $j < count($matches[0]); $j++)
-        {
-            $str = $matches[0][$j];
-            if (strpos($str, '\\u') === 0)
-            {
-                $code = base_convert(substr($str, 2, 2), 16, 10);
-                $code2 = base_convert(substr($str, 4), 16, 10);
-                $c = chr($code).chr($code2);
-                $c = iconv('UCS-2', 'UTF-8', $c);
-                $name .= $c;
-            }
-            else
-            {
-                $name .= $str;
-            }
-        }
-    }
-    return $name;
+function unicode_decode($name){
+  $json = '{"str":"'.$name.'"}';
+  $arr = json_decode($json,true);
+  if(empty($arr)) return '';
+  return $arr['str'];
 }
 ?>

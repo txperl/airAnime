@@ -7,7 +7,7 @@ $timeout = stream_context_create(array(
 );
 $title=$_SERVER['QUERY_STRING'];
 if ($title!='') {
-	$web='http://share.dmhy.org/topics/rss/rss.xml?keyword='.$title;
+	$web='http://mikanani.me/RSS/Search?searchstr='.$title;
 	$data=file_get_contents($web);
 	echo $data;
 }

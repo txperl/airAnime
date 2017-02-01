@@ -75,7 +75,7 @@
 							</div>
 						</div>
 
-						<h2 class="content-sub-heading">以图搜番[未开放]</h2>
+						<h2 class="content-sub-heading">PicSearch (以图搜番)</h2>
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
@@ -84,7 +84,7 @@
 									<p><span style="font-weight:bold;">此代码为全局指令,不可与普通搜索(名称搜索)方式并用</span>，与其他指令用 <span style="font-weight:bold;">空格</span> 隔开。开始: '!image:' ,结束: ';'.</p>
 									<p>通用形式：!image:?; codes</p> 
 									<hr>
-									<p>此功能用了whatanime.ga API，所以存在单位时间使用限制。这个功能运气好的话可以在之后某一版本呈现，但最不好的情况就是取消。主要原因还是因为API问题。</p>
+									<p>此功能用了whatanime.ga API，限制为10次/min。具体使用说明请阅读<a target="_blank" herf="https://whatanime.ga/faq">这个</a>。</p>
 								</div>
 							</div>
 						</div>
