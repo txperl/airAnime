@@ -124,6 +124,11 @@
 										<td>百度协助搜索</td>
 									</tr>
 									<tr>
+										<td>TKMH(图库漫画)_漫画源</td>
+										<td>TRUE</td>
+										<td>百度协助搜索</td>
+									</tr>
+									<tr>
 										<td>TXDM(腾讯动漫)_小说源</td>
 										<td>TRUE</td>
 										<td>百度协助搜索</td>
