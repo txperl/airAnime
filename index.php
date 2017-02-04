@@ -83,7 +83,7 @@
             <div class="card-main">
                 <div class="card-inner">
                     <p class="card-heading">Welcome</p>
-                    <p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 beta5,<br><span style="font-weight:bold;">假期快结束惹</span>，因为速度问题部分功能未开放。</p>
+                    <p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 beta5,<br><span style="font-weight:bold;">假期快结束惹</span>,漫画与小说搜索BUG已修复.</p>
                 </div>
             <div class="card-action">
                 <div class="card-action-btn pull-left">

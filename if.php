@@ -35,7 +35,7 @@
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
-									<p>因为本程序是获取网页源代码后分析网页，所以如果网页代码更改，程序即会失效。</p>
+									<p>因为本程序是获取网页源代码后分析网页，所以如果网页代码更改，部分功能即会失效。</p>
 									<p>你可以在此查看本程序的数据源是否处于可用状态。</p>
 									<p>如果处于可用状态，网页仍异常，应该是用户本地网络或浏览器问题。</p>
 									<hr>
@@ -95,8 +95,13 @@
 									</tr>
 									<tr>
 										<td>TencentTV(腾讯视频)</td>
-										<td>uTRUE</td>
+										<td>TRUE</td>
 										<td>百度协助搜索</td>
+									</tr>
+									<tr>
+										<td>WXDM(无限动漫)</td>
+										<td>TRUE</td>
+										<td>站内搜索</td>
 									</tr>
 									<tr>
 										<td>BaiduAll(百度集合搜索)</td>
@@ -126,7 +131,7 @@
 									<tr>
 										<td>TKMH(图库漫画)_漫画源</td>
 										<td>TRUE</td>
-										<td>百度协助搜索</td>
+										<td>站内搜索</td>
 									</tr>
 									<tr>
 										<td>TXDM(腾讯动漫)_小说源</td>

@@ -61,7 +61,7 @@ if(is_array($_GET)&&count($_GET)>0){
 			//$n_info=$r_info[0];
 			//$des_info=$r_info[1];
 			//if ($des_info=='') {
-				$des_info='(ฅ´ω`ฅ) 番剧信息功能未开放...';
+				$des_info='(ฅ´ω`ฅ) 番剧信息未完成唔...';
 			//}
 		// bilibili 结果
 		//if ($ifrun[0]=='true') {
@@ -149,7 +149,13 @@ if(is_array($_GET)&&count($_GET)>0){
 				$l_tencenttv=$r_tencenttv[1];
 			}
 		}
-
+		// 无限动漫 结果
+		//if ($ifrun[9]=='true'){
+		//	$r_wxdm=wxdmS($webd[10]);
+		//	$n_wxdm=$r_wxdm[2];
+		//	$t_wxdm=$r_wxdm[0];
+		//	$l_wxdm=$r_wxdm[1];
+		//}
 		$statol=$n_bilibili+$n_dilidili+$n_baiduall+$n_letv+$n_iqiyi+$n_pptv+$n_fcdm+$n_youku+$n_tencenttv;
 		// 简要 数量
 		echo '<div class="tile-wrap"><div class="tile"><div class="tile-inner">';
@@ -219,6 +225,9 @@ if(is_array($_GET)&&count($_GET)>0){
 		if ($ifrun[8]=='true') {
 		baiduSS($title,'v.qq.com','TencentTV','腾讯视频',$n_tencenttv,$l_tencenttv,$t_tencenttv);
 		}
+		//if ($ifrun[9]=='true') {
+		//loaclSS($title,'www.hkdm173.com','WXDM','无限动漫',$n_wxdm,$l_wxdm,$t_wxdm);
+		//}
 		//baiduall
 		if ($ifrun[7]=='true') {
 		$nowout='www.baidu.com';
@@ -256,7 +265,7 @@ if(is_array($_GET)&&count($_GET)>0){
 			//$n_info=$r_info[0];
 			//$des_info=$r_info[1];
 			//if ($des_info=='') {
-				$des_info='(ฅ´ω`ฅ) 番剧信息功能未开放...';
+				$des_info='(ฅ´ω`ฅ) 番剧信息未完成唔...';
 			//}
 			//动漫之家
 			$r_dmzj=baiduS($webd[0],'/{"title":"(.*?)_动漫之家(.*?)","url":"(.*?)"}/',1,'manhua.dmzj.com');
@@ -318,13 +327,19 @@ if(is_array($_GET)&&count($_GET)>0){
 			//$n_info=$r_info[0];
 			//$des_info=$r_info[1];
 			//if ($des_info=='') {
-				$des_info='(ฅ´ω`ฅ) 番剧信息功能未开放...';
+				$des_info='(ฅ´ω`ฅ) 番剧信息未完成唔...';
 			//}
 			//腾讯动漫
-			$r_txdm=baiduS($webd[0],'/{"title":"(.*?)_腾讯动漫(.*?)","url":"(.*?)"}/',1,'ac.qq.com');
+			$r_txdm=baiduS($webd[0],'/{"title":"(.*?)-在线漫画(.*?)","url":"(.*?)"}/',1,'ac.qq.com');
 			$n_txdm=$r_txdm[2];
 			$t_txdm=$r_txdm[0];
 			$l_txdm=$r_txdm[1];
+			if ($n_txdm==0) {
+				$r_txdm=baiduS($webd[0],'/{"title":"(.*?)_腾讯动漫(.*?)","url":"(.*?)"}/',1,'ac.qq.com');
+				$n_txdm=$r_txdm[2];
+				$t_txdm=$r_txdm[0];
+				$l_txdm=$r_txdm[1];
+			}
 			//动漫之家
 			$r_dmzjn=baiduS($webd[1],'/{"title":"(.*?)\|(.*?)","url":"(.*?)"}/',1,'xs.dmzj.com');
 			$n_dmzjn=$r_dmzjn[2];

@@ -129,6 +129,30 @@ function pptvS($title){
 		array_push($pptv,$number);
 		return $pptv;
 }
+// 无限动漫搜索
+function wxdmS($title){
+	$webtext=$title;
+	$webtext=getSubstr($webtext,'<div class="le15 weight f14 s1">','</script></body></html>');
+	$webtext=iconv("gb2312", "utf-8",$webtext);
+	$number=substr_count($webtext,'<li>');
+	$rst_t=array("无限动漫标题");
+	$rst_l=array("无限动漫链接");
+	$wxdm=array();
+
+		for ($n=0; $n<$number; $n++) {
+			$f='<li>'.getSubstr($webtext,'<li>','</li>').'</li>';
+			$l='http://www.hkdm173.com'.getSubstr($f,'<a href="','" ');
+			$t=getSubstr($f,'title="','"><');
+			$webtext=str_replace($f,'',$webtext);
+			array_push($rst_l,$l);
+			array_push($rst_t,$t);
+		}
+
+		array_push($wxdm,$rst_t);
+		array_push($wxdm,$rst_l);
+		array_push($wxdm,$number);
+		return $wxdm;
+}
 //////////////////////////////////////////////////
 // 漫画站内搜索
 // 图库漫画
@@ -318,6 +342,12 @@ function ifcode($title){
 			} else {
 				array_push($ifrun,'false');
 			}
+
+			if (substr_count($scode,'\w')==1) {
+				array_push($ifrun,'true');
+			} else {
+				array_push($ifrun,'false');
+			}
 	} elseif (substr_count($title,'exc:')==1) {
 		$scode=getSubstr($title,'exc:','/');
 			if (substr_count($scode,'\b')==1) {
@@ -373,8 +403,14 @@ function ifcode($title){
 			} else {
 				array_push($ifrun,'true');
 			}
-	} else{
-		for ($i=0; $i < 9; $i++) { 
+
+			if (substr_count($scode,'\w')==1) {
+				array_push($ifrun,'false');
+			} else {
+				array_push($ifrun,'true');
+			}
+	} else {
+		for ($i=0; $i < 10; $i++) { 
 			array_push($ifrun,'true');
 		}
 	}
@@ -396,7 +432,7 @@ function iftype($title){
 	return $iftype;
 }
 
-function picS($picurl){ //参考文档及API token获取:https://soruly.github.io/whatanime.ga/
+function picS($picurl){
 	if ($picurl!='') {
 	$image_file = $picurl;
 	$image_info = getimagesize($image_file);
@@ -407,7 +443,7 @@ function picS($picurl){ //参考文档及API token获取:https://soruly.github.i
 	$imgbase64 = 'data:image/'.$type.';base64,' . chunk_split(base64_encode(file_get_contents($image_file)));
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={your_token}'); //API token获取:https://soruly.github.io/whatanime.ga/
+    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={your_token}'); //参考文档及API token获取:https://soruly.github.io/whatanime.ga/
     curl_setopt($curl, CURLOPT_HEADER, 1);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POST, 1);
@@ -582,9 +618,17 @@ function asrh($title,$ifrun){
 			$stitle=$none;
 		}
 		array_push($urls,$stitle);//9
+
 		$stitle=$none;
 		//$stitle='http://bgm.tv/subject_search/'.urlencode($title).'?cat=2';
 		array_push($urls,$stitle);//10
+
+		//if ($ifrun[9]=='true') {
+		//	$stitle='http://www.hkdm173.com/search.asp?searchword='.iconv("utf-8","gb2312",$title);
+		//}	else{
+		//	$stitle=$none;
+		//}
+		//array_push($urls,$stitle);//11
 	//获取网页数据
 		$frst=curl_multi($urls);
 		$rst=array();
@@ -598,10 +642,13 @@ function asrh($title,$ifrun){
 		array_push($rst,$frst[8]);//baiduall 7
 		array_push($rst,$frst[9]);//tencenttv 8
 		array_push($rst,$frst[10]);//bangumi info 9
+		//array_push($rst,$frst[11]);//wxdm 10
 	return $rst;
 }
 function csrh($title){
 	$urls=array();
+		$none='http://7vzp04.com1.z0.glb.clouddn.com/none.txt';
+
 		$stitle='http://www.baidu.com/s?wd=site%3Amanhua.dmzj.com%20'.urlencode($title).'&pn=0'; //动漫之家
 		array_push($urls,$stitle);//0
 
@@ -629,6 +676,8 @@ function csrh($title){
 }
 function nsrh($title){
 	$urls=array();
+		$none='http://7vzp04.com1.z0.glb.clouddn.com/none.txt';
+
 		$stitle='http://www.baidu.com/s?wd=site%3Aac.qq.com%20'.urlencode($title).'&pn=0'; //腾讯动漫
 		array_push($urls,$stitle);//0
 

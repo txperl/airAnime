@@ -45,7 +45,7 @@ Demo: [airAnimeOnline](http://airs.im/).
 字体链接位于 .css 4个.css后缀文件中。默认用的是我七牛CDN，但这存在风险，万一我哪天突然换了是吧，所以请请自行修改。字体位于 .css/Roboto (请注意css.css的代码)。
 
 ###PicSearch(以图搜番)[beta]
-已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 index.php70行 与 functions/mains.php410行。
+已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 index.php70行 与 functions/mains.php446行。
 
 ###InfoDownload[beta]
 暂时只通过蜜柑计划RSS来获取数据，所以每次做多输出100项结果。现在只是个测试版本，之后会更加完善的。
@@ -53,7 +53,7 @@ Demo: [airAnimeOnline](http://airs.im/).
 ###Type类型
 本程序的搜索内容类型分为: 二次元 Anine(动画),Comic(漫画),Novel(小说),Download(下载).
 
-Anine包含如下数据源: Bilibili(哔哩哔哩),Dilidili(嘀哩嘀哩),Fcdm(风车动漫),PPTV(聚力),Letv(乐视),iQiyi(爱奇艺),Youku(优酷),TencentTV(腾讯视频),BaiduAll(百度集合搜索),DMHY(动漫花园)_下载源.
+Anine包含如下数据源: Bilibili(哔哩哔哩),Dilidili(嘀哩嘀哩),Fcdm(风车动漫),PPTV(聚力),Letv(乐视),iQiyi(爱奇艺),Youku(优酷),TencentTV(腾讯视频),BaiduAll(百度集合搜索),WXDM(无限动漫)[未开放].
 
 Comic包含如下数据源:DMZJ(动漫之家),BKMH(布卡漫画),DMW(动漫屋),TKMH(图库漫画).
 

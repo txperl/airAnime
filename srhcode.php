@@ -52,7 +52,7 @@
 									<p>此代码必须<span style="font-weight:bold;">小写</span>，并且用 <span style="font-weight:bold;">空格</span> 隔开。开始: 'only:' ,结束: '/' ；开始: 'exc:' ,结束: '/' .</p>
 									<p>通用形式：title codes</p> 
 									<hr>
-									<p><span style="font-weight:bold;">数据源代码：</span><br>bilibili(哔哩哔哩): \b<br>dilidili(嘀哩嘀哩): \d<br>Fcdm(风车动漫): \f<br>PPTV(聚力): \p<br>Letv(乐视): \l<br>iQiyi(爱奇艺): \i<br>Youku(优酷): \y<br>TencentTV(腾讯视频): \t<br>BaiduAll(百度集合搜索): \bda</p>
+									<p><span style="font-weight:bold;">数据源代码：</span><br>bilibili(哔哩哔哩): \b<br>dilidili(嘀哩嘀哩): \d<br>Fcdm(风车动漫): \f<br>PPTV(聚力): \p<br>Letv(乐视): \l<br>iQiyi(爱奇艺): \i<br>Youku(优酷): \y<br>TencentTV(腾讯视频): \t<br>WXDM(无限动漫): \w<br>BaiduAll(百度集合搜索): \bda</p>
 									<hr>
 									<p>哔哩哔哩数据源为必搜索源，所以以上搜索指令对其无效</p>
 								</div>
@@ -84,7 +84,7 @@
 									<p><span style="font-weight:bold;">此代码为全局指令,不可与普通搜索(名称搜索)方式并用</span>，与其他指令用 <span style="font-weight:bold;">空格</span> 隔开。开始: '!image:' ,结束: ';'.</p>
 									<p>通用形式：!image:?; codes</p> 
 									<hr>
-									<p>此功能用了whatanime.ga API，限制为10次/min。具体使用说明请阅读<a target="_blank" herf="https://whatanime.ga/faq">这个</a>。</p>
+									<p>此功能用了whatanime.ga API，限制为10次/min。具体使用说明请阅读<a target="_blank" href="https://whatanime.ga/faq">这个</a>。</p>
 								</div>
 							</div>
 						</div>
