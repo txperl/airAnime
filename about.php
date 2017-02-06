@@ -38,7 +38,7 @@
 									<p>airAnime是一款集合番剧搜索程序,借助于各网站的数据及各网站的搜索功能进行指定搜索,以减少搜索番剧的时间。</p>
 									<hr>
 									<p>前端基于 <a href="https://github.com/Daemonite/material" target="_blank">Material框架</a> ，后端PHP。</p>
-									<p>这是一个开源程序，您可以到我的GitHub主页下载。</p>
+									<p>这是一个开源程序，您可以到GitHub下载(右下角小红圈)。</p>
 									<p>请使用现代浏览器以达到最佳体验效果。</p>
 									<p>第一次使用务必阅读Docs中各文档。</p>
 									<p>背景图来自 <a href="http://www.pixiv.net/member.php?id=1565632" target="_blank">@Kantoku</a> 。
@@ -69,8 +69,8 @@
 								<tbody>
 									<tr>
 										<td>airAnime Online</td>
-										<td>1.0 beta5</td>
-										<td>2017/02/01</td>
+										<td>1.0 RC1</td>
+										<td>2017/02/06</td>
 									</tr>
 									<tr>
 										<td>搜索指令</td>
@@ -94,6 +94,12 @@
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
+									<p>1.0 RC1 -学习&工作愉快</p>
+									<p>* 修补 细节及BUG</p>
+									<p>* 新增 漫画源</p>
+									<p>* 待定 部分功能(源码中注释掉的部分)</p>
+									<p>* 进入 更新休眠期(要上学惹)</p>
+									<hr>							
 									<p>1.0 beta5 -假期快结束惹</p>
 									<p>* 优化 InfoDownload界面</p>
 									<p>* 新增 InfoS(动漫信息搜索)[beta][未开放]</p>

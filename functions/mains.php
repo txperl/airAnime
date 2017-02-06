@@ -1,11 +1,11 @@
 <?php
-//添加数据源思路：
-//1.写 asrh 中代码
-//2.添加搜索指令 ifrun
-//3.index中整合数据(站内搜索还需写匹配代码)
-//4.结果总数
-//5.输出结果
-//6.检查
+//添加番剧数据源步骤：(漫画小说步骤相同)
+//1.在 asrh 中添加搜索链接 (站内搜索或百度协助搜索或其他的)
+//2.添加搜索指令 ifrun (若有)
+//3.run.php 中执行数据处理
+//4.输出结果
+//5.细节修补
+//6.完善
 ini_set("error_reporting","E_ALL & ~E_NOTICE");
 require "function.php";
 // r_bilibili
@@ -178,6 +178,29 @@ function tkmhS($title){
 		array_push($tkmh,$number);
 		return $tkmh;
 }
+// 腾讯动漫
+function txdm_mhS($title){
+	$webtext=$title;
+	$webtext=getSubstr($webtext,'<!-- 结果列表 ST -->','<!-- 结果列表 ED -->');
+	$number=substr_count($webtext,'<li class="comic-item">');
+	$rst_t=array("腾讯动漫_漫画标题");
+	$rst_l=array("腾讯动漫_漫画链接");
+	$txdm_mh=array();
+
+		for ($n=0; $n<$number; $n++) {
+			$f='<li class="comic-item">'.getSubstr($webtext,'<li class="comic-item">','</li>').'</li>';
+			$l='http://m.ac.qq.com'.getSubstr($f,' href="','">');
+			$t=getSubstr($f,'<strong class="comic-title">','</strong>');
+			$webtext=str_replace($f,'',$webtext);
+			array_push($rst_l,$l);
+			array_push($rst_t,$t);
+		}
+
+		array_push($txdm_mh,$rst_t);
+		array_push($txdm_mh,$rst_l);
+		array_push($txdm_mh,$number);
+		return $txdm_mh;
+}
 //////////////////////////////////////////////////
 //百度集合搜索
 function baiduallS($title)
@@ -190,11 +213,11 @@ function baiduallS($title)
 	$season=substr_count($webtext,'<div class="op-zx-new-tvideo-stitle op-zx-new-tvideo-more-hid">');
 
 	for ($i=0; $i<$season; $i++) { 
-	$f=getSubstr($webtext,'<div class="op-zx-new-tvideo-stitle op-zx-new-tvideo-more-hid">','</div>');
-	array_push($rstz,$f);
-	$f='<div class="op-zx-new-tvideo-stitle op-zx-new-tvideo-more-hid">'.$f.'</div>';
-	$webtext=str_replace($f,'',$webtext);
-	$number=$number+substr_count($f,'op-zx-new-tvideo-tbs');
+		$f=getSubstr($webtext,'<div class="op-zx-new-tvideo-stitle op-zx-new-tvideo-more-hid">','</div>');
+		array_push($rstz,$f);
+		$f='<div class="op-zx-new-tvideo-stitle op-zx-new-tvideo-more-hid">'.$f.'</div>';
+		$webtext=str_replace($f,'',$webtext);
+		$number=$number+substr_count($f,'op-zx-new-tvideo-tbs');
 	}
 
 	for ($i=0; $i<count($rstz); $i++) { 
@@ -204,12 +227,12 @@ function baiduallS($title)
 	}
 
 	for ($i=0; $i<$number; $i++) { 
-			$f=getSubstr($finalrst,"<p class='op-zx-new-tvideo-tbs'>",'</p>');
-			$a=str_replace('<em>','',$f);
-			$a=str_replace('</em>','',$a);
-			array_push($rstf,$a);
-			$f="<p class='op-zx-new-tvideo-tbs'>".$f.'</p>';
-			$finalrst=str_replace($f,'',$finalrst);
+		$f=getSubstr($finalrst,"<p class='op-zx-new-tvideo-tbs'>",'</p>');
+		$a=str_replace('<em>','',$f);
+		$a=str_replace('</em>','',$a);
+		array_push($rstf,$a);
+		$f="<p class='op-zx-new-tvideo-tbs'>".$f.'</p>';
+		$finalrst=str_replace($f,'',$finalrst);
 	}
 	array_push($rst,$rstf);
 	array_push($rst,$number);
@@ -221,10 +244,10 @@ function baiduS($title,$zz,$page,$wst){
   $rst_l=array("链接");
   $baiduS=array();
   for ($m=0;$m<$page;$m++){ //百度协助搜索页数
-  $webtext=$title;
-  $webtext=str_replace(' ','',$webtext);
-  preg_match_all($zz,$webtext,$rst);
-  $number=$number+count($rst[0]);
+  	$webtext=$title;
+  	$webtext=str_replace(' ','',$webtext);
+  	preg_match_all($zz,$webtext,$rst);
+  	$number=$number+count($rst[0]);
     // 载入 标题 链接
     for ($i=0; $i<count($rst[0]); $i++) { 
     	$t=$rst[1][$i];
@@ -432,7 +455,7 @@ function iftype($title){
 	return $iftype;
 }
 
-function picS($picurl){
+function picS($picurl){ //参考文档及API token获取:https://soruly.github.io/whatanime.ga/
 	if ($picurl!='') {
 	$image_file = $picurl;
 	$image_info = getimagesize($image_file);
@@ -443,7 +466,7 @@ function picS($picurl){
 	$imgbase64 = 'data:image/'.$type.';base64,' . chunk_split(base64_encode(file_get_contents($image_file)));
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={your_token}'); //参考文档及API token获取:https://soruly.github.io/whatanime.ga/
+    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={your_token}');
     curl_setopt($curl, CURLOPT_HEADER, 1);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POST, 1);
@@ -664,6 +687,9 @@ function csrh($title){
 		$stitle=$none;
 		//$stitle='http://bgm.tv/subject_search/'.urlencode($title).'?cat=1';
 		array_push($urls,$stitle);//4
+
+		$stitle='http://m.ac.qq.com/search/result?word='.urlencode($title); //腾讯动漫_漫画
+		array_push($urls,$stitle);//5
 	//获取网页数据
 		$frst=curl_multi($urls);
 		$rst=array();
@@ -672,6 +698,7 @@ function csrh($title){
 		array_push($rst,$frst[2]);//动漫屋 2
 		array_push($rst,$frst[3]);//图库漫画 3
 		array_push($rst,$frst[4]);//bangumi info 4
+		array_push($rst,$frst[5]);//腾讯动漫_漫画 5
 	return $rst;
 }
 function nsrh($title){

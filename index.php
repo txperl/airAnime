@@ -67,7 +67,7 @@
 
         <div id='upimage' style="display:none;"> 
             <form enctype="multipart/form-data" method="post" action="http://up.imgapi.com/" id="upform">
-            <input name="Token" id="token" value="{your_toke}" type="hidden"> <!-- 贴图库 http://www.tietuku.com/ 获取 -->
+            <input name="Token" id="token" value="{your_token}" type="hidden"> <!-- 贴图库 http://www.tietuku.com/ 获取 -->
             <input type="hidden" name="from" value="file">
             <input type="hidden" name="httptype" value="1">
             <input type="file" name="file" id="file" style="display:none">
@@ -83,7 +83,7 @@
             <div class="card-main">
                 <div class="card-inner">
                     <p class="card-heading">Welcome</p>
-                    <p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 beta5,<br><span style="font-weight:bold;">假期快结束惹</span>,漫画与小说搜索BUG已修复.</p>
+                    <p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 RC1,<br><span style="font-weight:bold;">呼呼呼</span>~学习&工作愉快.</p>
                 </div>
             <div class="card-action">
                 <div class="card-action-btn pull-left">

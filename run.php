@@ -16,7 +16,7 @@ if(is_array($_GET)&&count($_GET)>0){
 					$name=zhconversion_hans($name);  //简体
 					$title=str_replace('!image:'.$picurl.';',$name,$title);
 				} else {
-					echo '<h3>搜索失败，请重试。可能原因包含：<br><h4>1.搜索次数达到限制，请稍候尝试(几率最大)。<br>2.目标服务器正在维护或无法访问。<br>3.本服务器网速问题。<br>或者是，请正确输入图像链接(几率也很大)！！</h4>';
+					echo '<h3>图像搜索失败，请重试。可能原因包含：<br><h4>1.搜索次数达到限制，请稍候尝试(几率很大)。<br>2.目标服务器正在维护或无法访问。<br>3.本服务器网络速度问题。<br>或者是，<span style="color:#FD5B78;">请正确输入图像链接(几率也很大)！！</span>[具体参考 搜索指令 页面]</h4><br><br><br><br>';
 					exit();
 				}
 			} else {
@@ -299,7 +299,13 @@ if(is_array($_GET)&&count($_GET)>0){
 			$n_tkmh=$r_tkmh[2];
 			$t_tkmh=$r_tkmh[0];
 			$l_tkmh=$r_tkmh[1];
-			$statol=$n_dmzj+$n_bkmh+$n_dmw+$n_tkmh;
+			//腾讯动漫_漫画
+			$r_txdm_mh=txdm_mhS($webd[5]);
+			$n_txdm_mh=$r_txdm_mh[2];
+			$t_txdm_mh=$r_txdm_mh[0];
+			$l_txdm_mh=$r_txdm_mh[1];
+
+			$statol=$n_dmzj+$n_bkmh+$n_dmw+$n_tkmh+$n_txdm_mh;
 			// 简要 数量
 			echo '<div class="tile-wrap"><div class="tile"><div class="tile-inner">';
 				echo $des_info;
@@ -316,6 +322,8 @@ if(is_array($_GET)&&count($_GET)>0){
 				baiduSS($title,'www.dm5.com','DMW','动漫屋',$n_dmw,$l_dmw,$t_dmw);
 				//图库漫画
 				loaclSS($title,'m.tuku.cc','TKMH','图库漫画',$n_tkmh,$l_tkmh,$t_tkmh);
+				//腾讯动漫_漫画
+				loaclSS($title,'m.ac.qq.com','TXDM_MH','腾讯动漫',$n_txdm_mh,$l_txdm_mh,$t_txdm_mh);
 				echo '</div>';
 		//结束
 		}

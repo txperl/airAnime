@@ -11,7 +11,7 @@ $(document).ready(function(){
 			return false;
 		}
 		if (img_size>max) {
-			alert("图片最大为1MB");
+			alert("图像最大为1MB");
 			return false;
 		}
 		//开始上传

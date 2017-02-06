@@ -39,13 +39,13 @@ Demo: [airAnimeOnline](http://airs.im/).
 ##细节
 
 ###.d/.server
-此文件夹的中的文件，是用于加速获取动漫花园信息的，原理就是用其他服务器来抓取数据。如果服务器本身获取速度优秀，请无视这文件。
+此文件夹的中的文件，是用于加速获取动漫花园信息的，原理就是用其他服务器来抓取数据。如果服务器本身获取速度优秀，请无视这文件。但也请修改 mains.php538行 代码。
 
 ###Fonts
 字体链接位于 .css 4个.css后缀文件中。默认用的是我七牛CDN，但这存在风险，万一我哪天突然换了是吧，所以请请自行修改。字体位于 .css/Roboto (请注意css.css的代码)。
 
 ###PicSearch(以图搜番)[beta]
-已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 index.php70行 与 functions/mains.php446行。
+已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 index.php70行 与 functions/mains.php469行。
 
 ###InfoDownload[beta]
 暂时只通过蜜柑计划RSS来获取数据，所以每次做多输出100项结果。现在只是个测试版本，之后会更加完善的。
@@ -53,7 +53,7 @@ Demo: [airAnimeOnline](http://airs.im/).
 ###Type类型
 本程序的搜索内容类型分为: 二次元 Anine(动画),Comic(漫画),Novel(小说),Download(下载).
 
-Anine包含如下数据源: Bilibili(哔哩哔哩),Dilidili(嘀哩嘀哩),Fcdm(风车动漫),PPTV(聚力),Letv(乐视),iQiyi(爱奇艺),Youku(优酷),TencentTV(腾讯视频),BaiduAll(百度集合搜索),WXDM(无限动漫)[未开放].
+Anine包含如下数据源: Bilibili(哔哩哔哩),Dilidili(嘀哩嘀哩),Fcdm(风车动漫),PPTV(聚力),Letv(乐视),iQiyi(爱奇艺),Youku(优酷),TencentTV(腾讯视频),BaiduAll(百度集合搜索),DMHY(动漫花园)_下载源.
 
 Comic包含如下数据源:DMZJ(动漫之家),BKMH(布卡漫画),DMW(动漫屋),TKMH(图库漫画).
 
@@ -67,6 +67,12 @@ Download包含如下数据源:MGJH(蜜柑计划).
 * 集合搜索 -抓取百度工具的集合番剧信息，不过匹配码只针对一些例子，所以时有时无。
 
 ##更新日志
+####v1 beta5
+* 修补 细节及BUG
+* 新增 漫画源
+* 待定 部分功能(源码中注释掉的部分)
+* 进入 更新休眠期(要上学惹)
+
 ####v1 beta5
 * 优化 InfoDownload界面
 * 新增 InfoS(动漫信息搜索)[beta,未开放]
@@ -107,5 +113,5 @@ All
 
 感谢。
 
-Feb. 1st,2017  
+Feb. 6th,2017  
 Trii Hsia
