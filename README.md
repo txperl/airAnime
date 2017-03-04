@@ -1,6 +1,6 @@
 因为感觉经常在各视频网站找番有点浪费时间，于是就突然萌生了一个想法：如果能同时进行，就不会浪费太多时间了。所以，airAnime就出于这个想法诞生了。
 
-airAnime是一款集合番剧搜索程序,借助于各网站的数据及各网站的搜索功能进行指定搜索,以减少搜索番剧的时间。
+airAnime是一款集合番剧搜索程序，借助于各网站的数据及各网站的搜索功能进行指定搜索，以减少搜索番剧的时间。
 
 Demo: [airAnimeOnline](http://airs.im/).
 
@@ -22,17 +22,19 @@ Demo: [airAnimeOnline](http://airs.im/).
     ├── mains.php - 程序主要功能代码
     ├── pages.php - 输出通用网页部分代码
     ├── srhauto.php - 获取关键词联想结果代码
+    ├── bangumiinfo.php - 获取番剧信息代码
 ├── .d
     ├── .server - 放于其他服务器的文件
     ├── index.php - InfoDownload主代码
     ├── list.js - 列表搜索功能JS
+├── .pages
+	├── about.php - 关于页面
+	├── start.php - 使用文档页面
+	├── if.php - 数据源可用性页面
+	├── srhcode.php - 搜索指令页面
+	├── notice.php - 告示页面
 ├── index.php - 程序主代码
 ├── run.php - AJAX接受数据并处理
-├── about.php - 关于页面
-├── start.php - 使用文档页面
-├── if.php - 数据源可用性页面
-├── srhcode.php - 搜索指令页面
-├── notice.php - 告示页面
 
 ```
 
@@ -44,8 +46,11 @@ Demo: [airAnimeOnline](http://airs.im/).
 ###Fonts
 字体链接位于 .css 4个.css后缀文件中。默认用的是我七牛CDN，但这存在风险，万一我哪天突然换了是吧，所以请请自行修改。字体位于 .css/Roboto (请注意css.css的代码)。
 
+###InfoS[beta]
+番剧信息获取功能，附带着搜索内容推测算法，精度有不错的提高。数据基于Bangumi番组计划。
+
 ###PicSearch(以图搜番)[beta]
-已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 index.php70行 与 functions/mains.php469行。
+已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 index.php84行 与 functions/mains.php469行。
 
 ###InfoDownload[beta]
 暂时只通过蜜柑计划RSS来获取数据，所以每次做多输出100项结果。现在只是个测试版本，之后会更加完善的。
@@ -53,7 +58,7 @@ Demo: [airAnimeOnline](http://airs.im/).
 ###Type类型
 本程序的搜索内容类型分为: 二次元 Anine(动画),Comic(漫画),Novel(小说),Download(下载).
 
-Anine包含如下数据源: Bilibili(哔哩哔哩),Dilidili(嘀哩嘀哩),Fcdm(风车动漫),PPTV(聚力),Letv(乐视),iQiyi(爱奇艺),Youku(优酷),TencentTV(腾讯视频),BaiduAll(百度集合搜索),DMHY(动漫花园)_下载源.
+Anine包含如下数据源: Bilibili(哔哩哔哩),Dilidili(嘀哩嘀哩),Fcdm(风车动漫),PPTV(聚力),Letv(乐视),iQiyi(爱奇艺),Youku(优酷),TencentTV(腾讯视频),BaiduAll(百度集合搜索).
 
 Comic包含如下数据源:DMZJ(动漫之家),BKMH(布卡漫画),DMW(动漫屋),TKMH(图库漫画).
 
@@ -67,7 +72,13 @@ Download包含如下数据源:MGJH(蜜柑计划).
 * 集合搜索 -抓取百度工具的集合番剧信息，不过匹配码只针对一些例子，所以时有时无。
 
 ##更新日志
-####v1 beta5
+####v1 RC1.2
+* 修补 累计的细节及BUG
+* 新增 搜索内容推测算法
+* 开启 番剧信息获取功能
+* 进入 更新休眠期(上学中)
+
+####v1 RC1
 * 修补 细节及BUG
 * 新增 漫画源
 * 待定 部分功能(源码中注释掉的部分)

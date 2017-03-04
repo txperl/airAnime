@@ -745,4 +745,118 @@ function infoS($title){
 	}
 	return $rst;
 }
+// 推测搜索内容
+function whatstitle($title){
+	// 取百度联想结果
+	$rst=array(); //百度联想结果
+	$f_rst=array(); //判断中的暂时数据
+	$a_rst=array(); //最终数组1
+	$b_rst=array(); //最终数组2
+    $link=curl_get_contents('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='.urlencode($title).'&json=1&p=3');
+    $link=mb_convert_encoding($link, 'utf-8', 'gbk');
+    $link=getSubstr($link,'s":[',']});');
+    $num=substr_count($link,'","')+1;
+    if ($num!=1) {
+        for ($i=0; $i < $num; $i++) { 
+            if (getSubstr($link,'"','",')=='') {
+                $f=getSubstr($link,'"','"');
+            } else{
+                $f=getSubstr($link,'"','",');
+            }
+            $link=str_replace('"'.$f.'"','',$link);
+
+            // 除杂
+    		$f=str_replace('第一季','',$f);
+    		$f=str_replace('第二季','',$f);
+    		$f=str_replace('第三季','',$f);
+    		$f=str_replace('第四季','',$f);
+    		$f=str_replace('第五季','',$f);
+    		$f=str_replace('第六季','',$f);
+    		$n=mb_substr($f,mb_strlen($f)-1,mb_strlen($f),'utf-8');
+			if ($n==1 or $n==2 or $n==3 or $n==4 or $n==5 or $n==6) {
+				$f=mb_substr($f,0,mb_strlen($f)-1);
+			}
+
+            array_push($rst,$f);
+            $text=$text.$f;
+        }
+    }
+    // 取出最长文本
+    $max=0;
+    for ($i=0; $i < count($rst); $i++) { 
+    	$tlength=mb_strlen($rst[$i]);
+    	if ($tlength>$max) {
+    		$max=$tlength;
+    		$turn=$i;
+    	}
+    }
+    $ltitle=$rst[$turn];
+
+    // 反复判断出现次数并筛选结果
+    for ($i=0; $i < $max; $i++) { 
+    	$iftitle=mb_substr($ltitle,0,$max-$i,'utf-8');
+    	if (substr_count($text,$iftitle)>count($rst)/2) { // 大于一半就收手,233333.
+    		$ftitle=$iftitle;
+    		break;
+    	}
+    }
+
+	// 判断是否存在完全相同文本
+	for ($i=0; $i < count($rst); $i++) { 
+		if ($ftitle==$rst[$i]) {
+			$aexist=1;
+		}
+	}
+    // 若以上未判断出结果，则继续判断
+    // 模拟肉眼筛选出出现次数最多的一个可用结果
+    if ($aexist!=1) {
+    	$ftitle='';
+    	for ($i=0; $i < count($rst); $i++) { 
+    	$t=$rst[$i];
+    		for ($a=0; $a < mb_strlen($t)-mb_strlen($title); $a++) { 
+    			$f=mb_substr($t,0,mb_strlen($title)+$a+1,'utf-8');
+    			if (substr_count($text,$f)>1) {
+    				array_push($f_rst,$f);
+    				if ($a==mb_strlen($t)-mb_strlen($title)-1) {
+    					if ($f_rst[0]!='') {
+    						array_push($a_rst,$f_rst);
+    						$f_rst=array();
+    					}
+    				}
+    			} else {
+    				if ($f_rst[0]!='') {
+    					array_push($a_rst,$f_rst);
+    					$f_rst=array();
+    				}
+    				break;
+    			}
+    		}
+    	}
+    }
+
+    // 最终结果选择并再次筛选最多出现次数
+    if ($ftitle!='') {
+    	$ftitle=$ftitle;
+    } elseif (count($a_rst)==0) {
+    	$ftitle=$title;
+    } elseif (count($a_rst)==1) {
+    	$ftitle=$a_rst[0][count($a_rst[0])-1];
+    } else {
+    	for ($i=0; $i < count($a_rst); $i++) { 
+    		array_push($b_rst,$a_rst[$i][count($a_rst[$i])-1]);
+    		$ftext=$ftext.$a_rst[$i][count($a_rst[$i])-1];
+    	}
+    	$maxn=0;
+    	for ($i=0; $i < count($b_rst); $i++) { 
+    		$t=$b_rst[$i];
+    		$num=substr_count($ftext,$t);
+    		if ($num>$maxn) {
+    			$ftitle=$t;
+    		}
+    	}
+    }
+
+    $ftitle=str_replace(' ','',$ftitle);
+    return $ftitle;
+}
 ?>

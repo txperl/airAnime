@@ -12,11 +12,13 @@ if(is_array($_GET)&&count($_GET)>0){
 			if (strlen(file_get_contents($picurl))<=1048869) { //判断图像大小
 				$rst=picS($picurl);
 				$name=unicode_decode(getSubstr($rst,'title_chinese":"','","')); //繁体
+				$time=getSubstr($rst,'at":',',"');
+				$season=getSubstr($rst,'season":"','","');
 				if ($name!='') {
 					$name=zhconversion_hans($name);  //简体
 					$title=str_replace('!image:'.$picurl.';',$name,$title);
 				} else {
-					echo '<h3>图像搜索失败，请重试。可能原因包含：<br><h4>1.搜索次数达到限制，请稍候尝试(几率很大)。<br>2.目标服务器正在维护或无法访问。<br>3.本服务器网络速度问题。<br>或者是，<span style="color:#FD5B78;">请正确输入图像链接(几率也很大)！！</span>[具体参考 搜索指令 页面]</h4><br><br><br><br>';
+					echo '<h3>图像搜索失败，请重试。可能原因包含：<br>*<span style="color:#FD5B78;">未找到此图像所在番剧...</span><br><br>或者是：<h4>1.搜索次数达到限制，请稍候尝试。<br>2.目标服务器正在维护或无法访问。<br>3.本服务器网络速度问题。<br>4.<span style="color:#FD5B78;">请正确输入图像链接。</span><br>[具体请参考 搜索指令 页面]</h4><br><br><br><br>';
 					exit();
 				}
 			} else {
@@ -47,7 +49,11 @@ if(is_array($_GET)&&count($_GET)>0){
 		} elseif ($iftype=='d') {
 			echo '<h2 class="content-sub-heading">'.$title.' [InfoDownload] Searching...</h2>';
 		} else{
-			echo '<h2 class="content-sub-heading">'.$title.'</h2>';
+			if ($picurl!='') {
+				echo '<h2 class="content-sub-heading">'.$title.' [At:'.$time.'s] [Season:'.$season.']'.'</h2>';
+			} else {
+				echo '<h2 class="content-sub-heading">'.$title.'</h2>';
+			}
 		}
 		if ($picurl!='') {
 			echo '<div style="text-align:center;"><img style="max-width:100%;height:auto;" src="'.$picurl.'"></div>';
@@ -55,13 +61,20 @@ if(is_array($_GET)&&count($_GET)>0){
 		// 抓取网页
 			//动画
 		if ($iftype=='a') {
+			$autotitle=whatstitle($title);
 			$webd=asrh($title,$ifrun);
 		// bangumi info
 			//$r_info=infoS($webd[9]);
 			//$n_info=$r_info[0];
 			//$des_info=$r_info[1];
 			//if ($des_info=='') {
-				$des_info='(ฅ´ω`ฅ) 番剧信息未完成唔...';
+			$infolink='<a href="#" id="infoget" name="'.$autotitle.'">'.$autotitle.'</a>';
+			$infolinko='<a href="#" id="infogeto" name="'.$title.'">'.$title.'</a>';
+			if ($autotitle==$title) {
+				$des_info='(ฅ´ω`ฅ) 想知道「'.$infolinko.'」的简介嘛？';
+			} else {
+				$des_info='(ฅ´ω`ฅ) 想知道「'.$infolink.'」还是「'.$infolinko.'」的简介呢？';
+			}
 			//}
 		// bilibili 结果
 		//if ($ifrun[0]=='true') {
@@ -160,6 +173,7 @@ if(is_array($_GET)&&count($_GET)>0){
 		// 简要 数量
 		echo '<div class="tile-wrap"><div class="tile"><div class="tile-inner">';
 			echo $des_info;
+			echo '<div id="banguim_info"></div>';
 		echo '</div></div>';
 
 		// 结果

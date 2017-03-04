@@ -12,7 +12,7 @@ print <<<EOT
 				</a>
 			</li>
 		</ul>
-		<a class="header-logo margin-left-no" href="./">airAnime</a>
+		<a class="header-logo margin-left-no" href="/">airAnime</a>
 		</header>
 
 EOT;
@@ -23,28 +23,29 @@ print <<<EOT
 		<nav aria-hidden="true" class="menu" id="ui_menu" tabindex="-1">
 		<div class="menu-scroll">
 			<div class="menu-content">
-				<a class="menu-logo" href="./">airAnime</a>
+				<a class="menu-logo" href="/">airAnime</a>
 				<ul class="nav">
 					<li>
-						<a class="collapsed waves-attach" href="./">Home</a>
+						<a class="collapsed waves-attach" href="/">Home</a>
 					</li>
 					<li>
-						<a class="collapsed waves-attach" href="./about.php">About</a>
+						<a class="collapsed waves-attach" href="/pages/about.php">About</a>
 					</li>
 					<li>
-						<a class="collapsed waves-attach" href="./notice.php">Notice</a>
+						<a class="collapsed waves-attach" href="/pages/notice.php">Notice</a>
 					</li>
+
 					<li>
-						<a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_extras">Docs</a>
+						<a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_extras">--Docs</a>
 						<ul class="menu-collapse collapse" id="ui_menu_extras">
 							<li>
-								<a class="waves-attach" href="./start.php">使用说明</a>
+								<a class="waves-attach" href="/pages/start.php">使用说明</a>
 							</li>
 							<li>
-								<a class="waves-attach" href="./if.php">数据源可用性</a>
+								<a class="waves-attach" href="/pages/if.php">数据源可用性</a>
 							</li>
 							<li>
-								<a class="waves-attach" href="./srhcode.php">搜索指令</a>
+								<a class="waves-attach" href="/pages/srhcode.php">搜索指令</a>
 							</li>
 							<li>
 								<a class="waves-attach" href="https://trello.com/b/8s4PQwAN/" target="_blank">其他</a>
@@ -52,13 +53,11 @@ print <<<EOT
 						</ul>
 					</li>
 					<li>
-						<a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_xinfan">新番</a>
+						<a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_xinfan">--新番</a>
 						<ul class="menu-collapse collapse" id="ui_menu_xinfan">
+							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=19811&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2017年04月春季</a></li>
 							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=18100&categoryId=800&realCategoryId=1&subCategoryId=5" target="_blank">2017年01月冬季</a></li>
 							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=15697&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年10月秋季</a></li>
-							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=15445&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年07月夏季</a></li>
-							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=14444&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年04月春季</a></li>
-							<li><a class="waves-attach" href="http://www.animen.com.tw/NewsArea/NewsItemDetail?NewsId=12914&categoryId=600&tagName=%E6%96%B0%E7%95%AA%E5%88%97%E8%A1%A8&realCategoryId=1&subCategoryId=5" target="_blank">2016年01月冬季</a></li>
 						</ul>
 					</li>
 				</ul>
