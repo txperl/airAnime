@@ -50,7 +50,7 @@ Demo: [airAnimeOnline](http://airs.im/).
 番剧信息获取功能，附带着搜索内容推测算法，精度有不错的提高。数据基于Bangumi番组计划。
 
 ###PicSearch(以图搜番)[beta]
-已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 index.php84行 与 functions/mains.php469行。
+已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 index.php92行 与 functions/mains.php469行。
 
 ###InfoDownload[beta]
 暂时只通过蜜柑计划RSS来获取数据，所以每次做多输出100项结果。现在只是个测试版本，之后会更加完善的。

@@ -68,8 +68,8 @@ if(is_array($_GET)&&count($_GET)>0){
 			//$n_info=$r_info[0];
 			//$des_info=$r_info[1];
 			//if ($des_info=='') {
-			$infolink='<a href="#" id="infoget" name="'.$autotitle.'">'.$autotitle.'</a>';
-			$infolinko='<a href="#" id="infogeto" name="'.$title.'">'.$title.'</a>';
+			$infolink='<a href="javascript:void(0)" id="infoget" name="'.$autotitle.'">'.$autotitle.'</a>';
+			$infolinko='<a href="javascript:void(0)" id="infogeto" name="'.$title.'">'.$title.'</a>';
 			if ($autotitle==$title) {
 				$des_info='(ฅ´ω`ฅ) 想知道「'.$infolinko.'」的简介嘛？';
 			} else {

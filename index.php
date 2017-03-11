@@ -42,9 +42,9 @@
 											<input class="form-control" id="title" type="text" name='title' autocomplete="off">
 											</div>
 											<br>
-											搜索指令(点击添加): <code><a href="#" id="addsctp">!image</a></code> <code><a href="#" id="addscmh">&comic</a></code> <code><a href="#" id="addscxs">&novel</a></code>
+											搜索指令(点击添加): <code><a href="javascript:void(0)" id="addsctp">!image</a></code> <code><a href="javascript:void(0)" id="addscmh">&comic</a></code> <code><a href="javascript:void(0)" id="addscxs">&novel</a></code>
 											<div style="text-align:right;">
-											<a class="btn btn-flat waves-attach" id="btnUP">Upload</a> <a class="btn btn-brand waves-attach waves-light" href="#" id="btnS"> Search </a> 
+											<a class="btn btn-flat waves-attach" id="btnUP">Upload</a> <a class="btn btn-brand waves-attach waves-light" href="javascript:void(0)" id="btnS"> Search </a> 
 											</div>
 											<div class="progress" style="display:none;" id="loading">
     										<div class="progress-bar-indeterminate"></div>
@@ -75,6 +75,14 @@
                 </div>
             </div></div>
         </div>
+
+        <?php
+            if (isset($_GET["title"])) {
+                $sotitle=$_GET["title"];
+            } else {
+                $sotitle='';
+            }
+        ?>
 
 			<div id="rst_show"></div>
 
@@ -149,14 +157,6 @@
             });
         });
         $(function(){
-            $("#addscxz").click(function(){
-                var obj=document.getElementById("title");
-				var val=obj.value;
-				if (val != '')
-					obj.value=val+" type:\\d/";
-            });
-        });
-        $(function(){
             $("#addscxs").click(function(){
                 var obj=document.getElementById("title");
 				var val=obj.value;
@@ -207,14 +207,13 @@
             });
         });
 	</script>
-	<script>
-        //判断类型与AJAX提交
-	   window.onload=function() {
-            var oBtn1=document.getElementById('btnS');
-            var oInput=document.getElementById("title");
-            var oDiv=document.getElementById("rst_show");
-        oBtn1.onclick=function() {
-            var i=oInput.value.indexOf('type:\\d/');
+    <script>
+    //判断类型并AJAX提交
+    function airsim()
+    {
+        var oBtn1=document.getElementById('btnS');
+        var oInput=document.getElementById("title");
+        var i=oInput.value.indexOf('type:\\d/');
             if (i != '-1'){
                 getId("btnS").style.display="none";
                 getId("btnUP").style.display="none";
@@ -222,77 +221,72 @@
                 var name = oInput.value.substring(0,oInput.value.indexOf("type:\\d/"));
                 window.location.href='./d/?'+name;
             } else {
-        	   getId("srhauto").style.display="none";
-        	   getId("btnS").style.display="none";
-               getId("btnUP").style.display="none";
-               getId("btnUP").style.display="none";
-        	   getId("loading").style.display="";
-                var sValue=oInput.value;
-                //1.创建Ajax对象
-                if(window.XMLHttpRequest) {
-                    var oAjax=new XMLHttpRequest();
-                } else {
-                    var oAjax=new ActiveXObject('Microsoft.XMLHTTP');
-                }
-                //2.连接服务器
-                oAjax.open('get','run.php?title='+sValue,true);
-                //3.发送请求
-                oAjax.send();
-                //4.接收返回
-                oAjax.onreadystatechange=function()
-                {
-                    //oAjax.readyState  记录步骤
-                    if(oAjax.readyState == 4) {    
-                        if(oAjax.status == 200) {
-                            oDiv.innerHTML = oAjax.responseText;
+                var title=oInput.value;
+                getId("srhauto").style.display="none";
+                getId("btnS").style.display="none";
+                getId("btnUP").style.display="none";
+                getId("loading").style.display="";
+                    $.get( './run.php', { 'title' : title },function(data){
+                        if( title == '' ) 
+                            alert("搜索失败，请刷新重试");
+                        else
+                            $('#rst_show').html(data).css('display','block');
                             document.getElementById("title").value='';
                             getId("ifhomea").style.display="none";
                             getId("srhauto").style.display="none";
-    	         			getId("btnS").style.display="";
-    	          			getId("loading").style.display="none";
+                            getId("btnS").style.display="";
+                            getId("loading").style.display="none";
                             getId("picstip").style.display="none";
-                                //获取番剧信息
-                                    //联想标题
-                                $(function(){
-                                    $("#infoget").click(function(){
-                                        $('#banguim_info').html('<br>少女祈愿中...').css('display','block');
-                                        var t=document.getElementById("infoget").name;
-                                        $.post( './functions/bangumiinfo.php', { 'value' : t },function(data){
+                            //获取番剧信息
+                                //联想标题
+                                    $(function(){
+                                        $("#infoget").click(function(){
+                                            $('#banguim_info').html('<br>少女祈愿中...').css('display','block');
+                                            var t=document.getElementById("infoget").name;
+                                            $.post( './functions/bangumiinfo.php', { 'value' : t },function(data){
                                             if( t == '' ) 
                                                 $('#banguim_info').html('').css('display','none');
                                             else
                                                 $('#banguim_info').html(data).css('display','block');
+                                            });
                                         });
                                     });
-                                });
-                                    //原标题
-                                $(function(){
-                                    $("#infogeto").click(function(){
-                                        $('#banguim_info').html('<br>少女祈愿中...').css('display','block');
-                                        var t=document.getElementById("infogeto").name;
-                                        $.post( './functions/bangumiinfo.php', { 'value' : t },function(data){
-                                            if( t == '' ) 
-                                                $('#banguim_info').html('').css('display','none');
-                                            else
-                                                $('#banguim_info').html(data).css('display','block');
+                                //原标题
+                                    $(function(){
+                                        $("#infogeto").click(function(){
+                                            $('#banguim_info').html('<br>少女祈愿中...').css('display','block');
+                                            var t=document.getElementById("infogeto").name;
+                                            $.post( './functions/bangumiinfo.php', { 'value' : t },function(data){
+                                                if( t == '' ) 
+                                                    $('#banguim_info').html('').css('display','none');
+                                                else
+                                                    $('#banguim_info').html(data).css('display','block');
+                                            });
                                         });
                                     });
-                                });
                                 //
-                        } else {
-                            alert("搜索失败，请刷新重试");
-                        }
-                    }
-                }
+                    });
             }
+    }
+
+        // '/?title=' 执行AJAX
+        var sotitle ="<?php echo $sotitle; ?>";
+        if (sotitle!='') {
+            document.getElementById('title').value=sotitle;
+            airsim();
+        }
+
+        //按钮 执行AJAX
+        document.getElementById('btnS').onclick=function() {
+            airsim();
         };
-       };
-	    //回车事件绑定
+
+	    //回车 执行AJAX
         $('#title').bind('keypress', function(event) {  
             if (event.keyCode == "13") {              
                 event.preventDefault();   
                 //回车执行
-                $('#btnS').click();  
+                airsim(); 
             }  
         });
     </script>
