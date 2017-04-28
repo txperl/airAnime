@@ -71,7 +71,7 @@
             <div class="card-main">
                 <div class="card-inner">
                     <p class="card-heading">「PicSearch」以图搜番说明</p>
-                    <p class="margin-bottom-lg">1.只可搜索出自日本动画(动漫)中的图片<br>2.图像大小 <= 1MB<br>3.若搜索本地图片，请点击UPLOAD上传图像再搜索<br>更多搜索指令使用说明请参考 <a href="./pages/srhcode.php">搜索指令</a>&<a href="./pages/start.php">使用说明</a> 页面</p>
+                    <p class="margin-bottom-lg">1.只可搜索出自日本动画(动漫)中的图片<br>2.图像大小 <= 1MB<br>3.若搜索本地图片，请点击UPLOAD上传图像再搜索<br>4.若图片为GIF格式，必须上传后才可正常搜索<br><br>更多搜索指令使用说明请参考 <a href="./pages/srhcode.php">搜索指令</a>&<a href="./pages/start.php">使用说明</a> 页面</p>
                 </div>
             </div></div>
         </div>
@@ -106,7 +106,7 @@
             <div class="card-main">
                 <div class="card-inner">
                     <p class="card-heading">Welcome</p>
-                    <p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 RC1.2,<br><span style="font-weight:bold;">呼呼呼</span>~学习&工作加油.</p>
+                    <p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 RC1.3<br><span style="font-weight:bold;">呼呼呼</span>~生活愉快~</p>
                 </div>
             <div class="card-action">
                 <div class="card-action-btn pull-left">
@@ -211,6 +211,7 @@
     //判断类型并AJAX提交
     function airsim()
     {
+        if (document.getElementById("title").value!='') {
         var oBtn1=document.getElementById('btnS');
         var oInput=document.getElementById("title");
         var i=oInput.value.indexOf('type:\\d/');
@@ -267,6 +268,7 @@
                                 //
                     });
             }
+        }
     }
 
         // '/?title=' 执行AJAX

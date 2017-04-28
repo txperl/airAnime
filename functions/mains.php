@@ -460,6 +460,13 @@ function picS($picurl){ //参考文档及API token获取:https://soruly.github.i
 	$image_file = $picurl;
 	$image_info = getimagesize($image_file);
 	$type = pathinfo($image_file, PATHINFO_EXTENSION);
+	if ($type=='gif') {
+		$picurl = str_replace('.gif','',$picurl);
+		$picurl = $picurl.'t.jpg';
+		$image_file = $picurl;
+		$image_info = getimagesize($image_file);
+		$type = pathinfo($image_file, PATHINFO_EXTENSION);
+	}
 	if ($type=='jpg') {
 		$type='jpeg';
 	}
@@ -476,6 +483,7 @@ function picS($picurl){ //参考文档及API token获取:https://soruly.github.i
     curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
     $data = curl_exec($curl);
     curl_close($curl);
+
     return $data;
 	}
 }
@@ -535,7 +543,7 @@ function MGJH($title){
   	$rst_size=array("Size");
   	$rst_ori=array("字幕组");
   	$mgjh=array();
-	$link='http://airanime.host.smartgslb.com/d/?'.$title;
+	$link='http://mikanani.me/RSS/Search?searchstr='.$title;
 	$link=curl_get_contents($link);
 	$number=substr_count($link,'<item>');
 
@@ -593,12 +601,14 @@ function asrh($title,$ifrun){
 		if ($ifrun[1]=='true') {
 			$stitle1='http://www.baidu.com/s?wd=site%3Awww.dilidili.com%20'.urlencode($title).'&pn=0';
 			$stitle2='http://www.baidu.com/s?wd=site%3Awww.dilidili.com%20'.urlencode($title).'&pn=10';
+			$stitle3='http://www.baidu.com/s?wd=site%3Awww.dilidili.wang%20'.urlencode($title).'&pn=0';
 		}	else{
 			$stitle1=$none;
 			$stitle2=$none;
 		}
 		array_push($urls,$stitle1);//1
 		array_push($urls,$stitle2);//2
+		array_push($urls,$stitle3);//3
 		if ($ifrun[2]=='true') {
 			$stitle='http://www.fengchedm.com/common/search.aspx?key='.urlencode($title);
 		}	else{
@@ -656,16 +666,16 @@ function asrh($title,$ifrun){
 		$frst=curl_multi($urls);
 		$rst=array();
 		array_push($rst,$frst[0]);//bilibili 0
-		array_push($rst,$frst[1].$frst[2]);//dilidili 1
-		array_push($rst,$frst[3]);//fcdm 2
-		array_push($rst,$frst[4]);//pptv 3
-		array_push($rst,$frst[5]);//letv 4
-		array_push($rst,$frst[6]);//iqiyi 5
-		array_push($rst,$frst[7]);//youku 6
-		array_push($rst,$frst[8]);//baiduall 7
-		array_push($rst,$frst[9]);//tencenttv 8
-		array_push($rst,$frst[10]);//bangumi info 9
-		//array_push($rst,$frst[11]);//wxdm 10
+		array_push($rst,$frst[1].$frst[2].$frst[3]);//dilidili 1
+		array_push($rst,$frst[4]);//fcdm 2
+		array_push($rst,$frst[5]);//pptv 3
+		array_push($rst,$frst[6]);//letv 4
+		array_push($rst,$frst[7]);//iqiyi 5
+		array_push($rst,$frst[8]);//youku 6
+		array_push($rst,$frst[9]);//baiduall 7
+		array_push($rst,$frst[10]);//tencenttv 8
+		array_push($rst,$frst[11]);//bangumi info 9
+		//array_push($rst,$frst[12]);//wxdm 10
 	return $rst;
 }
 function csrh($title){
@@ -772,9 +782,19 @@ function whatstitle($title){
     		$f=str_replace('第四季','',$f);
     		$f=str_replace('第五季','',$f);
     		$f=str_replace('第六季','',$f);
+    		$f=str_replace('第一部','',$f);
+    		$f=str_replace('第二部','',$f);
+    		$f=str_replace('第三部','',$f);
+    		$f=str_replace('第四部','',$f);
+    		$f=str_replace('第五部','',$f);
+    		$f=str_replace('第六部','',$f);
     		$n=mb_substr($f,mb_strlen($f)-1,mb_strlen($f),'utf-8');
-			if ($n==1 or $n==2 or $n==3 or $n==4 or $n==5 or $n==6) {
+			if ($n=='1' or $n=='2' or $n=='3' or $n=='4' or $n=='5' or $n=='6' or $n=='7' or $n=='8' or $n=='9') {
 				$f=mb_substr($f,0,mb_strlen($f)-1);
+			}
+    		$n=mb_substr($f,mb_strlen($f)-2,mb_strlen($f),'utf-8');
+			if ($n=='01' or $n=='02' or $n=='03' or $n=='04' or $n=='05' or $n=='06' or $n=='07' or $n=='08' or $n=='09') {
+				$f=mb_substr($f,0,mb_strlen($f)-2);
 			}
 
             array_push($rst,$f);
@@ -803,12 +823,18 @@ function whatstitle($title){
 
 	// 判断是否存在完全相同文本
 	for ($i=0; $i < count($rst); $i++) { 
+		if ($title==$rst[$i]) {
+			$ftitle=$title;
+			$aexist=1;
+			break;
+		}
 		if ($ftitle==$rst[$i]) {
 			$aexist=1;
+			break;
 		}
 	}
     // 若以上未判断出结果，则继续判断
-    // 模拟肉眼筛选出出现次数最多的一个可用结果
+    // 模拟筛选出出现次数最多的一个可用结果
     if ($aexist!=1) {
     	$ftitle='';
     	for ($i=0; $i < count($rst); $i++) { 

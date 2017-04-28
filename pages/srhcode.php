@@ -6,15 +6,15 @@
 	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
 	<title>搜索指令 -airAnime</title>
 
-	<link href="/css/base.min.css" rel="stylesheet">
-	<link href="/css/project.min.css" rel="stylesheet">
+	<link href="../css/base.min.css" rel="stylesheet">
+	<link href="../css/project.min.css" rel="stylesheet">
 </head>
 <body class="page-brand">
 
 	<?php
 	require "../functions/pages.php";
-	pagepart('header');
-	pagepart('menu');
+	pagepart('header',1);
+	pagepart('menu',1);
 	?>
 	
 	<!-- 主 -->
@@ -133,8 +133,8 @@
 	?>
 
 	<!-- js -->
-	<script src="/js/jquery.min2.20.js"></script>
-	<script src="/js/base.min.js"></script>
-	<script src="/js/project.min.js"></script>
+	<script src="../js/jquery.min2.20.js"></script>
+	<script src="../js/base.min.js"></script>
+	<script src="../js/project.min.js"></script>
 </body>
 </html>

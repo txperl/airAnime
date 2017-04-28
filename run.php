@@ -18,7 +18,7 @@ if(is_array($_GET)&&count($_GET)>0){
 					$name=zhconversion_hans($name);  //简体
 					$title=str_replace('!image:'.$picurl.';',$name,$title);
 				} else {
-					echo '<h3>图像搜索失败，请重试。可能原因包含：<br>*<span style="color:#FD5B78;">未找到此图像所在番剧...</span><br><br>或者是：<h4>1.搜索次数达到限制，请稍候尝试。<br>2.目标服务器正在维护或无法访问。<br>3.本服务器网络速度问题。<br>4.<span style="color:#FD5B78;">请正确输入图像链接。</span><br>[具体请参考 搜索指令 页面]</h4><br><br><br><br>';
+					echo '<div class="card"><div class="card-main"><div class="card-inner"><p class="card-heading">(,,• ₃ •,,) 唔唔唔，没找到是什么番唉...</p><p class="margin-bottom-lg">可能原因如下：<br>1.未找到此图像所在番剧<br>2.搜索次数达到限制，请稍候尝试<br>3.未输入正确图像地址<br>4.若图片为GIF格式，必须上传后才能搜索<br>5.目标服务器或本服务器网络错误<br>若2-4步骤完全正常，那即是1步骤错误</p></div></div></div><br><br>';
 					exit();
 				}
 			} else {

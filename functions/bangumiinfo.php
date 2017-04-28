@@ -1,9 +1,8 @@
 <?php
-//取百度搜索联想结果
 include("chttochs/convert.php");
 require 'function.php';
     $val = $_POST['value'];
-    $web=curl_get_contents('http://bgm.tv/subject_search/'.urlencode($val).'?cat=2');
+    $web=curl_get_contents('http://bangumi.tv/subject_search/'.urlencode($val).'?cat=2');
     $r_info=infoS($web);
 
     if ($r_info!='') {
@@ -17,7 +16,7 @@ require 'function.php';
         echo '<br><br>番剧信息数据基于Bangumi番组计划';
         echo '</div>';
     } else {
-        echo '<br>抱歉未找到相关内容，可能是网络速度问题，您可以重试看看...';
+        echo '<br>「施工中」抱歉未找到相关内容，可能是网络速度问题，您可以重试看看...';
     }
     
 //Bangumi Info

@@ -6,15 +6,15 @@
 	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
 	<title>关于 -airAnime</title>
 
-	<link href="/css/base.min.css" rel="stylesheet">
-	<link href="/css/project.min.css" rel="stylesheet">
+	<link href="../css/base.min.css" rel="stylesheet">
+	<link href="../css/project.min.css" rel="stylesheet">
 </head>
 <body class="page-brand">
 
 	<?php
 	require "../functions/pages.php";
-	pagepart('header');
-	pagepart('menu');
+	pagepart('header',1);
+	pagepart('menu',1);
 	?>
 
 	<!-- 主 -->
@@ -35,10 +35,11 @@
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
-									<p>airAnime是一款集合番剧搜索程序,借助于各网站的数据及各网站的搜索功能进行指定搜索,以减少搜索番剧的时间。</p>
+									<img src="http://7vzp04.com1.z0.glb.clouddn.com/image/airAnimeicon.png" style="float:right;width:256px;height:256px;"/>
+									<p>airAnime是一款集合<span style="color:#FD5B78;">「番剧&动漫搜索」</span>程序，借助于各网站的数据及各网站的搜索功能进行指定搜索，以减少搜索番剧的时间。</p>
 									<hr>
 									<p>前端基于 <a href="https://github.com/Daemonite/material" target="_blank">Material框架</a> ，后端PHP。</p>
-									<p>这是一个开源程序，您可以到GitHub下载(右下角小红圈)。</p>
+									<p>这是一个开源程序，小红圈内有GitHub链接。</p>
 									<p>请使用现代浏览器以达到最佳体验效果。</p>
 									<p>第一次使用务必阅读Docs中各文档。</p>
 									<p>背景图来自 <a href="http://www.pixiv.net/member.php?id=1565632" target="_blank">@Kantoku</a> 。
@@ -94,7 +95,7 @@
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
-									<p>1.0 RC1.2 -学习&工作加油</p>
+									<p>1.0 RC1.2 -学习&工作愉快</p>
 									<p>* 修补 累计的细节及BUG</p>
 									<p>* 新增 搜索内容推测算法</p>
 									<p>* 开启 番剧信息获取功能</p>
@@ -149,8 +150,8 @@
 	?>
 
 	<!-- js -->
-	<script src="/js/jquery.min2.20.js"></script>
-	<script src="/js/base.min.js"></script>
-	<script src="/js/project.min.js"></script>
+	<script src="../js/jquery.min2.20.js"></script>
+	<script src="../js/base.min.js"></script>
+	<script src="../js/project.min.js"></script>
 </body>
 </html>
