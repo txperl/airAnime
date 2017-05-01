@@ -41,11 +41,7 @@ function bilibiliS($title){
 			array_push($rst_l,$l);
 			array_push($rst_t,$t);
 		}
-/*
-		for ($n=0; $n<$number; $n++) {
-			echo 'bilibili('.$number.'):'.$rst_t[$n+1].'('.$rst_l[$n+1].')'.'<br>';
-		}
-*/
+
 		array_push($bilibili,$rst_t);
 		array_push($bilibili,$rst_l);
 		array_push($bilibili,$number);
@@ -53,7 +49,7 @@ function bilibiliS($title){
 }
 
 // 嘀哩嘀哩搜索
-function dilidiliS($title){
+function dilidiliS($title,$ori1,$ori2){
 	$rst_t=array("dilidili标题");
 	$rst_l=array("dilidili链接");
 	$dilidili=array();
@@ -69,20 +65,19 @@ function dilidiliS($title){
 		// 载入 标题 链接
 		for ($i=0; $i<count($rst[0]); $i++) { 
 			$t=str_replace('-','',$rst[1][$i]);
+			$sinm1=howtextsimilar(strtoupper($t),strtoupper($ori1));
+			$sinm2=howtextsimilar(strtoupper($t),strtoupper($ori2));
+			$sinm=($sinm1+$sinm2) / 2;
+			if ($sinm>=0.3) {
 			array_push($rst_t,$t);
 			$l=$rst[3][$i];
 			array_push($rst_l,$l);
-
-/*
-		for ($n=0; $n<$number;$n++) { 
-			echo 'dilidili('.$number.'):'.$rst_t[$n+1].'('.$rst_l[$n+1].')'.'<br>';
+			}
 		}
-*/
 
-	}
 	array_push($dilidili,$rst_t);
 	array_push($dilidili,$rst_l);
-	array_push($dilidili,$number);
+	array_push($dilidili,count($rst_t)-1);
 	return $dilidili;
 }
 // 风车动漫
@@ -599,12 +594,13 @@ function asrh($title,$ifrun){
 		//}
 		array_push($urls,$stitle);//0
 		if ($ifrun[1]=='true') {
-			$stitle1='http://www.baidu.com/s?wd=site%3Awww.dilidili.com%20'.urlencode($title).'&pn=0';
-			$stitle2='http://www.baidu.com/s?wd=site%3Awww.dilidili.com%20'.urlencode($title).'&pn=10';
-			$stitle3='http://www.baidu.com/s?wd=site%3Awww.dilidili.wang%20'.urlencode($title).'&pn=0';
+			$stitle1='http://www.baidu.com/s?wd=site%3Awww.dilidili.wang%20'.urlencode($title).'&pn=0';
+			$stitle2='http://www.baidu.com/s?wd=site%3Awww.dilidili.com%20'.urlencode($title).'&pn=0';
+			$stitle3='http://www.baidu.com/s?wd=site%3Awww.dilidili.com%20'.urlencode($title).'&pn=10';
 		}	else{
 			$stitle1=$none;
 			$stitle2=$none;
+			$stitle3=$none;
 		}
 		array_push($urls,$stitle1);//1
 		array_push($urls,$stitle2);//2
@@ -884,5 +880,61 @@ function whatstitle($title){
 
     $ftitle=str_replace(' ','',$ftitle);
     return $ftitle;
+}
+//简单余弦函数判断短文本相似度
+function howtextsimilar($text1,$text2){
+	$gentext=$text1.$text2;
+	$fword='';
+	$word=array(); //文本单分割结果
+	$num1=array(); //文本1向量构建
+	$num2=array(); //文本2向量构建
+
+	//取单个词并加入数组
+	for ($i=0; $i < mb_strlen($gentext); $i++) { 
+		$f=mb_substr($gentext,$i,1,'utf-8');
+		if (substr_count($fword,$f)==0) {
+			$fword=$fword.$f;
+		}
+	}
+	for ($i=0; $i < mb_strlen($fword); $i++) { 
+		$f=mb_substr($fword,$i,1,'utf-8');
+		array_push($word,$f);
+	}
+
+	//判断词频
+	for ($i=0; $i < mb_strlen($fword); $i++) { 
+		$ntext1=substr_count($text1,$word[$i]);
+		$ntext2=substr_count($text2,$word[$i]);
+		array_push($num1,$ntext1);
+		array_push($num2,$ntext2);
+	}
+
+	//计算余弦值
+	$sum=0;
+	$sumT1=0;
+	$sumT2=0;
+	for ($i=0; $i < mb_strlen($fword); $i++) { 
+		$sum=$sum+$num1[$i]*$num2[$i];
+		$sumT1=$sumT1+pow($num1[$i],2);
+		$sumT2=$sumT2+pow($num2[$i],2);
+	}
+	$cos=$sum / (sqrt($sumT1 * $sumT2));
+	
+	return $cos;
+}
+//依据相似度筛选排列数组
+function runtextsimilar($text,$ori1,$ori2){
+	$rst=array();
+	$nsimilar=array();
+
+	$title=$text[0];
+	for ($i=0; $i < count($title); $i++) { 
+		$fn1=howtextsimilar($title[$i],$ori1);
+		$fn2=howtextsimilar($title[$i],$ori2);
+		$fn=($fn1+$fn2) / 2;
+		array_push($nsimilar,$fn);
+	}
+
+
 }
 ?>

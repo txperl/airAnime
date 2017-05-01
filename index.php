@@ -4,7 +4,9 @@
 	<meta charset="UTF-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
-	<title>airAnime Online</title>
+    <meta name="keywords" content="airAnime,Anime Search Engine,动漫搜索,Trii Hsia">
+    <meta name="description" content="一款不错的聚合动漫&番剧搜索程序">
+	<title>airAnime Online - Polymeric Anime Search Engine</title>
 
 	<link href="css/base.min.css" rel="stylesheet">
 	<link href="css/project.min.css" rel="stylesheet">
@@ -42,7 +44,7 @@
 											<input class="form-control" id="title" type="text" name='title' autocomplete="off">
 											</div>
 											<br>
-											搜索指令(点击添加): <code><a href="javascript:void(0)" id="addsctp">!image</a></code> <code><a href="javascript:void(0)" id="addscmh">&comic</a></code> <code><a href="javascript:void(0)" id="addscxs">&novel</a></code>
+											搜索指令: <code><a href="javascript:void(0)" id="addsctp">!image</a></code> <code><a href="javascript:void(0)" id="addscmh">&comic</a></code> <code><a href="javascript:void(0)" id="addscxs">&novel</a></code>
 											<div style="text-align:right;">
 											<a class="btn btn-flat waves-attach" id="btnUP">Upload</a> <a class="btn btn-brand waves-attach waves-light" href="javascript:void(0)" id="btnS"> Search </a> 
 											</div>
@@ -106,7 +108,7 @@
             <div class="card-main">
                 <div class="card-inner">
                     <p class="card-heading">Welcome</p>
-                    <p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 RC1.3<br><span style="font-weight:bold;">呼呼呼</span>~生活愉快~</p>
+                    <p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 RC1.5<br><span style="font-weight:bold;">呼呼呼</span>~记录每一天~</p>
                 </div>
             <div class="card-action">
                 <div class="card-action-btn pull-left">
@@ -274,6 +276,12 @@
         // '/?title=' 执行AJAX
         var sotitle ="<?php echo $sotitle; ?>";
         if (sotitle!='') {
+            var i=sotitle.indexOf(' type:');
+            if (i != "-1") {
+                var name1 = sotitle.substring(0,sotitle.indexOf(" type:"));
+                var name2 = " type:\\"+sotitle.substring(sotitle.indexOf(" type:")+6,sotitle.indexOf("/"))+"/";
+                sotitle=name1+name2;
+            }
             document.getElementById('title').value=sotitle;
             airsim();
         }

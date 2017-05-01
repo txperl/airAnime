@@ -85,7 +85,7 @@ if(is_array($_GET)&&count($_GET)>0){
 		//}
 		// dilidili 结果
 		if ($ifrun[1]=='true'){
-			$r_dilidili=dilidiliS($webd[1]);
+			$r_dilidili=dilidiliS($webd[1],$autotitle,$title);
 			$n_dilidili=$r_dilidili[2];
 			$t_dilidili=$r_dilidili[0];
 			$l_dilidili=$r_dilidili[1];
@@ -199,7 +199,7 @@ if(is_array($_GET)&&count($_GET)>0){
 		//}
 		//dilidili 保留示范
 		if ($ifrun[1]=='true') {
-		$nowout='www.dilidili.com';
+		$nowout='www.dilidili.wang';
 		echo '<div class="tile tile-collapse"><div data-target="#dilidili" data-toggle="tile"><div class="tile-inner"><div class="text-overflow">Dilidili<div style="display:block;float: right;">'.$n_dilidili.'</div></div></div></div><div class="tile-active-show collapse" id="dilidili"><div class="tile-sub">';
 
 			for ($i=0; $i<$n_dilidili; $i++) { 

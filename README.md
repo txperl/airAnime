@@ -1,6 +1,6 @@
 因为感觉经常在各视频网站找番有点浪费时间，于是就突然萌生了一个想法：如果能同时进行，就不会浪费太多时间了。所以，airAnime就出于这个想法诞生了。
 
-airAnime是一款集合「番剧&动漫搜索」程序，借助于各网站的数据及各网站的搜索功能进行指定搜索，以减少搜索番剧的时间。
+airAnime是一款聚合「番剧&动漫搜索」程序，借助于各网站的数据及各网站的搜索功能进行指定搜索，以减少搜索番剧的时间。
 
 Demo: [airAnimeOnline](http://airs.im/).
 
@@ -44,7 +44,7 @@ Demo: [airAnimeOnline](http://airs.im/).
 字体链接位于 '.css' 4个.css后缀文件中。默认使用我的七牛CDN，但这存在风险，万一我哪天突然换了是吧，所以请请自行修改。字体位于 '.css/Roboto' (请注意更改css.css的代码)。
 
 ### PicSearch(以图搜番)[beta]
-已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 'index.php'92行 与 'functions/mains.php'476行。
+已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 'index.php'94行 与 'functions/mains.php'471行。
 
 ### Type类型
 本程序的搜索内容类型分为: 二次元 Anine(动画),Comic(漫画),Novel(小说),Download(下载).
@@ -64,8 +64,10 @@ Download包含如下数据源:MGJH(蜜柑计划).
 
 ## 更新日志
 
-#### v1 RC1.3
-* NONE - 更新并入RC2版本
+#### v1 RC2
+* 完善 番剧信息获取功能
+* 新增 简单余弦相似度算法[DILIDILI数据源开启测试]
+* （更新内容并入RC2版本）
 
 #### v1 RC1.2
 * 修补 累计的细节及BUG
@@ -119,5 +121,5 @@ All
 
 感谢。
 
-Apr. 28th,2017  
+May 1st,2017  
 Trii Hsia
