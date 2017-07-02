@@ -118,6 +118,7 @@
                         $bgmC=fgets($myfile);
                     fclose($myfile);
                     $bgmC=json_decode($bgmC, true);
+		    $id=$bgmC['id'];
                     if ($bgmC['name_cn']=='') {
                         $name=$bgmC['name'];
                     } else {
