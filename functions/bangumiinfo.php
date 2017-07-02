@@ -5,7 +5,7 @@ require 'function.php';
     $val = $_POST['value'];
     $id = $_POST['id'];
     if ($id=='') {
-        $web=curl_get_contents('http://bangumi.tv/subject_search/'.urlencode($val).'?cat=2');
+        $web=curl_get_contents('http://api.bgm.tv/search/subject/'.urlencode($val).'?responseGroup=simple&type=2');
     }
     $r_info=infoS($web,$id);
 
@@ -59,18 +59,17 @@ function infoS($web='',$id=''){
     $list=array();
 
     if ($id=='') {
-        $webtext=$web;
+        $bgmS=json_decode($web, true);
 
-        $number=substr_count($webtext,'<h3>');
+        $number=count($bgmS['list']);
             for ($i=0; $i < $number; $i++) { 
-                $f='<h3>'.getSubstr($webtext,'<h3>','</div>').'</div>';
-                $date=getSubstr($f,'<p class="info tip">','日').'日';
-                $date=str_replace(' ','',$date);
-                $flink=getSubstr($f,'/subject/','" '); // /subject/18629
-                $ftitle=getSubstr($f,' class="l">','</a> ').' -'.$date;
-                array_push($link,$flink);
+                if ($bgmS['list'][$i]['name_cn']=='') {
+                    $ftitle=$bgmS['list'][$i]['name'];
+                } else {
+                    $ftitle=$bgmS['list'][$i]['name_cn'];
+                }
+                array_push($link,$bgmS['list'][$i]['id']);
                 array_push($title,$ftitle);
-                $webtext=str_replace($f,'',$webtext);
             }
             array_push($list,$title);
             array_push($list,$link);
@@ -82,11 +81,14 @@ function infoS($web='',$id=''){
 
     $APIurl='http://api.bgm.tv'.$flink.'?responseGroup=simple';
     $webtext=curl_get_contents($APIurl);
-    $name=unicode_decode(getSubstr($webtext,'"name_cn":"','","'));
-    $des=getSubstr($webtext,'"summary":"','","');
-    $des=str_replace('\r\n','<br><br>',$des);
-    $des=unicode_decode($des);
-    $img=unicode_decode(getSubstr($webtext,'"large":"','","'));
+    $bgmC=json_decode($webtext, true);
+    if ($bgmC['name_cn']=='') {
+        $name=$bgmC['name'];
+    } else {
+        $name=$bgmC['name_cn'];
+    }
+    $des=$bgmC['summary'];
+    $img=$bgmC['images']['large'];
 
     array_push($rst,$name);//0
     array_push($rst,$des); //1

@@ -8,8 +8,10 @@
     <meta name="description" content="一款不错的聚合动漫&番剧搜索程序">
 	<title>airAnime Online - Polymeric Anime Search Engine</title>
 
+    <link href="css/mori.css" rel="stylesheet">
 	<link href="css/base.min.css" rel="stylesheet">
 	<link href="css/project.min.css" rel="stylesheet">
+    <link href="js/zoom-js/css/zoom.css" rel="stylesheet">
 </head>
 <body class="page-brand">
 
@@ -59,7 +61,7 @@
 					</section>
 
                     <!-- 自动联想结果 -->
-					<div class="card">
+					<div class="card" style="margin-top:-15px;margin-bottom:45px;">
 							<div class="card-main">
 								<div class="card-inner" id="srhauto" style="display:none;">
 									<div id="search_auto"></div>
@@ -91,7 +93,7 @@
         <!-- 图片上传表单 -->
         <div id='upimage' style="display:none;"> 
             <form enctype="multipart/form-data" method="post" action="http://up.imgapi.com/" id="upform">
-            <input name="Token" id="token" value="{your_token}" type="hidden"> <!-- 贴图库 http://www.tietuku.com/ 获取 -->
+            <input name="Token" id="token" value="{...}" type="hidden">
             <input type="hidden" name="from" value="file">
             <input type="hidden" name="httptype" value="1">
             <input type="file" name="file" id="file" style="display:none">
@@ -100,23 +102,66 @@
         </div>
 
         <!-- 首页公示 -->
-        <div id='ifhomea'>
-            <div class="card">
-                <aside class="card-side card-side-img pull-left">
-                        <img alt="alt text" src="images/samples/portrait.jpg">
-                </aside>
-            <div class="card-main">
-                <div class="card-inner">
-                    <p class="card-heading">Welcome</p>
-                    <p class="margin-bottom-lg">(´・ω・`) airAnimeOnline v1 RC1.5<br><span style="font-weight:bold;">呼呼呼</span>~记录每一天~</p>
-                </div>
-            <div class="card-action">
-                <div class="card-action-btn pull-left">
-                    <a class="btn btn-flat waves-attach" href="./pages/start.php">开始</a>
-                    <a class="btn btn-flat waves-attach" href="./pages/if.php">数据源</a>
-                    <a class="btn btn-flat waves-attach" href="./pages/srhcode.php">搜索指令</a>
-                </div>
-            </div></div></div>
+        <div id='ifhomea' style="display:none;">
+            <div class="logo" id="logo" data-tilt data-tilt-glare="true" data-tilt-max-glare="0.3" data-tilt-speed="200" data-tilt-scale="1" data-tilt-max="12" data-tilt-perspective="900">
+                <span>Welcome</span>
+                <div class="homelink"><a href="./pages/start.php">&开始</a> <a href="./pages/about.php">&关于</a> <a href="./pages/srhcode.php">&搜索指令</a></div>
+            </div>
+        </div>
+
+        <!-- 随机推荐 -->
+        <div id='ifhomeaii' class="post-content" style="display:none;">
+            <h4><a style="color:#78909c;text-decoration:none;" id="todayB" href="javascript:void(0)">番剧推荐</a> <span style="font-size:10px;">点点看?</span></h4>
+            <div id="sugB_show">
+                <?php
+                    $myfile=fopen("./functions/bangumiToday.json", "r") or die("Unable to open file!");
+                        $bgmC=fgets($myfile);
+                    fclose($myfile);
+                    $bgmC=json_decode($bgmC, true);
+                    if ($bgmC['name_cn']=='') {
+                        $name=$bgmC['name'];
+                    } else {
+                        $name=$bgmC['name_cn'];
+                    }
+                    $des=$bgmC['summary'];
+                    $img=$bgmC['images']['large'];
+                    $air_date=$bgmC['air_date'];
+
+                    if ($des=='') {
+                        $des='抱歉，暂无简介...';
+                    } else {
+                        $des=str_replace('　　','',$des);
+                        $des=str_replace(' ','',$des);
+                    }
+
+                    $url='http://bgm.tv/subject/'.$id;
+                    echo '<div class="barc-t"><div class="barc-tile">';
+                    echo '<div style="width:40%;max-height:300px;float:left;margin-right:10px;"><img src="'.$img.'" data-action="zoom" class="img-rounded img-responsive"></div>';
+                    echo '<div style="padding-top:10px;padding-bottom:10px;"><a target="_blank" href="'.$url.'">'.$name.'</a><br><span class="arc-date">&'.$bgmC['name'].'</span><br><span class="arc-date">首播: '.$air_date.'</span><br><span id="desb" class="arc-date">'.$des.'</span><br><span class="arc-date">数据来源于Bangumi番组计划.</span></div>';
+                    echo '</div></div>';
+                ?>
+            </div>
+        </div>
+        
+        <!-- 今日新番 -->
+        <div id='ifhomeai' class="post-content" style="display:none;">
+            <?php
+                $file="./functions/bangumiS2017.json";
+                $bcon=file_get_contents($file);
+                $bcon=json_decode($bcon, true);
+                $today=date("N")-1;
+                $bcon=$bcon[$today];
+                $num=count($bcon['items']);
+                echo '<h4>今日 - 快乐'.$bcon['weekday']['cn'].'</h4>';
+                for ($i=0; $i < $num; $i++) { 
+                    if ($bcon['items'][$i]['name_cn']=='') {
+                        $name_cn=$bcon['items'][$i]['name'];
+                    } else {
+                        $name_cn=$bcon['items'][$i]['name_cn'];
+                    }
+                    echo '<div class="arc-t"><div class="arc-tile"><div style="box-shadow: 0 2px 15px 1px rgba(0,0,0,0.15);width:46%;max-height:150px;float:left;margin-right:6px;"><img src="'.$bcon['items'][$i]['images']['large'].'" data-action="zoom" class="img-rounded img-responsive"></div><small><a target="_blank" href="'.$bcon['items'][$i]['url'].'">'.$name_cn.'</a></small><br><span class="arc-date">&'.$bcon['items'][$i]['name'].'</span><br><span class="arc-date">首播: '.$bcon['items'][$i]['air_date'].'</span></div></div>';
+                }
+            ?>
         </div>
 
 	</div></div></div>
@@ -132,6 +177,9 @@
 	<script src="js/project.min.js"></script>
     <script src="js/jquery.form.js"></script>
     <script src="js/embed.js"></script>
+    <script src="js/zoom-js/js/zoom.js"></script>
+    <script src="js/vanilla-tilt.min.js"></script>
+    <script src="js/md5.js"></script>
 	<script type="text/javascript">
         //UPLOAD被点击
         $(function(){
@@ -175,7 +223,64 @@
             });
         });
         //判断首页
-        var a = location.href;if(a=='http://airanime.applinzi.com/'){$('#ifhomea').show();}else $('#ifhomea').hide();
+        $(document).ready(function() {
+            var a = location.href;if(a=='http://airanime.applinzi.com/'){$("#ifhomea").fadeIn(300);}else $('#ifhomea').hide();
+            var c = location.href;if(c=='http://airanime.applinzi.com/'){$("#ifhomeaii").fadeIn(500);}else $('#ifhomeai').hide();
+            var b = location.href;if(b=='http://airanime.applinzi.com/'){$("#ifhomeai").fadeIn(600);}else $('#ifhomeai').hide();  
+        });
+        </script>
+        <script type="text/javascript">
+            //随机推荐
+            $("#todayB").click(function(){
+                todayB('run');
+            });
+
+           function todayB(code){ //today:个人推荐 run:随机推荐 up:更新缓存
+            if (code!='today') {$('#sugB_show').html('少女祈愿中...').css('display','block');}
+            var t=code;
+            $.post( './functions/bangumiSug.php', { 'code' : t },function(data){
+            if( data == '' ) 
+                $('#sugB_show').html('获取失败').css('display','none');
+            else
+                $('#sugB_show').html(data).css('display','block');
+                $("#translateB").click(function(){
+                    var text=document.getElementById("desb").innerHTML;
+                    baiduTr(text);
+                });
+                //百度搜索API
+                function baiduTr(text){
+                    var appid = '{...}';
+                    var key = '{...}';
+                    var salt = (new Date).getTime();
+                    var query = text;
+                    var from = 'auto';
+                    var to = 'zh';
+                    var str1 = appid + query + salt +key;
+                    var sign = MD5(str1);
+                    $.ajax({
+                        url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
+                        type: 'get',
+                        dataType: 'jsonp',
+                        data: {
+                            q: query,
+                            appid: appid,
+                            salt: salt,
+                            from: from,
+                            to: to,
+                            sign: sign
+                            },
+                        success: function (data) {
+                            var num=data['trans_result'].length;
+                            var text='';
+                            for (var i = 0; i < num; i++) {
+                                text=text+data['trans_result'][i]['dst'];
+                            }
+                            $('#desb').html(text).css('display','block');
+                        } 
+                    });
+                }
+            });
+           }
     </script>
     <script type="text/javascript">
         //表单提交时加载动画
@@ -195,10 +300,10 @@
                 var text=document.getElementById("title");
                 var i=text.value.indexOf('!image:')
                 if (i != '-1') {
-                    getId("picstip").style.display="";
-                    getId("srhauto").style.display="none";
+                    $("#srhauto").fadeOut(100);
+                    $("#picstip").fadeIn(500);
                 } else {
-                    getId("picstip").style.display="none";
+                    $("#picstip").fadeOut(100);
                 $.post( './functions/srhauto.php', { 'value' : $(this).val() },function(data){
                     if( document.getElementById("title").value == '' ) 
                         $('#srhauto').html('').css('display','none');
@@ -236,6 +341,8 @@
                             $('#rst_show').html(data).css('display','block');
                             document.getElementById("title").value='';
                             getId("ifhomea").style.display="none";
+                            getId("ifhomeai").style.display="none";
+                            getId("ifhomeaii").style.display="none";
                             getId("srhauto").style.display="none";
                             getId("btnS").style.display="";
                             getId("loading").style.display="none";

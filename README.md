@@ -23,6 +23,10 @@ Demo: [airAnimeOnline](http://airs.im/).
     ├── pages.php - 输出通用网页部分代码
     ├── srhauto.php - 获取关键词联想结果代码
     ├── bangumiinfo.php - 获取番剧信息代码
+    ├── bangumiSug.php - 番剧推荐代码
+    ├── bangumiS.json - 2000年至今(2017/7/1)的日本动漫信息
+    ├── bangumiS2017.json - 新番放送表(2017夏)
+    ├── bangumiToday.json - 动漫推荐缓存文件
 ├── .d
     ├── .server - 放于其他服务器的文件
     ├── index.php - InfoDownload主代码
@@ -44,7 +48,7 @@ Demo: [airAnimeOnline](http://airs.im/).
 字体链接位于 '.css' 4个.css后缀文件中。默认使用我的七牛CDN，但这存在风险，万一我哪天突然换了是吧，所以请请自行修改。字体位于 '.css/Roboto' (请注意更改css.css的代码)。
 
 ### PicSearch(以图搜番)[beta]
-已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 'index.php'94行 与 'functions/mains.php'471行。
+已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 'index.php'96行 与 'functions/mains.php'471行。
 
 ### Type类型
 本程序的搜索内容类型分为: 二次元 Anine(动画),Comic(漫画),Novel(小说),Download(下载).
@@ -65,9 +69,11 @@ Download包含如下数据源:MGJH(蜜柑计划).
 ## 更新日志
 
 #### v1 RC2
-* 完善 番剧信息获取功能
+* 全新 主页
+* 新增 番剧推荐
+* 新增 新番放送表
 * 新增 简单余弦相似度算法[DILIDILI数据源开启测试]
-* （更新内容并入RC2版本）
+* 完善 番剧信息获取功能
 
 #### v1 RC1.2
 * 修补 累计的细节及BUG
@@ -121,5 +127,5 @@ All
 
 感谢。
 
-May 1st,2017  
+July 2nd,2017  
 Trii Hsia

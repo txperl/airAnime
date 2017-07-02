@@ -70,8 +70,8 @@
 								<tbody>
 									<tr>
 										<td>airAnime Online</td>
-										<td>1.0 RC1.5</td>
-										<td>2017/05/01</td>
+										<td>1.0 RC2</td>
+										<td>2017/07/02</td>
 									</tr>
 									<tr>
 										<td>搜索指令</td>
@@ -80,8 +80,8 @@
 									</tr>
 									<tr>
 										<td>网页样式</td>
-										<td>1.2</td>
-										<td>2017/02/01</td>
+										<td>2.0</td>
+										<td>2017/07/02</td>
 									</tr>
 									<tr>
 										<td>托管服务器</td>
@@ -95,10 +95,12 @@
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
-									<p>v1 RC1.5 -记录每一天</p>
-									<p>* 完善 番剧信息获取功能</p>
+									<p>v1 RC2 -假期快乐</p>
+									<p>* 全新 主页</p>
+									<p>* 新增 番剧推荐</p>
+									<p>* 新增 新番放送表</p>
 									<p>* 新增 简单余弦相似度算法[DILIDILI数据源开启测试]</p>
-									<p>* （更新内容并入RC2版本）</p>
+									<p>* 完善 番剧信息获取功能</p>
 									<hr>
 									<p>v1 RC1.2 -学习&工作愉快</p>
 									<p>* 修补 累计的细节及BUG</p>

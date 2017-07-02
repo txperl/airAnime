@@ -468,7 +468,7 @@ function picS($picurl){ //参考文档及API token获取:https://soruly.github.i
 	$imgbase64 = 'data:image/'.$type.';base64,' . chunk_split(base64_encode(file_get_contents($image_file)));
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={your_token}');
+    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={...}');
     curl_setopt($curl, CURLOPT_HEADER, 1);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POST, 1);
@@ -934,7 +934,6 @@ function runtextsimilar($text,$ori1,$ori2){
 		$fn=($fn1+$fn2) / 2;
 		array_push($nsimilar,$fn);
 	}
-
-
+	//...
 }
 ?>
