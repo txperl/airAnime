@@ -43,8 +43,10 @@ Demo: [airAnimeOnline](http://airs.im/).
 ```
 
 ## 细节
-###番剧推荐
-设计思路是这样的：自已更换bangumi动画id-执行(访问 {your_url}/functions/bangumiSug.php/?code=up )-数据保存到本地。程序只是调用本地数据。
+### 番剧推荐
+设计思路是这样的：
+
+自已更换bangumi动画id→执行更新数据(访问 url/functions/bangumiSug.php/?code=up )→数据保存到本地。程序只是调用本地数据。
 
 id获取代码在 functions/bangumiSug.php 25-27行。
 
