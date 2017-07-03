@@ -43,12 +43,16 @@ Demo: [airAnimeOnline](http://airs.im/).
 ```
 
 ## 细节
+###番剧推荐
+设计思路是这样的：自已更换bangumi动画id-执行(访问 {your_url}/functions/bangumiSug.php/?code=up )-数据保存到本地。程序只是调用本地数据。
+
+id获取代码在 functions/bangumiSug.php 25-27行。
 
 ### Fonts
 字体链接位于 '.css' 4个.css后缀文件中。默认使用我的七牛CDN，但这存在风险，万一我哪天突然换了是吧，所以请请自行修改。字体位于 '.css/Roboto' (请注意更改css.css的代码)。
 
 ### PicSearch(以图搜番)[beta]
-已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 'index.php'96行 与 'functions/mains.php'471行。
+已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 'index.php'96行 与 'functions/mains.php'471行。百度翻译API授权于 'index.php'256,2557行。
 
 ### Type类型
 本程序的搜索内容类型分为: 二次元 Anine(动画),Comic(漫画),Novel(小说),Download(下载).

@@ -57,6 +57,7 @@ require_once 'function.php';
     }
     $des=$bgmC['summary'];
     $img=$bgmC['images']['large'];
+    $img=str_replace('http://','https://',$img);
     $air_date=$bgmC['air_date'];
 
     if ($des=='') {

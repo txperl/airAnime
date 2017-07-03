@@ -13,6 +13,7 @@ require 'function.php';
         $n_info=zhconversion_hans($r_info[0]);
         $des_info=zhconversion_hans($r_info[1]);
         $des_img=$r_info[2];
+        $des_img=str_replace('http://','https://',$des_img);
         $list=$r_info[3];
 
         $listcode='';

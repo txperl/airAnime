@@ -934,6 +934,7 @@ function runtextsimilar($text,$ori1,$ori2){
 		$fn=($fn1+$fn2) / 2;
 		array_push($nsimilar,$fn);
 	}
-	//...
+
+
 }
 ?>

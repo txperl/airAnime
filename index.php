@@ -126,6 +126,7 @@
                     }
                     $des=$bgmC['summary'];
                     $img=$bgmC['images']['large'];
+                    $img=str_replace('http://','https://',$img);
                     $air_date=$bgmC['air_date'];
 
                     if ($des=='') {
@@ -160,7 +161,9 @@
                     } else {
                         $name_cn=$bcon['items'][$i]['name_cn'];
                     }
-                    echo '<div class="arc-t"><div class="arc-tile"><div style="box-shadow: 0 2px 15px 1px rgba(0,0,0,0.15);width:46%;max-height:150px;float:left;margin-right:6px;"><img src="'.$bcon['items'][$i]['images']['large'].'" data-action="zoom" class="img-rounded img-responsive"></div><small><a target="_blank" href="'.$bcon['items'][$i]['url'].'">'.$name_cn.'</a></small><br><span class="arc-date">&'.$bcon['items'][$i]['name'].'</span><br><span class="arc-date">首播: '.$bcon['items'][$i]['air_date'].'</span></div></div>';
+                    $img=$bcon['items'][$i]['images']['large'];
+                    $img=str_replace('http://','https://',$img);
+                    echo '<div class="arc-t"><div class="arc-tile"><div style="box-shadow: 0 2px 15px 1px rgba(0,0,0,0.15);width:46%;max-height:150px;float:left;margin-right:6px;"><img src="'.$img.'" data-action="zoom" class="img-rounded img-responsive"></div><small><a target="_blank" href="'.$bcon['items'][$i]['url'].'">'.$name_cn.'</a></small><br><span class="arc-date">&'.$bcon['items'][$i]['name'].'</span><br><span class="arc-date">首播: '.$bcon['items'][$i]['air_date'].'</span></div></div>';
                 }
             ?>
         </div>
@@ -248,7 +251,7 @@
                     var text=document.getElementById("desb").innerHTML;
                     baiduTr(text);
                 });
-                //百度搜索API
+
                 function baiduTr(text){
                     var appid = '{...}';
                     var key = '{...}';
