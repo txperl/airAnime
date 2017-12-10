@@ -11,14 +11,16 @@ if(is_array($_GET)&&count($_GET)>0){
 			$picurl=getSubstr($title,'!image:',';');
 			if (strlen(file_get_contents($picurl))<=1048869) { //判断图像大小
 				$rst=picS($picurl);
-				$name=unicode_decode(getSubstr($rst,'title_chinese":"','","')); //繁体
-				$time=getSubstr($rst,'at":',',"');
-				$season=getSubstr($rst,'season":"','","');
+				$rst=json_decode($rst, true);
+				$name=unicode_decode($rst['docs'][0]['title_chinese']); //繁体
+				$atmins=round($rst['docs'][0]['at']/60, 1);
+				$time='第'.$rst['docs'][0]['episode'].'话'.$atmins.'分';
+				$season=$rst['docs'][0]['season'];
 				if ($name!='') {
 					$name=zhconversion_hans($name);  //简体
 					$title=str_replace('!image:'.$picurl.';',$name,$title);
 				} else {
-					echo '<div class="card"><div class="card-main"><div class="card-inner"><p class="card-heading">(,,• ₃ •,,) 唔唔唔，没找到是什么番唉...</p><p class="margin-bottom-lg">可能原因如下：<br>1.未找到此图像所在番剧<br>2.搜索次数达到限制，请稍候尝试<br>3.未输入正确图像地址<br>4.若图片为GIF格式，必须上传后才能搜索<br>5.目标服务器或本服务器网络错误<br>若2-4步骤完全正常，那即是1步骤错误</p></div></div></div><br><br>';
+					echo '<div class="barc-t"><div class="barc-tile" style="height: 100%;"><div style="padding-left:10px;padding-top:10px;padding-bottom:10px;">(,,• ₃ •,,) 唔唔唔，不知道是什么番唉<br><span id="desb" class="arc-date">可能原因如下：</span><div style="padding-left:5px;"><span id="desb" class="arc-date">1.未找到此图像所在番剧<br>2.搜索次数达到限制，请稍候尝试<br>3.未输入正确图像地址<br>4.若图片为GIF格式，必须上传后才能搜索<br>5.目标服务器或本服务器网络错误<br></span></div><span id="desb" class="arc-date">若2-4皆正常，那即是原因1错误</span></div></div><div><br><br>';
 					exit();
 				}
 			} else {
@@ -50,7 +52,7 @@ if(is_array($_GET)&&count($_GET)>0){
 			echo '<h2 class="content-sub-heading">'.$title.' [InfoDownload] Searching...</h2>';
 		} else{
 			if ($picurl!='') {
-				echo '<h2 class="content-sub-heading">'.$title.' [At:'.$time.'s] [Season:'.$season.']'.'</h2>';
+				echo '<h2 class="content-sub-heading">'.$title.' ['.$season.'] ['.$time.']'.'</h2>';
 			} else {
 				echo '<h2 class="content-sub-heading">'.$title.'</h2>';
 			}
@@ -75,6 +77,7 @@ if(is_array($_GET)&&count($_GET)>0){
 			} else {
 				$des_info='(ฅ´ω`ฅ) 想知道「'.$infolink.'」还是「'.$infolinko.'」的简介呢？';
 			}
+			
 			//}
 		// bilibili 结果
 		//if ($ifrun[0]=='true') {
@@ -89,6 +92,19 @@ if(is_array($_GET)&&count($_GET)>0){
 			$n_dilidili=$r_dilidili[2];
 			$t_dilidili=$r_dilidili[0];
 			$l_dilidili=$r_dilidili[1];
+		}
+		// xsjdm 结果
+		if ($ifrun[9]=='true') {
+			$r_xsjdm=baiduS($webd[10],'/{"title":"(.*?)动漫全集(.*?)","url":"(.*?)"}/',1,'x4jdm.com');
+			$n_xsjdm=$r_xsjdm[2];
+			$t_xsjdm=$r_xsjdm[0];
+			$l_xsjdm=$r_xsjdm[1];
+			if ($n_xsjdm=='') {
+				$r_xsjdm=baiduS($webd[10],'/{"title":"(.*?)","url":"(.*?)"}/',1,'x4jdm.com');
+				$n_xsjdm=$r_xsjdm[2];
+				$t_xsjdm=$r_xsjdm[0];
+				$l_xsjdm=$r_xsjdm[1];
+			}
 		}
 		// fcdm 结果
 		if ($ifrun[2]=='true'){
@@ -162,14 +178,8 @@ if(is_array($_GET)&&count($_GET)>0){
 				$l_tencenttv=$r_tencenttv[1];
 			}
 		}
-		// 无限动漫 结果
-		//if ($ifrun[9]=='true'){
-		//	$r_wxdm=wxdmS($webd[10]);
-		//	$n_wxdm=$r_wxdm[2];
-		//	$t_wxdm=$r_wxdm[0];
-		//	$l_wxdm=$r_wxdm[1];
-		//}
-		$statol=$n_bilibili+$n_dilidili+$n_baiduall+$n_letv+$n_iqiyi+$n_pptv+$n_fcdm+$n_youku+$n_tencenttv;
+
+		$statol=$n_bilibili+$n_dilidili+$n_baiduall+$n_letv+$n_iqiyi+$n_pptv+$n_fcdm+$n_youku+$n_tencenttv+$n_xsjdm;
 		// 简要 数量
 		echo '<div class="tile-wrap"><div class="tile"><div class="tile-inner">';
 			echo $des_info;
@@ -215,13 +225,16 @@ if(is_array($_GET)&&count($_GET)>0){
 			echo '<a target="_blank" class="btn btn-flat waves-attach" href="https://www.google.com/#q=site%3A'.$nowout.'%20'.$title.'">谷歌</a>';
 		echo '</div></div></div></div></div>';
 		}
+		if ($ifrun[9]=='true') {
+		baiduSS($title,'x4jdm.co','XSJDM','新世界动漫',$n_xsjdm,$l_xsjdm,$t_xsjdm);
+		}
 		//fcdm
 		if ($ifrun[2]=='true') {
 		loaclSS($title,'www.fengchedm.com','FCDM','风车动漫',$n_fcdm,$l_fcdm,$t_fcdm);
 		}
 		//pptv
 		if ($ifrun[3]=='true') {
-		loaclSS($title,'www.pptv.com','PPTV','PPTV聚力',$n_pptv,$l_pptv,$t_pptv);
+		loaclSS($title,'www.pptv.com','PPTV','PPTV',$n_pptv,$l_pptv,$t_pptv);
 		}
 		//letv
 		if ($ifrun[4]=='true') {
@@ -239,9 +252,6 @@ if(is_array($_GET)&&count($_GET)>0){
 		if ($ifrun[8]=='true') {
 		baiduSS($title,'v.qq.com','TencentTV','腾讯视频',$n_tencenttv,$l_tencenttv,$t_tencenttv);
 		}
-		//if ($ifrun[9]=='true') {
-		//loaclSS($title,'www.hkdm173.com','WXDM','无限动漫',$n_wxdm,$l_wxdm,$t_wxdm);
-		//}
 		//baiduall
 		if ($ifrun[7]=='true') {
 		$nowout='www.baidu.com';

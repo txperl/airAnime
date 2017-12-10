@@ -13,7 +13,6 @@ require 'function.php';
         $n_info=zhconversion_hans($r_info[0]);
         $des_info=zhconversion_hans($r_info[1]);
         $des_img=$r_info[2];
-        $des_img=str_replace('http://','https://',$des_img);
         $list=$r_info[3];
 
         $listcode='';
@@ -37,8 +36,8 @@ require 'function.php';
         echo '<div id="inforst"><hr>';
         echo '<img src="'.$des_img.'" style="float:right;width:176px;height:250px;padding-left:4px;" />'; //封面
         echo '<span style="font-size:18px;">《'.$n_info.'》</span><br>'; //标题
-        echo $des_info; //内容
-        echo '<br><br><span style="font-size:10px;">番剧信息数据基于Bangumi番组计划<br></div>'; //版权
+        echo '<span style="font-size:13px;">'.$des_info.'</span><br>'; //内容
+        echo '<span style="font-size:10px;">番剧信息数据基于Bangumi番组计划.</div>'; //版权
 
         if (count($list[0])>1) {
         echo '<a style="width:100%;margin-top:6px;margin-bottom:6px;" class="btn btn-flat waves-attach" data-toggle="collapse" href="#selector"> 更多结果 </a>

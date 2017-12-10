@@ -151,11 +151,11 @@ html::-webkit-scrollbar-thumb:hover{background-color:#AAA;} \e641
 }
 @media (max-width: 768px){
   .arc-t {
-  width:100%;
+    width:100%;
   }
 }
 .tarc-t {
-  width:00%;
+  width:80%;
   position:relative;
   min-height:1px;
   padding-right:5px;
@@ -227,7 +227,7 @@ html::-webkit-scrollbar-thumb:hover{background-color:#AAA;} \e641
     transition: 0.3s ease all;
 }
 .logo > span:after {
-    content: "假期快乐";
+    content: "记录每一天";
     position: absolute;
     color: white;
     font-size: 18px;

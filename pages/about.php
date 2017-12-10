@@ -42,7 +42,7 @@
 									<p>这是一个开源程序，小红圈内有GitHub链接。</p>
 									<p>请使用现代浏览器以达到最佳体验效果。</p>
 									<p>第一次使用务必阅读Docs中各文档。</p>
-									<p>背景图来自 <a href="http://www.pixiv.net/member.php?id=1565632" target="_blank">@Kantoku</a> 。
+									<p>背景图来自 <a href="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=59747310" target="_blank">@幻想絵風</a>、<a href="https://www.pixiv.net/member.php?id=1565632" target="_blank">@Kantoku</a> 。
 								</div>
 							</div>
 						</div>
@@ -70,8 +70,8 @@
 								<tbody>
 									<tr>
 										<td>airAnime Online</td>
-										<td>1.0 RC2</td>
-										<td>2017/07/02</td>
+										<td>1.0 RC2!</td>
+										<td>2017/12/10</td>
 									</tr>
 									<tr>
 										<td>搜索指令</td>
@@ -80,8 +80,8 @@
 									</tr>
 									<tr>
 										<td>网页样式</td>
-										<td>2.0</td>
-										<td>2017/07/02</td>
+										<td>2.1</td>
+										<td>2017/12/10</td>
 									</tr>
 									<tr>
 										<td>托管服务器</td>
@@ -95,6 +95,11 @@
 						<div class="card">
 							<div class="card-main">
 								<div class="card-inner">
+									<p>v1 RC2! -小修小补</p>
+									<p>* 新增 Bangumi图片镜像</p>
+									<p>* 完善 界面</p>
+									<p>* 更变 头图</p>
+									<hr>						
 									<p>v1 RC2 -假期快乐</p>
 									<p>* 全新 主页</p>
 									<p>* 新增 番剧推荐</p>

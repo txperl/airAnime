@@ -47,6 +47,7 @@
 								<div class="card-main">
 									<div class="card-inner">
 										<p class="card-heading">认识&搜索</p>
+										<p>airAnime是一款聚合<span style="color:#FD5B78;">「番剧&动漫搜索」</span>程序，借助于各网站的数据及各网站的搜索功能进行指定搜索，以减少搜索番剧的时间。</p>
 										<p>airAnime可以聚合(全局)搜索已有的动漫数据源，准确率约为92%。</p>
 										<p>在文本框中输入您所要搜索的番剧，按 Enter 或 点击SEARCH 即可开始搜索。</p>
 										<p>这里有一点需要注明，因为是在线抓取网页数据并分析，暂未加入数据库，所以 每次搜索速度未知。</p>

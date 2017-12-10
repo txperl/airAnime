@@ -1,7 +1,7 @@
 @import url(http://7xj8zi.com1.z0.glb.clouddn.com/fonts/airanime/css.css);
 .ui-card-wrap:after,.ui-picker-lib:after{clear:both}body{padding-bottom:69px}.ui-content-header{background-position:50% 50%;background-repeat:no-repeat;background-size:cover;margin-bottom:-58px;padding-top:68px;padding-bottom:58px;}
 
-.page-brand .ui-content-header::before{background:url(http://7vzp04.com1.z0.glb.clouddn.com/brandoo.png);}
+.page-brand .ui-content-header::before{background:url(http://7vzp04.com1.z0.glb.clouddn.com/brandooo.jpg);}
 .page-brand .ui-content-header{
 	position: relative;
 	background: hsla(0,0%,100%,.01) border-box; /* rgba(0, 0, 0, 0.5) */
@@ -16,10 +16,10 @@
 	background-position:center top;
   	background-size: cover;
   	background-repeat: no-repeat;
-  	-webkit-filter: blur(20px);
-  	-moz-filter: blur(20px);
-  	-ms-filter: blur(20px);    
-  	filter: blur(20px);
+  	-webkit-filter: blur(12px);
+  	-moz-filter: blur(12px);
+  	-ms-filter: blur(12px);    
+  	filter: blur(12px);
   	/*transition:filter 0.6s ease-in-out;*/
 }
 /*

@@ -3,10 +3,8 @@
   getSubstr=调用名称
   $str=预取全文本 
   $leftStr=左边文本
-  $rightStr=右边文本
-*/
-function getSubstr($str, $leftStr, $rightStr)
-{
+  $rightStr=右边文本*/
+function getSubstr($str, $leftStr, $rightStr) {
     $left = strpos($str, $leftStr);
     //echo '左边:'.$left;
     $right = strpos($str, $rightStr,$left);
@@ -14,9 +12,8 @@ function getSubstr($str, $leftStr, $rightStr)
     if($left < 0 or $right < $left) return '';
     return substr($str, $left + strlen($leftStr), $right-$left-strlen($leftStr));
 }
-/*以下是取中间文本的函数(正则) 
-*/
-function getNeedBetween($data,$zz){
+/*以下是取中间文本的函数(正则)*/
+function getNeedBetween($data,$zz) {
     $str = $data;
     preg_match($zz, $str, $a);
     $b = $a[1];

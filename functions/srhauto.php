@@ -36,7 +36,7 @@ require 'function.php';
             }
             $link=str_replace('"'.$f.'"','',$link);
 
-            echo ' <a style="text-decoration:none;" href="#" id="srhauto'.$i.'" name="'.$f.$sumscode.'"><span class="label">'.$f.'</span></a> ';
+            echo ' <a style="text-decoration:none;" href="javascript:void(0)" id="srhauto'.$i.'" name="'.$f.$sumscode.'"><span class="label">'.$f.'</span></a> ';
             $scr=$scr.'$(function(){$("#srhauto'.$i.'").click(function(){var text=document.getElementById("srhauto'.$i.'").name;document.getElementById("title").value=text;});});';
         }
             echo '<script>'.$scr.'</script>';

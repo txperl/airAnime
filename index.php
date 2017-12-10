@@ -8,10 +8,10 @@
     <meta name="description" content="一款不错的聚合动漫&番剧搜索程序">
 	<title>airAnime Online - Polymeric Anime Search Engine</title>
 
-    <link href="css/mori.css" rel="stylesheet">
-	<link href="css/base.min.css" rel="stylesheet">
-	<link href="css/project.min.css" rel="stylesheet">
-    <link href="js/zoom-js/css/zoom.css" rel="stylesheet">
+    <link href="./css/mori.css" rel="stylesheet">
+	<link href="./css/base.min.css" rel="stylesheet">
+	<link href="./css/project.min.css" rel="stylesheet">
+    <link href="./js/zoom-js/css/zoom.css" rel="stylesheet">
 </head>
 <body class="page-brand">
 
@@ -71,11 +71,12 @@
 
         <!-- 以图搜番说明 -->
         <div id='picstip' style="display:none;">
-            <div class="card">
-            <div class="card-main">
-                <div class="card-inner">
-                    <p class="card-heading">「PicSearch」以图搜番说明</p>
-                    <p class="margin-bottom-lg">1.只可搜索出自日本动画(动漫)中的图片<br>2.图像大小 <= 1MB<br>3.若搜索本地图片，请点击UPLOAD上传图像再搜索<br>4.若图片为GIF格式，必须上传后才可正常搜索<br><br>更多搜索指令使用说明请参考 <a href="./pages/srhcode.php">搜索指令</a>&<a href="./pages/start.php">使用说明</a> 页面</p>
+            <div class="barc-t"><div class="barc-tile" style="height: 100%;">
+                <div style="padding-left:10px;padding-top:10px;padding-bottom:10px;">PicSearch</a><span class="arc-date">&以图搜番说明</span><br>
+                    <div style="padding-left:5px;">
+                        <span id="desb" class="arc-date">1.只可搜索出自日本动画(动漫)中的图片<br>2.图像大小 <= 1MB<br>3.若搜索本地图片，请点击UPLOAD上传图像再搜索<br>4.若图片为GIF格式，必须上传后才可正常搜索<br></span>
+                    </div>
+                <span id="desb" class="arc-date">更多搜索指令使用说明请参考 <a href="./pages/srhcode.php">搜索指令</a>&<a href="./pages/start.php">使用说明</a> 页面</span>
                 </div>
             </div></div>
         </div>
@@ -93,7 +94,7 @@
         <!-- 图片上传表单 -->
         <div id='upimage' style="display:none;"> 
             <form enctype="multipart/form-data" method="post" action="http://up.imgapi.com/" id="upform">
-            <input name="Token" id="token" value="{...}" type="hidden">
+            <input name="Token" id="token" value="{your_token}" type="hidden">
             <input type="hidden" name="from" value="file">
             <input type="hidden" name="httptype" value="1">
             <input type="file" name="file" id="file" style="display:none">
@@ -105,20 +106,20 @@
         <div id='ifhomea' style="display:none;">
             <div class="logo" id="logo" data-tilt data-tilt-glare="true" data-tilt-max-glare="0.3" data-tilt-speed="200" data-tilt-scale="1" data-tilt-max="12" data-tilt-perspective="900">
                 <span>Welcome</span>
-                <div class="homelink"><a href="./pages/start.php">&开始</a> <a href="./pages/about.php">&关于</a> <a href="./pages/srhcode.php">&搜索指令</a></div>
+                <div class="homelink"><a href="./pages/start.php">&开始</a> <a href="./pages/about.php">&关于</a> <a href="./pages/srhcode.php">&搜索指令</a><br><span style="opacity: 0.7;font-size: 14px;"><a href="./pages/public.php">捐赠本项目?</a></span></div>
             </div>
         </div>
 
         <!-- 随机推荐 -->
         <div id='ifhomeaii' class="post-content" style="display:none;">
-            <h4><a style="color:#78909c;text-decoration:none;" id="todayB" href="javascript:void(0)">番剧推荐</a> <span style="font-size:10px;">点点看?</span></h4>
+            <h4><a style="color:#78909c;text-decoration:none;" id="todayB" href="javascript:void(0)">番剧推荐</a> <span style="font-size:10px;">(′・ω・`) 点点看?</span></h4>
             <div id="sugB_show">
                 <?php
-                    $myfile=fopen("./functions/bangumiToday.json", "r") or die("Unable to open file!");
+                    $myfile=fopen("./functions/data/bangumiToday.json", "r") or die("Unable to open file!");
                         $bgmC=fgets($myfile);
                     fclose($myfile);
                     $bgmC=json_decode($bgmC, true);
-		    $id=$bgmC['id'];
+                    $id=$bgmC['id'];
                     if ($bgmC['name_cn']=='') {
                         $name=$bgmC['name'];
                     } else {
@@ -126,7 +127,6 @@
                     }
                     $des=$bgmC['summary'];
                     $img=$bgmC['images']['large'];
-                    $img=str_replace('http://','https://',$img);
                     $air_date=$bgmC['air_date'];
 
                     if ($des=='') {
@@ -148,7 +148,7 @@
         <!-- 今日新番 -->
         <div id='ifhomeai' class="post-content" style="display:none;">
             <?php
-                $file="./functions/bangumiS2017.json";
+                $file="./functions/data/bangumiS2017.json";
                 $bcon=file_get_contents($file);
                 $bcon=json_decode($bcon, true);
                 $today=date("N")-1;
@@ -162,28 +162,29 @@
                         $name_cn=$bcon['items'][$i]['name_cn'];
                     }
                     $img=$bcon['items'][$i]['images']['large'];
-                    $img=str_replace('http://','https://',$img);
+                    $img=str_replace('http://lain.bgm.tv','http://7xkwzy.com1.z0.glb.clouddn.com',$img);
                     echo '<div class="arc-t"><div class="arc-tile"><div style="box-shadow: 0 2px 15px 1px rgba(0,0,0,0.15);width:46%;max-height:150px;float:left;margin-right:6px;"><img src="'.$img.'" data-action="zoom" class="img-rounded img-responsive"></div><small><a target="_blank" href="'.$bcon['items'][$i]['url'].'">'.$name_cn.'</a></small><br><span class="arc-date">&'.$bcon['items'][$i]['name'].'</span><br><span class="arc-date">首播: '.$bcon['items'][$i]['air_date'].'</span></div></div>';
                 }
             ?>
-        </div>
-
-	</div></div></div>
-
+        </div>   
+	</div>
+    </div>
+    </div>
+    
 	<?php
 	pagepart('footer');
 	pagepart('ball');
 	?>
 
 	<!-- js -->
-	<script src="js/jquery.min2.20.js"></script>
-	<script src="js/base.min.js"></script>
-	<script src="js/project.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/embed.js"></script>
-    <script src="js/zoom-js/js/zoom.js"></script>
-    <script src="js/vanilla-tilt.min.js"></script>
-    <script src="js/md5.js"></script>
+	<script src="./js/jquery.min2.20.js"></script>
+	<script src="./js/base.min.js"></script>
+	<script src="./js/project.min.js"></script>
+    <script src="./js/jquery.form.js"></script>
+    <script src="./js/embed.js"></script>
+    <script src="./js/zoom-js/js/zoom.js"></script>
+    <script src="./js/vanilla-tilt.min.js"></script>
+    <script src="./js/md5.js"></script>
 	<script type="text/javascript">
         //UPLOAD被点击
         $(function(){
@@ -228,9 +229,18 @@
         });
         //判断首页
         $(document).ready(function() {
-            var a = location.href;if(a=='http://airanime.applinzi.com/'){$("#ifhomea").fadeIn(300);}else $('#ifhomea').hide();
-            var c = location.href;if(c=='http://airanime.applinzi.com/'){$("#ifhomeaii").fadeIn(500);}else $('#ifhomeai').hide();
-            var b = location.href;if(b=='http://airanime.applinzi.com/'){$("#ifhomeai").fadeIn(600);}else $('#ifhomeai').hide();  
+            var a = location.href;
+                if(a=='http://airanime.applinzi.com/'){
+                    $("#ifhomea").fadeIn(300);
+                    $("#ifhomeaii").fadeIn(500);
+                    $("#ifhomeai").fadeIn(600);
+                    $("#adshow").fadeIn(800);
+                } else {
+                    $('#ifhomea').hide();
+                    $('#ifhomeai').hide();
+                    $('#ifhomeai').hide();
+                    $('#adshow').hide();
+                }
         });
         </script>
         <script type="text/javascript">
@@ -302,7 +312,7 @@
         $(function(){
             $('#search input[name="title"]').keyup(function(){
                 var text=document.getElementById("title");
-                var i=text.value.indexOf('!image:')
+                var i=text.value.indexOf('!image:');
                 if (i != '-1') {
                     $("#srhauto").fadeOut(100);
                     $("#picstip").fadeIn(500);

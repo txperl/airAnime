@@ -8,7 +8,7 @@ require_once 'function.php';
         $code=$_POST['code'];
     }
     
-    $file="./bangumiS.json";
+    $file="./data/bangumiS.json";
     $bca=file_get_contents($file);
     $bca=json_decode($bca, true);
     $bca=$bca['items'];
@@ -26,7 +26,7 @@ require_once 'function.php';
         $web=getSubstr($web,'<textarea>','</textarea>');
         $id=getSubstr($web,'bangumi_id=',';');
     } else {
-        $myfile=fopen("./bangumiToday.json", "r") or die("Unable to open file!");
+        $myfile=fopen("./data/bangumiToday.json", "r") or die("Unable to open file!");
             $bgmC=fgets($myfile);
         fclose($myfile);
         $bgmC=json_decode($bgmC, true);
@@ -37,7 +37,7 @@ require_once 'function.php';
     if ($code=='up') {
         $APIurl='http://api.bgm.tv'.$flink.'?responseGroup=large';
         $webtext=curl_get_contents($APIurl);
-        $myfile = fopen("./bangumiToday.json", "w") or die("Unable to open file!");
+        $myfile = fopen("./data/bangumiToday.json", "w") or die("Unable to open file!");
         $txt = $webtext;
         fwrite($myfile, $txt);
         fclose($myfile);

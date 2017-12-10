@@ -361,7 +361,7 @@ function ifcode($title){
 				array_push($ifrun,'false');
 			}
 
-			if (substr_count($scode,'\w')==1) {
+			if (substr_count($scode,'\x')==1) {
 				array_push($ifrun,'true');
 			} else {
 				array_push($ifrun,'false');
@@ -422,7 +422,7 @@ function ifcode($title){
 				array_push($ifrun,'true');
 			}
 
-			if (substr_count($scode,'\w')==1) {
+			if (substr_count($scode,'\x')==1) {
 				array_push($ifrun,'false');
 			} else {
 				array_push($ifrun,'true');
@@ -468,8 +468,8 @@ function picS($picurl){ //参考文档及API token获取:https://soruly.github.i
 	$imgbase64 = 'data:image/'.$type.';base64,' . chunk_split(base64_encode(file_get_contents($image_file)));
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={...}');
-    curl_setopt($curl, CURLOPT_HEADER, 1);
+    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={your_token}');
+    curl_setopt($curl, CURLOPT_HEADER, 0);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POST, 1);
     $post_data = array(
@@ -481,6 +481,40 @@ function picS($picurl){ //参考文档及API token获取:https://soruly.github.i
 
     return $data;
 	}
+}
+//////////////////////////////////////////////////
+// Bing
+function decode_Bing($data){
+	libxml_disable_entity_loader(true); 
+	$xmlstring = simplexml_load_string($data, 'SimpleXMLElement', LIBXML_NOCDATA); 
+	$val = json_decode(json_encode($xmlstring),true); 
+	return $val; 
+}
+function getItem_Bing_XSJDM($data,$ori1,$ori2){
+	$rst_t=array("新世界动漫标题");
+	$rst_l=array("新世界动漫链接");
+	$xsjdm=array();
+	$data=$data['channel']['item'];
+	$num=count($data);
+	$pre='/{"title":"(.*?)_全集(.*?)","url":"(.*?)"}/';//JOJO的奇妙冒险动漫全集（日语 )高清在线观看 ...- 新世界动漫
+	for ($i=0; $i < $num; $i++) { 
+		$t=$data[$i]['title'];
+		$if_t=strstr($t,'动漫全集');
+		if (strstr($t,'动漫全集')!='') {
+			$t=str_replace($if_t,'',$t);
+		}
+		$sinm1=howtextsimilar(strtoupper($t),strtoupper($ori1));
+		$sinm2=howtextsimilar(strtoupper($t),strtoupper($ori2));
+		$sinm=($sinm1+$sinm2) / 2;
+		if ($sinm>=0.3) {
+			array_push($rst_t,$t);
+			array_push($rst_l,$data[$i]['link']);
+		}
+	}
+	array_push($xsjdm, $rst_t);
+	array_push($xsjdm, $rst_l);
+	array_push($xsjdm, count($rst_t));
+	return $xsjdm;
 }
 //////////////////////////////////////////////////
 // Download Info old
@@ -652,12 +686,12 @@ function asrh($title,$ifrun){
 		//$stitle='http://bgm.tv/subject_search/'.urlencode($title).'?cat=2';
 		array_push($urls,$stitle);//10
 
-		//if ($ifrun[9]=='true') {
-		//	$stitle='http://www.hkdm173.com/search.asp?searchword='.iconv("utf-8","gb2312",$title);
-		//}	else{
-		//	$stitle=$none;
-		//}
-		//array_push($urls,$stitle);//11
+		if ($ifrun[9]=='true') {
+			$stitle='http://www.baidu.com/s?wd=site%3Ax4jdm.com%20'.urlencode($title.'动漫全集').'&pn=0';
+		}	else{
+			$stitle=$none;
+		}
+		array_push($urls,$stitle);//11
 	//获取网页数据
 		$frst=curl_multi($urls);
 		$rst=array();
@@ -671,7 +705,7 @@ function asrh($title,$ifrun){
 		array_push($rst,$frst[9]);//baiduall 7
 		array_push($rst,$frst[10]);//tencenttv 8
 		array_push($rst,$frst[11]);//bangumi info 9
-		//array_push($rst,$frst[12]);//wxdm 10
+		array_push($rst,$frst[12]);//xsjdm 10
 	return $rst;
 }
 function csrh($title){
