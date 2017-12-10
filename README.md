@@ -48,6 +48,7 @@ Demo: [airAnimeOnline](http://airanime.applinzi.com/).
 
 自已更换bangumi动画id→执行更新数据(访问 url/functions/bangumiSug.php/?code=up )→数据保存到本地。程序只是调用本地数据。
 
+id获取代码在 functions/bangumiSug.php 25-27行。百度翻译API授权于 'index.php'266,267行。
 
 ### Fonts
 字体链接位于 '.css' 4个.css后缀文件中。默认使用我的七牛CDN，但这存在风险，万一我哪天突然换了是吧，所以请请自行修改。字体位于 '.css/Roboto' (请注意更改css.css的代码)。
@@ -137,6 +138,5 @@ All
 
 感谢。
 
-
-July 2nd,2017  
+Dec 10th,2017  
 Trii Hsia
