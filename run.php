@@ -1,10 +1,14 @@
 <?php
 include("./functions/chttochs/convert.php");
-require "./functions/mains.php";
+require_once "./functions/mains.php";
 header("Content-type: text/html; charset=utf-8");
-if(is_array($_GET)&&count($_GET)>0){ 
-	if(isset($_GET["title"])){
-		$title=$_GET["title"];
+header('Access-Control-Allow-Origin:*');  
+header('Access-Control-Allow-Methods:POST');  
+header('Access-Control-Allow-Headers:x-requested-with,content-type'); 
+if(is_array($_POST)&&count($_POST)>0){ 
+	if(isset($_POST["title"])){
+		$title=RemoveXSS($_POST["title"]);
+		$t=$_POST["t"];
 	 if ($title!='') {
 		//!image
 		if (substr_count($title,'!image:')==1) {
@@ -54,7 +58,9 @@ if(is_array($_GET)&&count($_GET)>0){
 			if ($picurl!='') {
 				echo '<h2 class="content-sub-heading">'.$title.' ['.$season.'] ['.$time.']'.'</h2>';
 			} else {
-				echo '<h2 class="content-sub-heading">'.$title.'</h2>';
+				if ($t!='mengfan') {
+					echo '<h2 class="content-sub-heading">'.$title.'</h2>';
+				}
 			}
 		}
 		if ($picurl!='') {
@@ -95,12 +101,12 @@ if(is_array($_GET)&&count($_GET)>0){
 		}
 		// xsjdm 结果
 		if ($ifrun[9]=='true') {
-			$r_xsjdm=baiduS($webd[10],'/{"title":"(.*?)动漫全集(.*?)","url":"(.*?)"}/',1,'x4jdm.com');
+			$r_xsjdm=baiduS($webd[10],'/{"title":"(.*?)动漫全集(.*?)","url":"(.*?)"}/',1,'x4jdm.com',$autotitle,$title);
 			$n_xsjdm=$r_xsjdm[2];
 			$t_xsjdm=$r_xsjdm[0];
 			$l_xsjdm=$r_xsjdm[1];
-			if ($n_xsjdm=='') {
-				$r_xsjdm=baiduS($webd[10],'/{"title":"(.*?)","url":"(.*?)"}/',1,'x4jdm.com');
+			if ($n_xsjdm==0) {
+				$r_xsjdm=baiduS($webd[10],'/{"title":"(.*?)","url":"(.*?)"}/',1,'x4jdm.com',$autotitle,$title);
 				$n_xsjdm=$r_xsjdm[2];
 				$t_xsjdm=$r_xsjdm[0];
 				$l_xsjdm=$r_xsjdm[1];
@@ -115,19 +121,19 @@ if(is_array($_GET)&&count($_GET)>0){
 		}
 		// pptv 结果
 		if ($ifrun[3]=='true'){
-			$r_pptv=pptvS($webd[3]);
+			$r_pptv=pptvS($webd[3],$autotitle,$title);
 			$n_pptv=$r_pptv[2];
 			$t_pptv=$r_pptv[0];
 			$l_pptv=$r_pptv[1];
 		}
 		// letv 结果
 		if ($ifrun[4]=='true'){
-			$r_letv=baiduS($webd[4],'/{"title":"(.*?)_全集(.*?)","url":"(.*?)"}/',1,'www.le.com');// 1 参数暂时无用，下同
+			$r_letv=baiduS($webd[4],'/{"title":"(.*?)_全集(.*?)","url":"(.*?)"}/',1,'www.le.com',$autotitle,$title);// 1 参数暂时无用，下同
 			$n_letv=$r_letv[2];
 			$t_letv=$r_letv[0];
 			$l_letv=$r_letv[1];
-			if ($n_letv=='') {
-				$r_letv=baiduS($webd[4],'/{"title":"(.*?)-在线观看-动漫(.*?)","url":"(.*?)"}/',1,'www.le.com');// 1 参数暂时无用，下同
+			if ($n_letv==0) {
+				$r_letv=baiduS($webd[4],'/{"title":"(.*?)-在线观看-动漫(.*?)","url":"(.*?)"}/',1,'www.le.com',$autotitle,$title);// 1 参数暂时无用，下同
 				$n_letv=$r_letv[2];
 				$t_letv=$r_letv[0];
 				$l_letv=$r_letv[1];
@@ -135,12 +141,18 @@ if(is_array($_GET)&&count($_GET)>0){
 		}
 		// iqiyi 结果
 		if ($ifrun[5]=='true'){
-			$r_iqiyi=baiduS($webd[5],'/{"title":"(.*?)-动漫动画-全集(.*?)","url":"(.*?)"}/',1,'www.iqiyi.com');
+			$r_iqiyi=baiduS($webd[5],'/{"title":"(.*?)-动漫动画-全集(.*?)","url":"(.*?)"}/',1,'www.iqiyi.com',$autotitle,$title);
 			$n_iqiyi=$r_iqiyi[2];
 			$t_iqiyi=$r_iqiyi[0];
 			$l_iqiyi=$r_iqiyi[1];
 			if ($n_iqiyi==0) {
-				$r_iqiyi=baiduS($webd[5],'/{"title":"(.*?)-全集在线观看-动漫(.*?)","url":"(.*?)"}/',1,'www.iqiyi.com');
+				$r_iqiyi=baiduS($webd[5],'/{"title":"(.*?)-全集在线观看-动漫(.*?)","url":"(.*?)"}/',1,'www.iqiyi.com',$autotitle,$title);
+				$n_iqiyi=$r_iqiyi[2];
+				$t_iqiyi=$r_iqiyi[0];
+				$l_iqiyi=$r_iqiyi[1];
+			}
+			if ($n_iqiyi==0) {
+				$r_iqiyi=baiduS($webd[5],'/{"title":"(.*?)-动漫-全集高清(.*?)","url":"(.*?)"}/',1,'www.iqiyi.com',$autotitle,$title);
 				$n_iqiyi=$r_iqiyi[2];
 				$t_iqiyi=$r_iqiyi[0];
 				$l_iqiyi=$r_iqiyi[1];
@@ -148,12 +160,12 @@ if(is_array($_GET)&&count($_GET)>0){
 		}
 		// youku 结果
 		if ($ifrun[6]=='true'){
-			$r_youku=baiduS($webd[6],'/{"title":"(.*?)—日本—动漫—优酷(.*?)","url":"(.*?)"}/',1,'www.youku.com');
+			$r_youku=baiduS($webd[6],'/{"title":"(.*?)—日本—动漫—优酷(.*?)","url":"(.*?)"}/',1,'www.youku.com',$autotitle,$title);
 			$n_youku=$r_youku[2];
 			$t_youku=$r_youku[0];
 			$l_youku=$r_youku[1];
 			if ($n_youku==0) {
-				$r_youku=baiduS($webd[6],'/{"title":"(.*?)—日本—动漫(.*?)","url":"(.*?)"}/',1,'www.youku.com');
+				$r_youku=baiduS($webd[6],'/{"title":"(.*?)—日本—动漫(.*?)","url":"(.*?)"}/',1,'www.youku.com',$autotitle,$title);
 				$n_youku=$r_youku[2];
 				$t_youku=$r_youku[0];
 				$l_youku=$r_youku[1];
@@ -167,12 +179,12 @@ if(is_array($_GET)&&count($_GET)>0){
 		}
 		// 腾讯视频 结果
 		if ($ifrun[8]=='true'){
-			$r_tencenttv=baiduS($webd[8],'/{"title":"(.*?)-高清(.*?)","url":"(.*?)"}/',1,'v.qq.com');
+			$r_tencenttv=baiduS($webd[8],'/{"title":"(.*?)-高清(.*?)","url":"(.*?)"}/',1,'v.qq.com',$autotitle,$title);
 			$n_tencenttv=$r_tencenttv[2];
 			$t_tencenttv=$r_tencenttv[0];
 			$l_tencenttv=$r_tencenttv[1];
 			if ($n_tencenttv==0) {
-				$r_tencenttv=baiduS($webd[8],'/{"title":"(.*?)-动漫(.*?)","url":"(.*?)"}/',1,'v.qq.com');
+				$r_tencenttv=baiduS($webd[8],'/{"title":"(.*?)-动漫(.*?)","url":"(.*?)"}/',1,'v.qq.com',$autotitle,$title);
 				$n_tencenttv=$r_tencenttv[2];
 				$t_tencenttv=$r_tencenttv[0];
 				$l_tencenttv=$r_tencenttv[1];
@@ -180,6 +192,7 @@ if(is_array($_GET)&&count($_GET)>0){
 		}
 
 		$statol=$n_bilibili+$n_dilidili+$n_baiduall+$n_letv+$n_iqiyi+$n_pptv+$n_fcdm+$n_youku+$n_tencenttv+$n_xsjdm;
+
 		// 简要 数量
 		echo '<div class="tile-wrap"><div class="tile"><div class="tile-inner">';
 			echo $des_info;
@@ -292,12 +305,12 @@ if(is_array($_GET)&&count($_GET)>0){
 				$des_info='(ฅ´ω`ฅ) 番剧信息未完成唔...';
 			//}
 			//动漫之家
-			$r_dmzj=baiduS($webd[0],'/{"title":"(.*?)_动漫之家(.*?)","url":"(.*?)"}/',1,'manhua.dmzj.com');
+			$r_dmzj=baiduS($webd[0],'/{"title":"(.*?)动漫之家漫画网","url":"(.*?)"}/',1,'manhua.dmzj.com');
 			$n_dmzj=$r_dmzj[2];
 			$t_dmzj=$r_dmzj[0];
 			$l_dmzj=$r_dmzj[1];
 			if ($n_dmzj==0) {
-				$r_dmzj=baiduS($webd[0],'/{"title":"(.*?)-动漫之家(.*?)","url":"(.*?)"}/',1,'manhua.dmzj.com');
+				$r_dmzj=baiduS($webd[0],'/{"title":"(.*?)动漫之家(.*?)","url":"(.*?)"}/',1,'manhua.dmzj.com');
 				$n_dmzj=$r_dmzj[2];
 				$t_dmzj=$r_dmzj[0];
 				$l_dmzj=$r_dmzj[1];
@@ -308,7 +321,7 @@ if(is_array($_GET)&&count($_GET)>0){
 			$t_bkmh=$r_bkmh[0];
 			$l_bkmh=$r_bkmh[1];
 			//动漫屋
-			$r_dmw=baiduS($webd[2],'/{"title":"(.*?)-动漫屋(.*?)","url":"(.*?)"}/',1,'www.dm5.com');
+			$r_dmw=baiduS($webd[2],'/{"title":"(.*?)_在线漫画阅读_动漫屋","url":"(.*?)"}/',1,'www.dm5.com');
 			$n_dmw=$r_dmw[2];
 			$t_dmw=$r_dmw[0];
 			$l_dmw=$r_dmw[1];

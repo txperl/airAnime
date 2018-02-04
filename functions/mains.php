@@ -103,7 +103,7 @@ function fcdmS($title){
 		return $fcdm;
 }
 // PPTV搜索
-function pptvS($title){
+function pptvS($title,$ori1,$ori2){
 	$webtext=$title;
 	$webtext=str_replace('title="详情"','',$webtext);
 	$number=substr_count($webtext,'<div class="bd fr">');
@@ -112,16 +112,18 @@ function pptvS($title){
 	$pptv=array();
 
 		for ($n=0; $n<$number; $n++) {
-			$f='class="ico02"'.getSubstr($webtext,'class="ico02"','</span></dt>').'</span></dt>';
+			$f='<i class="ico02"></i></a>'.getSubstr($webtext,'<i class="ico02"></i></a>','<dd class="pinfo pinfo2">').'<dd class="pinfo pinfo2">';
 			$l=getSubstr($f,'<a href="','" target="_blank"');
 			$t=getSubstr($f,' title="','">');
 			$webtext=str_replace($f,'',$webtext);
-			array_push($rst_l,$l);
+
 			array_push($rst_t,$t);
+			array_push($rst_l,$l);
 		}
+
 		array_push($pptv,$rst_t);
 		array_push($pptv,$rst_l);
-		array_push($pptv,$number);
+		array_push($pptv,count($rst_t)-1);
 		return $pptv;
 }
 // 无限动漫搜索
@@ -234,7 +236,7 @@ function baiduallS($title)
 	return $rst;
 }
 //百度协助搜索通用代码
-function baiduS($title,$zz,$page,$wst){
+function baiduS($title,$zz,$page,$wst,$ori1,$ori2){
   $rst_t=array("标题");
   $rst_l=array("链接");
   $baiduS=array();
@@ -246,14 +248,19 @@ function baiduS($title,$zz,$page,$wst){
     // 载入 标题 链接
     for ($i=0; $i<count($rst[0]); $i++) { 
     	$t=$rst[1][$i];
-      	array_push($rst_t,$t);
-      	$l=$rst[3][$i];
-      	array_push($rst_l,$l);
+		$sinm1=howtextsimilar(strtoupper($t),strtoupper($ori1));
+		$sinm2=howtextsimilar(strtoupper($t),strtoupper($ori2));
+		$sinm=($sinm1+$sinm2) / 2;
+		if ($sinm>=0.3) {
+			array_push($rst_t,$t);
+			$l=$rst[3][$i];
+			array_push($rst_l,$l);
+		}
     }
   }
   array_push($baiduS,$rst_t);
   array_push($baiduS,$rst_l);
-  array_push($baiduS,$number);
+  array_push($baiduS,count($rst_t)-1);
   return $baiduS;
 }
 //输出百度协助搜索通用代码

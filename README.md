@@ -24,8 +24,8 @@ Demo: [airAnimeOnline](http://airanime.applinzi.com/).
     ├── srhauto.php - 获取关键词联想结果代码
     ├── bangumiinfo.php - 获取番剧信息代码
     ├── bangumiSug.php - 番剧推荐代码
-    ├── bangumiS.json - 2000年至今(2017/10/1)的日本动漫信息
-    ├── bangumiS2017.json - 新番放送表(2017秋)
+    ├── bangumiS.json - 2000年至今(2017/2/4)的日本动漫信息
+    ├── bangumiS2017.json - 新番放送表(2018年冬)
     ├── bangumiToday.json - 动漫推荐缓存文件
 ├── .d
     ├── .server - 放于其他服务器的文件
@@ -138,5 +138,5 @@ All
 
 感谢。
 
-Dec 10th,2017  
+Feb 4th,2018  
 Trii Hsia
