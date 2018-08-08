@@ -348,7 +348,7 @@
                 getId("btnS").style.display="none";
                 getId("btnUP").style.display="none";
                 getId("loading").style.display="";
-                    $.get( './run.php', { 'title' : title },function(data){
+                    $.post( './run.php', { 'title' : title },function(data){
                         if( title == '' ) 
                             alert("搜索失败，请刷新重试");
                         else
