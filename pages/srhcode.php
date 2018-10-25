@@ -84,7 +84,7 @@
 									<p><span style="font-weight:bold;">此代码为全局指令,不可与普通搜索(名称搜索)方式并用</span>，与其他指令用 <span style="font-weight:bold;">空格</span> 隔开。<br><br>开始: '<span style="color:#FD5B78;">!image:</span>' ，结束: '<span style="color:#FD5B78;">;</span>'.</p>
 									<p>通用形式：!image:?; codes</p> 
 									<hr>
-									<p>此功能用了whatanime.ga API，限制为10次/min。具体使用说明请阅读<a target="_blank" href="https://whatanime.ga/faq">这个</a>。</p>
+									<p>此功能用了whatanime.ga API，限制为10次/min。具体使用说明请阅读<a target="_blank" href="https://trace.moe/faq">这个</a>。</p>
 								</div>
 							</div>
 						</div>

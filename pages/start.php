@@ -71,7 +71,7 @@
 								<div class="card-main">
 									<div class="card-inner">
 										<p class="card-heading">PicSearch(以图搜番)</p>
-										<p>此功能用了whatanime.ga API，限制为10次/min。具体使用说明请阅读<a target="_blank" href="https://whatanime.ga/faq">这个</a>。</p>
+										<p>此功能用了whatanime.ga API，限制为10次/min。具体使用说明请阅读<a target="_blank" href="https://trace.moe/faq">这个</a>。</p>
 										<p>在首页点击 UPLOAD 可上传图片(最大为1MB)。</p>
 									</div>
 								</div>

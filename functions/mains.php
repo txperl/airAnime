@@ -457,7 +457,7 @@ function iftype($title){
 	return $iftype;
 }
 
-function picS($picurl){ //参考文档及API token获取:https://soruly.github.io/whatanime.ga/
+function picS($picurl){ //参考文档及API token获取:https://soruly.github.io/trace.moe/
 	if ($picurl!='') {
 	$image_file = $picurl;
 	$image_info = getimagesize($image_file);
@@ -475,7 +475,7 @@ function picS($picurl){ //参考文档及API token获取:https://soruly.github.i
 	$imgbase64 = 'data:image/'.$type.';base64,' . chunk_split(base64_encode(file_get_contents($image_file)));
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, 'https://whatanime.ga/api/search?token={your_token}');
+    curl_setopt($curl, CURLOPT_URL, ' https://trace.moe/api/search?token={your_token}');
     curl_setopt($curl, CURLOPT_HEADER, 0);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POST, 1);
