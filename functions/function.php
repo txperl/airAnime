@@ -156,4 +156,21 @@ function RemoveXSS($val) {
    } 
    return $val; 
 }
+function m_ArrayUnique($arr, $reserveKey = false){
+	if (is_array($arr) && !empty($arr)) {
+		foreach ($arr as $key => $value) {
+			$tmpArr[$key] = serialize($value) . '';
+		}
+		$tmpArr = array_unique($tmpArr);
+		$arr = array();
+		foreach ($tmpArr as $key => $value) {
+			if ($reserveKey) {
+				$arr[$key] = unserialize($value);
+			} else {
+				$arr[] = unserialize($value);
+			}
+		}
+	}
+	return $arr;
+}
 ?>

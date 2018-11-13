@@ -27,25 +27,25 @@ $timeout = stream_context_create(array(
 // 动画站内搜索
 // 哔哩哔哩集合搜索
 function bilibiliS($title){
-	$webtext=$title;
-	$number=substr_count($webtext,'<div class="left-img">');
-	$rst_t=array("bilibili标题");
-	$rst_l=array("bilibili链接");
+	$webtext=json_decode($title,true);
+	$number=count($webtext['data']['result']['media_bangumi']);
+	$rst_t=array("airAnime_title");
+	$rst_l=array("airAnime_link");
 	$bilibili=array();
 
-		for ($n=0; $n<$number; $n++) {
-			$f='<div class="left-img">'.getSubstr($webtext,'<div class="left-img">','</div>').'</div>';
-			$l='http://bangumi.bilibili.com/anime/'.getSubstr($f,'//bangumi.bilibili.com/anime/','" ');
-			$t=getSubstr($f,'title="','" ');
-			$webtext=str_replace($f,'',$webtext);
-			array_push($rst_l,$l);
-			array_push($rst_t,$t);
-		}
+	for ($n=0; $n<$number; $n++) {
+		$l='https://www.bilibili.com/bangumi/media/md'.$webtext['data']['result']['media_bangumi'][$n]['media_id'];
+		$t=$webtext['data']['result']['media_bangumi'][$n]['title'];
+		$t=str_replace('<em class="keyword">','',$t);
+		$t=str_replace('</em>','',$t);
+		array_push($rst_l,$l);
+		array_push($rst_t,$t);
+	}
 
-		array_push($bilibili,$rst_t);
-		array_push($bilibili,$rst_l);
-		array_push($bilibili,$number);
-		return $bilibili;
+	array_push($bilibili,$rst_t);
+	array_push($bilibili,$rst_l);
+	array_push($bilibili,$number);
+	return $bilibili;
 }
 
 // 嘀哩嘀哩搜索
@@ -457,7 +457,7 @@ function iftype($title){
 	return $iftype;
 }
 
-function picS($picurl){ //参考文档及API token获取:https://soruly.github.io/trace.moe/
+function picS($picurl){ //参考文档及API token获取:https://trace.moe
 	if ($picurl!='') {
 	$image_file = $picurl;
 	$image_info = getimagesize($image_file);
@@ -475,7 +475,7 @@ function picS($picurl){ //参考文档及API token获取:https://soruly.github.i
 	$imgbase64 = 'data:image/'.$type.';base64,' . chunk_split(base64_encode(file_get_contents($image_file)));
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, ' https://trace.moe/api/search?token={your_token}');
+    curl_setopt($curl, CURLOPT_URL, 'https://trace.moe/api/search?token={your_token}');
     curl_setopt($curl, CURLOPT_HEADER, 0);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_POST, 1);
@@ -629,7 +629,7 @@ function asrh($title,$ifrun){
 	$urls=array();
 		$none='http://7vzp04.com1.z0.glb.clouddn.com/none.txt';
 		//if ($ifrun[0]=='true') {
-			$stitle='http://search.bilibili.com/all?keyword='.urlencode($title);
+			$stitle='https://api.bilibili.com/x/web-interface/search/all?jsonp=jsonp&keyword='.urlencode($title);
 		//}	else{
 		//	$stitle=$none;
 		//}

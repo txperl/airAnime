@@ -162,7 +162,7 @@
                         $name_cn=$bcon['items'][$i]['name_cn'];
                     }
                     $img=$bcon['items'][$i]['images']['large'];
-                    $img=str_replace('http://lain.bgm.tv','http://7xkwzy.com1.z0.glb.clouddn.com',$img);
+                    $img=str_replace('http://lain.bgm.tv','https://lain.bgm.tv',$img);
                     echo '<div class="arc-t"><div class="arc-tile"><div style="box-shadow: 0 2px 15px 1px rgba(0,0,0,0.15);width:46%;max-height:150px;float:left;margin-right:6px;"><img src="'.$img.'" data-action="zoom" class="img-rounded img-responsive"></div><small><a target="_blank" href="'.$bcon['items'][$i]['url'].'">'.$name_cn.'</a></small><br><span class="arc-date">&'.$bcon['items'][$i]['name'].'</span><br><span class="arc-date">首播: '.$bcon['items'][$i]['air_date'].'</span></div></div>';
                 }
             ?>

@@ -1,7 +1,7 @@
-@import url(http://7xj8zi.com1.z0.glb.clouddn.com/fonts/airanime/css.css);
+@import url(Roboto/css.css);
 .ui-card-wrap:after,.ui-picker-lib:after{clear:both}body{padding-bottom:69px}.ui-content-header{background-position:50% 50%;background-repeat:no-repeat;background-size:cover;margin-bottom:-58px;padding-top:68px;padding-bottom:58px;}
 
-.page-brand .ui-content-header::before{background:url(http://7vzp04.com1.z0.glb.clouddn.com/brandooo.jpg);}
+.page-brand .ui-content-header::before{background:url(images/bg/brandooo.jpg);}
 .page-brand .ui-content-header{
 	position: relative;
 	background: hsla(0,0%,100%,.01) border-box; /* rgba(0, 0, 0, 0.5) */
