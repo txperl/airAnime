@@ -1,142 +1,99 @@
-因为感觉经常在各视频网站找番有点浪费时间，于是就突然萌生了一个想法：如果能同时进行，就不会浪费太多时间了。所以，airAnime就出于这个想法诞生了。
+### airAnime
 
-airAnime是一款聚合「番剧&动漫搜索」程序，借助于各网站的数据及各网站的搜索功能进行指定搜索，以减少搜索番剧的时间。
+因为感觉经常在各视频网站找番有点浪费时间，于是就突然萌生了一个想法：如果能同时进行，就不会浪费太多时间了。所以，airAnime 就出于这个想法诞生了。
 
-Demo: [airAnimeOnline](http://airanime.applinzi.com/).
+airAnime 是一款聚合「番剧&动漫类搜索」程序，借助于各网站的数据及各网站的搜索功能进行综合搜索，以减少寻找在线番剧的时间。
 
-以下是代码说明块。
+v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
 
-代码说明
-==========================
-
-## 代码结构:
+## 代码结构
 
 ```
 .
-├── .css
-├── .images
-├── .js
-├── .functions
+├── .assert
+├── .data
+├── .function
     ├── .chttochs - 繁体与简体转换代码
-    ├── function.php - 封装的通用功能性代码
-    ├── mains.php - 程序主要功能代码
-    ├── pages.php - 输出通用网页部分代码
-    ├── srhauto.php - 获取关键词联想结果代码
-    ├── bangumiinfo.php - 获取番剧信息代码
-    ├── bangumiSug.php - 番剧推荐代码
-    ├── bangumiS.json - 2000年至今(2017/2/4)的日本动漫信息
-    ├── bangumiS2017.json - 新番放送表(2018年冬)
-    ├── bangumiToday.json - 动漫推荐缓存文件
-├── .d
-    ├── .server - 放于其他服务器的文件
-    ├── index.php - InfoDownload主代码
-    ├── list.js - 列表搜索功能JS
-├── .pages
+    ├── .class - 各主要功能代码类
+    ├── .small - 各辅助功能代码类
+    ├── bgminfo.php - 番剧信息获取代码
+    ├── bts.php - 下载源搜索控制代码
+    ├── conline.php - 漫画源搜索控制代码
+    ├── functions.php - 功能函数集
+    ├── newbgm.php - 首页新番信息代码
+    ├── picsearch.php - 以图搜番控制代码
+    ├── resources.php - 本地数据库搜索控制代码
+    ├── sact.json - 关键词联想代码
+    ├── sonline.php - 动画源搜索控制代码
+    ├── userbgm.php - 用户追番表控制代码
+├── .page
     ├── about.php - 关于页面
-    ├── start.php - 使用文档页面
-    ├── if.php - 数据源可用性页面
-    ├── srhcode.php - 搜索指令页面
-    ├── notice.php - 告示页面
-├── index.php - 程序主代码
-├── run.php - AJAX接受数据并处理
-
+    ├── doc.php - 使用文档页面
+    ├── setting.php - 设置页面
+├── config.php - 配置文件
+├── index.php
 ```
 
-## 细节
-### 番剧推荐
-设计思路是这样的：
+代码写的比较糟糕，请见谅...
 
-自已更换bangumi动画id→执行更新数据(访问 url/functions/bangumiSug.php/?code=up )→数据保存到本地。程序只是调用本地数据。
+## 部署
 
-id获取代码在 functions/bangumiSug.php 25-27行。百度翻译API授权于 'index.php'266,267行。
+- PHP 7.0+
 
-### Fonts
-字体链接位于 '.css' 4个.css后缀文件中。默认使用我的七牛CDN，但这存在风险，万一我哪天突然换了是吧，所以请请自行修改。字体位于 '.css/Roboto' (请注意更改css.css的代码)。
+通常情况下只需将源码上传至服务器即可正常运行基础功能。
 
-### PicSearch(以图搜番)[beta]
-已开放测试此功能，用 !image:?; 指令使用，限制为 10次/min 。具体请参考 搜索指令 页面。自行搭建前请务必修改 贴图库与whatanime.ga 的token，分别位于 'index.php'97行 与 'functions/mains.php'471行。
+### 额外功能
 
-### Type类型
-本程序的搜索内容类型分为: 二次元 Anine(动画),Comic(漫画),Novel(小说),Download(下载).
+##### 本地数据库搜索
 
-Anine包含如下数据源: Bilibili(哔哩哔哩),Dilidili(嘀哩嘀哩),Fcdm(风车动漫),PPTV(聚力),Letv(乐视),iQiyi(爱奇艺),Youku(优酷),TencentTV(腾讯视频),BaiduAll(百度集合搜索).
+若要开启此功能，请将 `./data/数据库/bgm.sql` 上传至 MySQL 数据库（与 `userbgm.sql` 相同），然后运行 `./data/数据库/bangumi.php` 将 `bangumi.json` 的数据导入。
 
-Comic包含如下数据源:DMZJ(动漫之家),BKMH(布卡漫画),DMW(动漫屋),TKMH(图库漫画).
+设置 `./config.php` 中 `db_server, db_username, db_password, db_name`，最后将 `$GLOBALS['res_is']` 设置为 `on` 即可。
 
-Novel包含如下数据源:DMZJ(动漫之家),TXDM(腾讯动漫).
+##### 用户追番表
 
-Download包含如下数据源:MGJH(蜜柑计划).
+此功能是同步 bangumi.tv 的追番数据至本地服务器，并展示到 airAnime 主页。
 
-搜索以上信息包含三种方式:  
-* 站内搜索 -抓取网站内提供的搜索信息，所以相对较准确。
-* 百度协助搜索 -在一些站内搜索速度慢或者不怎么推荐的数据源或者没办法直接抓取的数据源会使用这种方法，因为取百度搜索结果，并且用正则只匹配一种规则，所以匹配结果范围较大。
-* 集合搜索 -抓取百度工具的集合番剧信息，不过匹配码只针对一些例子，所以时有时无。
+若要关闭，请移除 `./page/setting.php` 以及 `./index.php` 中相关代码。
 
-## 更新日志
+若要开启，请将 `./data/数据库/userbgm.sql` 上传至 MySQL 数据库（与 `bgm.sql` 相同）即可。
 
-#### v1 RC2!
-* 新增 Bangumi图片镜像
-* 完善 界面
-* 更变 头图
+##### 以图搜番
 
-#### v1 RC2
-* 全新 主页
-* 新增 番剧推荐
-* 新增 新番放送表
-* 新增 简单余弦相似度算法[DILIDILI数据源开启测试]
-* 完善 番剧信息获取功能
+申请后修改 `./config.php` 中 `picS_token` 即可。
 
-#### v1 RC1.2
-* 修补 累计的细节及BUG
-* 新增 搜索内容推测算法
-* 开启 番剧信息获取功能
-* 进入 更新休眠期(上学中)
+### 数据
 
-#### v1 RC1
-* 修补 细节及BUG
-* 新增 漫画源
-* 待定 部分功能(源码中注释掉的部分)
-* 进入 更新休眠期(要上学惹)
+airAnime 中 `Anime1, Calibur, AGE动漫, 新番` 数据基于本地 json 文件，所以需要定期更新。
 
-#### v1 beta5
-* 优化 InfoDownload界面
-* 新增 InfoS(动漫信息搜索)[beta,未开放]
-* 新增 漫画源(图库漫画)
-* 新增 AJAX异步数据提交
-* 新增 PicSearch(以图搜番)[beta]
+##### Anime1
 
-#### v1 beta4
-* 优化 百度协助搜索-漫画(精度提高约至92%)
-* 优化 InfoDownload(数据基于蜜柑计划)[beta]
-* 新增 小说源(动漫之家,腾讯动漫)
-* 新增 漫画源(动漫屋)
-* 新增 背景图与毛玻璃效果
-* 待定 以图搜番测试版[未开放]
+运行 `./data/anime1.php` 后将数据粘贴至 `anime1.json` 即可。
 
-#### v1 beta3
-* 优化 指令搜索代码结构
-* 优化 百度协助搜索(精度提高约至90%)
-* 新增 image[未开放],type指令
-* 新增 漫画搜索(动漫之家,布卡漫画)
-* 新增 以图搜番测试版[未开放]
+##### Calibur
 
-#### v1 beta2
-* 优化 内部代码结构
-* 优化 百度协助搜索规则(更加精准稳定)
-* 优化 页面载入速度
-* 新增 腾讯视频数据源
-* 开启 动漫花园下载数据源测试
-* 开启 短网址:airs.im
+修改抓取范围并运行 `./data/calibur.php` 后将数据添加至 `calibur.json` 即可。
 
-#### v1 beta1
-All
+##### AGE动漫
+
+修改抓取范围并运行 `./data/agefans.php` 后将数据添加至 `agefans.json` 即可。
+
+##### 新番
+
+新番数据基于 bangumi.tv 新番数据。
+
+您也可以访问 `https://api.tls.moe/?app=bangumi&key=calendar` 来获取数据，然后将数据粘贴至 `201901.json` 即可。
+
+## Todo
+
+- 小说源搜索（是的，轻小说搜索还没完成...）
+- 更多动画源
+- 更多下载源
 
 ## 声明
+
 本程序源代码可任意修改并任意使用，但禁止商业化用途。一旦使用，任何不可知事件都与原作者无关，原作者不承担任何后果。
 
-如果您喜欢，希望可以在页面某处保留原作者(Trii Hsia)版权信息。
+如果您喜欢，希望可以在页面某处保留原作者(Trii Hsia)版权信息，或是保留 airAnime 的 GitHub 仓库地址（https://github.com/txperl/airAnime）。
 
 感谢。
-
-Feb 4th,2018  
-Trii Hsia
