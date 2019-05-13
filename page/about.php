@@ -32,7 +32,7 @@
         <li class="mdui-divider"></li>
         <li class="mdui-menu-item">
           <a target="_blank" href="https://github.com/txperl/airAnime" class="mdui-ripple">GitHub</a>
-          <a target="_blank" href="https://yumoe.com/" class="mdui-ripple">Creator</a>
+          <a target="_blank" href="https://yumoe.com/" class="mdui-ripple">TriiHsia</a>
         </li>
       </ul>
   </div>
@@ -70,7 +70,7 @@
     </div>
   
     <div class="mdui-card-content">
-      &airAnime@<span style="color:#FD5B78;">v2α#20181126</span> · &本地数据库@<span style="color:#FD5B78;">#20190213</span> · &新番数据@<span style="color:#FD5B78;">#20190213</span>
+      &airAnime@<span style="color:#FD5B78;">v2@.1#20190513</span> · &本地数据库@<span style="color:#FD5B78;">#20190513</span> · &新番数据@<span style="color:#FD5B78;">#20190513</span>
     </div>
   </div>
 </div>
@@ -118,6 +118,11 @@
             <td>SM.MS</td>
             <td>优质免费的图床，提供上传图床支持</td>
             <td>https://sm.ms/</td>
+          </tr>
+          <tr>
+            <td>Calibur.tv</td>
+            <td>感谢站长付出，这样的落幕也是一种初心吧？</td>
+            <td>https://calibur.tv/</td>
           </tr>
           <tr>
             <td>各视频网站</td>

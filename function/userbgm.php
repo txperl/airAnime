@@ -21,6 +21,7 @@ if (@$_COOKIE["user_id"] && @$_COOKIE["user_ctime"]) {
     }
 
     $search = new allSearch();
+    $search->dbStart();
 
     if ($type == 'refresh') {
         $data = file_get_contents('http://api.tls.moe/?app=bangumi&key=watching&name=' . $userid);
@@ -28,7 +29,7 @@ if (@$_COOKIE["user_id"] && @$_COOKIE["user_ctime"]) {
         setcookie("user_ctime", $ntime, time() + 24 * 3600 * 7, "/");
         $oriData = $search->__doExit_Userbgm($userid, $ntime, $data);
         $oriData = $search->__doSearch_Userbgm($userid);
-        $oriData[0]['data'] = json_decode($oriData[0]['data'], true);
+        $oriData[0]['data'] = json_decode(stripcslashes($oriData[0]['data']), true);
         $oriData = json_encode($oriData, JSON_UNESCAPED_UNICODE);
         $oriData = str_replace('http:\/\/', 'https:\/\/', $oriData);
         print_r($oriData);
@@ -43,11 +44,12 @@ if (@$_COOKIE["user_id"] && @$_COOKIE["user_ctime"]) {
             $oriData = $search->__doExit_Userbgm($userid, $ntime, $data);
             $oriData = $search->__doSearch_Userbgm($userid);
         }
-        $oriData[0]['data'] = json_decode($oriData[0]['data'], true);
+        $oriData[0]['data'] = json_decode(stripcslashes($oriData[0]['data']), true);
         $oriData = json_encode($oriData, JSON_UNESCAPED_UNICODE);
         $oriData = str_replace('http:\/\/', 'https:\/\/', $oriData);
         print_r($oriData);
     }
+    $search->dbEnd();
 } else {
     die("error");
 }

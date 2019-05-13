@@ -63,24 +63,31 @@ class allSearchOnline
             $rst['tencenttv'] = $r_tencenttv;
         }
 
+        $r_qinmei = $this->__qinmeiS($data['qinmei']);
+        $rst['qinmei'] = $r_qinmei;
+
         if ($isLocal) {
             // anime1.me 结果
             $r_anime1 = $this->__anime1S($keyTitle);
             $rst['anime1'] = $r_anime1;
 
-            // calibur.tv 结果
-            $r_calibur = $this->__caliburS($keyTitle);
-            $rst['calibur'] = $r_calibur;
+            // bimibimi.cc 结果
+            $r_bimibimi = $this->__bimibimiS($keyTitle);
+            $rst['bimibimi'] = $r_bimibimi;
 
-            // qinmei.video 结果
-            $r_qinmei = $this->__qinmeiS($data['qinmei']);
-            $rst['qinmei'] = $r_qinmei;
+            // 8maple.ru 结果
+            $r_8maple = $this->__8mapleS($keyTitle);
+            $rst['8maple'] = $r_8maple;
+
+            // calibur.tv 结果，感谢站长付出
+            //$r_calibur = $this->__caliburS($keyTitle);
+            //$rst['calibur'] = $r_calibur;
         }
 
         if ($isLocal) {
-            $statol = $r_bilibili[2] + $r_dilidili[2] + $r_letv[2] + $r_iqiyi[2] + $r_pptv[2] + $r_fcdm[2] + $r_youku[2] + $r_tencenttv[2] + $r_anime1[2] + $r_calibur[2] + $r_qinmei[2];
+            $statol = $r_bilibili[2] + $r_dilidili[2] + $r_letv[2] + $r_iqiyi[2] + $r_pptv[2] + $r_fcdm[2] + $r_youku[2] + $r_tencenttv[2] + $r_anime1[2] + $r_bimibimi[2] + $r_8maple[2];
         } else {
-            $statol = $r_bilibili[2] + $r_dilidili[2] + $r_letv[2] + $r_iqiyi[2] + $r_pptv[2] + $r_fcdm[2] + $r_youku[2] + $r_tencenttv[2];
+            $statol = $r_bilibili[2] + $r_dilidili[2] + $r_letv[2] + $r_iqiyi[2] + $r_pptv[2] + $r_fcdm[2] + $r_youku[2] + $r_tencenttv[2] + $r_qinmei[2];
         }
 
         $rst['allNum'] = $statol;
@@ -237,6 +244,94 @@ class allSearchOnline
         return $anime1;
     }
 
+    function __bimibimiS($keytitle)
+    {
+        $file = "../data/bimibimi.json";
+        $bca = file_get_contents($file);
+        $bca = json_decode($bca, true);
+        $rst = array();
+        $rst_t = array("airAnime_title");
+        $rst_l = array("airAnime_link");
+        $bimibimi = array();
+
+        for ($i = 0; $i < count($bca); $i++) {
+            $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
+            if ($cos >= 0.5) {
+                array_push($rst, $bca[$i]);
+            }
+        }
+
+        if (count($rst) >= 20) {
+            $rst = ifExistinOnline($rst, $keytitle);
+        }
+
+        if (count($rst) == 0) {
+            $rst = array();
+            for ($i = 0; $i < count($bca); $i++) {
+                similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
+                if ($cos >= 45) {
+                    array_push($rst, $bca[$i]);
+                }
+            }
+        }
+
+        $number = count($rst);
+
+        for ($i = 0; $i < count($rst); $i++) {
+            array_push($rst_t, $rst[$i]['title']);
+            array_push($rst_l, $rst[$i]['link']);
+        }
+
+        array_push($bimibimi, $rst_t);
+        array_push($bimibimi, $rst_l);
+        array_push($bimibimi, $number);
+        return $bimibimi;
+    }
+
+    function __8mapleS($keytitle)
+    {
+        $file = "../data/8maple.json";
+        $bca = file_get_contents($file);
+        $bca = json_decode($bca, true);
+        $rst = array();
+        $rst_t = array("airAnime_title");
+        $rst_l = array("airAnime_link");
+        $f8maple = array();
+
+        for ($i = 0; $i < count($bca); $i++) {
+            $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
+            if ($cos >= 0.5) {
+                array_push($rst, $bca[$i]);
+            }
+        }
+
+        if (count($rst) >= 20) {
+            $rst = ifExistinOnline($rst, $keytitle);
+        }
+
+        if (count($rst) == 0) {
+            $rst = array();
+            for ($i = 0; $i < count($bca); $i++) {
+                similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
+                if ($cos >= 45) {
+                    array_push($rst, $bca[$i]);
+                }
+            }
+        }
+
+        $number = count($rst);
+
+        for ($i = 0; $i < count($rst); $i++) {
+            array_push($rst_t, $rst[$i]['title']);
+            array_push($rst_l, $rst[$i]['link']);
+        }
+
+        array_push($f8maple, $rst_t);
+        array_push($f8maple, $rst_l);
+        array_push($f8maple, $number);
+        return $f8maple;
+    }
+
     function __caliburS($keytitle)
     {
         $file = "../data/calibur.json";
@@ -344,4 +439,3 @@ class allSearchOnline
         return $rst;
     }
 }
-?>

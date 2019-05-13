@@ -8,84 +8,123 @@ class allSearch
     function __doExit_Userbgm($userid, $ctime, $data)
     {
         $data = addslashes($data);
-        $sql_index = "update userbgm SET ctime = $ctime, data = '$data' WHERE userid = '$userid'";
-        $data = $this->__doDatabaseI($sql_index);
 
-        return $data;
+        if (isset($this->con)) {
+            $this->dbcon = $this->con->prepare("UPDATE userbgm SET ctime = ?, data = ? WHERE userid = ?");
+            $this->dbcon->bind_param('dss', $ctime, $data, $userid);
+
+            $data = $this->__doDatabaseI();
+
+            return $data;
+        }
     }
 
     function __doInsert_Userbgm($userid, $ctime, $data)
     {
         $data = addslashes($data);
-        $sql_index = "insert into userbgm (userid,ctime,data) values('$userid',$ctime,'$data')";
-        $data = $this->__doDatabaseI($sql_index);
 
-        return $data;
+        if (isset($this->con)) {
+            $this->dbcon = $this->con->prepare("INSERT INTO userbgm (userid,ctime,data) VALUES(?, ?, ?)");
+            $this->dbcon->bind_param('sds', $userid, $ctime, $data);
+
+            $data = $this->__doDatabaseI();
+
+            return $data;
+        }
     }
 
     function __doSearch_Userbgm($userid)
     {
-        $sql_index = "select * from userbgm WHERE userid = '$userid'";
-        $data = $this->__doDatabaseS($sql_index);
+        if (isset($this->con)) {
+            $this->dbcon = $this->con->prepare("SELECT * FROM userbgm WHERE userid = ?");
+            $this->dbcon->bind_param('s', $userid);
 
-        return $data;
+            $data = $this->__doDatabaseS();
+
+            return $data;
+        }
     }
 
     function __doSearchDate_Begin($begin)
     {
-        $sql_index = "select * from bgm WHERE begin >= $begin";
-        $data = $this->__doDatabaseS($sql_index);
+        $this->dbStart();
+        if (isset($this->con)) {
+            $this->dbcon = $this->con->prepare("SELECT * FROM bgm WHERE begin >= ?");
+            $this->dbcon->bind_param('d', $begin);
 
-        return $data;
+            $data = $this->__doDatabaseS();
+            $this->dbEnd();
+
+            return $data;
+        }
     }
 
     function __doSearchDate($begin, $end)
     {
-        $sql_index = "select * from bgm WHERE begin between $begin and $end OR end between $begin and $end";
-        $data = $this->__doDatabaseS($sql_index);
+        if (isset($this->con)) {
+            $this->dbcon = $this->con->prepare("SELECT * FROM bgm WHERE begin between ? and ? OR end between ? and ?");
+            $this->dbcon->bind_param('dddd', $begin, $end, $begin, $end);
 
-        return $data;
+            $data = $this->__doDatabaseS();
+
+            return $data;
+        }
     }
 
     function __doSearchAll()
     {
-        $sql_index = "select * from bgm";
-        $data = $this->__doDatabaseS($sql_index);
+        if (isset($this->con)) {
+            $this->dbcon = $this->con->prepare("SELECT * FROM bgm");
 
-        return $data;
+            $data = $this->__doDatabaseS();
+
+            return $data;
+        }
     }
 
-    function __doDatabaseS($sql)
+    function __doDatabaseS()
     {
-        $con = new mysqli($GLOBALS['db_server'], $GLOBALS['db_username'], $GLOBALS['db_password'], $GLOBALS['db_name']); // !!!数据库信息
-        if (!$con) {
-            die('error');
-        } else {
-            $con->query("set names utf8");
-            $sql_index = $sql;
-            $sql_index = $con->query($sql_index);
+        if ($this->con && $this->dbcon) {
+            $this->dbcon->execute();
 
             $rst = array();
-            while ($arr = $sql_index->fetch_assoc()) {
+            $dbrst = $this->dbcon->get_result();
+
+            while ($arr = $dbrst->fetch_assoc()) {
                 array_push($rst, $arr);
             }
-            $con->close();
+
+            return $rst;
         }
-        return $rst;
     }
 
-    function __doDatabaseI($sql)
+    function __doDatabaseI()
     {
-        $con = new mysqli($GLOBALS['db_server'], $GLOBALS['db_username'], $GLOBALS['db_password'], $GLOBALS['db_name']); // !!!数据库信息
-        if (!$con) {
-            die('error');
-        } else {
-            $con->query("set names utf8");
-            $sql_index = $sql;
-            $sql_index = $con->query($sql_index);
-            $con->close();
+        if ($this->con && $this->dbcon) {
+            $this->dbcon->execute();
+            if ($this->con->affected_rows) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
-        return $sql_index;
+    }
+
+    function dbStart()
+    {
+        if (!isset($this->con)) {
+            $this->con = new mysqli($GLOBALS['db_server'], $GLOBALS['db_username'], $GLOBALS['db_password'], $GLOBALS['db_name']);
+            if ($this->con) {
+                $this->con->query('set names utf8');
+            }
+        }
+    }
+
+    function dbEnd()
+    {
+        if (isset($this->con)) {
+            $this->dbcon->close();
+            $this->con->close();
+        }
     }
 }
-?>

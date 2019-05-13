@@ -32,7 +32,7 @@
         <li class="mdui-divider"></li>
         <li class="mdui-menu-item">
           <a target="_blank" href="https://github.com/txperl/airAnime" class="mdui-ripple">GitHub</a>
-          <a target="_blank" href="https://yumoe.com/" class="mdui-ripple">Creator</a>
+          <a target="_blank" href="https://yumoe.com/" class="mdui-ripple">TriiHsia</a>
         </li>
       </ul>
   </div>

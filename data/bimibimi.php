@@ -1,13 +1,13 @@
 <?php
-//抓取 Calibur 数据并输出 json && https://www.calibur.tv/ && 1360
+//抓取 Bimibimi 数据并输出 json && https://www.bimibimi.cc/ && 1360
 $rst = array();
-for ($i = 1350; $i < 1380; $i++) {
+for ($i = 1; $i < 1670; $i++) {
     $f = array();
-    $link = 'https://www.calibur.tv/bangumi/' . $i . '/video';
+    $link = 'https://www.bimibimi.cc/bangumi/bi/' . $i;
     $data = curl_get_contents($link);
-    if (substr_count($data, '没有找到番剧') == 0) {
-        $title = getSubstr($data, '<h1 class="title">', '</h1>');
-        $url = 'https://www.calibur.tv/bangumi/' . $i;
+    if (substr_count($data, '跳转</a> 等待时间：') == 0) {
+        $title = getSubstr($data, ' <a class="current" title="', '" href="');
+        $url = 'https://www.bimibimi.cc/bangumi/bi/' . $i;
         $f['title'] = $title;
         $f['link'] = $url;
         array_push($rst, $f);

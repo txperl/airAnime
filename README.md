@@ -38,9 +38,11 @@ v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
 
 ## 部署
 
+- airAnime v2@.1
 - PHP 7.0+
+- MySQL（非必须）
 
-通常情况下只需将源码上传至服务器即可正常运行基础功能。
+通常情况下只需将源码放至服务器即可正常运行基础功能。
 
 ### 额外功能
 
@@ -49,6 +51,8 @@ v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
 若要开启此功能，请将 `./data/数据库/bgm.sql` 上传至 MySQL 数据库（与 `userbgm.sql` 相同），然后运行 `./data/数据库/bangumi.php` 将 `bangumi.json` 的数据导入。
 
 设置 `./config.php` 中 `db_server, db_username, db_password, db_name`，最后将 `$GLOBALS['res_is']` 设置为 `on` 即可。
+
+（数据来自 `https://github.com/bangumi-data/bangumi-data`）
 
 ##### 用户追番表
 
@@ -70,9 +74,13 @@ airAnime 中 `Anime1, Calibur, AGE动漫, 新番` 数据基于本地 json 文件
 
 运行 `./data/anime1.php` 后将数据粘贴至 `anime1.json` 即可。
 
-##### Calibur
+##### Bimibimi
 
-修改抓取范围并运行 `./data/calibur.php` 后将数据添加至 `calibur.json` 即可。
+修改抓取范围并运行 `./data/bimibimi.php` 后将数据添加至 `bimibimi.json` 即可。
+
+##### 枫树林
+
+修改抓取范围并运行 `./data/8maple.php` 后将数据添加至 `8maple.json` 即可。
 
 ##### AGE动漫
 
@@ -82,7 +90,7 @@ airAnime 中 `Anime1, Calibur, AGE动漫, 新番` 数据基于本地 json 文件
 
 新番数据基于 bangumi.tv 新番数据。
 
-您也可以访问 `https://api.tls.moe/?app=bangumi&key=calendar` 来获取数据，然后将数据粘贴至 `201901.json` 即可。
+您也可以访问 `https://api.tls.moe/?app=bangumi&key=calendar` 来获取数据，然后将数据粘贴至 `201902.json` 即可。
 
 ## Todo
 
@@ -94,6 +102,6 @@ airAnime 中 `Anime1, Calibur, AGE动漫, 新番` 数据基于本地 json 文件
 
 本程序源代码可任意修改并任意使用，但禁止商业化用途。一旦使用，任何不可知事件都与原作者无关，原作者不承担任何后果。
 
-如果您喜欢，希望可以在页面某处保留原作者(Trii Hsia)版权信息，或是保留 airAnime 的 GitHub 仓库地址（https://github.com/txperl/airAnime）。
+如果您喜欢，希望可以在页面某处保留原作者(Trii Hsia)版权信息，或是保留 airAnime 的 GitHub 仓库地址（`https://github.com/txperl/airAnime`）。
 
 感谢。
