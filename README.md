@@ -68,7 +68,7 @@ v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
 
 ### 数据
 
-airAnime 中 `Anime1, Calibur, AGE动漫, 新番` 数据基于本地 json 文件，所以需要定期更新。
+airAnime 中 `Anime1, Bimibimi, AGE动漫, 枫林网, 新番` 数据基于本地 json 文件，所以需要定期更新。
 
 ##### Anime1
 
