@@ -1,5 +1,5 @@
 <?php
-// 获取 8maple.ru 的番剧并生成 json && http://8maple.ru/
+// 获取 8maple.ru 的番剧并生成 json && http://8maple.ru/ && 三眼哮天录
 include("chttochs/convert.php");
 $frst = array();
 $w = 'http://8maple.ru/category/%E5%88%86%E9%A1%9E/%E5%8B%95%E7%95%AB%E5%88%86%E9%A1%9E/%E5%8B%95%E7%95%AB2019/';

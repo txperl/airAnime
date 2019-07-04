@@ -90,11 +90,11 @@ airAnime 中 `Anime1, Bimibimi, AGE动漫, 枫林网, 新番` 数据基于本地
 
 新番数据基于 bangumi.tv 新番数据。
 
-您也可以访问 `https://api.tls.moe/?app=bangumi&key=calendar` 来获取数据，然后将数据粘贴至 `201902.json` 即可。
+您也可以访问 `https://api.tls.moe/?app=bangumi&key=calendar` 来获取数据，然后将数据粘贴至 `201903.json` 即可。
 
 ## 注意
 
-若程序公开部署，请务必删除用于数据抓取与本地数据库导入的相关代码文件（`./data` 目录下除 json 后缀的文件全需删除，如 `./data/数据库`, `./data/anime1.php` 等）。
+若程序公开部署，请务必删除用于数据抓取与本地数据库导入的相关代码文件（`./data` 目录下除 json 后缀的功能性文件全需删除，如 `./data/数据库`, `./data/anime1.php` 等）。
 
 ## ToDo
 

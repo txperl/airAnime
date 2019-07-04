@@ -8,10 +8,10 @@ if ($url) {
     $data = file_get_contents($url);
     $title = getSubstr($data, '<h4 class="detail_imform_name"> ', ' </h4>');
     $link = 'http://donghua.agefans.com' . getSubstr($data, 'res_links_a" href="', '" target="_blank"');
-    if (substr_count($data, '<span class="res_links_pswd">') == 0) {
+    if (substr_count($data, '<span class="res_links_pswd" >') == 0) {
         $psw = '没有哦~';
     } else {
-        $psw = getSubstr($data, '<span class="res_links_pswd">', ') </span>');
+        $psw = getSubstr($data, '<span class="res_links_pswd" >', ') </span>');
     }
 
     $rst['title'] = $title;
