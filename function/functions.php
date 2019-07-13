@@ -9,7 +9,7 @@ function howtextsimilar($text1, $text2)
     $num1 = array(); //文本1向量构建
     $num2 = array(); //文本2向量构建
 
-	//取单个词并加入数组
+    //取单个词并加入数组
     for ($i = 0; $i < mb_strlen($gentext); $i++) {
         $f = mb_substr($gentext, $i, 1, 'utf-8');
         if (substr_count($fword, $f) == 0) {
@@ -21,7 +21,7 @@ function howtextsimilar($text1, $text2)
         array_push($word, $f);
     }
 
-	//判断词频
+    //判断词频
     for ($i = 0; $i < mb_strlen($fword); $i++) {
         $ntext1 = substr_count($text1, $word[$i]);
         $ntext2 = substr_count($text2, $word[$i]);
@@ -29,7 +29,7 @@ function howtextsimilar($text1, $text2)
         array_push($num2, $ntext2);
     }
 
-	//计算余弦值
+    //计算余弦值
     $sum = 0;
     $sumT1 = 0;
     $sumT2 = 0;
@@ -42,6 +42,7 @@ function howtextsimilar($text1, $text2)
 
     return $cos;
 }
+
 function getResUrl($code, $c)
 {
     $url = '';
@@ -102,6 +103,7 @@ function getResUrl($code, $c)
 
     return $url;
 }
+
 function getResName($c)
 {
     $name = '';
@@ -162,6 +164,7 @@ function getResName($c)
 
     return $name;
 }
+
 function ifExistin($data, $c)
 {
     $rst = array();
@@ -177,6 +180,7 @@ function ifExistin($data, $c)
 
     return $rst;
 }
+
 function ifExistinOnline($data, $c)
 {
     $rst = array();
@@ -191,6 +195,7 @@ function ifExistinOnline($data, $c)
 
     return $rst;
 }
+
 //多线程抓取网页
 function curl_multi($urls)
 {
@@ -237,7 +242,7 @@ function curl_multi($urls)
 
     foreach ($curl as $k => $v) {
         if (curl_error($curl[$k]) == "") {
-            $text[$k] = (string)curl_multi_getcontent($curl[$k]);
+            $text[$k] = (string) curl_multi_getcontent($curl[$k]);
         }
         curl_multi_remove_handle($handle, $curl[$k]);
         curl_close($curl[$k]);
@@ -245,10 +250,11 @@ function curl_multi($urls)
     curl_multi_close($handle);
     return $text;
 }
+
 // 推测搜索内容
 function whatstitle($title)
 {
-	// 取百度联想结果
+    // 取百度联想结果
     $rst = array(); //百度联想结果
     $f_rst = array(); //判断中的暂时数据
     $a_rst = array(); //最终数组1
@@ -294,7 +300,7 @@ function whatstitle($title)
             $text = $text . $f;
         }
     }
-	
+
     // 取出最长文本
     $max = 0;
     for ($i = 0; $i < count($rst); $i++) {
@@ -315,7 +321,7 @@ function whatstitle($title)
         }
     }
 
-	// 判断是否存在完全相同文本
+    // 判断是否存在完全相同文本
     for ($i = 0; $i < count($rst); $i++) {
         if ($title == $rst[$i]) {
             $ftitle = $title;
@@ -380,6 +386,7 @@ function whatstitle($title)
     $ftitle = str_replace(' ', '', $ftitle);
     return $ftitle;
 }
+
 function curl_get_contents($url)
 {
     $ch = curl_init();
@@ -394,6 +401,7 @@ function curl_get_contents($url)
     curl_close($ch);
     return $r;
 }
+
 function curl_get_contents_form_post($url, $da)
 {
     $ch = curl_init();
@@ -410,6 +418,7 @@ function curl_get_contents_form_post($url, $da)
     curl_close($ch);
     return $r;
 }
+
 /*以下是取中间文本的函数 
   getSubstr=调用名称
   $str=预取全文本 
@@ -424,6 +433,7 @@ function getSubstr($str, $leftStr, $rightStr)
     if ($left < 0 or $right < $left) return '';
     return substr($str, $left + strlen($leftStr), $right - $left - strlen($leftStr));
 }
+
 /*以下是取中间文本的函数(正则)*/
 function getNeedBetween($data, $zz)
 {
@@ -432,30 +442,31 @@ function getNeedBetween($data, $zz)
     $b = $a[1];
     return $b;
 }
+
 function RemoveXSS($val)
-{ 
-	// remove all non-printable characters. CR(0a) and LF(0b) and TAB(9) are allowed 
-	// this prevents some character re-spacing such as <java\0script> 
-	// note that you have to handle splits with \n, \r, and \t later since they *are* allowed in some inputs 
-    $val = preg_replace('/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/', '', $val); 
- 
-	// straight replacements, the user should never need these since they're normal characters 
-	// this prevents like <IMG SRC=@avascript:alert('XSS')> 
+{
+    // remove all non-printable characters. CR(0a) and LF(0b) and TAB(9) are allowed 
+    // this prevents some character re-spacing such as <java\0script> 
+    // note that you have to handle splits with \n, \r, and \t later since they *are* allowed in some inputs 
+    $val = preg_replace('/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/', '', $val);
+
+    // straight replacements, the user should never need these since they're normal characters 
+    // this prevents like <IMG SRC=@avascript:alert('XSS')> 
     $search = 'abcdefghijklmnopqrstuvwxyz';
     $search .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $search .= '1234567890!@#$%^&*()';
     $search .= '~`";:?+/={}[]-_|\'\\';
     for ($i = 0; $i < strlen($search); $i++) {
-	   // ;? matches the ;, which is optional
-	   // 0{0,7} matches any padded zeros, which are optional and go up to 8 chars
- 
-	   // @ @ search for the hex values
+        // ;? matches the ;, which is optional
+        // 0{0,7} matches any padded zeros, which are optional and go up to 8 chars
+
+        // @ @ search for the hex values
         $val = preg_replace('/(&#[xX]0{0,8}' . dechex(ord($search[$i])) . ';?)/i', $search[$i], $val); // with a ;
-	   // @ @ 0{0,7} matches '0' zero to seven times 
+        // @ @ 0{0,7} matches '0' zero to seven times 
         $val = preg_replace('/(�{0,8}' . ord($search[$i]) . ';?)/', $search[$i], $val); // with a ;
     }
- 
-	// now the only remaining whitespace attacks are \t, \n, and \r
+
+    // now the only remaining whitespace attacks are \t, \n, and \r
     $ra1 = array('javascript', 'vbscript', 'expression', 'applet', 'meta', 'xml', 'blink', 'link', 'style', 'script', 'embed', 'object', 'iframe', 'frame', 'frameset', 'ilayer', 'layer', 'bgsound', 'title', 'base');
     $ra2 = array('onabort', 'onactivate', 'onafterprint', 'onafterupdate', 'onbeforeactivate', 'onbeforecopy', 'onbeforecut', 'onbeforedeactivate', 'onbeforeeditfocus', 'onbeforepaste', 'onbeforeprint', 'onbeforeunload', 'onbeforeupdate', 'onblur', 'onbounce', 'oncellchange', 'onchange', 'onclick', 'oncontextmenu', 'oncontrolselect', 'oncopy', 'oncut', 'ondataavailable', 'ondatasetchanged', 'ondatasetcomplete', 'ondblclick', 'ondeactivate', 'ondrag', 'ondragend', 'ondragenter', 'ondragleave', 'ondragover', 'ondragstart', 'ondrop', 'onerror', 'onerrorupdate', 'onfilterchange', 'onfinish', 'onfocus', 'onfocusin', 'onfocusout', 'onhelp', 'onkeydown', 'onkeypress', 'onkeyup', 'onlayoutcomplete', 'onload', 'onlosecapture', 'onmousedown', 'onmouseenter', 'onmouseleave', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onmousewheel', 'onmove', 'onmoveend', 'onmovestart', 'onpaste', 'onpropertychange', 'onreadystatechange', 'onreset', 'onresize', 'onresizeend', 'onresizestart', 'onrowenter', 'onrowexit', 'onrowsdelete', 'onrowsinserted', 'onscroll', 'onselect', 'onselectionchange', 'onselectstart', 'onstart', 'onstop', 'onsubmit', 'onunload');
     $ra = array_merge($ra1, $ra2);
@@ -479,7 +490,7 @@ function RemoveXSS($val)
             $replacement = substr($ra[$i], 0, 2) . '<x>' . substr($ra[$i], 2); // add in <> to nerf the tag
             $val = preg_replace($pattern, $replacement, $val); // filter out the hex tags
             if ($val_before == $val) {
-			 // no replacements were made, so exit the loop
+                // no replacements were made, so exit the loop
                 $found = false;
             }
         }
@@ -503,6 +514,7 @@ function delairAnimeHeader($arr)
 
     return $arr;
 }
+
 function m_ArrayUnique($arr, $reserveKey = false)
 {
     if (is_array($arr) && !empty($arr)) {
@@ -521,4 +533,3 @@ function m_ArrayUnique($arr, $reserveKey = false)
     }
     return $arr;
 }
-?>

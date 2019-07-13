@@ -38,7 +38,7 @@ v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
 
 ## 部署
 
-- airAnime v2@.1
+- airAnime v2@.2
 - PHP 7.0+
 - MySQL（非必须）
 
@@ -78,7 +78,7 @@ airAnime 中 `Anime1, Bimibimi, AGE动漫, 枫林网, 新番` 数据基于本地
 
 修改抓取范围并运行 `./data/bimibimi.php` 后将数据添加至 `bimibimi.json` 即可。
 
-##### 枫树林
+##### 枫树林（已暂停更新此源，原因是国内体验不佳）
 
 修改抓取范围并运行 `./data/8maple.php` 后将数据添加至 `8maple.json` 即可。
 

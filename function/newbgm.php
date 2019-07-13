@@ -39,10 +39,9 @@ function getTodays()
         }
 
         array_push($frst, $f);
-            //<div class="bgm-item" data-title="'.$bcon['items'][$i]['name'].'" style="background-color:#D4C7DE" plan="black"><a href="#"><img src="'.$img.'" class=""><h3 style="background:linear-gradient(rgba(233,227,238,0),rgba(233,227,238,.6),rgba(233,227,238,.8));">'.$name_cn.'</h3><b>'.$bcon['items'][$i]['air_date'].'</b></a></div>
+        //<div class="bgm-item" data-title="'.$bcon['items'][$i]['name'].'" style="background-color:#D4C7DE" plan="black"><a href="#"><img src="'.$img.'" class=""><h3 style="background:linear-gradient(rgba(233,227,238,0),rgba(233,227,238,.6),rgba(233,227,238,.8));">'.$name_cn.'</h3><b>'.$bcon['items'][$i]['air_date'].'</b></a></div>
     }
     array_push($rst, $frst);
 
     return $rst;
 }
-?>

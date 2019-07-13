@@ -53,7 +53,7 @@
   <div class="mdui-card-content">
     <p>airAnime 是一款聚合<span style="color:#FD5B78;">「番剧&动漫类搜索」</span>程序，借助于各网站的数据及各网站的搜索功能进行综合搜索，以减少寻找在线番剧的时间。</p>
     <hr>
-    <p>这是一个开源程序，右上角菜单中有 <a target="_blank" href="https://github.com/txperl/airAnime-v2">GitHub</a> 链接。</p>
+    <p>这是一个开源程序，右上角菜单中有 <a target="_blank" href="https://github.com/txperl/airAnime">GitHub</a> 链接。</p>
     <p>请使用现代浏览器以达到最佳体验效果。</p>
     <p>第一次使用务必阅读文档。</p>
   </div>
@@ -70,7 +70,7 @@
     </div>
   
     <div class="mdui-card-content">
-      &airAnime@<span style="color:#FD5B78;">v2@.1#20190513</span> · &本地数据库@<span style="color:#FD5B78;">#20190704</span> · &新番数据@<span style="color:#FD5B78;">#20190704</span>
+      &airAnime@<span style="color:#FD5B78;">v2@.2#20190713</span> · &本地数据库@<span style="color:#FD5B78;">#20190713</span> · &新番数据@<span style="color:#FD5B78;">#20190713</span>
     </div>
   </div>
 </div>

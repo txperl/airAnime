@@ -9,6 +9,7 @@ class allSearchOnline
     {
         $rst = array();
         $autotitle = whatstitle($keyTitle);
+        $this->autotitle = $autotitle;
 
         //整理数据
         // bilibili 结果
@@ -63,8 +64,13 @@ class allSearchOnline
             $rst['tencenttv'] = $r_tencenttv;
         }
 
+        // qinmei 结果
         $r_qinmei = $this->__qinmeiS($data['qinmei']);
         $rst['qinmei'] = $r_qinmei;
+
+        // nicotv 结果
+        $r_nicotv = $this->__nicotvS($data['nicotv']);
+        $rst['nicotv'] = $r_nicotv;
 
         if ($isLocal) {
             // anime1.me 结果
@@ -85,9 +91,9 @@ class allSearchOnline
         }
 
         if ($isLocal) {
-            $statol = $r_bilibili[2] + $r_dilidili[2] + $r_letv[2] + $r_iqiyi[2] + $r_pptv[2] + $r_fcdm[2] + $r_youku[2] + $r_tencenttv[2] + $r_anime1[2] + $r_bimibimi[2] + $r_8maple[2];
+            $statol = $r_bilibili[2] + $r_dilidili[2] + $r_letv[2] + $r_iqiyi[2] + $r_pptv[2] + $r_fcdm[2] + $r_youku[2] + $r_tencenttv[2] + $r_qinmei[2] + $r_nicotv[2] + $r_anime1[2] + $r_bimibimi[2] + $r_8maple[2];
         } else {
-            $statol = $r_bilibili[2] + $r_dilidili[2] + $r_letv[2] + $r_iqiyi[2] + $r_pptv[2] + $r_fcdm[2] + $r_youku[2] + $r_tencenttv[2] + $r_qinmei[2];
+            $statol = $r_bilibili[2] + $r_dilidili[2] + $r_letv[2] + $r_iqiyi[2] + $r_pptv[2] + $r_fcdm[2] + $r_youku[2] + $r_tencenttv[2] + $r_qinmei[2] + $r_nicotv[2];
         }
 
         $rst['allNum'] = $statol;
@@ -202,178 +208,23 @@ class allSearchOnline
 
     function __anime1S($keytitle)
     {
-        $file = "../data/anime1.json";
-        $bca = file_get_contents($file);
-        $bca = json_decode($bca, true);
-        $rst = array();
-        $rst_t = array("airAnime_title");
-        $rst_l = array("airAnime_link");
-        $anime1 = array();
+        $anime1 = $this->__localSearch('../data/anime1.json', $keytitle);
 
-        for ($i = 0; $i < count($bca); $i++) {
-            $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
-            if ($cos >= 0.5) {
-                array_push($rst, $bca[$i]);
-            }
-        }
-
-        if (count($rst) >= 20) {
-            $rst = ifExistinOnline($rst, $keytitle);
-        }
-
-        if (count($rst) == 0) {
-            $rst = array();
-            for ($i = 0; $i < count($bca); $i++) {
-                similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
-                if ($cos >= 45) {
-                    array_push($rst, $bca[$i]);
-                }
-            }
-        }
-
-        $number = count($rst);
-
-        for ($i = 0; $i < count($rst); $i++) {
-            array_push($rst_t, $rst[$i]['title']);
-            array_push($rst_l, $rst[$i]['link']);
-        }
-
-        array_push($anime1, $rst_t);
-        array_push($anime1, $rst_l);
-        array_push($anime1, $number);
         return $anime1;
     }
 
     function __bimibimiS($keytitle)
     {
-        $file = "../data/bimibimi.json";
-        $bca = file_get_contents($file);
-        $bca = json_decode($bca, true);
-        $rst = array();
-        $rst_t = array("airAnime_title");
-        $rst_l = array("airAnime_link");
-        $bimibimi = array();
+        $bimibimi = $this->__localSearch('../data/bimibimi.json', $keytitle);
 
-        for ($i = 0; $i < count($bca); $i++) {
-            $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
-            if ($cos >= 0.5) {
-                array_push($rst, $bca[$i]);
-            }
-        }
-
-        if (count($rst) >= 20) {
-            $rst = ifExistinOnline($rst, $keytitle);
-        }
-
-        if (count($rst) == 0) {
-            $rst = array();
-            for ($i = 0; $i < count($bca); $i++) {
-                similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
-                if ($cos >= 45) {
-                    array_push($rst, $bca[$i]);
-                }
-            }
-        }
-
-        $number = count($rst);
-
-        for ($i = 0; $i < count($rst); $i++) {
-            array_push($rst_t, $rst[$i]['title']);
-            array_push($rst_l, $rst[$i]['link']);
-        }
-
-        array_push($bimibimi, $rst_t);
-        array_push($bimibimi, $rst_l);
-        array_push($bimibimi, $number);
         return $bimibimi;
     }
 
     function __8mapleS($keytitle)
     {
-        $file = "../data/8maple.json";
-        $bca = file_get_contents($file);
-        $bca = json_decode($bca, true);
-        $rst = array();
-        $rst_t = array("airAnime_title");
-        $rst_l = array("airAnime_link");
-        $f8maple = array();
+        $f8maple = $this->__localSearch('../data/8maple.json', $keytitle);
 
-        for ($i = 0; $i < count($bca); $i++) {
-            $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
-            if ($cos >= 0.5) {
-                array_push($rst, $bca[$i]);
-            }
-        }
-
-        if (count($rst) >= 20) {
-            $rst = ifExistinOnline($rst, $keytitle);
-        }
-
-        if (count($rst) == 0) {
-            $rst = array();
-            for ($i = 0; $i < count($bca); $i++) {
-                similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
-                if ($cos >= 45) {
-                    array_push($rst, $bca[$i]);
-                }
-            }
-        }
-
-        $number = count($rst);
-
-        for ($i = 0; $i < count($rst); $i++) {
-            array_push($rst_t, $rst[$i]['title']);
-            array_push($rst_l, $rst[$i]['link']);
-        }
-
-        array_push($f8maple, $rst_t);
-        array_push($f8maple, $rst_l);
-        array_push($f8maple, $number);
         return $f8maple;
-    }
-
-    function __caliburS($keytitle)
-    {
-        $file = "../data/calibur.json";
-        $bca = file_get_contents($file);
-        $bca = json_decode($bca, true);
-        $rst = array();
-        $rst_t = array("airAnime_title");
-        $rst_l = array("airAnime_link");
-        $calibur = array();
-
-        for ($i = 0; $i < count($bca); $i++) {
-            $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
-            if ($cos >= 0.5) {
-                array_push($rst, $bca[$i]);
-            }
-        }
-
-        if (count($rst) >= 20) {
-            $rst = ifExistinOnline($rst, $keytitle);
-        }
-
-        if (count($rst) == 0) {
-            $rst = array();
-            for ($i = 0; $i < count($bca); $i++) {
-                similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
-                if ($cos >= 45) {
-                    array_push($rst, $bca[$i]);
-                }
-            }
-        }
-
-        $number = count($rst);
-
-        for ($i = 0; $i < count($rst); $i++) {
-            array_push($rst_t, $rst[$i]['title']);
-            array_push($rst_l, $rst[$i]['link']);
-        }
-
-        array_push($calibur, $rst_t);
-        array_push($calibur, $rst_l);
-        array_push($calibur, $number);
-        return $calibur;
     }
 
     function __qinmeiS($data)
@@ -397,6 +248,30 @@ class allSearchOnline
         array_push($qinmei, $number);
 
         return $qinmei;
+    }
+
+    function __nicotvS($data)
+    {
+        $webtext = $data;
+        $number = substr_count($webtext, '<h2 class="text-nowrap ff-text-right">');
+        $rst_t = array("airAnime_title");
+        $rst_l = array("airAnime_link");
+        $nicotv = array();
+
+        for ($n = 0; $n < $number; $n++) {
+            $f = '<h2 class="text-nowrap ff-text-right">' . getSubstr($webtext, '<h2 class="text-nowrap ff-text-right">', '</h2>') . '</h2>';
+            $l = 'http://www.nicotv.me' . getSubstr($f, '<a href="', '" title="');
+            $t = getSubstr($f, ' title="', '">');
+            $webtext = str_replace($f, '', $webtext);
+
+            array_push($rst_t, $t);
+            array_push($rst_l, $l);
+        }
+
+        array_push($nicotv, $rst_t);
+        array_push($nicotv, $rst_l);
+        array_push($nicotv, count($rst_t) - 1);
+        return $nicotv;
     }
 
     function __baiduS($title, $zz, $page, $wst, $ori1, $ori2)
@@ -429,6 +304,79 @@ class allSearchOnline
         array_push($baiduS, $rst_l);
         array_push($baiduS, count($rst_t) - 1);
         return $baiduS;
+    }
+
+    function __localSearch($uri, $keytitle)
+    {
+        $file = $uri;
+        $bca = file_get_contents($file);
+        $bca = json_decode($bca, true);
+        $rst = array();
+        $rst_t = array("airAnime_title");
+        $rst_l = array("airAnime_link");
+        $rst_f = array();
+        $coss = array("airAnime_cos");
+
+        for ($i = 0; $i < count($bca); $i++) {
+            $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
+            if ($cos >= 0.5) {
+                $cos2 = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($this->autotitle));
+                array_push($rst, $bca[$i]);
+                array_push($coss, $cos2 * 10);
+            }
+        }
+
+        if (count($rst) >= 20) {
+            $rst = ifExistinOnline($rst, $keytitle);
+        }
+
+        if (count($rst) == 0) {
+            $rst = array();
+            for ($i = 0; $i < count($bca); $i++) {
+                similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
+                if ($cos >= 45) {
+                    similar_text(strtoupper($bca[$i]['title']), strtoupper($this->autotitle), $cos2);
+                    array_push($rst, $bca[$i]);
+                    array_push($coss, $cos2);
+                }
+            }
+        }
+
+        $number = count($rst);
+
+        for ($i = 0; $i < count($rst); $i++) {
+            array_push($rst_t, $rst[$i]['title']);
+            array_push($rst_l, $rst[$i]['link']);
+        }
+
+        array_push($rst_f, $rst_t);
+        array_push($rst_f, $rst_l);
+        array_push($rst_f, $number);
+
+        return $this->__sortCoss($rst_f, $coss);
+    }
+
+    function __sortCoss($c, $coss)
+    {
+        // 简单插排
+        for ($i = 1; $i < count($coss); $i++) {
+            $insertVal = $coss[$i];
+            $insertVal2 = $c[0][$i];
+            $insertVal3 = $c[1][$i];
+
+            $insertIndex = $i - 1;
+            while ($insertIndex >= 1 && $insertVal > $coss[$insertIndex]) {
+                $coss[$insertIndex + 1] = $coss[$insertIndex];
+                $c[0][$insertIndex + 1] = $c[0][$insertIndex];
+                $c[1][$insertIndex + 1] = $c[1][$insertIndex];
+                $insertIndex--;
+            }
+            $coss[$insertIndex + 1] = $insertVal;
+            $c[0][$insertIndex + 1] = $insertVal2;
+            $c[1][$insertIndex + 1] = $insertVal3;
+        }
+
+        return $c;
     }
 
     function __getSDdata($urls)

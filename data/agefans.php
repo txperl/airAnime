@@ -18,7 +18,7 @@
 // 2019 160
 set_time_limit(0);
 $rst = array();
-for ($i = 150; $i <= 180; $i++) {
+for ($i = 170; $i <= 200; $i++) {
     $year = 2019;
     if (strlen($i) == 1) {
         $a = '000' . $i;

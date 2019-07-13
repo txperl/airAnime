@@ -1,7 +1,7 @@
 <?php
 //抓取 Bimibimi 数据并输出 json && https://www.bimibimi.cc/ && 1360
 $rst = array();
-for ($i = 1660; $i < 1780; $i++) {
+for ($i = 1770; $i < 1880; $i++) {
     $f = array();
     $link = 'https://www.bimibimi.cc/bangumi/bi/' . $i;
     $data = curl_get_contents($link);

@@ -9,6 +9,7 @@ class allSearchOnline
     {
         $rst = array();
         $autotitle = whatstitle($keyTitle);
+        $this->autotitle = $autotitle;
 
         //整理数据
         // mgjh 结果
@@ -48,45 +49,8 @@ class allSearchOnline
 
     function __agefansS($keytitle)
     {
-        $file = "../data/agefans.json";
-        $bca = file_get_contents($file);
-        $bca = json_decode($bca, true);
-        $rst = array();
-        $rst_t = array("airAnime_title");
-        $rst_l = array("airAnime_link");
-        $agefans = array();
+        $agefans = $this->__localSearch('../data/agefans.json', $keytitle);
 
-        for ($i = 0; $i < count($bca); $i++) {
-            $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
-            if ($cos >= 0.5) {
-                array_push($rst, $bca[$i]);
-            }
-        }
-
-        if (count($rst) >= 20) {
-            $rst = ifExistinOnline($rst, $keytitle);
-        }
-
-        if (count($rst) == 0) {
-            $rst = array();
-            for ($i = 0; $i < count($bca); $i++) {
-                similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
-                if ($cos >= 45) {
-                    array_push($rst, $bca[$i]);
-                }
-            }
-        }
-
-        $number = count($rst);
-
-        for ($i = 0; $i < count($rst); $i++) {
-            array_push($rst_t, $rst[$i]['title']);
-            array_push($rst_l, $rst[$i]['link']);
-        }
-
-        array_push($agefans, $rst_t);
-        array_push($agefans, $rst_l);
-        array_push($agefans, $number);
         return $agefans;
     }
 
@@ -121,7 +85,79 @@ class allSearchOnline
         array_push($baiduS, count($rst_t) - 1);
         return $baiduS;
     }
+    function __localSearch($uri, $keytitle)
+    {
+        $file = $uri;
+        $bca = file_get_contents($file);
+        $bca = json_decode($bca, true);
+        $rst = array();
+        $rst_t = array("airAnime_title");
+        $rst_l = array("airAnime_link");
+        $rst_f = array();
+        $coss = array("airAnime_cos");
 
+        for ($i = 0; $i < count($bca); $i++) {
+            $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
+            if ($cos >= 0.5) {
+                $cos2 = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($this->autotitle));
+                array_push($rst, $bca[$i]);
+                array_push($coss, $cos2 * 10);
+            }
+        }
+
+        if (count($rst) >= 20) {
+            $rst = ifExistinOnline($rst, $keytitle);
+        }
+
+        if (count($rst) == 0) {
+            $rst = array();
+            for ($i = 0; $i < count($bca); $i++) {
+                similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
+                if ($cos >= 45) {
+                    similar_text(strtoupper($bca[$i]['title']), strtoupper($this->autotitle), $cos2);
+                    array_push($rst, $bca[$i]);
+                    array_push($coss, $cos2);
+                }
+            }
+        }
+
+        $number = count($rst);
+
+        for ($i = 0; $i < count($rst); $i++) {
+            array_push($rst_t, $rst[$i]['title']);
+            array_push($rst_l, $rst[$i]['link']);
+        }
+
+        array_push($rst_f, $rst_t);
+        array_push($rst_f, $rst_l);
+        array_push($rst_f, $number);
+
+        return $this->__sortCoss($rst_f, $coss);
+    }
+
+    function __sortCoss($c, $coss)
+    {
+        // 简单插排
+        for ($i = 1; $i < count($coss); $i++) {
+            $insertVal = $coss[$i];
+            $insertVal2 = $c[0][$i];
+            $insertVal3 = $c[1][$i];
+
+            $insertIndex = $i - 1;
+            while ($insertIndex >= 1 && $insertVal > $coss[$insertIndex]) {
+                $coss[$insertIndex + 1] = $coss[$insertIndex];
+                $c[0][$insertIndex + 1] = $c[0][$insertIndex];
+                $c[1][$insertIndex + 1] = $c[1][$insertIndex];
+                $insertIndex--;
+            }
+            $coss[$insertIndex + 1] = $insertVal;
+            $c[0][$insertIndex + 1] = $insertVal2;
+            $c[1][$insertIndex + 1] = $insertVal3;
+        }
+
+        return $c;
+    }
+    
     function __getSDdata($urls)
     {
         //获取网页数据
@@ -130,4 +166,3 @@ class allSearchOnline
         return $rst;
     }
 }
-?>
