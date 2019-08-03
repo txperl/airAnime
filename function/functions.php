@@ -181,17 +181,23 @@ function ifExistin($data, $c)
     return $rst;
 }
 
-function ifExistinOnline($data, $c)
+function ifExistinOnline($data, $coss, $c)
 {
     $rst = array();
+    $frst = array();
+    $fcoss = array();
 
     for ($i = 0; $i < count($data); $i++) {
         $zhtitle = $data[$i]['title'];
 
         if (stripos($zhtitle, $c) !== false) {
-            array_push($rst, $data[$i]);
+            array_push($frst, $data[$i]);
+            array_push($fcoss, $coss[$i]);
         }
     }
+
+    $rst[0] = $frst;
+    $rst[1] = $fcoss;
 
     return $rst;
 }

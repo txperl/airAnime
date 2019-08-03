@@ -85,6 +85,7 @@ class allSearchOnline
         array_push($baiduS, count($rst_t) - 1);
         return $baiduS;
     }
+    
     function __localSearch($uri, $keytitle)
     {
         $file = $uri;
@@ -94,7 +95,8 @@ class allSearchOnline
         $rst_t = array("airAnime_title");
         $rst_l = array("airAnime_link");
         $rst_f = array();
-        $coss = array("airAnime_cos");
+        $coss = array();
+        $rst_c = array("airAnime_cos");
 
         for ($i = 0; $i < count($bca); $i++) {
             $cos = howtextsimilar(strtoupper($bca[$i]['title']), strtoupper($keytitle));
@@ -104,13 +106,16 @@ class allSearchOnline
                 array_push($coss, $cos2 * 10);
             }
         }
-
+        
         if (count($rst) >= 20) {
-            $rst = ifExistinOnline($rst, $keytitle);
+            $rst = ifExistinOnline($rst, $coss, $keytitle);
+            $coss = $rst[1];
+            $rst = $rst[0];
         }
 
         if (count($rst) == 0) {
             $rst = array();
+            $coss = array();
             for ($i = 0; $i < count($bca); $i++) {
                 similar_text(strtoupper($bca[$i]['title']), strtoupper($keytitle), $cos);
                 if ($cos >= 45) {
@@ -126,13 +131,14 @@ class allSearchOnline
         for ($i = 0; $i < count($rst); $i++) {
             array_push($rst_t, $rst[$i]['title']);
             array_push($rst_l, $rst[$i]['link']);
+            array_push($rst_c, $coss[$i]);
         }
 
         array_push($rst_f, $rst_t);
         array_push($rst_f, $rst_l);
         array_push($rst_f, $number);
 
-        return $this->__sortCoss($rst_f, $coss);
+        return $this->__sortCoss($rst_f, $rst_c);
     }
 
     function __sortCoss($c, $coss)
