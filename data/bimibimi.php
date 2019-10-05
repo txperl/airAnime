@@ -1,13 +1,13 @@
 <?php
 //抓取 Bimibimi 数据并输出 json && https://www.bimibimi.cc/ && 1360
 $rst = array();
-for ($i = 1770; $i < 1880; $i++) {
+for ($i = 1870; $i < 2040; $i++) {
     $f = array();
-    $link = 'https://www.bimibimi.cc/bangumi/bi/' . $i;
+    $link = 'http://www.bimibimi.tv/bangumi/bi/' . $i;
     $data = curl_get_contents($link);
     if (substr_count($data, '跳转</a> 等待时间：') == 0) {
         $title = getSubstr($data, ' <a class="current" title="', '" href="');
-        $url = 'https://www.bimibimi.cc/bangumi/bi/' . $i;
+        $url = 'http://www.bimibimi.tv/bangumi/bi/' . $i;
         $f['title'] = $title;
         $f['link'] = $url;
         array_push($rst, $f);

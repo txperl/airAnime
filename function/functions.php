@@ -504,6 +504,7 @@ function RemoveXSS($val)
 
     return $val;
 }
+
 function delairAnimeHeader($arr)
 {
     if (!is_array($arr)) {
@@ -518,7 +519,24 @@ function delairAnimeHeader($arr)
         array_splice($arr[$key][1], 0, 1);
     }
 
-    return $arr;
+    $rst = array();
+
+    foreach ($arr as $key => $c) {
+        if ($key == 'allNum') {
+            continue;
+        }
+        for ($i = 0; $i < $c[2]; $i++) {
+            $tem = [];
+            $tem['title'] = $arr[$key][0][$i];
+            $tem['link'] = $arr[$key][1][$i];
+            $rst[$key][$i] = $tem;
+        }
+        if ($c[2] == 0) {
+            $rst[$key] = [];
+        }
+    }
+
+    return $rst;
 }
 
 function m_ArrayUnique($arr, $reserveKey = false)

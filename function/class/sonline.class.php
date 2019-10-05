@@ -230,15 +230,15 @@ class allSearchOnline
     function __qinmeiS($data)
     {
         $webtext = json_decode($data, true);
+        $webtext = $webtext['data'];
         $number = count($webtext);
         $rst_t = array("airAnime_title");
         $rst_l = array("airAnime_link");
         $qinmei = array();
 
         for ($n = 0; $n < $number; $n++) {
-            $l = 'https://qinmei.video/animate/' . $webtext[$n]['slug'];
-            $l = str_replace('qinmei.org', 'qinmei.video', $l);
-            $t = $webtext[$n]['title']['rendered'];
+            $l = 'https://qinmei.video/web/animate/' . $webtext[$n]['slug'];
+            $t = $webtext[$n]['title'];
             array_push($rst_l, $l);
             array_push($rst_t, $t);
         }

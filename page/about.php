@@ -70,7 +70,7 @@
     </div>
   
     <div class="mdui-card-content">
-      &airAnime@<span style="color:#FD5B78;">v2@.2#20190713</span> · &本地数据库@<span style="color:#FD5B78;">#20190713</span> · &新番数据@<span style="color:#FD5B78;">#20190713</span>
+      &airAnime@<span style="color:#FD5B78;">v2@.2.1#20191005</span> · &本地数据库@<span style="color:#FD5B78;">#20191005</span> · &新番数据@<span style="color:#FD5B78;">#20191005</span>
     </div>
   </div>
 </div>

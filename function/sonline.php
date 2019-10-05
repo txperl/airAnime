@@ -25,7 +25,7 @@ array_push($urls, 'http://www.baidu.com/s?wd=site%3Awww.le.com%20' . urlencode($
 array_push($urls, 'http://www.baidu.com/s?wd=site%3Awww.iqiyi.com%20' . urlencode($keyTitle) . '&pn=0'); //5
 array_push($urls, 'http://www.baidu.com/s?wd=site%3Awww.youku.com%20' . urlencode($keyTitle) . '&pn=0'); //6
 array_push($urls, 'http://www.baidu.com/s?wd=site%3Av.qq.com%20' . urlencode($keyTitle) . '&pn=0'); //7
-array_push($urls, 'https://qinmei.org/wp-json/wp/v2/animate?animateweb=19414&search=' . urlencode($keyTitle) . '&per_page=50&page=1'); //8
+array_push($urls, 'https://qinmei.video/api/v1/animate?title=' . urlencode($keyTitle)); //8
 array_push($urls, 'http://www.nicotv.me/video/search/' . urlencode($keyTitle) . '.html'); //9
 
 // 抓取数据并整理数据
@@ -51,10 +51,10 @@ if ($_POST["kt"]) {
     $output->__doOutputSOnline($data['bilibili'], '哔哩哔哩', 'www.bilibili.com', $keyTitle);
     if ($isLocal) {
         $output->__doOutputSOnline($data['anime1'], 'Anime1', 'anime1.me', $keyTitle);
-        $output->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimibimi.cc', $keyTitle);
+        $output->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimibimi.tv', $keyTitle);
     }
     $output->__doOutputSOnline($data['nicotv'], '妮可动漫', 'www.nicotv.me', $keyTitle);
-    $output->__doOutputSOnline($data['qinmei'], 'Qinmei', 'qinmei.video', $keyTitle);
+    $output->__doOutputSOnline($data['qinmei'], 'Qinmei', 'qinmei.video', $keyTitle, 'qinmei.png');
     $output->__doOutputSOnline($data['dilidili'], '嘀哩嘀哩', 'www.dilidili.name', $keyTitle, 'dilidili.ico');
     if ($isLocal) {
         $output->__doOutputSOnline($data['8maple'], '枫林网', '8maple.ru', $keyTitle);
