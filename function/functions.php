@@ -56,7 +56,7 @@ function getResUrl($code, $c)
         $url = 'http://www.acfun.cn/bangumi/aa' . $code;
     }
     if ($c == 'bilibili') {
-        $url = 'https://bangumi.bilibili.com/anime/' . $code;
+        $url = 'https://www.bilibili.com/bangumi/media/md' . $code;
     }
     if ($c == 'tucao') {
         $url = 'http://www.tucao.tv/index.php?m=search&c=index&a=init2&q=' . $code;
