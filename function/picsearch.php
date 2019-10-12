@@ -37,5 +37,3 @@ if ($picurl != '') {
 
     echo $rst;
 }
-
-?>

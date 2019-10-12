@@ -106,7 +106,8 @@ function getResUrl($code, $c)
 
 function getResName($c)
 {
-    $name = '';
+    $name = $c;
+
     if ($c == 'bangumi') {
         $name = 'Bangumi';
     }
@@ -163,6 +164,36 @@ function getResName($c)
     }
 
     return $name;
+}
+
+function apiGetCNName($c)
+{
+    $rst = [
+        'bilibili' => '哔哩哔哩',
+        'dilidili' => '嘀哩嘀哩',
+        'fcdm' => '风车动漫',
+        'pptv' => 'PPTV',
+        'letv' => '乐视',
+        'iqiyi' => '爱奇艺',
+        'youku' => '优酷',
+        'tencenttv' => '腾讯视频',
+        'qinmei' => 'Qinmei',
+        'nicotv' => '妮可动漫',
+        'anime1' => 'Anime1',
+        'bimibimi' => 'Bimibimi',
+        '8maple' => '枫林网',
+        'c---' => '---',
+        'acqq' => '腾讯漫画',
+        'manhuagui' => '动画柜',
+        'dm5' => '漫画人',
+        'manhuatai' => '漫画台',
+        'dmzj' => '动漫之家',
+        'bt---' => '---',
+        'mgjh' => '蜜柑计划',
+        'agefans' => 'AGE动漫&百度云'
+    ];
+
+    return $rst[$c];
 }
 
 function ifExistin($data, $c)
@@ -505,10 +536,18 @@ function RemoveXSS($val)
     return $val;
 }
 
-function delairAnimeHeader($arr)
+function delairAnimeHeader($arr, $lang = '', $isShoetCut = false)
 {
     if (!is_array($arr)) {
         return $arr;
+    }
+
+    if (isset($_GET['lang'])) {
+        $lang = $_GET['lang'];
+    }
+
+    if (isset($_GET['shortcut'])) {
+        $isShoetCut = true;
     }
 
     $arr_key = array_keys($arr);
@@ -525,14 +564,58 @@ function delairAnimeHeader($arr)
         if ($key == 'allNum') {
             continue;
         }
+        if ($lang == 'cn') {
+            $langKey = apiGetCNName($key);
+        } else {
+            $langKey = $key;
+        }
+        if ($isShoetCut) {
+            $langKey = $langKey . ' (' . $c[2] . ')';
+        }
         for ($i = 0; $i < $c[2]; $i++) {
             $tem = [];
             $tem['title'] = $arr[$key][0][$i];
             $tem['link'] = $arr[$key][1][$i];
-            $rst[$key][$i] = $tem;
+            if ($key == 'dmzj' && substr_count($tem['link'], 'https', 0, 5) == 0) {
+                $tem['link'] = 'https:' . $tem['link'];
+            }
+            $rst[$langKey][$i] = $tem;
         }
         if ($c[2] == 0) {
-            $rst[$key] = [];
+            if (!$isShoetCut) {
+                $rst[$langKey] = [];
+            }
+        }
+    }
+
+    return $rst;
+}
+
+function resAPIer($arr, $lang = '')
+{
+    if (count($arr) == 0) {
+        return [];
+    }
+
+    if (isset($_GET['lang'])) {
+        $lang = $_GET['lang'];
+    }
+
+    $rst = [];
+
+    for ($i = 0; $i < count($arr); $i++) {
+        $titles = json_decode($arr[$i]['zhtitle'], true);
+        $sites = json_decode($arr[$i]['site'], true);
+
+        for ($n = 0; $n < count($sites); $n++) {
+            $tem = [];
+            if ($lang == 'cn') {
+                $tem['title'] = getResName($sites[$n]['site']);
+            } else {
+                $tem['title'] = $sites[$n]['site'];
+            }
+            $tem['link'] = getResUrl($sites[$n]['id'], $sites[$n]['site']);
+            $rst[$titles[0]][$n] = $tem;
         }
     }
 

@@ -60,8 +60,7 @@ if (count($rst) == 0) {
 if ($_POST["kt"]) {
     $output->__doOutputRes($rst);
 } elseif ($_GET["kt"]) {
-    $output->__doOutputOri($rst);
+    $output->__doOutputOri(resAPIer($rst));
 } else {
     echo 'error';
 }
-?>

@@ -6,6 +6,8 @@ airAnime 是一款聚合「番剧&动漫类搜索」程序，借助于各网站�
 
 v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
 
+[airAnime 的 iOS 捷径](https://www.icloud.com/shortcuts/95f1954703444d09b7bea48e6bc91f57)
+
 ## 代码结构
 
 ```

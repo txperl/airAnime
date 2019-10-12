@@ -29,6 +29,9 @@
         <li class="mdui-menu-item">
           <a href="./doc.php" class="mdui-ripple">文档</a>
         </li>
+        <li class="mdui-menu-item">
+          <a target="_blank" href="https://www.icloud.com/shortcuts/95f1954703444d09b7bea48e6bc91f57" class="mdui-ripple">iOS 捷径</a>
+        </li>
         <li class="mdui-divider"></li>
         <li class="mdui-menu-item">
           <a target="_blank" href="https://github.com/txperl/airAnime" class="mdui-ripple">GitHub</a>
@@ -70,7 +73,7 @@
     </div>
   
     <div class="mdui-card-content">
-      &airAnime@<span style="color:#FD5B78;">v2@.2.1#20191005</span> · &本地数据库@<span style="color:#FD5B78;">#20191005</span> · &新番数据@<span style="color:#FD5B78;">#20191005</span>
+      &airAnime@<span style="color:#FD5B78;">v2@.2.2#20191012</span> · &本地数据库@<span style="color:#FD5B78;">#20191012</span> · &新番数据@<span style="color:#FD5B78;">#20191012</span>
     </div>
   </div>
 </div>
