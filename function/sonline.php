@@ -48,23 +48,23 @@ $data = $sonline->__doS($frst, $keyTitle, $isLocal);
 
 if ($_POST["kt"]) {
     // 输出结果
-    $output->__doOutputSOnline($data['bilibili'], '哔哩哔哩', 'www.bilibili.com', $keyTitle);
+    $output->__doOutputSOnline($data['bilibili'], '哔哩哔哩', 'www.bilibili.com', $keyTitle, 'bilibili.ico');
     if ($isLocal) {
-        $output->__doOutputSOnline($data['anime1'], 'Anime1', 'anime1.me', $keyTitle);
-        $output->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimibimi.tv', $keyTitle);
+        $output->__doOutputSOnline($data['anime1'], 'Anime1', 'anime1.me', $keyTitle, 'anime1.ico');
+        $output->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimibimi.tv', $keyTitle, 'bimibimi.ico');
     }
-    $output->__doOutputSOnline($data['nicotv'], '妮可动漫', 'www.nicotv.me', $keyTitle);
+    $output->__doOutputSOnline($data['nicotv'], '妮可动漫', 'www.nicotv.me', $keyTitle, 'nicotv.ico');
     $output->__doOutputSOnline($data['qinmei'], 'Qinmei', 'qinmei.video', $keyTitle, 'qinmei.png');
     $output->__doOutputSOnline($data['dilidili'], '嘀哩嘀哩', 'www.dilidili.name', $keyTitle, 'dilidili.ico');
     if ($isLocal) {
-        $output->__doOutputSOnline($data['8maple'], '枫林网', '8maple.ru', $keyTitle);
+        $output->__doOutputSOnline($data['8maple'], '枫林网', '8maple.ru', $keyTitle, '8maple.ico');
     }
     $output->__doOutputSOnline($data['iqiyi'], '爱奇艺', 'www.iqiyi.com', $keyTitle, 'iqiyi.png');
     $output->__doOutputSOnline($data['tencenttv'], '腾讯视频', 'v.qq.com', $keyTitle);
     $output->__doOutputSOnline($data['fcdm'], '风车动漫', 'www.fengchedm.com', $keyTitle, 'none.png');
     $output->__doOutputSOnline($data['youku'], '优酷', 'www.youku.com', $keyTitle, 'youku.png');
-    $output->__doOutputSOnline($data['pptv'], 'PPTV', 'www.pptv.com', $keyTitle);
-    $output->__doOutputSOnline($data['letv'], '乐视', 'www.le.com', $keyTitle);
+    $output->__doOutputSOnline($data['pptv'], 'PPTV', 'www.pptv.com', $keyTitle, 'pptv.ico');
+    $output->__doOutputSOnline($data['letv'], '乐视', 'www.le.com', $keyTitle, 'letv.ico');
 } elseif ($_GET["kt"]) {
     // API Json 输出
     $data = delairAnimeHeader($data);

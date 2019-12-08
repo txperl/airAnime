@@ -40,7 +40,7 @@ v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
 
 ## 部署
 
-- airAnime v2@.2.1
+- airAnime v2@.2.3
 - PHP 7.0+
 - MySQL（非必须）
 
@@ -70,33 +70,17 @@ v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
 
 ### 数据
 
-airAnime 中 `Anime1, Bimibimi, AGE动漫, 枫林网, 新番` 数据基于本地 json 文件，所以需要定期更新。
+airAnime 中 `Anime1, Bimibimi, AGE动漫, 枫林网(已停止更新), 新番` 数据基于本地 json 文件，所以需要定期更新。
 
-##### Anime1
+#### 更新数据
 
-运行 `./data/anime1.php` 后将数据粘贴至 `anime1.json` 即可。
+执行 `./data/auto/index.php`，即可自动抓取最新 `Anime1, Bimibimi, AGE动漫, 新番` 数据，并保存在同目录下。执行前请务必更改此文件代码，其中包含配置项，具体请看注释。
 
-##### Bimibimi
-
-修改抓取范围并运行 `./data/bimibimi.php` 后将数据添加至 `bimibimi.json` 即可。
-
-##### 枫树林（已暂停更新此源，原因是国内体验不佳）
-
-修改抓取范围并运行 `./data/8maple.php` 后将数据添加至 `8maple.json` 即可。
-
-##### AGE动漫
-
-修改抓取范围并运行 `./data/agefans.php` 后将数据添加至 `agefans.json` 即可。
-
-##### 新番
-
-新番数据基于 bangumi.tv 新番数据。
-
-您也可以访问 `https://api.tls.moe/?app=bangumi&key=calendar` 来获取数据，然后将数据粘贴至 `201904.json` 即可。
+需要注意的是，`./data/` 中必须包含初始数据文件才可正常执行。若想要手动抓取数据，请浏览之前版本（<=v2@.2.2）代码。
 
 ## 注意
 
-若程序公开部署，请务必删除用于数据抓取与本地数据库导入的相关代码文件（`./data` 目录下除 json 后缀的功能性文件全需删除，如 `./data/数据库`, `./data/anime1.php` 等）。
+若程序公开部署，请务必删除用于数据抓取与本地数据库导入的相关代码文件（`./data` 目录下除 json 后缀的所有功能性文件需全部删除，如 `./data/数据库/`, `./data/anime1.php` 等）。
 
 ## ToDo
 

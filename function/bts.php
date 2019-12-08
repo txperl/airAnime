@@ -28,8 +28,8 @@ $frst['mgjh'] = $oriData[0];
 $data = $bts->__doS($frst, $keyTitle);
 
 if ($_POST["kt"]) {
-    $output->__doOutputSOnline($data['mgjh'], '蜜柑计划', 'mikanani.me', $keyTitle);
-    $output->__doOutputBTS($data['agefans'], 'AGE动漫&百度云', 'donghua.agefans.com', $keyTitle);
+    $output->__doOutputSOnline($data['mgjh'], '蜜柑计划', 'mikanani.me', $keyTitle, 'mgjh.ico');
+    $output->__doOutputBTS($data['agefans'], 'AGE动漫&百度云', 'donghua.agefans.com', $keyTitle, 'agefuns.ico');
 } elseif ($_GET["kt"]) {
     $data = delairAnimeHeader($data);
     $output->__doOutputOri($data);

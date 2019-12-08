@@ -397,7 +397,7 @@ function whatstitle($title)
             }
         }
     }
-
+    $ftext = '';
     // 最终结果选择并再次筛选最多出现次数
     if ($ftitle != '') {
         $ftitle = $ftitle;
