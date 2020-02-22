@@ -1,10 +1,6 @@
 <?php
-/**
- * 
- */
 class allOutput
 {
-
     function __doOutputRes($data)
     {
         $f = '';

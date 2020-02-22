@@ -1,9 +1,10 @@
 <?php
-require_once 'class/conline.class.php';
-require_once 'class/output.class.php';
 require_once 'functions.php';
+require_once 'small/extraFuns.php';
+require_once 'class/aonline.class.php';
+require_once 'class/output.class.php';
 
-if ($_POST["kt"]) {
+if (@$_POST["kt"]) {
     $keyTitle = RemoveXSS($_POST["kt"]);
 } elseif ($_GET["kt"]) {
     $keyTitle = RemoveXSS($_GET["kt"]);
@@ -11,39 +12,79 @@ if ($_POST["kt"]) {
     die('error');
 }
 
-$conline = new allSearchOnline();
-$output = new allOutput();
+$arr = [
+    'qqmh' => [
+        'type' => 'getOnline',
+        'url' => [
+            'https://m.ac.qq.com/search/result?word=' . urlencode($keyTitle)
+        ],
+        'fun' => ['reg', '', ['/"\/comic\/index\/id\/(.*?)".*?comic-title">(.*?)<\/strong>/ms'], [1], [], ['qqmh']]
+    ],
+    'manhuagui' => [
+        'type' => 'getOnline',
+        'url' => [
+            'https://www.manhuagui.com/s/' . urlencode($keyTitle) . '.html'
+        ],
+        'fun' => ['reg', '', ['/<a class="bcover" href="(.*?)" title="(.*?)">/ms'], [1], [], ['manhuagui']]
+    ],
+    'soman' => [
+        'type' => 'getOnline',
+        'url' => [
+            'https://api.soman.com/soman.ashx?action=getmobilesomancomics&pageindex=1&pagesize=20&keyword=' . urlencode($keyTitle)
+        ],
+        'fun' => ['json', '', ['Comics{-}{index}{-}Title'], ['Comics{-}{index}{-}Sources{-}{(0)}{-}SourceUrl'], [], []]
+    ],
+    'mangabz' => [
+        'type' => 'getOnline',
+        'url' => [
+            [
+                'GET',
+                'http://www.mangabz.com/search?title=' . urlencode($keyTitle)
+            ]
+        ],
+        'fun' => ['reg', '', ['/<h2 class="title">.*?<a href="(.*?)" title="(.*?)">/ms'], [1], [], ['mangabz']]
+    ],
+    'bilibilimh' => [
+        'type' => 'getOnline',
+        'url' => [
+            [
+                'POST',
+                'https://manga.bilibili.com/twirp/comic.v1.Comic/Search?device=pc&platform=web',
+                ['key_word' => $keyTitle, 'page_num' => 1, 'page_size' => 9]
+            ]
+        ],
+        'fun' => ['json', '', ['data{-}list{-}{index}{-}org_title'], ['data{-}list{-}{index}{-}id'], [], ['bilibilimh']]
+    ],
+    'dmzjmh' => [
+        'type' => 'getOnline',
+        'url' => [
+            [
+                'POST',
+                'https://www.dmzj.com/dynamic/o_search/index',
+                ['keywords' => $keyTitle]
+            ]
+        ],
+        'fun' => ['reg', '', ['/<li><a   target="_blank" title="(.*?)"href="(.*?)">/ms'], [0], [], ['dmzjmh']]
+    ]
+];
 
-// 添加搜索源_在线抓取源
-$urls = array();
-array_push($urls, 'http://m.ac.qq.com/search/result?word=' . urlencode($keyTitle)); //0
-array_push($urls, 'https://www.manhuagui.com/s/' . urlencode($keyTitle) . '.html'); //1
-array_push($urls, 'http://m.dm5.com/search?title=' . urlencode($keyTitle)); //2
-array_push($urls, 'http://www.manhuatai.com/getjson.shtml?q=' . urlencode($keyTitle)); //3
+$my = new animeOnline($arr);
+$my->getUrlsData();
 
-// 抓取数据并整理_多线程
-$oriData = $conline->__getSDdata($urls);
+$data = $my->doS($keyTitle, false);
 
-$frst = array();
-$frst['acqq'] = $oriData[0];
-$frst['manhuagui'] = $oriData[1];
-$frst['dm5'] = $oriData[2];
-$frst['manhuatai'] = $oriData[3];
-$frst['dmzj'] = curl_get_contents_form_post('https://www.dmzj.com/dynamic/o_search/index', 'keywords=' . urlencode($keyTitle));
+$out = new allOutput();
 
-// 结构化数据整理_在线抓取源+本地源
-$data = $conline->__doS($frst, $keyTitle);
-
-if ($_POST["kt"]) {
-    $output->__doOutputSOnline($data['dmzj'], '动漫之家', 'www.dmzj.com', $keyTitle);
-    $output->__doOutputSOnline($data['manhuagui'], '漫画柜', 'www.manhuagui.com', $keyTitle);
-    $output->__doOutputSOnline($data['dm5'], '动漫屋', 'www.dm5.com', $keyTitle);
-    $output->__doOutputSOnline($data['manhuatai'], '漫画台', 'www.manhuatai.com', $keyTitle);
-    $output->__doOutputSOnline($data['acqq'], '腾讯漫画', 'ac.qq.com', $keyTitle);
+if (@$_POST["kt"]) {
+    $out->__doOutputSOnline($data['bilibilimh'], '哔哩哔哩漫画', 'manga.bilibili.com', $keyTitle, 'bilibili.ico');
+    $out->__doOutputSOnline($data['qqmh'], '腾讯漫画', 'ac.qq.com', $keyTitle);
+    $out->__doOutputSOnline($data['soman'], '搜漫', 'www.soman.com', $keyTitle);
+    $out->__doOutputSOnline($data['mangabz'], 'Mangabz', 'www.mangabz.com', $keyTitle);
+    $out->__doOutputSOnline($data['dmzjmh'], '动漫之家', 'www.dmzj.com', $keyTitle);
+    $out->__doOutputSOnline($data['manhuagui'], '漫画柜', 'www.manhuagui.com', $keyTitle);
 } elseif ($_GET["kt"]) {
     $data = delairAnimeHeader($data);
-    $output->__doOutputOri($data);
+    $out->__doOutputOri($data);
 } else {
     echo 'error';
 }
-?>

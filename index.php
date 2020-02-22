@@ -101,8 +101,8 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
     <div class="mdui-card no-overflow mdui-col-xs-12 mdui-col-md-10 mdui-col-offset-md-1 sites-card">
 
       <div class="mdui-card-header">
-        <div class="mdui-card-header-title">Resources</div>
-        <div class="mdui-card-header-subtitle">#数据库中的可能结果</div>
+        <div class="mdui-card-header-title">Official</div>
+        <div class="mdui-card-header-subtitle">#番剧官方播放地址</div>
       </div>
 
       <div class="mdui-card-content">
@@ -119,8 +119,8 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
     <div class="mdui-card mdui-col-xs-12 mdui-col-md-10 mdui-col-offset-md-1 sites-card">
 
       <div class="mdui-card-header">
-        <div class="mdui-card-header-title">Btrst</div>
-        <div class="mdui-card-header-subtitle">#下载源搜索结果</div>
+        <div class="mdui-card-header-title">Download</div>
+        <div class="mdui-card-header-subtitle">#番剧下载来源</div>
       </div>
 
       <div class="mdui-row">
@@ -136,8 +136,8 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
     <div class="mdui-card mdui-col-xs-12 mdui-col-md-10 mdui-col-offset-md-1 sites-card">
 
       <div class="mdui-card-header">
-        <div class="mdui-card-header-title">Results</div>
-        <div class="mdui-card-header-subtitle">#在线搜索结果</div>
+        <div class="mdui-card-header-title">Result</div>
+        <div class="mdui-card-header-subtitle">#综合搜索结果</div>
       </div>
 
       <div class="mdui-row">
@@ -191,14 +191,14 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
 
   <br><br><br>
 
-  <!-- 图片上传表单 -->
+  <!-- 图片上传表单
   <div id='upimage' style="display:none;">
-    <form enctype="multipart/form-data" method="post" action="https://sm.ms/api/upload" id="upform">
+    <form enctype="multipart/form-data" method="post" action="https://sm.ms/api/v2/upload" id="upform">
       <input type="file" name="smfile" id="btnFile">
       <input type="submit" id='btnUUP' value="Upload">
     </form>
   </div>
-  <!-- end -->
+  end -->
 
   <!-- 信息框 -->
   <div class="mdui-dialog" id="airDialog"></div>
@@ -211,9 +211,10 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
 <script src="assert/js/jquery.lazyload.min.js"></script>
 <script src="assert/js/jquery.form.js"></script>
 <script src="assert/js/jquery.cookie.js"></script>
-<script src="assert/js/embed.js"></script>
 
 <script type="text/javascript">
+  type = 'a';
+
   $(document).ready(function() {
     getUserbgm('none');
   });
@@ -232,6 +233,7 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
       $('#newbgm_card').css('display', 'none');
       $('#bgminfo_card').css('display', 'none');
       $('#rst_info_card').css('display', 'none');
+      $('#rst_bt_card').css('display', 'none');
 
       // Anime
       if (type == 'a') {
@@ -254,13 +256,13 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
           $('#bgminfo_card').html('<div class="mdui-card mdui-col-xs-12 mdui-col-md-10 mdui-col-offset-md-1 sites-card"><div class="mdui-card-header"><div class="mdui-card-header-title">番剧信息</div><div id="des_bgminfo_card" class="mdui-card-header-subtitle"></div></div></div>');
           $('#des_bgminfo_card').html('(ฅ´ω`ฅ) 想知道 <a style="color: #333;" href="javascript:searchBmgInfo(\'a\',\'' + keytitle + '\');">' + keytitle + '</a> 的番剧信息嘛？');
           $('#bgminfo_card').css('display', '');
-          $.post('./function/sonline.php', {
+          $.post('./function/aonline.php', {
             'kt': keytitle
           }, function(data) {
             if (data) {
               $('#rst_s').html(data);
             } else {
-              $('#rst_s').html('<div class="mdui-panel-item"><div class="mdui-panel-item-header">error</div><div class="mdui-panel-item-body"></div></div>');
+              $('#rst_s').html('<div class="mdui-panel-item"><div class="mdui-panel-item-header">Error</div><div class="mdui-panel-item-body"></div></div>');
             }
           });
           if (bt_is == 'on') {
@@ -301,7 +303,7 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
             if (data) {
               $('#rst_s').html(data);
             } else {
-              $('#rst_s').html('<div class="mdui-panel-item"><div class="mdui-panel-item-header">error</div><div class="mdui-panel-item-body"></div></div>');
+              $('#rst_s').html('<div class="mdui-panel-item"><div class="mdui-panel-item-header">Error</div><div class="mdui-panel-item-body"></div></div>');
             }
           });
         }
@@ -324,14 +326,14 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
             } else if (nums >= 90) {
               var numsDes = '可信度中';
             } else {
-              var numsDes = '可信度小';
+              var numsDes = '可信度低';
             }
             var titleMsg = picData.title_chinese + '<br>第 ' + picData.episode + ' 话，' + mins + ' 分 ' + secs + ' 秒' + '<br>相似度 ' + nums + '% | ' + numsDes;
           } else {
             var titleMsg = '抱歉，未找到相关番剧...'
           }
           $('#keytitle').val('');
-          $('#rst_info').html('<div class="mdui-col-xs-8 mdui-col-md-10" style="padding-right:0;"><div class="bgm-item" data-title="' + picData.title_chinese + '" style="background-color:#D4C7DE;width: 100%;" plan="black"><img style="height:420px;" src="' + keytitle + '" class=""><h3 style="background:linear-gradient(rgba(233,227,238,0),rgba(233,227,238,.6),rgba(233,227,238,.8));">' + titleMsg + '</h3><b>PicSearch</b></div></div><div class="mdui-col-xs-4 mdui-col-md-2" style="padding:0;"><div class="mdui-list bgm-info-list"><a href="./?kt=' + picData.title_chinese + '&type=a" class="mdui-list-item mdui-ripple">Search</a><a target="_blank" href="https://trace.moe/?url=' + picData.picurl + '" class="mdui-list-item mdui-ripple">Trace.moe</a></div></div>');
+          $('#rst_info').html('<div class="mdui-col-xs-8 mdui-col-md-10" style="padding-right:0;"><div class="bgm-item" data-title="' + picData.title_chinese + '" style="background-color:#D4C7DE;width: 100%;" plan="black"><img style="height:420px;" src="' + picData.picurl + '"><h3 style="background:linear-gradient(rgba(233,227,238,0),rgba(233,227,238,.6),rgba(233,227,238,.8));">' + titleMsg + '</h3><b>PicSearch</b></div></div><div class="mdui-col-xs-4 mdui-col-md-2" style="padding:0;"><div class="mdui-list bgm-info-list"><a href="./?kt=' + picData.title_chinese + '&type=a" class="mdui-list-item mdui-ripple">搜索</a><a target="_blank" href="https://trace.moe/?url=' + picData.picurl + '" class="mdui-list-item mdui-ripple">Trace.moe</a></div></div>');
           $('#rst_info_card').css('display', 'block');
         });
       }
@@ -389,18 +391,21 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
     if (values == "a") {
       $('#keytitle').attr('placeholder', '🎐您想搜索的番剧是？');
       $('#btnUP').css('display', 'none');
+      type = 'a';
     }
     if (values == "c") {
       $('#keytitle').attr('placeholder', '🏮您想搜索的漫画是？');
       $('#btnUP').css('display', 'none');
+      type = 'c';
     }
     if (values == "n") {
       $('#keytitle').attr('placeholder', '什么也没有...');
       $('#btnUP').css('display', 'none');
     }
     if (values == "i") {
-      $('#keytitle').attr('placeholder', '「以图搜番」请输入图片链接，或点击右侧 UP 上传');
+      $('#keytitle').attr('placeholder', '「以图搜番」请输入图片链接，或点击右侧 UP 上传后输入');
       $('#btnUP').css('display', 'block');
+      type = 'i';
     }
   }
 
@@ -417,7 +422,7 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
       $("#btnS").click();
     }
 
-    if (event.keyCode != '13') {
+    if (event.keyCode != '13' && type != 'i') {
       var keytitle = document.getElementById("keytitle").value;
       if (keytitle == '') {
         $('#Sl').addClass("h");
@@ -430,9 +435,12 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
             $('#rst_sact').html(data);
           } else {
             $('#Sl').addClass("h");
+            $('#rst_sact').html('');
           }
         });
       }
+    } else {
+      $('#Sl').addClass("h");
     }
   });
 
@@ -450,7 +458,8 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
   });
 
   $("#btnUP").click(function() {
-    $('#btnFile').click();
+    window.open('https://sm.ms/', '_blank');
+    // $('#btnFile').click();
   });
 
   $("#btnFile").change(function() {

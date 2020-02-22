@@ -38,6 +38,7 @@ function howtextsimilar($text1, $text2)
         $sumT1 = $sumT1 + pow($num1[$i], 2);
         $sumT2 = $sumT2 + pow($num2[$i], 2);
     }
+
     $cos = $sum / (sqrt($sumT1 * $sumT2));
 
     return $cos;
@@ -170,30 +171,31 @@ function apiGetCNName($c)
 {
     $rst = [
         'bilibili' => '哔哩哔哩',
-        'dilidili' => '嘀哩嘀哩',
-        'fcdm' => '风车动漫',
-        'pptv' => 'PPTV',
-        'letv' => '乐视',
         'iqiyi' => '爱奇艺',
         'youku' => '优酷',
-        'tencenttv' => '腾讯视频',
+        'qqtv' => '腾讯视频',
         'qinmei' => 'Qinmei',
         'nicotv' => '妮可动漫',
         'anime1' => 'Anime1',
         'bimibimi' => 'Bimibimi',
         '8maple' => '枫林网',
+        'opacg' => '欧派动漫',
+        'acfun' => 'AcFun',
+        'yhdm' => '樱花动漫',
+        'halitv' => '哈哩哈哩',
         'c---' => '---',
-        'acqq' => '腾讯漫画',
-        'manhuagui' => '动画柜',
-        'dm5' => '漫画人',
-        'manhuatai' => '漫画台',
-        'dmzj' => '动漫之家',
+        'qqmh' => '腾讯漫画',
+        'bilibilimh' => '哔哩哔哩漫画',
+        'soman' => '搜漫',
+        'mangabz' => 'Mangabz',
+        'dmzjmh' => '动漫之家',
+        'manhuagui' => '漫画柜',
         'bt---' => '---',
         'mgjh' => '蜜柑计划',
         'agefans' => 'AGE动漫&百度云'
     ];
 
-    return $rst[$c];
+    return isset($rst[$c]) ? $rst[$c] : $c. ' (outdated)';
 }
 
 function ifExistin($data, $c)
@@ -250,8 +252,8 @@ function curl_multi($urls)
         curl_setopt($ch, CURLOPT_REFERER, $url); //设置来源
         curl_setopt($ch, CURLOPT_ENCODING, "gzip"); //编码压缩
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); //是否采集301、302之后的页面
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 5); //查找次数，防止查找太深
+        //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); //是否采集301、302之后的页面
+        //curl_setopt($ch, CURLOPT_MAXREDIRS, 5); //查找次数，防止查找太深
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //对认证证书来源的检查
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); //从证书中检查SSL加密算法是否存在
         curl_setopt($ch, CURLOPT_TIMEOUT, 6); //设置超时
@@ -297,49 +299,45 @@ function whatstitle($title)
     $a_rst = array(); //最终数组1
     $b_rst = array(); //最终数组2
     $aexist = '';
-    $link = curl_get_contents('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' . urlencode($title) . '&json=1&p=3');
-    $link = mb_convert_encoding($link, 'utf-8', 'gbk');
-    $link = getSubstr($link, 's":[', ']});');
-    $num = substr_count($link, '","') + 1;
+    $num = 0;
     $text = '';
-    if ($num != 1) {
-        for ($i = 0; $i < $num; $i++) {
-            if (getSubstr($link, '"', '",') == '') {
-                $f = getSubstr($link, '"', '"');
-            } else {
-                $f = getSubstr($link, '"', '",');
-            }
-            $link = str_replace('"' . $f . '"', '', $link);
+    $link = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' . urlencode($title) . '&json=1&p=3';
+    $web = curl_get_contents($link);
+    $web = mb_convert_encoding($web, 'utf-8', 'gbk');
+    $web = getSubstr($web, ',"s":', '})');
+    $oriData = json_decode($web, true);
+    if ($oriData != '') {
+        //除杂
+        for ($i = 0; $i < count($oriData); $i++) {
+            $oriData[$i] = strtolower($oriData[$i]);
 
-            // 除杂
-            $f = str_replace('第一季', '', $f);
-            $f = str_replace('第二季', '', $f);
-            $f = str_replace('第三季', '', $f);
-            $f = str_replace('第四季', '', $f);
-            $f = str_replace('第五季', '', $f);
-            $f = str_replace('第六季', '', $f);
-            $f = str_replace('第一部', '', $f);
-            $f = str_replace('第二部', '', $f);
-            $f = str_replace('第三部', '', $f);
-            $f = str_replace('第四部', '', $f);
-            $f = str_replace('第五部', '', $f);
-            $f = str_replace('第六部', '', $f);
-            $n = mb_substr($f, mb_strlen($f) - 1, mb_strlen($f), 'utf-8');
-            if ($n == '1' or $n == '2' or $n == '3' or $n == '4' or $n == '5' or $n == '6' or $n == '7' or $n == '8' or $n == '9') {
-                $f = mb_substr($f, 0, mb_strlen($f) - 1);
-            }
-            $n = mb_substr($f, mb_strlen($f) - 2, mb_strlen($f), 'utf-8');
-            if ($n == '01' or $n == '02' or $n == '03' or $n == '04' or $n == '05' or $n == '06' or $n == '07' or $n == '08' or $n == '09') {
-                $f = mb_substr($f, 0, mb_strlen($f) - 2);
+            $oriData[$i] = str_replace('百度云', '', $oriData[$i]);
+            $oriData[$i] = str_replace('樱花动漫', '', $oriData[$i]);
+
+            for ($j = 0; $j < 3; $j++) {
+                $lastni = mb_substr($oriData[$i], mb_strlen($oriData[$i]) - 2, mb_strlen($oriData[$i]), 'utf-8');
+                if ($lastni == '无修' || $lastni == '手游' || $lastni == '壁纸' || $lastni == '在线' || $lastni == '观看' || $lastni == 'bd' || $lastni == '小说' || $lastni == '漫画' || $lastni == '动漫' || $lastni == '免费') {
+                    $oriData[$i] = mb_substr($oriData[$i], 0, mb_strlen($oriData[$i]) - 2);
+                }
             }
 
-            array_push($rst, $f);
-            $text = $text . $f;
+            $lastn = mb_substr($oriData[$i], mb_strlen($oriData[$i]) - 3, mb_strlen($oriData[$i]), 'utf-8');
+            if ($lastn == '表情包') {
+                $oriData[$i] = mb_substr($oriData[$i], 0, mb_strlen($oriData[$i]) - 3);
+            }
+        }
+
+        $oriData = m_ArrayUnique($oriData);
+        $num = count($oriData);
+        $rst = $oriData;
+        for ($i = 0; $i < count($oriData); $i++) {
+            $text = $text . $oriData[$i];
         }
     }
 
     // 取出最长文本
     $max = 0;
+    $turn = 0;
     for ($i = 0; $i < count($rst); $i++) {
         $tlength = mb_strlen($rst[$i]);
         if ($tlength > $max) {
@@ -398,6 +396,7 @@ function whatstitle($title)
         }
     }
     $ftext = '';
+
     // 最终结果选择并再次筛选最多出现次数
     if ($ftitle != '') {
         $ftitle = $ftitle;
@@ -477,6 +476,7 @@ function getNeedBetween($data, $zz)
     $str = $data;
     preg_match($zz, $str, $a);
     $b = $a[1];
+
     return $b;
 }
 
@@ -536,7 +536,7 @@ function RemoveXSS($val)
     return $val;
 }
 
-function delairAnimeHeader($arr, $lang = '', $isShoetCut = false)
+function delairAnimeHeader($arr, $lang = '', $isShortCut = false)
 {
     if (!is_array($arr)) {
         return $arr;
@@ -547,7 +547,7 @@ function delairAnimeHeader($arr, $lang = '', $isShoetCut = false)
     }
 
     if (isset($_GET['shortcut'])) {
-        $isShoetCut = true;
+        $isShortCut = true;
     }
 
     $arr_key = array_keys($arr);
@@ -569,7 +569,7 @@ function delairAnimeHeader($arr, $lang = '', $isShoetCut = false)
         } else {
             $langKey = $key;
         }
-        if ($isShoetCut) {
+        if ($isShortCut) {
             $langKey = $langKey . ' (' . $c[2] . ')';
         }
         for ($i = 0; $i < $c[2]; $i++) {
@@ -582,7 +582,7 @@ function delairAnimeHeader($arr, $lang = '', $isShoetCut = false)
             $rst[$langKey][$i] = $tem;
         }
         if ($c[2] == 0) {
-            if (!$isShoetCut) {
+            if (!$isShortCut) {
                 $rst[$langKey] = [];
             }
         }
@@ -638,5 +638,6 @@ function m_ArrayUnique($arr, $reserveKey = false)
             }
         }
     }
+
     return $arr;
 }

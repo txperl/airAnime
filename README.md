@@ -26,7 +26,7 @@ v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
     ├── picsearch.php - 以图搜番控制代码
     ├── resources.php - 本地数据库搜索控制代码
     ├── sact.json - 关键词联想代码
-    ├── sonline.php - 动画源搜索控制代码
+    ├── aonline.php - 动画源搜索控制代码
     ├── userbgm.php - 用户追番表控制代码
 ├── .page
     ├── about.php - 关于页面
@@ -40,7 +40,7 @@ v2 版本相对于 v1 版本简化了很多操作逻辑，改善了界面。
 
 ## 部署
 
-- airAnime v2@.2.3
+- airAnime v2@.3
 - PHP 7.0+
 - MySQL（非必须）
 

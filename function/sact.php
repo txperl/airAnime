@@ -16,6 +16,12 @@ if ($oriData != '') {
         $oriData[$i] = strtolower($oriData[$i]);
 
         $oriData[$i] = str_replace('百度云', '', $oriData[$i]);
+        $oriData[$i] = str_replace('樱花动漫', '', $oriData[$i]);
+
+        $lastn = mb_substr($oriData[$i], mb_strlen($oriData[$i]) - 3, mb_strlen($oriData[$i]), 'utf-8');
+        if ($lastn == '第一季' || $lastn == '第二季' || $lastn == '第三季' || $lastn == '第四季' || $lastn == '第五季' || $lastn == '第六季' || $lastn == '第七季' || $lastn == '第一部' || $lastn == '第二部' || $lastn == '第三部' || $lastn == '第四部' || $lastn == '第五部' || $lastn == '第六部' || $lastn == '第七部' || $lastn == '表情包') {
+            $oriData[$i] = mb_substr($oriData[$i], 0, mb_strlen($oriData[$i]) - 3);
+        }
 
         for ($j = 0; $j < 3; $j++) {
             $lastni = mb_substr($oriData[$i], mb_strlen($oriData[$i]) - 2, mb_strlen($oriData[$i]), 'utf-8');
@@ -25,7 +31,7 @@ if ($oriData != '') {
         }
 
         $lastn = mb_substr($oriData[$i], mb_strlen($oriData[$i]) - 3, mb_strlen($oriData[$i]), 'utf-8');
-        if ($lastn == '第一季' || $lastn == '第二季' || $lastn == '第三季' || $lastn == '第四季' || $lastn == '第五季' || $lastn == '第六季' || $lastn == '第七季' || $lastn == '第一部' || $lastn == '第二部' || $lastn == '第三部' || $lastn == '第四部' || $lastn == '第五部' || $lastn == '第六部' || $lastn == '第七部') {
+        if ($lastn == '第一季' || $lastn == '第二季' || $lastn == '第三季' || $lastn == '第四季' || $lastn == '第五季' || $lastn == '第六季' || $lastn == '第七季' || $lastn == '第一部' || $lastn == '第二部' || $lastn == '第三部' || $lastn == '第四部' || $lastn == '第五部' || $lastn == '第六部' || $lastn == '第七部' || $lastn == '表情包') {
             $oriData[$i] = mb_substr($oriData[$i], 0, mb_strlen($oriData[$i]) - 3);
         }
     }

@@ -18,13 +18,14 @@ $(document).ready(function () {
         $("#keytitle").val('loading...');
         //使用jquery.form插件异步提交表单，详细内容参考官方文档
         $("#upform").ajaxForm(function (data, status) {
+            console.log(data);
             if (data.code == "success") {
                 var imginfo = data;
                 console.log(imginfo);
                 $('#keytitle').focus();
                 $('#keytitle').val(imginfo.data['url']);
             }
-            else if(data.code == "exception" && data.message.split("https:").length > 1) {
+            else if (data.code == "exception" && data.message.split("https:").length > 1) {
                 console.log(data);
                 $('#keytitle').focus();
                 $('#keytitle').val("https:" + data.message.split("https:")[1]);
