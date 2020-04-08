@@ -45,7 +45,7 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
           <a href="./page/doc.php" class="mdui-ripple">文档</a>
         </li>
         <li class="mdui-menu-item">
-          <a target="_blank" href="https://www.icloud.com/shortcuts/95f1954703444d09b7bea48e6bc91f57" class="mdui-ripple">iOS 捷径</a>
+          <a target="_blank" href="https://sharecuts.cn/shortcut/5006" class="mdui-ripple">iOS 捷径</a>
         </li>
         <li class="mdui-divider"></li>
         <li class="mdui-menu-item">
@@ -174,7 +174,7 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
 
       <div class="mdui-card-header">
         <div class="mdui-card-header-title">今日</div>
-        <div class="mdui-card-header-subtitle"><?php echo $newbgm[0] ?> & <a target="_blank" href="https://www.icloud.com/shortcuts/95f1954703444d09b7bea48e6bc91f57" style="color:#333;">airAnime 的 iOS 捷径</a>上线啦</div>
+        <div class="mdui-card-header-subtitle"><?php echo $newbgm[0] ?> & <a target="_blank" href="https://sharecuts.cn/shortcut/5006" style="color:#333;">airAnime 的 iOS 捷径</a>上线啦</div>
       </div>
 
       <div class="mdui-row">

@@ -51,6 +51,13 @@ $arr = [
         ],
         'fun' => ['json', '', ['bgmList{-}{index}{-}bgmTitle'], ['bgmList{-}{index}{-}bgmId'], [], ['acfun']]
     ],
+    'qinmei' => [
+        'type' => 'getOnline',
+        'url' => [
+            'https://qinmei.video/api/v2/animates?type=queryAnimate&title=' . urlencode($keyTitle) . '&page=1&size=20&sortBy=updatedAt&sortOrder=-1'
+        ],
+        'fun' => ['json', '', ['data{-}list{-}{index}{-}title'], ['data{-}list{-}{index}{-}slug'], [], ['qinmei']]
+    ],
     'anime1' => [
         'type' => 'getLocal',
         'uri' => '../data/anime1.json',
@@ -98,6 +105,7 @@ if (@$_POST["kt"]) {
         $out->__doOutputSOnline($data['anime1'], 'Anime1', 'anime1.me', $keyTitle, 'anime1.ico');
         $out->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimibimi.tv', $keyTitle, 'bimibimi.ico');
     }
+    $out->__doOutputSOnline($data['qinmei'], 'Qinmei', 'qinmei.video', $keyTitle, 'qinmei.png');
     $out->__doOutputSOnline($data['nicotv'], '妮可动漫', 'www.nicotv.me', $keyTitle, 'nicotv.ico');
     if ($isLocal) {
         $out->__doOutputSOnline($data['opacg'], '欧派动漫', 'www.opacg.com', $keyTitle, 'opacg.png');

@@ -32,7 +32,7 @@
           <a href="./doc.php" class="mdui-ripple">文档</a>
         </li>
         <li class="mdui-menu-item">
-          <a target="_blank" href="https://www.icloud.com/shortcuts/95f1954703444d09b7bea48e6bc91f57" class="mdui-ripple">iOS 捷径</a>
+          <a target="_blank" href="https://sharecuts.cn/shortcut/5006" class="mdui-ripple">iOS 捷径</a>
         </li>
         <li class="mdui-divider"></li>
         <li class="mdui-menu-item">
@@ -58,7 +58,6 @@
         <hr>
         <p>这是一个开源程序，右上角菜单中有 <a target="_blank" href="https://github.com/txperl/airAnime">GitHub</a> 链接。</p>
         <p>请使用现代浏览器以达到最佳体验效果。</p>
-        <p>第一次使用务必阅读文档。</p>
       </div>
 
     </div>
@@ -73,7 +72,7 @@
       </div>
 
       <div class="mdui-card-content">
-        &airAnime@<span style="color:#FD5B78;">v2@.3#20200222</span> · &本地数据库@<span style="color:#FD5B78;">#20200117</span> · &新番数据@<span style="color:#FD5B78;">#20200222</span>
+        &airAnime@<span style="color:#FD5B78;">v2@.31#20200408</span> · &本地数据库@<span style="color:#FD5B78;">#20200408</span> · &新番数据@<span style="color:#FD5B78;">#20200408</span>
       </div>
     </div>
   </div>

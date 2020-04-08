@@ -91,3 +91,12 @@ function extraNex_mgjh($c)
 
     return $c;
 }
+
+function extraNex_qinmei($c)
+{
+    for ($i = 1; $i < count($c[0]); $i++) {
+        $c[1][$i] = 'https://qinmei.video/animate/slug/' . $c[1][$i];
+    }
+
+    return $c;
+}

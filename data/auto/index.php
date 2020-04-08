@@ -48,15 +48,15 @@ function getBimibimi()
     $sum = 0;
     $oriData = file_get_contents('../bimibimi.json');
     $rst = json_decode($oriData, true);
-    $lastIndex = getSubstr($rst[count($rst) - 1]['link'] . '#end', 'http://www.bimibimi.tv/bangumi/bi/', '#end');
+    $lastIndex = getSubstr($rst[count($rst) - 1]['link'] . '#end', 'http://www.bimibimi.me/bangumi/bi/', '#end');
     $errorNum = 0;
     for ($i = $lastIndex + 1; $i != 0; $i++) {
         $f = array();
-        $link = 'http://www.bimibimi.tv/bangumi/bi/' . $i;
+        $link = 'http://www.bimibimi.me/bangumi/bi/' . $i;
         $data = curl_get_contents($link);
         if (substr_count($data, '跳转</a> 等待时间：') == 0) {
             $title = getSubstr($data, ' <a class="current" title="', '" href="');
-            $url = 'http://www.bimibimi.tv/bangumi/bi/' . $i;
+            $url = 'http://www.bimibimi.me/bangumi/bi/' . $i;
             $f['title'] = $title;
             $f['link'] = $url;
             array_push($rst, $f);
@@ -234,7 +234,7 @@ function getNewBgm()
 {
     $frst = curl_get_contents('https://api.tls.moe/?app=bangumi&key=calendar');
 
-    if (saveData($frst, '202001')) {
+    if (saveData($frst, '202002')) {
         echo '[done] newBgm<br>';
     } else {
         echo '[fail] newBgm<br>';

@@ -67,7 +67,7 @@ if (@$_GET["code"] && @$_COOKIE["user_id"]) {
           <a href="./doc.php" class="mdui-ripple">文档</a>
         </li>
         <li class="mdui-menu-item">
-          <a target="_blank" href="https://www.icloud.com/shortcuts/95f1954703444d09b7bea48e6bc91f57" class="mdui-ripple">iOS 捷径</a>
+          <a target="_blank" href="https://sharecuts.cn/shortcut/5006" class="mdui-ripple">iOS 捷径</a>
         </li>
         <li class="mdui-divider"></li>
         <li class="mdui-menu-item">
