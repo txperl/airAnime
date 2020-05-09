@@ -58,11 +58,6 @@ $arr = [
         ],
         'fun' => ['json', '', ['data{-}list{-}{index}{-}title'], ['data{-}list{-}{index}{-}slug'], [], ['qinmei']]
     ],
-    'anime1' => [
-        'type' => 'getLocal',
-        'uri' => '../data/anime1.json',
-        'thred' => [0.5, 0.45]
-    ],
     'bimibimi' => [
         'type' => 'getLocal',
         'uri' => '../data/bimibimi.json',
@@ -72,11 +67,6 @@ $arr = [
         'type' => 'getLocal',
         'uri' => '../data/opacg.json',
         'thred' => [0.55, 0.5]
-    ],
-    '8maple' => [
-        'type' => 'getLocal',
-        'uri' => '../data/8maple.json',
-        'thred' => [0.5, 0.45]
     ],
     'yhdm' => [
         'type' => 'getLocal',
@@ -88,6 +78,11 @@ $arr = [
         'uri' => '../data/halitv.json',
         'thred' => [0.5, 0.45]
     ],
+    'moetv' => [
+        'type' => 'getLocal',
+        'uri' => '../data/moetv.json',
+        'thred' => [0.5, 0.45]
+    ],
 ];
 
 $my = new animeOnline($arr);
@@ -97,23 +92,21 @@ $data = $my->doS($keyTitle, $isLocal);
 
 $out = new allOutput();
 
+
 if (@$_POST["kt"]) {
     // 输出结果
     $out->__doOutputSOnline($data['acfun'], 'AcFun', 'www.acfun.cn', $keyTitle, 'acfun.ico');
     $out->__doOutputSOnline($data['bilibili'], '哔哩哔哩', 'www.bilibili.com', $keyTitle, 'bilibili.ico');
     if ($isLocal) {
-        $out->__doOutputSOnline($data['anime1'], 'Anime1', 'anime1.me', $keyTitle, 'anime1.ico');
         $out->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimibimi.tv', $keyTitle, 'bimibimi.ico');
     }
     $out->__doOutputSOnline($data['qinmei'], 'Qinmei', 'qinmei.video', $keyTitle, 'qinmei.png');
     $out->__doOutputSOnline($data['nicotv'], '妮可动漫', 'www.nicotv.me', $keyTitle, 'nicotv.ico');
     if ($isLocal) {
+        $out->__doOutputSOnline($data['moetv'], 'MoeTV', 'moetv.live', $keyTitle, 'moetv.ico');
         $out->__doOutputSOnline($data['opacg'], '欧派动漫', 'www.opacg.com', $keyTitle, 'opacg.png');
         $out->__doOutputSOnline($data['halitv'], '哈哩哈哩', 'www.halitv.com', $keyTitle, 'halitv.ico');
         $out->__doOutputSOnline($data['yhdm'], '樱花动漫', 'www.imomoe.in', $keyTitle, 'none.png');
-    }
-    if ($isLocal) {
-        $out->__doOutputSOnline($data['8maple'], '枫林网', '8maple.ru', $keyTitle, '8maple.ico');
     }
     $out->__doOutputSOnline($data['iqiyi'], '爱奇艺', 'www.iqiyi.com', $keyTitle, 'iqiyi.png');
     $out->__doOutputSOnline($data['qqtv'], '腾讯视频', 'v.qq.com', $keyTitle);

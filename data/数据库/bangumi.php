@@ -60,4 +60,3 @@ for ($i = 0; $i < count($bca); $i++) {
     $con->query($sql);
     $con->close();
 }
-?>

@@ -11,36 +11,13 @@ define('maxFailedNum', 6);
 // define('proxyPORT', '1087');
 // 配置项结束
 
-getAnime1();
 getNewBgm();
 getBimibimi();
 getAgeFuns();
 getOPAcg();
 getYHDM();
 getHalitv();
-
-function getAnime1()
-{
-    $frst = array();
-    $web = file_get_contents('https://anime1.me/');
-    $num = substr_count($web, '<td class="column-1">');
-    preg_match_all('/<td class="column-1"><a href="(.*?)">(.*?)<\/a><\/td>/', $web, $rst);
-    for ($i = 0; $i < count($rst[1]); $i++) {
-        $f = array();
-        $link = 'https://anime1.me' . $rst[1][$i];
-        $title = zhconversion_hans($rst[2][$i]);
-        $f['title'] = $title;
-        $f['link'] = $link;
-        array_push($frst, $f);
-    }
-    $frst = json_encode($frst, JSON_UNESCAPED_UNICODE);
-
-    if (saveData($frst, 'anime1')) {
-        echo '[done] anime1<br>';
-    } else {
-        echo '[fail] anime1<br>';
-    }
-}
+getMoeTV();
 
 // 一直抓直到错误 x 次
 function getBimibimi()
@@ -226,6 +203,45 @@ function getHalitv()
         echo '[done] halitv +' . $sum . '<br>';
     } else {
         echo '[fail] halitv<br>';
+    }
+}
+
+// 一次抓 100 个
+function getMoeTV()
+{
+    $sum = 0;
+    $oriData = file_get_contents('../moetv.json');
+    $rst = json_decode($oriData, true);
+    $lastIndex = getSubstr($rst[count($rst) - 1]['link'] . '#end', 'https://moetv.live/detail/?', '#end');
+
+    $tmpURL = array();
+    $tmpURLIndex = array();
+    for ($i = $lastIndex + 1; $i <= $lastIndex + 100; $i++) {
+        array_push($tmpURL, 'https://moetv.live/detail/?' . $i . '.html');
+        array_push($tmpURLIndex, $i);
+        if ($i % 10 == 0 || $i == $lastIndex + 100) {
+            $webDatas = curl_multi($tmpURL);
+            foreach ($webDatas as $key => $data) {
+                if (substr_count($data, 'href="/detail/?') != 0) {
+                    $title = getSubstr($data, 'href="/detail/?' . $tmpURLIndex[$key] . '.html" title="', '">');
+                    $title = str_replace('"', '', $title);
+                    $url = 'https://moetv.live/detail/?' . $tmpURLIndex[$key] . '.html';
+                    $f['title'] = $title;
+                    $f['link'] = $url;
+                    array_push($rst, $f);
+                    $sum++;
+                }
+            }
+            $tmpURL = array();
+            $tmpURLIndex = array();
+        }
+    }
+    $frst = json_encode($rst, JSON_UNESCAPED_UNICODE);
+
+    if (saveData($frst, 'moetv')) {
+        echo '[done] moetv +' . $sum . '<br>';
+    } else {
+        echo '[fail] moetv<br>';
     }
 }
 

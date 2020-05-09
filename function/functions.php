@@ -183,6 +183,7 @@ function apiGetCNName($c)
         'acfun' => 'AcFun',
         'yhdm' => '樱花动漫',
         'halitv' => '哈哩哈哩',
+        'moetv' => 'MoeTV',
         'c---' => '---',
         'qqmh' => '腾讯漫画',
         'bilibilimh' => '哔哩哔哩漫画',

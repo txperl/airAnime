@@ -7,7 +7,7 @@
     <meta http-equiv="content-language" content="zh-CN" />
 
     <link type="favicon" rel="shortcut icon" href="../favicon.ico">
-    <link href="../assert/css/mdui.min.css" rel="stylesheet">
+    <link href="https://lib.baomitu.com/mdui/0.4.3/css/mdui.min.css" rel="stylesheet">
     <link href="../assert/css/n.css" rel="stylesheet">
 </head>
 
@@ -100,5 +100,5 @@
     </div>
 </body>
 
-<script src="../assert/js/mdui.min.js"></script>
+<script src="https://lib.baomitu.com/mdui/0.4.3/js/mdui.min.js"></script>
 <script src="../assert/js/jquery.min.js"></script>
