@@ -5,9 +5,8 @@ include("../chttochs/convert.php");
 ini_set('memory_limit', '128M');
 ini_set('max_execution_time', 3600);
 set_time_limit(3600);
-// 抓取失败 >= X 次停止尝试
-define('maxFailedNum', 6);
-// define('proxyURL', '192.168.1.122');
+define('maxFailedNum', 60); // 抓取失败 >= X 次停止尝试
+// define('proxyURL', '127.0.0.1');
 // define('proxyPORT', '1087');
 // 配置项结束
 
@@ -17,7 +16,7 @@ getAgeFuns();
 getOPAcg();
 getYHDM();
 getHalitv();
-getMoeTV();
+// getMoeTV();
 
 // 一直抓直到错误 x 次
 function getBimibimi()
@@ -32,7 +31,7 @@ function getBimibimi()
         $link = 'http://www.bimibimi.me/bangumi/bi/' . $i;
         $data = curl_get_contents($link);
         if (substr_count($data, '跳转</a> 等待时间：') == 0) {
-            $title = getSubstr($data, ' <a class="current" title="', '" href="');
+            $title = getSubstr($data, '<a class="current" title="', '" href="');
             $url = 'http://www.bimibimi.me/bangumi/bi/' . $i;
             $f['title'] = $title;
             $f['link'] = $url;
@@ -68,7 +67,7 @@ function getAgeFuns()
         $link = 'https://www.agefans.tv/detail/' . $i;
         $data = curl_get_contents($link);
 
-        if ($data) {
+        if ($data && substr_count($data, '对不起，您要找的页面被AGE君丢失了') == 0) {
             $title = getSubstr($data, '<h4 class="detail_imform_name">', '</h4>');
             $url = 'https://www.agefans.tv/detail/' . $i;
             $f['title'] = $title;
@@ -250,7 +249,7 @@ function getNewBgm()
 {
     $frst = curl_get_contents('https://api.tls.moe/?app=bangumi&key=calendar');
 
-    if (saveData($frst, '202002')) {
+    if (saveData($frst, 'news')) {
         echo '[done] newBgm<br>';
     } else {
         echo '[fail] newBgm<br>';
@@ -283,10 +282,9 @@ function curl_get_contents($url)
 function curl_get_contents_proxy($url)
 {
     $ch = curl_init($url);
-
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_REFERER, 'https://donghua.agefans.com/');
+    curl_setopt($ch, CURLOPT_REFERER, $url);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -308,9 +306,7 @@ function curl_get_contents_proxy($url)
 function getSubstr($str, $leftStr, $rightStr)
 {
     $left = strpos($str, $leftStr);
-    //echo '左边:'.$left;
     $right = strpos($str, $rightStr, $left);
-    //echo '<br>右边:'.$right;
     if ($left < 0 or $right < $left) return '';
     return substr($str, $left + strlen($leftStr), $right - $left - strlen($leftStr));
 }
@@ -321,9 +317,13 @@ function createCh($url)
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_TIMEOUT, 5);
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko');
-    curl_setopt($ch, CURLOPT_REFERER, 'https://www.opacg.com/');
+    curl_setopt($ch, CURLOPT_REFERER, $url);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    // curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+    // curl_setopt($ch, CURLOPT_PROXY, proxyURL);
+    // curl_setopt($ch, CURLOPT_PROXYPORT, proxyPORT);
+
     return $ch;
 }
 

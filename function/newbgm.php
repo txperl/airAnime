@@ -5,7 +5,7 @@ function getTodays()
 {
     $rst = array();
     $frst = array();
-    $file = "./data/202002.json"; // !!!季度更变
+    $file = "./data/news.json";
     $bcon = file_get_contents($file);
     $bcon = json_decode($bcon, true);
     $today = date("N") - 1;
