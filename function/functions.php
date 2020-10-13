@@ -48,13 +48,13 @@ function getResUrl($code, $c)
 {
     $url = '';
     if ($c == 'bangumi') {
-        $url = 'http://bangumi.tv/subject/' . $code;
+        $url = 'https://bangumi.tv/subject/' . $code;
     }
     if ($c == 'saraba1st') {
         $url = 'https://bbs.saraba1st.com/2b/thread-' . $code . '-1-1.html';
     }
     if ($c == 'acfun') {
-        $url = 'http://www.acfun.cn/bangumi/aa' . $code;
+        $url = 'https://www.acfun.cn/bangumi/aa' . $code;
     }
     if ($c == 'bilibili') {
         $url = 'https://www.bilibili.com/bangumi/media/md' . $code;
@@ -90,7 +90,7 @@ function getResUrl($code, $c)
         $url = 'https://www.mgtv.com/h/' . $code . '.html';
     }
     if ($c == 'nicovideo') {
-        $url = 'http://ch.nicovideo.jp/' . $code;
+        $url = 'https://ch.nicovideo.jp/' . $code;
     }
     if ($c == 'netflix') {
         $url = 'https://www.netflix.com/title/' . $code;

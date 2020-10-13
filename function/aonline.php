@@ -51,13 +51,6 @@ $arr = [
         ],
         'fun' => ['json', '', ['bgmList{-}{index}{-}bgmTitle'], ['bgmList{-}{index}{-}bgmId'], [], ['acfun']]
     ],
-    'qinmei' => [
-        'type' => 'getOnline',
-        'url' => [
-            'https://qinmei.video/api/v2/animates?type=queryAnimate&title=' . urlencode($keyTitle) . '&page=1&size=20&sortBy=updatedAt&sortOrder=-1'
-        ],
-        'fun' => ['json', '', ['data{-}list{-}{index}{-}title'], ['data{-}list{-}{index}{-}slug'], [], ['qinmei']]
-    ],
     'bimibimi' => [
         'type' => 'getLocal',
         'uri' => '../data/bimibimi.json',
@@ -77,12 +70,7 @@ $arr = [
         'type' => 'getLocal',
         'uri' => '../data/halitv.json',
         'thred' => [0.5, 0.45]
-    ],
-    'moetv' => [
-        'type' => 'getLocal',
-        'uri' => '../data/moetv.json',
-        'thred' => [0.5, 0.45]
-    ],
+    ]
 ];
 
 $my = new animeOnline($arr);
@@ -98,12 +86,10 @@ if (@$_POST["kt"]) {
     $out->__doOutputSOnline($data['acfun'], 'AcFun', 'www.acfun.cn', $keyTitle, 'acfun.ico');
     $out->__doOutputSOnline($data['bilibili'], '哔哩哔哩', 'www.bilibili.com', $keyTitle, 'bilibili.ico');
     if ($isLocal) {
-        $out->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimibimi.tv', $keyTitle, 'bimibimi.ico');
+        $out->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimiacg.com', $keyTitle, 'bimibimi.ico');
     }
-    $out->__doOutputSOnline($data['qinmei'], 'Qinmei', 'qinmei.video', $keyTitle, 'qinmei.png');
     $out->__doOutputSOnline($data['nicotv'], '妮可动漫', 'www.nicotv.me', $keyTitle, 'nicotv.ico');
     if ($isLocal) {
-        $out->__doOutputSOnline($data['moetv'], 'MoeTV', 'moetv.live', $keyTitle, 'moetv.ico');
         $out->__doOutputSOnline($data['opacg'], '欧派动漫', 'www.opacg.com', $keyTitle, 'opacg.png');
         $out->__doOutputSOnline($data['halitv'], '哈哩哈哩', 'www.halitv.com', $keyTitle, 'halitv.ico');
         $out->__doOutputSOnline($data['yhdm'], '樱花动漫', 'www.imomoe.in', $keyTitle, 'none.png');

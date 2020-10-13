@@ -16,7 +16,6 @@ getAgeFuns();
 getOPAcg();
 getYHDM();
 getHalitv();
-// getMoeTV();
 
 // 一直抓直到错误 x 次
 function getBimibimi()
@@ -24,15 +23,15 @@ function getBimibimi()
     $sum = 0;
     $oriData = file_get_contents('../bimibimi.json');
     $rst = json_decode($oriData, true);
-    $lastIndex = getSubstr($rst[count($rst) - 1]['link'] . '#end', 'http://www.bimibimi.me/bangumi/bi/', '#end');
+    $lastIndex = getSubstr($rst[count($rst) - 1]['link'] . '#end', 'http://www.bimiacg.com/bangumi/bi/', '#end');
     $errorNum = 0;
     for ($i = $lastIndex + 1; $i != 0; $i++) {
         $f = array();
-        $link = 'http://www.bimibimi.me/bangumi/bi/' . $i;
+        $link = 'http://www.bimiacg.com/bangumi/bi/' . $i;
         $data = curl_get_contents($link);
-        if (substr_count($data, '跳转</a> 等待时间：') == 0) {
+        if (substr_count($data, '获取数据失败') == 0) {
             $title = getSubstr($data, '<a class="current" title="', '" href="');
-            $url = 'http://www.bimibimi.me/bangumi/bi/' . $i;
+            $url = 'http://www.bimiacg.com/bangumi/bi/' . $i;
             $f['title'] = $title;
             $f['link'] = $url;
             array_push($rst, $f);
