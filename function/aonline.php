@@ -86,7 +86,7 @@ if (@$_POST["kt"]) {
     $out->__doOutputSOnline($data['acfun'], 'AcFun', 'www.acfun.cn', $keyTitle, 'acfun.ico');
     $out->__doOutputSOnline($data['bilibili'], '哔哩哔哩', 'www.bilibili.com', $keyTitle, 'bilibili.ico');
     if ($isLocal) {
-        $out->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimiacg.com', $keyTitle, 'bimibimi.ico');
+        $out->__doOutputSOnline($data['bimibimi'], 'Bimibimi', 'www.bimiacg.net', $keyTitle, 'bimibimi.ico');
     }
     $out->__doOutputSOnline($data['nicotv'], '妮可动漫', 'www.nicotv.me', $keyTitle, 'nicotv.ico');
     if ($isLocal) {

@@ -488,10 +488,10 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
     $('#userbgm_card').css('display', 'none');
   }
 
-  function AGEgetBaiduYunUrl(url) {
+  function agefansGetPan(url) {
     var bt_is = "<?php echo $GLOBALS['bt_is']; ?>";
     if (bt_is == 'on') {
-      $.post('./function/small/AGEgetPanUrl.php', {
+      $.post('./function/small/agefansGetPan.php', {
         'url': url
       }, function(data) {
         if (data) {

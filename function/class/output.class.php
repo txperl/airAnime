@@ -59,7 +59,7 @@ class allOutput
             $icon_url = 'http://' . $url . '/favicon.ico';
         }
         for ($i = 0; $i < $num; $i++) {
-            $li = $li . '<div mdui-menu="{target: \'#bttr' . $i . '\'}" class="mdui-chip"><span class="mdui-chip-title">' . $title[$i + 1] . '</span></div> <ul class="mdui-menu" id="bttr' . $i . '"><li class="mdui-menu-item"><a target="_blank" href="' . $link[$i + 1] . '" class="mdui-ripple">打开</a></li><li class="mdui-menu-item"><a target="_blank" href="' . $link[$i + 1] . '" class="mdui-ripple">百度云</a></li></ul>';
+            $li = $li . '<div mdui-menu="{target: \'#bttr' . $i . '\'}" class="mdui-chip"><span class="mdui-chip-title">' . $title[$i + 1] . '</span></div> <ul class="mdui-menu" id="bttr' . $i . '"><li class="mdui-menu-item"><a target="_blank" href="' . $link[$i + 1] . '" class="mdui-ripple">打开</a></li><li class="mdui-menu-item"><a href="javascript:agefansGetPan(\'' . $link[$i + 1] . '\',\'' . $title[$i + 1] . '\');" class="mdui-ripple">百度云</a></li></ul>';
         }
         $but = '<div class="mdui-panel-item-actions"><a target="_blank" href="http://' . $url . '" class="mdui-btn mdui-ripple">' . $site . '</a><a target="_blank" href="https://www.google.com/#q=site%3A' . $url . '%20' . urlencode($keytitle) . '" class="mdui-btn mdui-ripple">Google</a><a target="_blank" href="https://bing.com/search?q=site%3A' . $url . '%20' . urlencode($keytitle) . '" class="mdui-btn mdui-ripple">Bing</a><a target="_blank" href="https://www.baidu.com/s?wd=site%3A' . $url . '%20' . urlencode($keytitle) . '" class="mdui-btn mdui-ripple">Baidu</a></div>';
 

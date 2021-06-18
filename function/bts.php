@@ -36,7 +36,7 @@ $out = new allOutput();
 
 if (@$_POST["kt"]) {
     $out->__doOutputSOnline($data['mgjh'], '蜜柑计划', 'mikanani.me', $keyTitle, 'mgjh.ico');
-    $out->__doOutputBTS($data['agefans'], 'AGE动漫&百度云', 'donghua.agefans.com', $keyTitle, 'agefuns.ico');
+    $out->__doOutputBTS($data['agefans'], 'AGE动漫&百度云', 'www.agefans.cc', $keyTitle, 'agefuns.ico');
 } elseif ($_GET["kt"]) {
     $data = delairAnimeHeader($data);
     $out->__doOutputOri($data);
