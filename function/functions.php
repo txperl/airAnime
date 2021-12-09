@@ -434,6 +434,8 @@ function curl_get_contents($url)
     //curl_setopt($ch, CURLOPT_REFERER,_REFERER_); //设置 referer
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); //跟踪301
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //返回结果
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,  2);
     $r = curl_exec($ch);
     curl_close($ch);
     return $r;
@@ -450,6 +452,8 @@ function curl_get_contents_form_post($url, $da)
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $da);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,  2);
     //curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
     $r = curl_exec($ch);
     curl_close($ch);
