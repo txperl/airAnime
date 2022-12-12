@@ -39,7 +39,7 @@ class allOutput
         for ($i = 0; $i < $num; $i++) {
             $li = $li . '<a target="_blank" href="' . $link[$i + 1] . '" style="color:#555;"><div class="mdui-chip"><span class="mdui-chip-title">' . $title[$i + 1] . '</span></div></a> ';
         }
-        $but = '<div class="mdui-panel-item-actions"><a target="_blank" href="http://' . $url . '" class="mdui-btn mdui-ripple">' . $site . '</a><a target="_blank" href="https://www.google.com/#q=site%3A' . $url . '%20' . urlencode($keytitle) . '" class="mdui-btn mdui-ripple">Google</a><a target="_blank" href="https://bing.com/search?q=site%3A' . $url . '%20' . urlencode($keytitle) . '" class="mdui-btn mdui-ripple">Bing</a><a target="_blank" href="https://www.baidu.com/s?wd=site%3A' . $url . '%20' . urlencode($keytitle) . '" class="mdui-btn mdui-ripple">Baidu</a></div>';
+        $but = '<div class="mdui-panel-item-actions"><a target="_blank" href="http://' . $url . '" class="mdui-btn mdui-ripple">' . $site . '</a><a target="_blank" href="https://www.google.com/search?q=site%3A' . $url . '%20' . urlencode($keytitle) . '" class="mdui-btn mdui-ripple">Google</a><a target="_blank" href="https://bing.com/search?q=site%3A' . $url . '%20' . urlencode($keytitle) . '" class="mdui-btn mdui-ripple">Bing</a><a target="_blank" href="https://www.baidu.com/s?wd=site%3A' . $url . '%20' . urlencode($keytitle) . '" class="mdui-btn mdui-ripple">Baidu</a></div>';
 
         echo '<div class="mdui-panel-item"><div class="mdui-panel-item-header"><img src="' . $icon_url . '" class="icon-website">' . $site . ' (<b>' . $num . '</b>)</div><div class="mdui-panel-item-body">' . $li . $but . '</div></div>';
     }

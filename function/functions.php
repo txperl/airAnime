@@ -1,5 +1,100 @@
 <?php
 ini_set("error_reporting", "E_ALL & ~E_NOTICE");
+$DATA_RES = [
+    "bangumi" => [
+        "title" => "番组计划",
+        "urlTemplate" => "https://bangumi.tv/subject/{{id}}",
+    ],
+    "acfun" => [
+        "title" => "AcFun",
+        "urlTemplate" => "https://www.acfun.cn/bangumi/aa{{id}}",
+    ],
+    "bilibili" => [
+        "title" => "哔哩哔哩",
+        "urlTemplate" => "https://www.bilibili.com/bangumi/media/md{{id}}/",
+    ],
+    "bilibili_hk_mo_tw" => [
+        "title" => "哔哩哔哩（港澳台）",
+        "urlTemplate" => "https://www.bilibili.com/bangumi/media/md{{id}}/",
+    ],
+    "bilibili_hk_mo" => [
+        "title" => "哔哩哔哩（港澳）",
+        "urlTemplate" => "https://www.bilibili.com/bangumi/media/md{{id}}/",
+    ],
+    "bilibili_tw" => [
+        "title" => "哔哩哔哩（台灣）",
+        "urlTemplate" => "https://www.bilibili.com/bangumi/media/md{{id}}/",
+    ],
+    "sohu" => [
+        "title" => "搜狐视频",
+        "urlTemplate" => "https://tv.sohu.com/{{id}}",
+    ],
+    "youku" => [
+        "title" => "优酷",
+        "urlTemplate" => "https://list.youku.com/show/id_z{{id}}.html",
+    ],
+    "qq" => [
+        "title" => "腾讯视频",
+        "urlTemplate" => "https://v.qq.com/detail/{{id}}.html",
+    ],
+    "iqiyi" => [
+        "title" => "爱奇艺",
+        "urlTemplate" => "https://www.iqiyi.com/{{id}}.html",
+    ],
+    "letv" => [
+        "title" => "乐视",
+        "urlTemplate" => "https://www.le.com/comic/{{id}}.html",
+    ],
+    "pptv" => [
+        "title" => "PPTV",
+        "urlTemplate" => "http://v.pptv.com/page/{{id}}.html",
+    ],
+    "mgtv" => [
+        "title" => "芒果tv",
+        "urlTemplate" => "https://www.mgtv.com/h/{{id}}.html",
+    ],
+    "nicovideo" => [
+        "title" => "Niconico",
+        "urlTemplate" => "https://ch.nicovideo.jp/{{id}}",
+    ],
+    "netflix" => [
+        "title" => "Netflix",
+        "urlTemplate" => "https://www.netflix.com/title/{{id}}",
+    ],
+    "gamer" => [
+        "title" => "動畫瘋",
+        "urlTemplate" => "https://acg.gamer.com.tw/acgDetail.php?s={{id}}",
+    ],
+    "muse_hk" => [
+        "title" => "木棉花 HK",
+        "urlTemplate" => "https://www.youtube.com/playlist?list={{id}}",
+    ],
+    "ani_one" => [
+        "title" => "Ani-One中文官方動畫頻道",
+        "urlTemplate" => "https://www.youtube.com/playlist?list={{id}}",
+    ],
+    "ani_one_asia" => [
+        "title" => "Ani-One Asia",
+        "urlTemplate" => "https://www.youtube.com/playlist?list={{id}}",
+    ],
+    "viu" => [
+        "title" => "Viu",
+        "urlTemplate" => "https://www.viu.com/ott/hk/zh-hk/vod/{{id}}/",
+    ],
+    "mytv" => [
+        "title" => "myTV SUPER",
+        "urlTemplate" => "https://www.mytvsuper.com/tc/programme/{{id}}/",
+    ],
+    "disneyplus" => [
+        "title" => "Disney+",
+        "urlTemplate" => "https://www.disneyplus.com/series/view/{{id}}",
+    ],
+    "dmhy" => [
+        "title" => "动漫花园",
+        "urlTemplate" => "https://share.dmhy.org/topics/list?keyword={{id}}",
+    ]
+];
+
 //简单余弦函数判断短文本相似度
 function howtextsimilar($text1, $text2)
 {
@@ -46,125 +141,14 @@ function howtextsimilar($text1, $text2)
 
 function getResUrl($code, $c)
 {
-    $url = '';
-    if ($c == 'bangumi') {
-        $url = 'https://bangumi.tv/subject/' . $code;
-    }
-    if ($c == 'saraba1st') {
-        $url = 'https://bbs.saraba1st.com/2b/thread-' . $code . '-1-1.html';
-    }
-    if ($c == 'acfun') {
-        $url = 'https://www.acfun.cn/bangumi/aa' . $code;
-    }
-    if ($c == 'bilibili') {
-        $url = 'https://www.bilibili.com/bangumi/media/md' . $code;
-    }
-    if ($c == 'tucao') {
-        $url = 'http://www.tucao.tv/index.php?m=search&c=index&a=init2&q=' . $code;
-    }
-    if ($c == 'sohu') {
-        $url = 'https://tv.sohu.com/' . $code;
-    }
-    if ($c == 'youku') {
-        $url = 'https://list.youku.com/show/id_z' . $code . '.html';
-    }
-    if ($c == 'tudou') {
-        $url = 'https://www.tudou.com/albumcover/' . $code . '.html';
-    }
-    if ($c == 'qq') {
-        $url = 'https://v.qq.com/detail/' . $code . '.html';
-    }
-    if ($c == 'iqiyi') {
-        $url = 'https://www.iqiyi.com/' . $code . '.html';
-    }
-    if ($c == 'letv') {
-        $url = 'https://www.le.com/comic/' . $code . '.html';
-    }
-    if ($c == 'pptv') {
-        $url = 'http://v.pptv.com/page/' . $code . '.html';
-    }
-    if ($c == 'kankan') {
-        $url = 'http://movie.kankan.com/movie/' . $code;
-    }
-    if ($c == 'mgtv') {
-        $url = 'https://www.mgtv.com/h/' . $code . '.html';
-    }
-    if ($c == 'nicovideo') {
-        $url = 'https://ch.nicovideo.jp/' . $code;
-    }
-    if ($c == 'netflix') {
-        $url = 'https://www.netflix.com/title/' . $code;
-    }
-    if ($c == 'dmhy') {
-        $url = 'https://share.dmhy.org/topics/list?keyword=' . $code;
-    }
-    if ($c == 'nyaa') {
-        $url = 'https://www.nyaa.se/?page=search&term=' . $code;
-    }
-
-    return $url;
+    global $DATA_RES;
+    return str_replace("{{id}}", $code, $DATA_RES[$c]["urlTemplate"]);
 }
 
 function getResName($c)
 {
-    $name = $c;
-
-    if ($c == 'bangumi') {
-        $name = 'Bangumi';
-    }
-    if ($c == 'saraba1st') {
-        $name = 'Saraba1st';
-    }
-    if ($c == 'acfun') {
-        $name = 'AcFun';
-    }
-    if ($c == 'bilibili') {
-        $name = '哔哩哔哩';
-    }
-    if ($c == 'tucao') {
-        $name = 'TUCAO';
-    }
-    if ($c == 'sohu') {
-        $name = '搜狐视频';
-    }
-    if ($c == 'youku') {
-        $name = '优酷';
-    }
-    if ($c == 'tudou') {
-        $name = '土豆';
-    }
-    if ($c == 'qq') {
-        $name = '腾讯视频';
-    }
-    if ($c == 'iqiyi') {
-        $name = '爱奇艺';
-    }
-    if ($c == 'letv') {
-        $name = '乐视';
-    }
-    if ($c == 'pptv') {
-        $name = 'PPTV';
-    }
-    if ($c == 'kankan') {
-        $name = '响巢看看';
-    }
-    if ($c == 'mgtv') {
-        $name = '芒果TV';
-    }
-    if ($c == 'nicovideo') {
-        $name = 'Niconico';
-    }
-    if ($c == 'netflix') {
-        $name = 'Netflix';
-    }
-    if ($c == 'dmhy') {
-        $name = '动漫花园';
-    }
-    if ($c == 'nyaa') {
-        $name = 'nyaa';
-    }
-
-    return $name;
+    global $DATA_RES;
+    return $DATA_RES[$c]["title"];
 }
 
 function apiGetCNName($c)
@@ -249,7 +233,7 @@ function curl_multi($urls)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'); //设置头部
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:107.0) Gecko/20100101 Firefox/107.0'); //设置头部
         curl_setopt($ch, CURLOPT_REFERER, $url); //设置来源
         curl_setopt($ch, CURLOPT_ENCODING, "gzip"); //编码压缩
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -430,7 +414,7 @@ function curl_get_contents($url)
     curl_setopt($ch, CURLOPT_URL, $url); //设置访问的url地址
     //curl_setopt($ch,CURLOPT_HEADER,1); //是否显示头部信息
     curl_setopt($ch, CURLOPT_TIMEOUT, 10); //设置超时
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'); //用户访问代理 User-Agent
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:107.0) Gecko/20100101 Firefox/107.0'); //用户访问代理 User-Agent
     //curl_setopt($ch, CURLOPT_REFERER,_REFERER_); //设置 referer
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); //跟踪301
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //返回结果
@@ -446,7 +430,7 @@ function curl_get_contents_form_post($url, $da)
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko');
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:107.0) Gecko/20100101 Firefox/107.0');
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

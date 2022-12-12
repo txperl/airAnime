@@ -21,9 +21,11 @@ $arr = [
         'fun' => ['reg', '', ['/<a href="\/Home\/Bangumi\/(.*?)".*?class="an-text" title="(.*?)"/ms'], [1], [], ['mgjh']]
     ],
     'agefans' => [
-        'type' => 'getLocal',
-        'uri' => '../data/agefans.json',
-        'thred' => [0.5, 0.45]
+        'type' => 'getOnline',
+        'url' => [
+            'https://api.agefans.app/v2/search?query=' . urlencode($keyTitle)
+        ],
+        'fun' => ['json', '', ['AniPreL{-}{index}{-}R动画名称'], ['AniPreL{-}{index}{-}AID'], [], ['agefans']]
     ]
 ];
 

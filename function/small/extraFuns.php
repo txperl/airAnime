@@ -1,5 +1,14 @@
 <?php
 
+function extraNex_agefans($c)
+{
+    for ($i = 1; $i < count($c[0]); $i++) {
+        $c[1][$i] = 'https://www.agemys.net/detail/' . $c[1][$i];
+    }
+
+    return $c;
+}
+
 function extraNex_acfun($c)
 {
     for ($i = 1; $i < count($c[0]); $i++) {
