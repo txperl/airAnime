@@ -98,6 +98,9 @@ $DATA_RES = [
 //简单余弦函数判断短文本相似度
 function howtextsimilar($text1, $text2)
 {
+    if (strpos($text1, $text2) !== false || strpos($text2, $text1) !== false)
+        return 1;
+
     $gentext = $text1 . $text2;
     $fword = '';
     $word = array(); //文本单分割结果

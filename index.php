@@ -50,13 +50,12 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
         <li class="mdui-divider"></li>
         <li class="mdui-menu-item">
           <a target="_blank" href="https://github.com/txperl/airAnime" class="mdui-ripple">GitHub</a>
-          <a target="_blank" href="https://yumoe.com/" class="mdui-ripple">TriiHsia</a>
         </li>
       </ul>
     </div>
   </header>
   <div class="searchbar mdui-toolbar mdui-color-white mdui-col-xs-12 searchbar_active" style="margin-bottom: 0;">
-    <select id="typeName" class="mdui-select" style="margin: 0 12px 0 16px;" onchange='typeChange(this[selectedIndex].value);'>
+    <select id="typeName" class="mdui-select" style="margin: 0 12px 0 16px; width: 5em; text-align: right;" onchange='typeChange(this[selectedIndex].value);'>
       <option value="a">番剧</option>
       <option value="c">漫画</option>
       <!-- <option value="n">小说</option> -->
@@ -64,7 +63,7 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
       <option value="i">图片</option>
     </select>
     <input id="keytitle" class="mdui-textfield-input" type="search" autocomplete="off" placeholder="想要搜索什么动漫呢？" />
-    <button id="btnUP" class="mdui-btn mdui-ripple" style="min-width: 56px;display: none;">UP</button>
+    <button id="btnUP" class="mdui-btn mdui-ripple" style="min-width: 56px; display: none;">UP</button>
     <button id="btnS" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon material-icons">search</i></button>
   </div>
   <div class="mdui-col-xs-12" style="margin-bottom: 40px;">
@@ -190,15 +189,6 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
   <!-- end -->
 
   <br><br><br>
-
-  <!-- 图片上传表单
-  <div id='upimage' style="display:none;">
-    <form enctype="multipart/form-data" method="post" action="https://sm.ms/api/v2/upload" id="upform">
-      <input type="file" name="smfile" id="btnFile">
-      <input type="submit" id='btnUUP' value="Upload">
-    </form>
-  </div>
-  end -->
 
   <!-- 信息框 -->
   <div class="mdui-dialog" id="airDialog"></div>
@@ -389,12 +379,12 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
   //下拉框选择改变事件
   function typeChange(values) {
     if (values == "a") {
-      $('#keytitle').attr('placeholder', '🎐您想搜索的番剧是？');
+      $('#keytitle').attr('placeholder', '🎐 您想搜索的番剧是？');
       $('#btnUP').css('display', 'none');
       type = 'a';
     }
     if (values == "c") {
-      $('#keytitle').attr('placeholder', '🏮您想搜索的漫画是？');
+      $('#keytitle').attr('placeholder', '🏮 您想搜索的漫画是？');
       $('#btnUP').css('display', 'none');
       type = 'c';
     }
@@ -403,7 +393,7 @@ if (@$_COOKIE["noUserbgm"] == 'true') {
       $('#btnUP').css('display', 'none');
     }
     if (values == "i") {
-      $('#keytitle').attr('placeholder', '「以图搜番」请输入图片链接，或点击右侧 UP 上传后输入');
+      $('#keytitle').attr('placeholder', '「以图搜番」图片的链接，或点击右侧 UP 上传后填入');
       $('#btnUP').css('display', 'block');
       type = 'i';
     }
