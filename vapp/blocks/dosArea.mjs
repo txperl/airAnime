@@ -86,7 +86,7 @@ export default {
             return null;
         },
         getPopupMenuCode(index, num) {
-            return `{target: '#pu${num}m-${index}', fixed: true, align: 'right'}`;
+            return `{target: '#pu${num}m-${index}'}`;
         },
         doGetSourceData(kt) {
             if (!kt) return;
