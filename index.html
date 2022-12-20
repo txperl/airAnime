@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>airAnime v3</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <link rel="stylesheet" href="./vapp/assets/aa3.css" />
+</head>
+
+<body>
+    <div id="app" style="padding: 100px 0;">
+        <div v-if="isLoadingData" class="loading"></div>
+        <div class="wait" :in="!isLoadingData">
+            <div class="mdui-container">
+                <div class="mdui-row" style="padding: 0 0 30px 0;">
+                    <div class="mdui-col-xs-10 mdui-col-offset-xs-1 mdui-col-md-6 mdui-col-offset-md-3">
+                        <search-bar :args="router.args" />
+                    </div>
+                </div>
+            </div>
+            <div v-if="router.cBlock === 'search'" class="mdui-container">
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-12 mdui-col-md-10 mdui-col-offset-md-1">
+                        <dos-area :args="router.args" />
+                    </div>
+                </div>
+            </div>
+            <div v-show="router.cBlock === 'home'" class="mdui-container">
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-12 mdui-col-md-10 mdui-col-offset-md-1">
+                        <pins-panel :args="router.args" />
+                    </div>
+                </div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-12 mdui-col-md-10 mdui-col-offset-md-1">
+                        <season-panel :args="router.args" style="padding-top: 60px; margin: 0;" />
+                    </div>
+                </div>
+            </div>
+            <div v-if="router.cBlock === 'about'" class="mdui-container">
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-12 mdui-col-md-10 mdui-col-offset-md-1">
+                        <about-area :args="router.args" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+<script src="https://unpkg.com/jquery@3.6.1/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/axios@1.2.1/dist/axios.min.js"></script>
+<script src="https://unpkg.com/localforage@1.10.0/dist/localforage.min.js"></script>
+<script type="module">
+    import { createApp } from "https://unpkg.com/vue@3.2.45/dist/vue.esm-browser.prod.js";
+    import MainApp from "./vapp/main.mjs"
+
+    createApp(MainApp).mount("#app");
+</script>
+
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "airanime-rp-vercel",
+  "version": "1.01",
+  "description": "One simple reverse proxy based on Vercel Serverless Functions for airAnime",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Trii Hsia",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "vercel": "*"
+  }
+}

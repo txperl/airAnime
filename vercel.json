@@ -1,0 +1,14 @@
+{
+    "redirects": [
+        {
+            "source": "/api/:path*",
+            "destination": "/"
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/fetch(.*)",
+            "destination": "/api/vercel_severless_functions/api/fetch.mjs"
+        }
+    ]
+}

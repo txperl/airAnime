@@ -1,0 +1,218 @@
+.search-bar .input-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 1.5em;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.search-bar .input-box i {
+    color: rgba(0, 0, 0, .75);
+}
+
+.search-bar .input-box[ing=true] {
+    background-color: rgba(0, 0, 0, .10);
+}
+
+.search-bar .input-box[ing=true]:hover {
+    background-color: rgba(0, 0, 0, .08);
+}
+
+.search-bar .input-box input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5em;
+    color: rgba(0, 0, 0, .87);
+    cursor: pointer;
+}
+
+.search-bar .input-box input:focus-visible {
+    outline: none;
+}
+
+.search-bar .maybe-card {
+    position: absolute;
+    padding: 0;
+    border-radius: 0 0 20px 20px;
+    background-color: rgba(255, 255, 255, 0.98);
+    z-index: 999;
+}
+
+.search-bar .maybe-card li {
+    padding: 0 1.5em;
+}
+
+.search-bar .maybe-card li:hover {
+    background-color: transparent;
+}
+
+.search-bar .maybe-card li[ing=true] {
+    background-color: rgb(235, 235, 235);
+}
+
+.dos-sources {
+    padding: .5em 0;
+}
+
+.dos-sources li a img {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, .1);
+}
+
+.dos-sources li a span {
+    padding: 0 0 0 22px;
+}
+
+.season-panel .gallery section {
+    height: 280px;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .08);
+}
+
+.season-panel .gallery section img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.season-panel .gallery section span {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.75em;
+    font-size: 1.05em;
+    font-weight: 500;
+    text-indent: .65em;
+    background: linear-gradient(rgba(233, 227, 238, 0), rgba(233, 227, 238, .6), rgba(233, 227, 238, .8));
+}
+
+.season-panel .gallery section span a {
+    display: inherit;
+    padding: 1em 0 0 0;
+    width: 95%;
+    color: #111;
+    text-shadow: 0 1px 1px rgb(255, 255, 255);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.season-panel .nav {
+    padding: 0 0 1em 0;
+}
+
+.season-panel .nav a:not(:last-child) {
+    margin: 0 .5em 0 0;
+}
+
+.season-panel .nav a::selection,
+.season-panel .nav a:focus-visible {
+    outline: none;
+    background-color: transparent;
+}
+
+.season-panel .nav .chooser {
+    position: absolute;
+    margin-top: -2em;
+}
+
+.season-panel .nav .shower a {
+    font-size: 2em;
+}
+
+.loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255, .5);
+    z-index: 999;
+}
+
+.loading::before {
+    content: "੭ ˙ᗜ˙ )੭ airAnime";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+}
+
+.wait {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: visibility 0s, all .35s cubic-bezier(.3, 0, .2, 1);
+}
+
+.wait[in=true] {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+    overflow: initial;
+}
+
+.block-nav {
+    font-size: 1em;
+    font-weight: 300;
+}
+
+a[disabled=true] {
+    pointer-events: none;
+    border: none;
+}
+
+.text a {
+    cursor: pointer;
+    color: rgba(0, 0, 0, .87);
+    position: relative;
+    text-decoration: none;
+}
+
+.text a:not([disabled=true])::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(0, 0, 0, .87);
+    transition: all .2s ease;
+}
+
+.text a:hover::before {
+    height: 4px;
+}
+
+.lazy {
+    opacity: 0;
+    transition: all .2s ease;
+}
+
+.loaded,
+.error {
+    opacity: 1;
+}
+
+.mdui-list-item,
+.mdui-list-item:hover {
+    border-radius: 20px;
+}
+
+.mdui-chip-title {
+    padding-left: 10px;
+}
+
+.mdui-chip:not(last-child) {
+    margin-right: .5em;
+}
