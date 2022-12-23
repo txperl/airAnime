@@ -1,7 +1,7 @@
 # airAnime
 airAnime 是一款聚合「番剧搜索」工具，也许你会喜欢。
 
-- [airAnime v3](https://air.tls.moe)
+- [air.tls.moe](https://air.tls.moe)
 
 ## 部署
 ### 手动
@@ -18,15 +18,10 @@ airAnime 是一款聚合「番剧搜索」工具，也许你会喜欢。
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/txperl/airAnime/)
 
 ## 最后
-### 声明
-- 本程序（airAnime）仅供学习交流，最初目的达成后请自行删除
-- 使用后任何不可知事件都与原作者无关，原作者不承担任何后果
-- MIT License
-
 ### 一些话
 > 因为感觉经常在各视频网站找番有点浪费时间，于是就突然萌生了一个想法：如果能同时进行，就不会浪费太多时间了。所以，airAnime 就出于这个想法诞生了。
 
-上面的这段话来自最初的 `v1` 版本，那也是我的第一个开源项目。经历了 `v1` 与 `v2` 版本后，它已经有很长一段时间没有被维护了。
+上面的这段话来自最初的 `v1` 版本，那也是我的第一个开源项目。经历了 `v1` 与 `v2` 版本后，它已经有很长一段时间没有维护了。
 
 直至近期，不知为何突然有一种冲动，想要将它继续下去。为此，`v3` 版本就这样诞生了。
 
