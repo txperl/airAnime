@@ -13,6 +13,7 @@ export default {
         return {
             q: {
                 sourceAll: SourceAll,
+                isSearchBarIng: false,
             },
             router: {
                 default: "/home",

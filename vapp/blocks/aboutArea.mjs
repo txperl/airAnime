@@ -88,7 +88,6 @@ export default {
     },
     methods: {
         init() {
-            // TODO: 初次加载数据问题
             this.onSources = {};
             this.allNames = this.$parent.q.sourceAll.filter.getAllKeys("name");
             this.$parent.q.sourceAll.filter.name().forEach(source => {

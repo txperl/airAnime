@@ -14,7 +14,7 @@ const template = `
             </section>
         </div>
         <div class="shower">
-            <a @keydown.enter.prevent @blur="changeDate($event, 0)" contenteditable="true"
+            <a @keydown.enter.prevent @blur="changeDate($event, 0)" :contenteditable="!$parent.q.isSearchBarIng"
                 style="cursor: text;">{{ cDate[0] }}</a>
             <a @click="toggleChooser('season')">{{ showSeasonName }}</a>
             <a @click="toggleChooser('dayofweek')">{{ dayOfWeekName[cDate[2]] }}</a>
@@ -22,9 +22,8 @@ const template = `
     </div>
     <div class="gallery">
         <section v-for="item in rOfHasImg" class="mdui-col">
-            <a @click.prevent="$parent.goToHash('/search/' + item.showTitle)" 
-                :href="'/#/search/' + item.showTitle">
-                <img class="lazy" :data-src="item.imgUrl"/>
+            <a @click.prevent="$parent.goToHash('/search/' + item.showTitle)" :href="'/#/search/' + item.showTitle">
+                <img class="lazy" :data-src="item.imgUrl" />
                 <span><a>{{ item.showTitle }}</a></span>
             </a>
         </section>
