@@ -6,7 +6,7 @@ import SourceMikanAni from "./online/mikanani.mjs";
 import SourceMoxMoe from "./online/moxmoe.mjs";
 import SourceNicoTV from "./online/nicotv.mjs";
 
-const AIRANIME_RP_URL = "https://air.tls.moe/fetch";
+const AIRANIME_RP_URL = "./fetch";
 
 const ALL_SOURCES = [
     new SourceBgmd(
