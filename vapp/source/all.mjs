@@ -6,50 +6,49 @@ import SourceMikanAni from "./online/mikanani.mjs";
 import SourceMoxMoe from "./online/moxmoe.mjs";
 import SourceNicoTV from "./online/nicotv.mjs";
 
-export default class SourceAll {
-    static AIRANIME_RP_URL = "./fetch";
+const AIRANIME_RP_URL = "https://air.tls.moe/fetch";
 
-    static SOURCES = [
-        new SourceBgmd(
-            "Official/bgmd/bgmd",
-            "github.com/bangumi-data/bangumi-data",
-            `https://unpkg.com/bangumi-data/dist/data.json`
-        ),
-        new SourceBimiBimi(
-            "Anime/bimibimi/BimiBimi",
-            "www.bimiacg4.net",
-            `${SourceAll.AIRANIME_RP_URL}/file/bimibimi.json`
-        ),
-        new SourceAgeFans(
-            "Anime/agefans/AGE动画",
-            "www.agemys.net",
-            `${SourceAll.AIRANIME_RP_URL}/agefans/{kt}`
-        ),
-        new SourceNicoTV(
-            "Anime/nicotv/妮可动漫",
-            "www.nicotv.me",
-            `${SourceAll.AIRANIME_RP_URL}/nicotv/{kt}`
-        ),
-        new SourceMikanAni(
-            "Anime/mikanani/蜜柑计划",
-            "mikanani.me",
-            `${SourceAll.AIRANIME_RP_URL}/mikanani/{kt}`
-        ),
-        new SourceMoxMoe(
-            "Manga/moxmoe/MoxMoe",
-            "mox.moe",
-            `${SourceAll.AIRANIME_RP_URL}/moxmoe/{kt}`
-        ),
-        new SourceCopyManga(
-            "Manga/copymanga/拷贝漫画",
-            "copymanga.site",
-            `${SourceAll.AIRANIME_RP_URL}/copymanga/{kt}`
-        ),
-    ]
+const ALL_SOURCES = [
+    new SourceBgmd(
+        "Official/bgmd/bgmd",
+        "github.com/bangumi-data/bangumi-data",
+        `https://unpkg.com/bangumi-data/dist/data.json`
+    ),
+    new SourceBimiBimi(
+        "Anime/bimibimi/BimiBimi",
+        "www.bimiacg4.net",
+        `${AIRANIME_RP_URL}/file/bimibimi.json`
+    ),
+    new SourceAgeFans(
+        "Anime/agefans/AGE动画",
+        "www.agemys.net",
+        `${AIRANIME_RP_URL}/agefans/{kt}`
+    ),
+    new SourceNicoTV(
+        "Anime/nicotv/妮可动漫",
+        "www.nicotv.me",
+        `${AIRANIME_RP_URL}/nicotv/{kt}`
+    ),
+    new SourceMikanAni(
+        "Anime/mikanani/蜜柑计划",
+        "mikanani.me",
+        `${AIRANIME_RP_URL}/mikanani/{kt}`
+    ),
+    new SourceMoxMoe(
+        "Manga/moxmoe/MoxMoe",
+        "mox.moe",
+        `${AIRANIME_RP_URL}/moxmoe/{kt}`
+    ),
+    new SourceCopyManga(
+        "Manga/copymanga/拷贝漫画",
+        "copymanga.site",
+        `${AIRANIME_RP_URL}/copymanga/{kt}`
+    ),
+];
 
-    static filter = {
+export default {
+    filter: {
         _cache: {},
-        _keys: {},
         _noNames: [],
         doReload() {
             this._cache = {};
@@ -59,16 +58,17 @@ export default class SourceAll {
             this._noNames = val.filter(n => n !== "bgmd");
             this.doReload();
         },
-        getAllKeys(key) {
-            if (!this._keys[key]) {
+        allSubKey(key) {
+            if (!this._cache.allSubKey) this._cache.allSubKey = {};
+            if (!this._cache.allSubKey[key]) {
                 const r = [];
-                SourceAll.SOURCES.forEach(source => {
+                ALL_SOURCES.forEach(source => {
                     if (source[key] && !r.includes(source[key]))
                         r.push(source[key]);
                 });
-                this._keys[key] = r;
+                this._cache.allSubKey[key] = r;
             }
-            return this._keys[key];
+            return this._cache.allSubKey[key];
         },
         method(subkey) {
             return this._filter("method", subkey);
@@ -82,7 +82,7 @@ export default class SourceAll {
         _filter(key, subkey, unique = false) {
             if (!this._cache[key]) {
                 const r = {};
-                SourceAll.SOURCES.forEach(source => {
+                ALL_SOURCES.forEach(source => {
                     if (this._noNames.includes(source.name))
                         return;
                     if (unique)

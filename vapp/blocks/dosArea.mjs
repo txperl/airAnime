@@ -46,7 +46,7 @@ export default {
     computed: {
         keyOfTypes() {
             const r = [];
-            this.$parent.q.sourceAll.filter.getAllKeys("type").forEach(type => r.push(type));
+            this.$parent.q.soHandler.filter.allSubKey("type").forEach(type => r.push(type));
             return r;
         },
         rOfAll() {
@@ -80,9 +80,11 @@ export default {
             this.doGetSourceData(this.args[1]);
         },
         getImgUrlOfBgmd(sites) {
-            for (const siteNameItem of sites)
-                if (siteNameItem[0] === "番组计划")
-                    return `https://api.bgm.tv/v0/subjects/${siteNameItem[1].url.split("/").at(-1)}/image?type=common`;
+            for (const siteNameItem of sites) {
+                if (siteNameItem[0] !== "番组计划") continue;
+                const temp = siteNameItem[1].url.split("/");
+                return `https://api.bgm.tv/v0/subjects/${temp[temp.length - 1]}/image?type=common`;
+            }
             return null;
         },
         getPopupMenuCode(index, num) {
@@ -91,7 +93,7 @@ export default {
         doGetSourceData(kt) {
             if (!kt) return;
             const vm = this;
-            this.$parent.q.sourceAll.filter.name().forEach(li => {
+            this.$parent.q.soHandler.filter.name().forEach(li => {
                 const [name, source] = li;
                 const type = source.type;
                 if (!vm.taskIngNum[type]) {

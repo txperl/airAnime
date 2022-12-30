@@ -98,7 +98,7 @@ export default {
             if (!this.kt)
                 return this.maybeKeys = [];
             this.timer = this.doLazy(350, () => {
-                this.$parent.q.sourceAll.filter.name("bgmd").get(this.kt.toLowerCase(), 30)
+                this.$parent.q.soHandler.filter.name("bgmd").get(this.kt.toLowerCase(), 30)
                     .then(items => {
                         const keys = {};
                         items.forEach(item => {

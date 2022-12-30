@@ -9,6 +9,7 @@ airAnime 是一款聚合「番剧搜索」工具，也许你会喜欢。
 
 - 准备项目的 `./index.html` 与 `./vapp/` 文件夹
 - 使用 Web 服务器（NGINX、Apache 等）绑定至相应目录
+- 最后，请确保 `.mjs` 文件响应头中的 `Content-Type` 字段为 `application/javascript`
 
 需要注意的是，部分数据源基于后端的抓取脚本。若您手动部署，请务必查看 [airAnime-rp](./api/) 文档。
 

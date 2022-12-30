@@ -89,7 +89,7 @@ export default {
         init() {
             const [year, season, day] = this.cDate;
             if (year === null || year < 1970 || season === null) return;
-            this.$parent.q.sourceAll.filter.name("bgmd")
+            this.$parent.q.soHandler.filter.name("bgmd")
                 .filter(null, null, (item) => {
                     if (item.season.year !== year || item.season.season !== season) return false;
                     return day === 7 || item.season.dayOfWeek === day;

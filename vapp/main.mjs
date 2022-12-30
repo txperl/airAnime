@@ -1,4 +1,4 @@
-import SourceAll from "./source/all.mjs";
+import SourceHandler from "./source/all.mjs";
 import SearchBar from "./blocks/searchBar.mjs";
 import DosArea from "./blocks/dosArea.mjs";
 import SeasonPanel from "./blocks/seasonPanel.mjs";
@@ -12,7 +12,7 @@ export default {
     data() {
         return {
             q: {
-                sourceAll: SourceAll,
+                soHandler: SourceHandler,
                 isSearchBarIng: false,
             },
             router: {
@@ -40,8 +40,8 @@ export default {
             const lang = await this.dget("sys.conf.lang", "zh-Hans");
             const noNames = await this.dget("sys.conf.noNames", []);
             const funcs = [];
-            this.q.sourceAll.filter.setNoNames(noNames);
-            this.q.sourceAll.filter.method("db").forEach(source => {
+            this.q.soHandler.filter.setNoNames(noNames);
+            this.q.soHandler.filter.method("db").forEach(source => {
                 source.setLang(lang);
                 funcs.push(source.update(false));
             });
