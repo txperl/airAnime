@@ -20,11 +20,15 @@ export default {
                 cBlock: null,
                 args: []
             },
+            appRootUrl: "",
             isLoadingData: true,
-            appRootUrl: `${window.location.protocol}//${window.location.host}`,
         }
     },
     created() {
+        let rurl = window.location.href.split("/#")[0];
+        while (rurl.charAt(rurl.length - 1) === "/")
+            rurl = rurl.substring(0, rurl.length - 1);
+        this.appRootUrl = rurl;
         const vm = this;
         window.addEventListener("hashchange", (event) => {
             vm.goToSys(event.newURL.split(vm.appRootUrl + "/#")[1]);

@@ -12,7 +12,7 @@ const template = `
                 <img v-if="rIndex === 0" :src="getImgUrlOfBgmd(titleSites[1])"
                     onerror="this.src='./vapp/assets/images/img-error.svg'" class="mdui-chip-icon"
                     style="object-fit: cover;" />
-                <span class="mdui-chip-title">{{ titleSites[0] }}</span>
+                <span class="mdui-chip-title" style="padding-left: 10px;">{{ titleSites[0] }}</span>
             </div>
             <ul :id="'pu' + rIndex +'m-' + index" class="mdui-menu">
                 <li v-for="siteNameItem in titleSites[1]" class="mdui-menu-item">

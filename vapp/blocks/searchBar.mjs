@@ -37,15 +37,17 @@ export default {
             maybeKeys: [],
             cIndex: -1,
             isFavorited: false,
+            funcsDynamicStyle: () => {
+                $(".search-bar .maybe-card").width($(".search-bar").width());
+            },
         }
     },
-    created() { this.init(); },
-    mounted() {
-        const dynamicStyle = () => {
-            $(".search-bar .maybe-card").width($(".search-bar").width());
-        };
-        setTimeout(dynamicStyle, 100);
-        $(window).on("resize", () => dynamicStyle());
+    created() {
+        this.init();
+        $(window).on("resize", () => this.funcsDynamicStyle());
+    },
+    updated() {
+        this.funcsDynamicStyle();
     },
     watch: {
         args() { this.init(); },
@@ -54,11 +56,11 @@ export default {
             if (val) return this.doSearchMaybeWords();
             this.cIndex = -1;
             this.maybeKeys = [];
-        }
+        },
     },
     methods: {
         init() {
-            this.maybeKeys = [];
+            $("#input-search-keyword").blur();
             if (this.args[0] !== "search" || !this.args[1])
                 return this.kt = "";
             this.kt = this.args[1];
@@ -87,10 +89,8 @@ export default {
             return false;
         },
         doSearch() {
-            if (this.cIndex > -1) {
-                $("#input-search-keyword").blur();
+            if (this.cIndex > -1 && this.maybeKeys[this.cIndex])
                 this.kt = this.maybeKeys[this.cIndex];
-            }
             this.$parent.goToHash("/search/" + this.kt);
         },
         doSearchMaybeWords() {

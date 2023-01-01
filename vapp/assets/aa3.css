@@ -261,10 +261,6 @@ a[disabled=true] {
     border-radius: 20px;
 }
 
-.mdui-chip-title {
-    padding-left: 10px;
-}
-
 .mdui-chip:not(last-child) {
     margin-right: .5em;
 }
