@@ -171,6 +171,54 @@
     font-weight: 300;
 }
 
+.gblock {
+    border: 1.5px solid rgba(0, 0, 0, .77);
+    border-radius: 5px;
+}
+
+.gblock .body {
+    padding: 1.5em;
+}
+
+.gblock .title {
+    font-size: 1.5em;
+}
+
+.gblock .content {
+    padding: 1em 0 0 0;
+    font-size: .95em;
+    color: rgba(0, 0, 0, .82);
+    line-height: 1.75;
+}
+
+.gblock .panel {
+    padding: 1.1em 1.5em;
+    border-top: 1.5px solid rgba(0, 0, 0, .77);
+    user-select: none;
+}
+
+.gblock .panel.right {
+    text-align: right;
+}
+
+.gblock .panel a:not(:last-child) {
+    margin: 0 5px 0 0;
+}
+
+.gblock .panel a {
+    padding: .6em;
+    font-size: .95em;
+    color: rgba(0, 0, 0, .87);
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.gblock .panel a:hover {
+    color: rgba(0, 0, 0, .97);
+    background-color: rgba(0, 0, 0, .08);
+}
+
 a[disabled=true] {
     pointer-events: none;
     border: none;
@@ -219,4 +267,14 @@ a[disabled=true] {
 
 .mdui-chip:not(last-child) {
     margin-right: .5em;
+}
+
+.mdui-table-fluid {
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+.gblock tbody tr:last-child td {
+    border-bottom: none;
 }

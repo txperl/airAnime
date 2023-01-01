@@ -4,7 +4,7 @@ const template = `
         <h1>About</h1>
         <p>airAnime 是一款聚合「番剧搜索」工具，也许你会喜欢。</p>
         <a href="https://yumoe.com" target="_blank" class="mdui-chip">
-            <span class="mdui-chip-title">Version@v3.03 / Created by Trii Hsia with ❤️</span>
+            <span class="mdui-chip-title">Version@v3.04 / Created by Trii Hsia with ❤️</span>
         </a>
         <a href="mailto:txperl@gmail.com" target="_blank" class="mdui-chip">
             <span class="mdui-chip-title">#Email</span>
@@ -15,33 +15,34 @@ const template = `
     </section>
     <section class="dos-sources">
         <h1>Setting</h1>
-        <div class="mdui-table-fluid">
-            <table class="mdui-table text" style="white-space: nowrap;">
-                <thead>
-                    <tr><th v-for="key in tableColKeys">{{ key }}</th></tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(item, name) in rowsOfTable">
-                        <td>{{ item[0] }}</td>
-                        <td v-html="item[1]"></td>
-                        <td>{{ item[2] }}</td>
-                        <td>{{ item[3] }}</td>
-                        <td class="mdui-table-col-numeric">
-                            <label @click="toggleNoNames(name)" class="mdui-checkbox">
-                                <input type="checkbox" :checked="onSources[name]" :disabled="name === 'bgmd'" />
-                                <i class="mdui-checkbox-icon"></i>
-                            </label>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div style="float: right;">
-            <br>
-            <button @click="doSourceTest" class="mdui-btn mdui-ripple">源测试</button>
-            <button @click="doDbUpdateAll" class="mdui-btn mdui-ripple">
-                {{ isUpdatingDB ? '更新中...' : '更新 DB 缓存' }}
-            </button>
+        <div class="gblock">
+            <div class="mdui-table-fluid">
+                <table class="mdui-table text" style="white-space: nowrap;">
+                    <thead>
+                        <tr>
+                            <th v-for="key in tableColKeys">{{ key }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, name) in rowsOfTable">
+                            <td>{{ item[0] }}</td>
+                            <td v-html="item[1]"></td>
+                            <td>{{ item[2] }}</td>
+                            <td>{{ item[3] }}</td>
+                            <td class="mdui-table-col-numeric">
+                                <label @click="toggleNoNames(name)" class="mdui-checkbox">
+                                    <input type="checkbox" :checked="onSources[name]" :disabled="name === 'bgmd'" />
+                                    <i class="mdui-checkbox-icon"></i>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel right">
+                <a @click="doSourceTest">源测试</a>
+                <a @click="doDbUpdateAll">{{ isUpdatingDB ? "更新中..." : "更新 DB 缓存" }}</a>
+            </div>
         </div>
     </section>
 

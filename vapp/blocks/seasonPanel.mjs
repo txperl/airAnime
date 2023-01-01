@@ -1,7 +1,7 @@
 import LazyLoad from "https://unpkg.com/vanilla-lazyload@17.8.3/dist/lazyload.esm.min.js";
 
 const template = `
-<div class="season-panel mdui-row-xs-2 mdui-row-md-5 mdui-row-gapless">
+<div class="season-panel mdui-row-gapless">
     <div class="nav text">
         <div class="chooser">
             <section v-show="cChooser === 'season'">
@@ -20,13 +20,23 @@ const template = `
             <a @click="toggleChooser('dayofweek')">{{ dayOfWeekName[cDate[2]] }}</a>
         </div>
     </div>
-    <div class="gallery">
+    <div class="gallery mdui-row-xs-2 mdui-row-md-5">
         <section v-for="item in rOfHasImg" class="mdui-col">
-            <a @click.prevent="$parent.goToHash('/search/' + item.showTitle)" :href="'/#/search/' + item.showTitle">
+            <a :href="'./#/search/' + item.showTitle">
                 <img class="lazy" :data-src="item.imgUrl" />
                 <span><a>{{ item.showTitle }}</a></span>
             </a>
         </section>
+    </div>
+    <div v-if="sResults.length === 0" class="gblock mdui-xs-12">
+        <div class="body">
+            <div class="title">(ㆆᴗㆆ)</div>
+            <div class="content">暂无当前时间点的新番数据<br>再等一下，可能马上就会有了</div>
+        </div>
+        <div class="panel">
+            <a @click="setLastSeason">查看上季度番剧</a>
+            <a href="./#/about/">刷新 DB 缓存</a>
+        </div>
     </div>
 </div>
 `;
@@ -61,9 +71,8 @@ export default {
             // lazyload
             $(".lazy").removeClass("entered").removeClass("loaded").removeAttr("data-ll-status");
             this.sResults.forEach(item => {
-                if (item.showTitle.includes("后宫")) return;
                 const bangumi = item.sites.filter(s => s.site === "bangumi")[0];
-                if (!bangumi) return item.imgUrl = "no";
+                if (!bangumi) return item.imgUrl = "none";
                 item.imgUrl = `https://api.bgm.tv/v0/subjects/${bangumi.id}/image?type=large`;
                 r.push(item);
             });
@@ -104,6 +113,15 @@ export default {
             if (this.cChooser === c)
                 return this.cChooser = null;
             this.cChooser = c;
-        }
+        },
+        setLastSeason() {
+            const [y, s, _] = this.cDate;
+            if (s === 0) {
+                this.cDate[1] = 3;
+                this.changeDate(null, 0, y - 1);
+            } else {
+                this.changeDate(null, 1, s - 1);
+            }
+        },
     }
 }
