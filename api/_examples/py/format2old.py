@@ -1,11 +1,20 @@
 import json
 
-with open("./data/py/bimibimi.json", "r", encoding="utf-8") as f:
+with open("./api/_examples/py/bimibimi.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 r = []
 for d in data:
-    r.append({"title": data[d], "link": "http://www.bimiacg4.net/bangumi/bi/" + d})
+    title = (
+        data[d]
+        .replace("【无修版】", "")
+        .replace("【无修正】", "")
+        .replace("无修版", "")
+        .replace("无修正", "")
+        .replace("【无暗牧】", "")
+        .strip()
+    )
+    r.append({"title": title, "link": "http://www.bimiacg4.net/bangumi/bi/" + d})
 
-with open("./data/bimibimi.json", "w", encoding="utf-8") as f:
-    json.dump(r, f)
+with open("./api/_examples/data/bimibimi.json", "w", encoding="utf-8") as f:
+    json.dump(r, f, ensure_ascii=False)

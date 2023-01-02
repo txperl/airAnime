@@ -49,9 +49,9 @@ class Bimiacg(object):
 
 if __name__ == "__main__":
     # config
-    begin, end = (799, 900)
+    begin, end = (799, 850)
     bundle = 10
-    filepath = "./data/py/bimibimi.json"
+    filepath = "./api/_examples/py/bimibimi.json"
 
     # start
     pool = ThreadPoolExecutor(max_workers=10)
