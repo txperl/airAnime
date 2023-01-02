@@ -11,4 +11,4 @@ jobs:
           source_branch: "master"
           destination_repo: ${{ secrets.DEST_REPO_URL }}
           destination_branch: "master"
-          ssh_private_key: ${{ secrets.GITHUB_TOKEN }}
+          source_ssh_private_key: ${{ secrets.GITHUB_TOKEN }}
