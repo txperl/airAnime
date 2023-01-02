@@ -1,9 +1,4 @@
-on: 
-  workflow_dispatch:
-    inputs:
-      destRepoUrl:
-        description: "Destination Repo URL"
-        required: true
+on: workflow_dispatch
 
 jobs:
   git-sync:
@@ -14,6 +9,6 @@ jobs:
         with:
           source_repo: ${{ github.repository }}
           source_branch: "master"
-          destination_repo: ${{ github.event.inputs.destRepoUrl }}
+          destination_repo: ${{ secrets.DEST_REPO_URL }}
           destination_branch: "master"
           ssh_private_key: ${{ secrets.GITHUB_TOKEN }}
