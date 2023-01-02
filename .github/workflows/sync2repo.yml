@@ -1,0 +1,19 @@
+on: 
+  workflow_dispatch:
+    inputs:
+      destRepoUrl:
+        description: "Destination Repo URL"
+        required: true
+
+jobs:
+  git-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git-sync
+        uses: wei/git-sync@v3
+        with:
+          source_repo: ${{ github.repository }}
+          source_branch: "master"
+          destination_repo: ${{ github.event.inputs.destRepoUrl }}
+          destination_branch: "master"
+          ssh_private_key: ${{ secrets.GITHUB_TOKEN }}
