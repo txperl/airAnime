@@ -7,8 +7,7 @@ jobs:
       - name: git-sync
         uses: wei/git-sync@v3
         with:
-          source_repo: ${{ github.repository }}
+          source_repo: ${{ secrets.SRC_REPO_URL }}
           source_branch: "master"
           destination_repo: ${{ secrets.DEST_REPO_URL }}
           destination_branch: "master"
-          source_ssh_private_key: ${{ secrets.GITHUB_TOKEN }}
