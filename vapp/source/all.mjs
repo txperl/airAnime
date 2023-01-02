@@ -5,6 +5,7 @@ import SourceCopyManga from "./online/copymanga.mjs";
 import SourceMikanAni from "./online/mikanani.mjs";
 import SourceMoxMoe from "./online/moxmoe.mjs";
 import SourceNicoTV from "./online/nicotv.mjs";
+import SourceZzzFun from "./online/zzzfun.mjs";
 
 const AIRANIME_RP_URL = "./fetch";
 
@@ -28,6 +29,11 @@ const ALL_SOURCES = [
         "Anime/nicotv/妮可动漫",
         "www.nicotv.me",
         `${AIRANIME_RP_URL}/nicotv/{kt}`
+    ),
+    new SourceZzzFun(
+        "Anime/zzzfun/ZzzFun",
+        "www.zzzfun.com",
+        `${AIRANIME_RP_URL}/zzzfun/{kt}`
     ),
     new SourceMikanAni(
         "Anime/mikanani/蜜柑计划",

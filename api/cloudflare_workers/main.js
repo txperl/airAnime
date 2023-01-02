@@ -10,6 +10,7 @@ const SUB_URLS = {
     file: "https://raw.githubusercontent.com/txperl/airAnime/master/api/_examples/data/{kt}",
     agefans: "https://api.agefans.app/v2/search?query={kt}",
     nicotv: "http://www.nicotv.me/video/search/{kt}.html",
+    zzzfun: "http://www.zzzfun.com/vod_search.html?wd={kt}",
     mikanani: "https://mikanani.me/Home/Search?searchstr={kt}",
     copymanga: "https://copymanga.site/api/v3/search/comic?format=json&platform=1&limit=10&offset=1&q={kt}",
     moxmoe: "https://mox.moe/list.php?s={kt}",
@@ -44,6 +45,11 @@ async function handleRequest(request) {
     response = new Response(response.body, response);
     response.headers.set("Access-Control-Allow-Headers", "*");
     response.headers.set("Access-Control-Allow-Origin", "*");
-    response.headers.append("Vary", "Origin");
+    response.headers.set("Vary", "Origin");
+    if (response.headers.get("content-type").includes("json")) {
+        response.headers.set("Content-Type", "application/json; charset=utf-8");
+    } else {
+        response.headers.set("Content-Type", "text/plain; charset=utf-8");
+    }
     return response;
 }
