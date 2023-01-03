@@ -1,3 +1,5 @@
+import { genAxiosGetFunc } from "../../utils/ops.mjs"
+
 export default class SourceDB {
     constructor(name, siteUrl, dbUrl) {
         this._db = localforage;
@@ -24,7 +26,7 @@ export default class SourceDB {
             return this.latestTime = data.ctime;
         let r;
         try {
-            const rep = await this._genGetFunc()(this.dbUrl);
+            const rep = await genAxiosGetFunc()(this.dbUrl);
             r = await this._store("data", rep.data);
         } catch {
             r = { extra: null, bgms: [], ctime: null };
@@ -36,7 +38,7 @@ export default class SourceDB {
 
     async test() {
         try {
-            await this._genGetFunc()(this.dbUrl);
+            await genAxiosGetFunc()(this.dbUrl);
         } catch (err) {
             return 0;
         }
@@ -72,20 +74,6 @@ export default class SourceDB {
             type: this.type,
             source: this.name,
             siteName: siteName ? siteName : this.siteName
-        };
-    }
-
-    _genGetFunc(timeout = 10000) {
-        const source = axios.CancelToken.source();
-        const timeoutFunc = setTimeout(() => {
-            source.cancel();
-            throw new Error("axios GET timeout");
-        }, timeout);
-        return async (url, options) => {
-            const ops = { ...options, cancelToken: source.token };
-            const rep = await axios.get(url, ops)
-            clearTimeout(timeoutFunc);
-            return rep;
         };
     }
 }

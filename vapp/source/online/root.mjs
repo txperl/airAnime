@@ -1,3 +1,5 @@
+import { genAxiosGetFunc, pureShowTitle } from "../../utils/ops.mjs"
+
 export default class SourceOnline {
     constructor(name, siteUrl, searchUrl) {
         this.method = "online";
@@ -9,7 +11,7 @@ export default class SourceOnline {
     async get(keyword, amount) {
         let r;
         try {
-            const rep = await this._genGetFunc()(this.searchUrl.replace("{kt}", keyword));
+            const rep = await genAxiosGetFunc()(this.searchUrl.replace("{kt}", keyword));
             r = await this.format(rep.data);
         } catch {
             r = [];
@@ -23,7 +25,7 @@ export default class SourceOnline {
 
     async test() {
         try {
-            await this._genGetFunc()(this.searchUrl.replace("{kt}", "jojo"));
+            await genAxiosGetFunc()(this.searchUrl.replace("{kt}", "jojo"));
         } catch (err) {
             return 0;
         }
@@ -32,25 +34,11 @@ export default class SourceOnline {
 
     _genRlist(title, url) {
         return {
-            title: title,
+            title: pureShowTitle(title),
             url: url,
             type: this.type,
             source: this.name,
             siteName: this.siteName
-        };
-    }
-
-    _genGetFunc(timeout = 10000) {
-        const source = axios.CancelToken.source();
-        const timeoutFunc = setTimeout(() => {
-            source.cancel();
-            throw new Error("axios GET timeout");
-        }, timeout);
-        return async (url, options) => {
-            const ops = { ...options, cancelToken: source.token };
-            const rep = await axios.get(url, ops)
-            clearTimeout(timeoutFunc);
-            return rep;
         };
     }
 }

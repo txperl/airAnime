@@ -1,3 +1,5 @@
+import { doSortShowTitle } from "../utils/ops.mjs";
+
 const template = `
 <div class="dos-area">
     <div v-for="(type, rIndex) in keyOfTypes" :id="'source-' + type" class="dos-sources">
@@ -66,10 +68,10 @@ export default {
                     Object.keys(r[type][title]).map(siteName => {
                         sites.push([siteName, r[type][title][siteName]]);
                     });
-                    sites.sort((a, b) => a[0].localeCompare(b[0]));
+                    doSortShowTitle(sites);
                     fr[type].push([title, sites]);
                 });
-                fr[type].sort((a, b) => a[0].localeCompare(b[0]));
+                doSortShowTitle(fr[type]);
             }
             return fr;
         }
