@@ -36,13 +36,13 @@ function doSortShowTitle(dicts) {
         for (let pos = 0; pos < Math.min(t1.length, t2.length); pos++) {
             const c1 = t1.charAt(pos), c2 = t2.charAt(pos);
             if (c1 === c2) continue;
-            if (c2 === " ") return 0;
+            if (c2 === " ") return -1;
             if (c1 === " ") return 1;
             if (CHS[c1] && CHS[c2])
                 return CHS[c1] - CHS[c2];
-            return c1 <= c2 ? 0 : 1;
+            return c1 < c2 ? -1 : 1;
         }
-        return t1.length <= t2.length ? 0 : 1;
+        return t1.length <= t2.length ? -1 : 1;
     });
 }
 

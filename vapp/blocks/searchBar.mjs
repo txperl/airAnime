@@ -2,8 +2,7 @@ const template = `
 <div class="search-bar">
     <div @click="doFocusInput($event)" :ing="cIndex === -1" class="input-box">
         <input id="input-search-keyword" v-model="kt" @input="doSearchMaybeWords" @keydown="doSearchKeydown"
-            @focus="ing = true" @blur="doLazy(100, () => ing = false)" @mouseover="cIndex = -1"
-            placeholder="(ฅ´ω\`ฅ) 要搜点什么呢？">
+            @mouseover="cIndex = -1" placeholder="(ฅ´ω\`ฅ) 要搜点什么呢？">
         <button v-show="kt && args[0] === 'search'" @click="doToggleFavorite"
             class="mdui-btn mdui-btn-icon mdui-ripple">
             <i class="mdui-icon material-icons">{{ isFavorited ? 'favorite' : 'favorite_border' }}</i>
@@ -18,8 +17,8 @@ const template = `
         </button>
     </div>
     <div class="maybe-card mdui-list" v-show="ing && maybeKeys.length">
-        <li v-for="(key, index) in maybeKeys" :ing="index === cIndex" @mouseover="cIndex = index"
-            @click="doSearch" class="mdui-list-item mdui-ripple">
+        <li v-for="(key, index) in maybeKeys" :ing="index === cIndex" @mouseover="cIndex = index" @click="doSearch"
+            class="mdui-list-item mdui-ripple">
             {{ key }}
         </li>
     </div>
@@ -44,7 +43,10 @@ export default {
     },
     created() {
         this.init();
-        $(window).on("resize", () => this.funcsDynamicStyle());
+        $(window).resize(() => this.funcsDynamicStyle());
+        $(window).click(event => {
+            this.ing = $(".search-bar").has($(event.target)).length > 0;
+        });
     },
     updated() {
         this.funcsDynamicStyle();
@@ -61,6 +63,7 @@ export default {
     methods: {
         init() {
             $("#input-search-keyword").blur();
+            this.ing = false;
             if (this.args[0] !== "search" || !this.args[1])
                 return this.kt = "";
             this.kt = this.args[1];
