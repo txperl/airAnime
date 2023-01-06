@@ -21,19 +21,21 @@ export default class SourceDB {
     }
 
     async update(isForce) {
-        const data = await this._getData(true);
-        if (!isForce && data && data.ctime && Date.now() - data.ctime < 3600 * 24 * 1000)
-            return this.latestTime = data.ctime;
-        let r;
-        try {
-            const rep = await genAxiosGetFunc()(this.dbUrl);
-            r = await this._store("data", rep.data);
-        } catch {
-            r = { extra: null, bgms: [], ctime: null };
+        if (!this._data || typeof this._data !== "object")
+            this._data = await this._take("data");
+        if (isForce || !(this._data && this._data.ctime
+            && Date.now() - this._data.ctime < 3600 * 3 * 1000)) {
+            let r;
+            try {
+                const rep = await genAxiosGetFunc()(this.dbUrl);
+                r = await this._store("data", rep.data);
+            } catch {
+                r = { extra: null, bgms: [], ctime: null };
+            }
+            this._data = r;
         }
-        this.latestTime = r.ctime;
-        this._data = r;
-        return r;
+        this.latestTime = this._data.ctime;
+        return this._data;
     }
 
     async test() {
@@ -43,16 +45,6 @@ export default class SourceDB {
             return 0;
         }
         return 1;
-    }
-
-    async _getData(isFromUpdate = false) {
-        if (!this._data || typeof this._data !== "object")
-            this._data = await this._take("data");
-        if (!this._data) {
-            if (isFromUpdate) return null;
-            this._data = await this.update();
-        }
-        return this._data;
     }
 
     async _store(key, raw) {

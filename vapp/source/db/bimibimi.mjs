@@ -2,7 +2,7 @@ import SourceDB from "./root.mjs";
 
 export default class SourceBimiBimi extends SourceDB {
     async get(keyword, amount) {
-        const data = await this._getData();
+        const data = await this.update(false);
         const r = [];
         for (const item of data.bgms) {
             if (amount && r.length >= amount) break;

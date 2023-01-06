@@ -3,7 +3,7 @@ import SourceDB from "./root.mjs";
 export default class SourceBgmd extends SourceDB {
     async get(keyword, amount) {
         const r = [];
-        const data = await this._getData();
+        const data = await this.update(false);
         for (const item of data.bgms) {
             if (amount && r.length >= amount) break;
             if (!item.keyword.includes(keyword)) continue;
@@ -19,7 +19,7 @@ export default class SourceBgmd extends SourceDB {
         if (typeof func !== "function")
             return await this.get(keyword, amount);
         const r = [];
-        const data = await this._getData();
+        const data = await this.update(false);
         for (const item of data.bgms) {
             if (amount && r.length >= amount) break;
             if (!func(item)) continue;
