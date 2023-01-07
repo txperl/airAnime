@@ -115,7 +115,7 @@ export default {
             if (el.length !== 1) return;
             const raw = el.html();
             let ns = raw.split("");
-            let index = 1, prev = 0, plus = 1, ms = 300, maxCount = 60;
+            let index = 1, prev = 0, plus = 1, ms = 300, maxCount = 35;
             const loop = () => setTimeout(() => {
                 ns[prev] = ns[prev].toLowerCase();
                 ns[index] = ns[index].toUpperCase();

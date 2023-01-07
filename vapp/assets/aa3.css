@@ -142,7 +142,7 @@
 }
 
 .loading::before {
-    content: "੭ ˙ᗜ˙ )੭ airAnime";
+    content: attr(title);
     position: fixed;
     top: 50%;
     transform: translate(0, -50%);

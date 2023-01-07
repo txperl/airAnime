@@ -24,7 +24,7 @@ export default class SourceDB {
         if (!this._data || typeof this._data !== "object")
             this._data = await this._take("data");
         if (isForce || !(this._data && this._data.ctime
-            && Date.now() - this._data.ctime < 3600 * 3 * 1000)) {
+            && Date.now() - this._data.ctime < 3600 * 24 * 1000)) {
             let r;
             try {
                 const rep = await genAxiosGetFunc()(this.dbUrl);

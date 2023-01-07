@@ -45,6 +45,7 @@ export default {
         this.init();
         $(window).resize(() => this.funcsDynamicStyle());
         $(window).click(event => {
+            if (event.target.className.includes("mdui")) return;
             this.ing = $(".search-bar").has($(event.target)).length > 0;
         });
     },
