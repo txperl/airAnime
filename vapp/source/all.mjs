@@ -2,6 +2,7 @@ import SourceBgmd from "./db/bgmd.mjs";
 import SourceBimiBimi from "./db/bimibimi.mjs";
 import SourceAgeFans from "./online/agefans.mjs";
 import SourceCopyManga from "./online/copymanga.mjs";
+import SourceDmzj from "./online/dmzj.mjs";
 import SourceMikanAni from "./online/mikanani.mjs";
 import SourceMoxMoe from "./online/moxmoe.mjs";
 import SourceNicoTV from "./online/nicotv.mjs";
@@ -44,6 +45,11 @@ const ALL_SOURCES = [
         "Manga/moxmoe/MoxMoe",
         "mox.moe",
         `${AIRANIME_RP_URL}/moxmoe/{kt}`
+    ),
+    new SourceDmzj(
+        "Manga/dmzj/动漫之家",
+        "dmzj.com",
+        `${AIRANIME_RP_URL}/dmzj/{kt}`
     ),
     new SourceCopyManga(
         "Manga/copymanga/拷贝漫画",

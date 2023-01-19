@@ -14,6 +14,7 @@ const SUB_URLS = {
     mikanani: "https://mikanani.me/Home/Search?searchstr={kt}",
     copymanga: "https://copymanga.site/api/v3/search/comic?format=json&platform=1&limit=10&offset=1&q={kt}",
     moxmoe: "https://mox.moe/list.php?s={kt}",
+    dmzj: "https://sacg.dmzj.com/comicsum/search.php?s={kt}",
 };
 
 async function handleRequest(request) {

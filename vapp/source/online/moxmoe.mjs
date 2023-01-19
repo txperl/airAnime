@@ -9,6 +9,6 @@ export default class SourceMoxMoe extends SourceOnline {
             if (m.index === regex.lastIndex) regex.lastIndex += 1;
             r.push(this._genRlist(m[2], m[1]));
         }
-        return r;
+        return r.slice(0, 10);
     }
 }
