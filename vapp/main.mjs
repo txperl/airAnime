@@ -41,8 +41,9 @@ export default {
     mouted() { },
     methods: {
         async doInit() {
-            const lang = await this.dget("sys.conf.lang", "zh-Hans");
-            const noNames = await this.dget("sys.conf.noNames", []);
+            await this.doInitConfig();
+            const lang = await this.dget("sys.conf.lang");
+            const noNames = await this.dget("sys.conf.noNames");
             const funcs = [];
             this.q.soHandler.filter.setNoNames(noNames);
             this.q.soHandler.filter.method("db").forEach(source => {
@@ -50,6 +51,17 @@ export default {
                 funcs.push(source.update(false));
             });
             return await Promise.all(funcs);
+        },
+        async doInitConfig() {
+            const _ = {
+                "sys.conf.lang": "zh-Hans",
+                "sys.conf.noNames": ["copymanga"],
+            };
+            for (const key in _) {
+                if (await this.dget(key, "__null__") !== "__null__")
+                    continue;
+                this.dset(key, _[key]);
+            }
         },
         goToHash(url, isSys = false) {
             if (!url.includes("/"))
@@ -71,9 +83,6 @@ export default {
             if (this.router.cBlock === blockName) return;
             this.router.cBlock = blockName;
             document.body.scrollTop = document.documentElement.scrollTop = 0;
-        },
-        goToNewBlank(path) {
-            window.open(`${this.appRootUrl}/#${path}`, "_blank");
         },
         async dget(key, default_ = null) {
             const data = await localforage.getItem(`appdata.${key}`);

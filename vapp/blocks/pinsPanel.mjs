@@ -1,9 +1,9 @@
 const template = `
 <div v-if="sResults.length" class="pins-panel">
     <h1>Pins</h1>
-    <div v-for="pin in sResults" @click="$parent.goToHash('/search/' + pin)" class="mdui-chip">
+    <a v-for="pin in sResults" :href="'./#/search/' + pin" class="mdui-chip">
         <span class="mdui-chip-title">{{ pin }}</span>
-    </div>
+    </a>
 </div>
 `;
 
