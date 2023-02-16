@@ -2,7 +2,7 @@ import { parse } from "url";
 
 const SUB_URLS = {
     file: "https://raw.githubusercontent.com/txperl/airAnime/master/api/_examples/data/{kt}",
-    bgmd: "https://unpkg.com/bangumi-data/dist/data.json",
+    bgmd: "https://raw.githubusercontent.com/bangumi-data/bangumi-data/master/dist/data.json",
     agefans: "https://api.agefans.app/v2/search?query={kt}",
     nicotv: "http://www.nicotv.me/video/search/{kt}.html",
     zzzfun: "http://www.zzzfun.com/vod_search.html?wd={kt}",
