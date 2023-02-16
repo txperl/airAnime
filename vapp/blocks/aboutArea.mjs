@@ -4,7 +4,7 @@ const template = `
         <h1>About</h1>
         <p>airAnime 是一款聚合「番剧搜索」工具，也许你会喜欢。</p>
         <a href="https://yumoe.com" target="_blank" class="mdui-chip">
-            <span class="mdui-chip-title">Version@v3.06 / Created by Trii Hsia with ❤️</span>
+            <span class="mdui-chip-title">Version@v3.07 / Created by Trii Hsia with ❤️</span>
         </a>
         <a href="mailto:txperl@gmail.com" target="_blank" class="mdui-chip">
             <span class="mdui-chip-title">#Email</span>
@@ -45,7 +45,6 @@ const template = `
             </div>
         </div>
     </section>
-
 </div>
 `;
 

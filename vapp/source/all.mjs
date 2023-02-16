@@ -14,7 +14,7 @@ const ALL_SOURCES = [
     new SourceBgmd(
         "Official/bgmd/bgmd",
         "github.com/bangumi-data/bangumi-data",
-        `https://unpkg.com/bangumi-data/dist/data.json`
+        `${AIRANIME_RP_URL}/bgmd/only`
     ),
     new SourceBimiBimi(
         "Anime/bimibimi/BimiBimi",

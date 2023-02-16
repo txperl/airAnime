@@ -1,4 +1,4 @@
-import LazyLoad from "https://unpkg.com/vanilla-lazyload@17.8.3/dist/lazyload.esm.min.js";
+import LazyLoad from "https://cdn.staticfile.org/vanilla-lazyload/17.8.3/lazyload.esm.min.js";
 
 const template = `
 <div class="season-panel mdui-row-gapless">
