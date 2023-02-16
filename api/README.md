@@ -7,10 +7,10 @@
 
 ## 使用
 ### 1. 部署 rp 脚本
-#### cloudflare workers
+#### cloudflare worker
 - [main.js](./cloudflare_workers/main.js)
 
-#### vercel severless functions
+#### vercel serverless function
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/txperl/airAnime/api/vercel_serverless_functions/)
 
 默认的 API 路由为 `https://{domain_name}/fetch`。

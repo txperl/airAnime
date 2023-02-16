@@ -8,7 +8,7 @@
     "rewrites": [
         {
             "source": "/fetch(.*)",
-            "destination": "/api/vercel_severless_functions/api/fetch.mjs"
+            "destination": "/api/vercel_serverless_functions/api/fetch.mjs"
         }
     ]
 }
