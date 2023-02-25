@@ -141,14 +141,21 @@
     z-index: 999;
 }
 
-.loading::before {
-    content: attr(title);
+.loading section {
     position: fixed;
     top: 50%;
     transform: translate(0, -50%);
     width: 100%;
     font-size: 2em;
     text-align: center;
+}
+
+.loading section span {
+    display: inline-block;
+}
+
+.flip-x {
+    transform: scaleX(-1);
 }
 
 .wait {

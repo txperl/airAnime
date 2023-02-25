@@ -38,7 +38,18 @@ export default {
             this.goToHash(window.location.hash.substring(1), true);
         });
     },
-    mouted() { },
+    mounted() {
+        const el = $("#app-cover section span");
+        let next = true;
+        const loopAni = () => setTimeout(() => {
+            if (this.isLoadingData === false) return;
+            if (next) el.addClass("flip-x");
+            else el.removeClass("flip-x");
+            next = !next;
+            loopAni();
+        }, 1500);
+        loopAni();
+    },
     methods: {
         async doInit() {
             await this.doInitConfig();
