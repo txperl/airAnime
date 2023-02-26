@@ -8,7 +8,7 @@ const SUB_URLS = {
     zzzfun: "http://www.zzzfun.com/vod_search.html?wd={kt}",
     mikanani: "https://mikanani.me/Home/Search?searchstr={kt}",
     copymanga: "https://copymanga.site/api/v3/search/comic?format=json&platform=1&limit=10&offset=1&q={kt}",
-    moxmoe: "https://kox.moe/list.php?s={kt}",
+    koxmoe: "https://kox.moe/list.php?s={kt}",
     dmzj: "https://sacg.dmzj.com/comicsum/search.php?s={kt}",
 };
 

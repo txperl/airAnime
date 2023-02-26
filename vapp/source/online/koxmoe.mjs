@@ -1,7 +1,7 @@
 import SourceOnline from "./root.mjs";
 import HanConvert from "../../utils/zhHan.mjs"
 
-export default class SourceMoxMoe extends SourceOnline {
+export default class SourceKoxMoe extends SourceOnline {
     async format(raw) {
         const r = [];
         const regex = /<\/div><\/a>.*?<a href='(.*?)'>(.*?)<\/a>/gms;

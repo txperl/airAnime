@@ -4,7 +4,7 @@ import SourceAgeFans from "./online/agefans.mjs";
 import SourceCopyManga from "./online/copymanga.mjs";
 import SourceDmzj from "./online/dmzj.mjs";
 import SourceMikanAni from "./online/mikanani.mjs";
-import SourceMoxMoe from "./online/moxmoe.mjs";
+import SourceKoxMoe from "./online/koxmoe.mjs";
 import SourceNicoTV from "./online/nicotv.mjs";
 import SourceZzzFun from "./online/zzzfun.mjs";
 
@@ -41,10 +41,10 @@ const ALL_SOURCES = [
         "mikanani.me",
         `${AIRANIME_RP_URL}/mikanani/{kt}`
     ),
-    new SourceMoxMoe(
-        "Manga/moxmoe/MoxMoe",
-        "mox.moe",
-        `${AIRANIME_RP_URL}/moxmoe/{kt}`
+    new SourceKoxMoe(
+        "Manga/koxmoe/KoxMoe",
+        "kox.moe",
+        `${AIRANIME_RP_URL}/koxmoe/{kt}`
     ),
     new SourceDmzj(
         "Manga/dmzj/动漫之家",
