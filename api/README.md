@@ -6,7 +6,7 @@
 **若您在部署 airAnime 时为手动部署**，请务必完成以下步骤。
 
 ## 使用
-### 1. 部署 rp 脚本
+### 1. 部署脚本
 #### Cloudflare Workder
 - [main.js](./cloudflare_workers/main.js)
 
