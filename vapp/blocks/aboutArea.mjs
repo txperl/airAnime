@@ -79,7 +79,7 @@ export default {
                     }
                     fr[2] = strType;
                     if (this.testResults[name] !== undefined)
-                        fr[3] = this.testResults[name] ? "Success" : "Fail";
+                        fr[3] = this.testResults[name] ? "Succeed" : "Failed";
                 }
                 r[name] = fr;
             });

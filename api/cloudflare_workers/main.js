@@ -37,6 +37,7 @@ async function handleRequest(request) {
 
     const finalUrl = SUB_URLS[subName].replace("{kt}", kt);
 
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
     let response = await fetch(finalUrl, {
         headers: {
             "Referer": finalUrl,
@@ -44,6 +45,7 @@ async function handleRequest(request) {
             "platform": "1",
         }
     });
+
     response = new Response(response.body, response);
     response.headers.set("Access-Control-Allow-Headers", "*");
     response.headers.set("Access-Control-Allow-Origin", "*");

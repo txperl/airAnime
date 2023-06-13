@@ -26,6 +26,7 @@ export default async function handler(req, res) {
 
     const finalUrl = SUB_URLS[subName].replace("{kt}", kt);
 
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
     const response = await fetch(finalUrl, {
         headers: {
             "Referer": finalUrl,

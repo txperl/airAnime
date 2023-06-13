@@ -23,7 +23,7 @@ const ALL_SOURCES = [
     ),
     new SourceAgeFans(
         "Anime/agefans/AGE动画",
-        "www.agemys.net",
+        "www.agemys.vip",
         `${AIRANIME_RP_URL}/agefans/{kt}`
     ),
     new SourceNicoTV(
