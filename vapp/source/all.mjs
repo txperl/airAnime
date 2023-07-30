@@ -23,7 +23,7 @@ const ALL_SOURCES = [
     ),
     new SourceAgeFans(
         "Anime/agefans/AGE动画",
-        "www.agemys.vip",
+        "www.agemys.org",
         `${AIRANIME_RP_URL}/agefans/{kt}`
     ),
     new SourceNicoTV(
@@ -53,7 +53,7 @@ const ALL_SOURCES = [
     ),
     new SourceCopyManga(
         "Manga/copymanga/拷贝漫画",
-        "copymanga.site",
+        "www.copymanga.tv",
         `${AIRANIME_RP_URL}/copymanga/{kt}`
     ),
 ];

@@ -7,7 +7,7 @@ export default class SourceCopyManga extends SourceOnline {
         for (const item of raw.results.list) {
             r.push(this._genRlist(
                 HanConvert.t2s(item.name),
-                `https://copymanga.site/comic/${item.path_word}`)
+                `https://www.copymanga.tv/comic/${item.path_word}`)
             );
         }
         return r.slice(0, 10);

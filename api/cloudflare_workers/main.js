@@ -9,11 +9,11 @@ export default {
 const SUB_URLS = {
     file: "https://raw.githubusercontent.com/txperl/airAnime/master/api/_examples/data/{kt}",
     bgmd: "https://raw.githubusercontent.com/bangumi-data/bangumi-data/master/dist/data.json",
-    agefans: "https://api.agefans.app/v2/search?query={kt}",
+    agefans: "https://www.agemys.org/search?query={kt}",
     nicotv: "http://www.nicotv.me/video/search/{kt}.html",
     zzzfun: "http://www.zzzfun.com/vod_search.html?wd={kt}",
     mikanani: "https://mikanani.me/Home/Search?searchstr={kt}",
-    copymanga: "https://copymanga.site/api/v3/search/comic?format=json&platform=1&limit=10&offset=1&q={kt}",
+    copymanga: "https://www.copymanga.tv/api/v3/search/comic?format=json&platform=1&limit=10&offset=1&q={kt}",
     koxmoe: "https://kox.moe/list.php?s={kt}",
     dmzj: "https://sacg.dmzj.com/comicsum/search.php?s={kt}",
 };
