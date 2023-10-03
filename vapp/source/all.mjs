@@ -24,7 +24,7 @@ const ALL_SOURCES = [
     ),
     new SourceAlidRuach(
         "Anime/alid_ruach/阿里云盘@Ruach",
-        "docs.qq.com/doc/DRHhIUkFqeWhGYmpT"
+        "docs.qq.com/doc/DRHhIUkFqeWhGYmpT",
         `${AIRANIME_RP_URL}/file/alid_ruach.json`
     ),
     new SourceAgeFans(
