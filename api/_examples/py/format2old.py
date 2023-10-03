@@ -14,7 +14,7 @@ for d in data:
         .replace("【无暗牧】", "")
         .strip()
     )
-    r.append({"title": title, "link": "http://www.bimiacg4.net/bangumi/bi/" + d})
+    r.append({"title": title, "link": "http://www.bimiacg10.net/bangumi/bi/" + d})
 
 with open("./api/_examples/data/bimibimi.json", "w", encoding="utf-8") as f:
     json.dump(r, f, ensure_ascii=False)

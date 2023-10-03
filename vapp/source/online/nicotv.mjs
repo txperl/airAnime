@@ -7,7 +7,7 @@ export default class SourceNicoTV extends SourceOnline {
         let m;
         while ((m = regex.exec(raw)) !== null) {
             if (m.index === regex.lastIndex) regex.lastIndex += 1;
-            r.push(this._genRlist(m[2], `http://www.nicotv.me${m[1]}`));
+            r.push(this._genRlist(m[2], `http://www.nicotv.org${m[1]}`));
         }
         return r;
     }

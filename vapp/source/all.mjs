@@ -18,7 +18,7 @@ const ALL_SOURCES = [
     ),
     new SourceBimiBimi(
         "Anime/bimibimi/BimiBimi",
-        "www.bimiacg4.net",
+        "www.bimiacg10.net",
         `${AIRANIME_RP_URL}/file/bimibimi.json`
     ),
     new SourceAgeFans(
@@ -28,12 +28,12 @@ const ALL_SOURCES = [
     ),
     new SourceNicoTV(
         "Anime/nicotv/妮可动漫",
-        "www.nicotv.me",
+        "www.nicotv.org",
         `${AIRANIME_RP_URL}/nicotv/{kt}`
     ),
     new SourceZzzFun(
         "Anime/zzzfun/ZzzFun",
-        "www.zzzfun.com",
+        "www.zzzfun.one",
         `${AIRANIME_RP_URL}/zzzfun/{kt}`
     ),
     new SourceMikanAni(
