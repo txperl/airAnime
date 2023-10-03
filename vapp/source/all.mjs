@@ -1,5 +1,6 @@
 import SourceBgmd from "./db/bgmd.mjs";
 import SourceBimiBimi from "./db/bimibimi.mjs";
+import SourceAlidRuach from "./db/alid_ruach.mjs";
 import SourceAgeFans from "./online/agefans.mjs";
 import SourceCopyManga from "./online/copymanga.mjs";
 import SourceDmzj from "./online/dmzj.mjs";
@@ -20,6 +21,11 @@ const ALL_SOURCES = [
         "Anime/bimibimi/BimiBimi",
         "www.bimiacg10.net",
         `${AIRANIME_RP_URL}/file/bimibimi.json`
+    ),
+    new SourceAlidRuach(
+        "Anime/alid_ruach/阿里云盘@Ruach",
+        "docs.qq.com/doc/DRHhIUkFqeWhGYmpT"
+        `${AIRANIME_RP_URL}/file/alid_ruach.json`
     ),
     new SourceAgeFans(
         "Anime/agefans/AGE动画",
