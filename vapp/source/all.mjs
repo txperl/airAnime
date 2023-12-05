@@ -29,12 +29,12 @@ const ALL_SOURCES = [
     ),
     new SourceAgeFans(
         "Anime/agefans/AGE动画",
-        "www.agemys.org",
+        "www.agedm.org",
         `${AIRANIME_RP_URL}/agefans/{kt}`
     ),
     new SourceNicoTV(
         "Anime/nicotv/妮可动漫",
-        "www.nicotv.org",
+        "www.nicotv.wtf",
         `${AIRANIME_RP_URL}/nicotv/{kt}`
     ),
     new SourceZzzFun(
