@@ -49,7 +49,7 @@ class Bimiacg(object):
 
 if __name__ == "__main__":
     # config
-    begin, end = (890, 900)
+    begin, end = (900, 910)
     bundle = 10
     filepath = "./api/_examples/py/bimibimi.json"
 
