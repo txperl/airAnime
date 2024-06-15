@@ -9,7 +9,7 @@ import SourceMikanAni from "./online/mikanani.mjs";
 import SourceNicoTV from "./online/nicotv.mjs";
 import SourceZzzFun from "./online/zzzfun.mjs";
 
-const AIRANIME_RP_URL = "https://air.tls.moe/fetch";
+const AIRANIME_RP_URL = "./fetch";
 
 const ALL_SOURCES = [
     new SourceBgmd(
