@@ -1,21 +1,21 @@
+import SourceAgeFans from "./online/agefans.mjs";
+import SourceAlidRuach from "./db/alid_ruach.mjs";
 import SourceBgmd from "./db/bgmd.mjs";
 import SourceBimiBimi from "./db/bimibimi.mjs";
-import SourceAlidRuach from "./db/alid_ruach.mjs";
-import SourceAgeFans from "./online/agefans.mjs";
 import SourceCopyManga from "./online/copymanga.mjs";
 import SourceDmzj from "./online/dmzj.mjs";
-import SourceMikanAni from "./online/mikanani.mjs";
 import SourceKoxMoe from "./online/koxmoe.mjs";
+import SourceMikanAni from "./online/mikanani.mjs";
 import SourceNicoTV from "./online/nicotv.mjs";
 import SourceZzzFun from "./online/zzzfun.mjs";
 
-const AIRANIME_RP_URL = "./fetch";
+const AIRANIME_RP_URL = "https://air.tls.moe/fetch";
 
 const ALL_SOURCES = [
     new SourceBgmd(
         "Official/bgmd/bgmd",
         "github.com/bangumi-data/bangumi-data",
-        `${AIRANIME_RP_URL}/bgmd/only`
+        `https://unpkg.com/bangumi-data@latest/dist/data.json`
     ),
     new SourceBimiBimi(
         "Anime/bimibimi/BimiBimi",

@@ -1,5 +1,5 @@
+import HanConvert from "../../utils/zhHan.mjs";
 import SourceOnline from "./root.mjs";
-import HanConvert from "../../utils/zhHan.mjs"
 
 export default class SourceKoxMoe extends SourceOnline {
     async format(raw) {
@@ -9,7 +9,8 @@ export default class SourceKoxMoe extends SourceOnline {
         let m;
         while ((m = regex.exec(raw)) !== null) {
             if (m.index === regex.lastIndex) regex.lastIndex += 1;
-            r.push(this._genRlist(HanConvert.t2s(m[2]), m[1]));
+            const title = m[2].replaceAll(new RegExp("\</?b\>", "gm"), "");
+            r.push(this._genRlist(HanConvert.t2s(title), m[1]));
         }
         return r.slice(0, 10);
     }
