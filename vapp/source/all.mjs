@@ -19,7 +19,7 @@ const ALL_SOURCES = [
     ),
     new SourceBimiBimi(
         "Anime/bimibimi/BimiBimi",
-        "www.bimiacg10.net",
+        "www.bimiacg4.net",
         `${AIRANIME_RP_URL}/file/bimibimi.json`
     ),
     new SourceAlidRuach(

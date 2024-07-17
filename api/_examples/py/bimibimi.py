@@ -8,7 +8,7 @@ import requests
 
 
 class Bimiacg(object):
-    ROOT_URL = "http://www.bimiacg10.net/bangumi/bi/{index:d}/"
+    ROOT_URL = "http://www.bimiacg4.net/bangumi/bi/{index:d}/"
     HEADERS = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:107.0) Gecko/20100101 Firefox/107.0",
         "Referer": ROOT_URL,
@@ -49,7 +49,7 @@ class Bimiacg(object):
 
 if __name__ == "__main__":
     # config
-    begin, end = (910, 920)
+    begin, end = (920, 930)
     bundle = 10
     filepath = "./api/_examples/py/bimibimi.json"
 
