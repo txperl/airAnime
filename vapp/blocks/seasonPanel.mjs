@@ -14,8 +14,8 @@ const template = `
             </section>
         </div>
         <div class="shower">
-            <a @keydown.enter.prevent @blur="changeDate($event, 0)" :contenteditable="!$parent.q.isSearchBarIng"
-                style="cursor: text;">{{ cDate[0] }}</a>
+            <a @keydown.enter.prevent @keydown.enter="changeDate($event, 0)" @blur="changeDate($event, 0)"
+                :contenteditable="!$parent.q.isSearchBarIng" style="cursor: text;">{{ cDate[0] }}</a>
             <a @click="toggleChooser('season')">{{ showSeasonName }}</a>
             <a @click="toggleChooser('dayofweek')">{{ dayOfWeekName[cDate[2]] }}</a>
         </div>

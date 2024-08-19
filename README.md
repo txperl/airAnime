@@ -16,7 +16,7 @@ airAnime 是一款聚合「番剧搜索」工具，也许你会喜欢。
 ### Vercel 托管
 或者，可以点击下方按钮以直接部署至 [Vercel](https://vercel.com/) 平台，无需其余操作。
 
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/txperl/airAnime/)
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/txperl/airAnime/tree/master/)
 
 ## 最后
 ### 一些话

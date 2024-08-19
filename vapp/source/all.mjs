@@ -27,6 +27,11 @@ const ALL_SOURCES = [
         "docs.qq.com/doc/DRHhIUkFqeWhGYmpT",
         `${AIRANIME_RP_URL}/file/alid_ruach.json`
     ),
+    new SourceAlidRuach(
+        "Anime/quark/夸克网盘",
+        "docs.qq.com/doc/DRHhIUkFqeWhGYmpT",
+        `${AIRANIME_RP_URL}/file/quark.json`
+    ),
     new SourceAgeFans(
         "Anime/agefans/AGE动画",
         "www.agedm.org",
