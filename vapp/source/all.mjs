@@ -6,8 +6,6 @@ import SourceCopyManga from "./online/copymanga.mjs";
 import SourceDmzj from "./online/dmzj.mjs";
 import SourceKoxMoe from "./online/koxmoe.mjs";
 import SourceMikanAni from "./online/mikanani.mjs";
-import SourceNicoTV from "./online/nicotv.mjs";
-import SourceZzzFun from "./online/zzzfun.mjs";
 
 const AIRANIME_RP_URL = "./fetch";
 
@@ -36,16 +34,6 @@ const ALL_SOURCES = [
         "Anime/agefans/AGE动画",
         "www.agedm.org",
         `${AIRANIME_RP_URL}/agefans/{kt}`
-    ),
-    new SourceNicoTV(
-        "Anime/nicotv/妮可动漫",
-        "www.nicotv.wtf",
-        `${AIRANIME_RP_URL}/nicotv/{kt}`
-    ),
-    new SourceZzzFun(
-        "Anime/zzzfun/ZzzFun",
-        "www.zzzfun.one",
-        `${AIRANIME_RP_URL}/zzzfun/{kt}`
     ),
     new SourceMikanAni(
         "Anime/mikanani/蜜柑计划",
