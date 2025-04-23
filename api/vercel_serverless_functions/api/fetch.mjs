@@ -1,3 +1,5 @@
+import { parse } from "url";
+
 const SUB_URLS = {
     file: "https://raw.githubusercontent.com/txperl/airAnime/master/api/_examples/data/{kt}",
     agefans: "https://www.agefans.la/search?query={kt}",
@@ -8,8 +10,7 @@ const SUB_URLS = {
 };
 
 export default async function handler(req, res) {
-    const url = new URL(req.url);
-    const paths = url.pathname.split("/").slice(2);
+    const paths = parse(req.url).pathname.split("/").slice(2);
 
     if (paths.length <= 1)
         return res.json(SUB_URLS);
