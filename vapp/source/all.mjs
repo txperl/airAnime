@@ -1,4 +1,3 @@
-import SourceAgeFans from "./online/agefans.mjs";
 import SourceAlidRuach from "./db/alid_ruach.mjs";
 import SourceBgmd from "./db/bgmd.mjs";
 import SourceDmzj from "./online/dmzj.mjs";
@@ -6,7 +5,8 @@ import SourceKoxMoe from "./online/koxmoe.mjs";
 import SourceMikanAni from "./online/mikanani.mjs";
 import SourceGuguFan from "./online/gugufan.mjs";
 import SourceAnime1 from "./db/anime1.mjs";
-const AIRANIME_RP_URL = "https://airanime-fetch.txperl.workers.dev/fetch";
+
+const AIRANIME_RP_URL = "./fetch";
 
 const ALL_SOURCES = [
     new SourceBgmd(
@@ -24,11 +24,6 @@ const ALL_SOURCES = [
         "docs.qq.com/doc/DRHhIUkFqeWhGYmpT",
         `${AIRANIME_RP_URL}/file/alid_ruach.json`
     ),
-    // new SourceAgeFans(
-    //     "Anime/agefans/AGE动画",
-    //     "www.agefans.la",
-    //     `${AIRANIME_RP_URL}/agefans/{kt}`
-    // ),
     new SourceGuguFan(
         "Anime/gugufan/咕咕番",
         "www.gugu3.com",
