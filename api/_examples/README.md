@@ -4,4 +4,12 @@
 
 目前，它包含以下内容。
 
-- BimiBimi 源数据与脚本
+**./data/**
+
+- `alid_ruach.json`: 阿里云盘数据
+- `bimibimi.json`: BimiBimi 数据
+- `quark.json`: 夸克云盘数据
+
+**./cf-worker-scripts/**
+
+- `koxmoe-fetch.js`: 用于获取 KoxMoe 搜索结果的脚本

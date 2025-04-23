@@ -8,10 +8,10 @@ export default {
 
 const SUB_URLS = {
     file: "https://raw.githubusercontent.com/txperl/airAnime/master/api/_examples/data/{kt}",
-    agefans: "https://www.agedm.org/search?query={kt}",
+    agefans: "https://www.agefans.la/search?query={kt}",
     mikanani: "https://mikanani.me/Home/Search?searchstr={kt}",
     copymanga: "https://www.copymanga.tv/api/v3/search/comic?format=json&platform=1&limit=10&offset=1&q={kt}",
-    koxmoe: "https://kox.moe/list.php?s={kt}",
+    koxmoe: "https://airanime-koxmoe-fetch.txperl.workers.dev/?keyword={kt}",
     dmzj: "https://sacg.dmzj.com/comicsum/search.php?s={kt}",
 };
 
@@ -34,7 +34,6 @@ async function handleRequest(request) {
 
     const finalUrl = SUB_URLS[subName].replace("{kt}", kt);
 
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
     let response = await fetch(finalUrl, {
         headers: {
             "Referer": finalUrl,

@@ -1,19 +1,18 @@
-import { parse } from "url";
-
 const SUB_URLS = {
     file: "https://raw.githubusercontent.com/txperl/airAnime/master/api/_examples/data/{kt}",
-    agefans: "https://www.agedm.org/search?query={kt}",
+    agefans: "https://www.agefans.la/search?query={kt}",
     mikanani: "https://mikanani.me/Home/Search?searchstr={kt}",
     copymanga: "https://www.copymanga.tv/api/v3/search/comic?format=json&platform=1&limit=10&offset=1&q={kt}",
-    koxmoe: "https://kox.moe/list.php?s={kt}",
+    koxmoe: "https://airanime-koxmoe-fetch.txperl.workers.dev/?keyword={kt}",
     dmzj: "https://sacg.dmzj.com/comicsum/search.php?s={kt}",
 };
 
 export default async function handler(req, res) {
-    const paths = parse(req.url).pathname.split("/").slice(2);
+    const url = new URL(req.url);
+    const paths = url.pathname.split("/").slice(2);
 
     if (paths.length <= 1)
-        return res.json(SUB_URLS)
+        return res.json(SUB_URLS);
 
     const subName = paths[0];
     const kt = paths.slice(1).join("");

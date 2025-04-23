@@ -32,7 +32,7 @@ const ALL_SOURCES = [
     ),
     new SourceAgeFans(
         "Anime/agefans/AGE动画",
-        "www.agedm.org",
+        "www.agefans.la",
         `${AIRANIME_RP_URL}/agefans/{kt}`
     ),
     new SourceMikanAni(
