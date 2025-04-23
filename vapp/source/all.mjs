@@ -1,13 +1,12 @@
 import SourceAgeFans from "./online/agefans.mjs";
 import SourceAlidRuach from "./db/alid_ruach.mjs";
 import SourceBgmd from "./db/bgmd.mjs";
-import SourceBimiBimi from "./db/bimibimi.mjs";
-import SourceCopyManga from "./online/copymanga.mjs";
 import SourceDmzj from "./online/dmzj.mjs";
 import SourceKoxMoe from "./online/koxmoe.mjs";
 import SourceMikanAni from "./online/mikanani.mjs";
-
-const AIRANIME_RP_URL = "./fetch";
+import SourceGuguFan from "./online/gugufan.mjs";
+import SourceAnime1 from "./db/anime1.mjs";
+const AIRANIME_RP_URL = "https://airanime-fetch.txperl.workers.dev/fetch";
 
 const ALL_SOURCES = [
     new SourceBgmd(
@@ -15,25 +14,25 @@ const ALL_SOURCES = [
         "github.com/bangumi-data/bangumi-data",
         `https://unpkg.com/bangumi-data@latest/dist/data.json`
     ),
-    new SourceBimiBimi(
-        "Anime/bimibimi/BimiBimi",
-        "www.bimiacg4.net",
-        `${AIRANIME_RP_URL}/file/bimibimi.json`
+    new SourceAnime1(
+        "Anime/anime1/Anime1",
+        "anime1.me",
+        `${AIRANIME_RP_URL}/file/anime1.json`
     ),
     new SourceAlidRuach(
         "Anime/alid_ruach/阿里云盘@Ruach",
         "docs.qq.com/doc/DRHhIUkFqeWhGYmpT",
         `${AIRANIME_RP_URL}/file/alid_ruach.json`
     ),
-    new SourceAlidRuach(
-        "Anime/quark/夸克网盘",
-        "docs.qq.com/doc/DRHhIUkFqeWhGYmpT",
-        `${AIRANIME_RP_URL}/file/quark.json`
-    ),
-    new SourceAgeFans(
-        "Anime/agefans/AGE动画",
-        "www.agefans.la",
-        `${AIRANIME_RP_URL}/agefans/{kt}`
+    // new SourceAgeFans(
+    //     "Anime/agefans/AGE动画",
+    //     "www.agefans.la",
+    //     `${AIRANIME_RP_URL}/agefans/{kt}`
+    // ),
+    new SourceGuguFan(
+        "Anime/gugufan/咕咕番",
+        "www.gugu3.com",
+        `${AIRANIME_RP_URL}/gugufan/{kt}`
     ),
     new SourceMikanAni(
         "Anime/mikanani/蜜柑计划",
@@ -49,11 +48,6 @@ const ALL_SOURCES = [
         "Manga/dmzj/动漫之家",
         "dmzj.com",
         `${AIRANIME_RP_URL}/dmzj/{kt}`
-    ),
-    new SourceCopyManga(
-        "Manga/copymanga/拷贝漫画",
-        "www.copymanga.tv",
-        `${AIRANIME_RP_URL}/copymanga/{kt}`
     ),
 ];
 

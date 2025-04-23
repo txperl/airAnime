@@ -66,7 +66,7 @@ export default {
         async doInitConfig() {
             const _ = {
                 "sys.conf.lang": "zh-Hans",
-                "sys.conf.noNames": ["dmzj", "copymanga"],
+                "sys.conf.noNames": ["dmzj"],
             };
             for (const key in _) {
                 if (await this.dget(key, "__null__") !== "__null__")

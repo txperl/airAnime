@@ -10,9 +10,9 @@ const SUB_URLS = {
     file: "https://raw.githubusercontent.com/txperl/airAnime/master/api/_examples/data/{kt}",
     agefans: "https://www.agefans.la/search?query={kt}",
     mikanani: "https://mikanani.me/Home/Search?searchstr={kt}",
-    copymanga: "https://www.copymanga.tv/api/v3/search/comic?format=json&platform=1&limit=10&offset=1&q={kt}",
     koxmoe: "https://airanime-koxmoe-fetch.txperl.workers.dev/?keyword={kt}",
     dmzj: "https://sacg.dmzj.com/comicsum/search.php?s={kt}",
+    gugufan: "https://www.gugu3.com/index.php/vod/search.html?wd={kt}",
 };
 
 async function handleRequest(request) {

@@ -1,13 +1,13 @@
 import SourceDB from "./root.mjs";
 
-export default class SourceAlidRuach extends SourceDB {
+export default class SourceAnime1 extends SourceDB {
     async get(keyword, amount) {
         const data = await this.update(false);
         const r = [];
         for (const item of data.bgms) {
             if (amount && r.length >= amount) break;
             if (!item.title.toLowerCase().includes(keyword)) continue;
-            r.push(this._genRlist(item.title, `https://www.alipan.com/s/${item.url}`))
+            r.push(this._genRlist(item.title, `https://${this.siteUrl}/?cat=${item.url}`))
         }
         return r;
     }
