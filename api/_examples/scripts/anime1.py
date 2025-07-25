@@ -19,5 +19,5 @@ for item in playlist_data:
         title = title
     r.append({"title": title, "link": link})
 
-with open("./anime1.json", "w", encoding="utf-8") as f:
+with open("../data/anime1.json", "w", encoding="utf-8") as f:
     json.dump(r, f, ensure_ascii=False)
