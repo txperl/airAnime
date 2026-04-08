@@ -1,0 +1,93 @@
+======================================================================
+[1] DROPPED — exact duplicates (same title + same share_id)
+======================================================================
+  3x  想要成为影之实力者  |  pT5wmfdiVyZ
+  2x  不死不幸  |  tCWxnQ8BeTt
+  2x  狩龙人拉格纳  |  xGg1UF5DwkE
+  2x  尼尔：机械纪元 Ver1.1  |  jYbkDN1kujn
+  2x  开阔天空！光之美少女  |  33pNB8wN23N
+  2x  致深爱你的那个我 & 致我深爱的每个你  |  YuNfbKAC5CJ
+  2x  异世界舅舅  |  idzqNptD1eo
+  2x  鬼灯的冷彻  |  sz3xGhaUGds
+  2x  GIVEN 被赠与的未来  |  AkiefFgkmNF
+  2x  黑岩射手  |  Pt6ywNeZaTG
+  2x  黄金拼图  |  PZ9BHWM6oLN
+  2x  回转企鹅罐  |  Noov1KVXzqb
+  2x  酷爱电影的庞波小姐  |  CRocFwPbc59
+  2x  某科学的一方通行  |  CZZdzXAgWTq
+  2x  魔女之旅  |  A5wsZ99NZZy
+  2x  天空侵犯  |  ZVsybmP2Nmp
+  2x  一拳超人  |  G4MhT7yhbmD
+  2x  悠哉日常大王  |  ymZRUbgR6sC
+
+======================================================================
+[2] KEPT — same title, different share_ids (likely diff resources)
+======================================================================
+  小哥斯拉的逆袭  ->  ['JfirffdnsGL', 'tsjT4JL78UD']
+  妖幻三重奏  ->  ['kZitTTE9iyF', '5Lcoz17fyXB', 'i9Ny6mQcNz6']
+  伊甸星原 第二季  ->  ['vdfNGvzKCE2', 'P95Fn5cp77M']
+  久保同学不放过我  ->  ['dm4hLQm31Rk', 'BSv4zAh9Pdk']
+  因为太怕痛就全点防御力了  ->  ['ynzoJGj5XHx', 'Z7e9cAdugsJ']
+  夏日重现  ->  ['PHwNTxz86su', 'hupWmsWuV73']
+  来自深渊  ->  ['HZ9wdQRBS4U', 'QVhDEwFv5Fz']
+  地球外少年少女  ->  ['ZWGjoGecJ3q', 'vAKzHDDR82p']
+  我们的重制人生  ->  ['yxfC5E5Bjuo', 'jbAyxkKJ5aX']
+  One Room  ->  ['XWdPyu2iLe9', 'A8LiGD3n28c']
+  成神之日  ->  ['sMd8XEVnEeb', 'PjG4b993su8']
+  请问您今天要来点兔子吗？  ->  ['ikgEj3ViEeQ', 'b5wf3FJnurs']
+  放学后海堤日记  ->  ['r29B8WndJbx', 'JLJatbq4qTu']
+  恋爱小行星  ->  ['DgXcCLZw2Hg', 'HMHvKWkRjkN']
+  猫娘乐园Nekopara  ->  ['ADktv2nVYpm', 'HQAHKu5hdLh']
+  钢琴之森  ->  ['nBfUBtikUpd', 'RKRMfSWXgQB']
+  皿三昧  ->  ['LUgAHbb8Zhs', 'qyvCi4d4L5D']
+  COP CRAFT 全缉毒狂潮  ->  ['Czm1tw4u1e7', 'WHQ3qTphCrg']
+  茜色少女  ->  ['h7ThtSefHPR', 'F2VPBejvVvB']
+  齐木楠雄的灾难  ->  ['MgAtJExkmod', 'cjXiG65Tocu']
+  来自多彩世界的明天  ->  ['NCzGeuQUhW1', 'gvicVsoGpnt']
+  寄宿学校的朱丽叶  ->  ['GsmuYg1hnvn', 'r8peJdYzcpv']
+  妖怪旅馆营业中  ->  ['5QTi12PZ8fR', 'oWGLaVNoDF3']
+  魔法少女网站  ->  ['LEQ6MchNs4k', 'Zg9Pvoup3sC']
+  黑社会的超能力女儿  ->  ['D4macbDadzk', 'SF9SgYbHkdC']
+  刻刻  ->  ['GPjJmyeoqqi', 'javcY855Z88']
+  比宇宙更远的地方  ->  ['1KdFRYKigNX', '1hbdkdGFJWs']
+  博多豚骨拉面团  ->  ['BnX2DmfTJet', 'uoYUYsD9Ek2']
+  春宵苦短，少女前进吧！  ->  ['DCPhBKiYSk6', '58waPv9xSqx']
+
+======================================================================
+[3] KEPT — same share_id, different titles (alias / bundled)
+======================================================================
+  qmdGjJpkuV5  ->  ['时光巡逻队 第二季', '时光巡逻队']
+  db1LfeX8CyH  ->  ['青春猪头少年不会梦到红书包女孩', '青春猪头少年系列']
+  1aaz3n1x1ts  ->  ['约会大作战 第五季', '约会大作战 第四季', '约会大作战']
+  6YPwk8SWkVm  ->  ['无职转生 第二季 Part.2', '无职转生 第二季', '无职转生~']
+  zn3ZeuitcLv  ->  ['我心里危险的东西 第二季', '我心里危险的东西 / 我内心的糟糕念头']
+  mDDtsFLGxXS  ->  ['物理魔法使马修 第二季 肌肉魔法使', '物理魔法使马修 肌肉魔法使']
+  SDWD86VnMzM  ->  ['我被逐出队伍后过上慢生活', '因为不是真正的伙伴而被逐出勇者队伍 流落到边境展开慢活人生 第二季']
+  LesCoDYQF8y  ->  ['灌篮高手大电影 The First Slam Dunk', '灌篮高手']
+  GBSzqR3NHG9  ->  ['间谍过家家 第二季', '间谍过家家']
+  9P17jPjLsZ5  ->  ['赛马娘 第三季', '赛马娘']
+  DorYQ8TZZuP  ->  ['堤亚穆帝国物语～', '堤亚穆帝国物语～从断头台开始，公主重生后的逆转人生～']
+  z2WHkDfqWdL  ->  ['位于恋爱光谱极端的我们', '经验丰富的你和经验为零的我交往的故事(位于恋爱光谱极端的我们)']
+  EcTMJMHWkTi  ->  ['蓝色巨星 BLUE GIANT', 'BLUE GIANT 蓝色巨星']
+  j9HUMxMzyf8  ->  ['剧场版 古立特宇宙 古利特宇宙 SSSS系列', 'SSSS系列 古立特 电光机王']
+  VkCK4CfEALe  ->  ['范马刃牙 第二季', '范马刃牙']
+  usKTefSZhBG  ->  ['鬼灭之刃锻刀村篇', '鬼灭之刃']
+  UKmGtJVr85A  ->  ['冰海战记 / 海盗战记 第二季', '冰海战记/海盗战记']
+  9g2TLk4jP1W  ->  ['魔王学院的不适任者 第二季', '魔王学院的不适合者 第二季']
+  h88LafUeE3a  ->  ['黄金神威 第4期', '黄金神威']
+  btwzU9YgP1F  ->  ['我的青春恋爱物语果然有问题 三季全+OVA', '我的青春恋爱物语果然有问题']
+  MBpgaHhJe8Y  ->  ['魔术士奥芬的无赖之旅 第三季', '魔术士欧菲流浪之旅 基姆拉克篇', '魔术士欧菲 流浪之旅']
+  Qfm4FPwqs4V  ->  ['天使降临到了我身边 剧场版', '天使降临到了我身边']
+  24iwNyq49pz  ->  ['舰队Collection 总有一天在那片海', '舰队收藏／舰队Collection']
+  BGpQzb9nc3x  ->  ['飙速宅男 LIMIT BREAK 第五季', '飙速宅男']
+  bA2Nw5x7ZBd  ->  ['Muv-Luv Alternative 第二期', 'Muv-Luv Alternative']
+  CyCK1xJBUvi  ->  ['我让最想被拥抱的男人给威胁了。~西班牙篇~', '我让最想被拥抱的男人给威胁了。']
+  x8TrLgXtT4S  ->  ['寒蝉鸣泣之时 卒', '寒蝉鸣泣之时 业']
+  uK1kWLHXiia  ->  ['剧场版 奇巧计程车 扑朔谜林', '奇巧计程车']
+  LKELrndEfvf  ->  ['幼女战记 沙漠意面大作战', '幼女战记 谭雅战纪']
+  XCS1ESvgBJq  ->  ['装甲重拳 机甲拳击 MEGALO BOX', 'MEGALO BOX 装甲重拳／机甲拳击']
+  qrq2hXDDLhQ  ->  ['工作细胞BLACK', '工作细胞']
+  4aJqG468dqT  ->  ['厨神小当家 第二季', '厨神小当家']
+  wjCZrczNCLQ  ->  ['WIXOSS DIVA(A)LIVE', 'WIXOSS系列']
+  wDftCNhWn4X  ->  ['排球少年!! TO THE TOP', '排球少年!']
+  4Ji3fkeECvE  ->  ['食戟之灵 豪之皿', '食戟之灵']
