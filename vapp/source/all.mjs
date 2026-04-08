@@ -1,4 +1,5 @@
-import SourceAlidRuach from "./db/alid_ruach.mjs";
+import SourceAlipan from "./db/alipan.mjs";
+import SourceQuark from "./db/quark.mjs";
 import SourceBgmd from "./db/bgmd.mjs";
 import SourceDmzj from "./online/dmzj.mjs";
 import SourceKoxMoe from "./online/koxmoe.mjs";
@@ -19,10 +20,15 @@ const ALL_SOURCES = [
         "anime1.me",
         `${AIRANIME_RP_URL}/file/anime1.json`
     ),
-    new SourceAlidRuach(
-        "Anime/alid_ruach/阿里云盘@Ruach",
+    new SourceAlipan(
+        "Anime/alipan/阿里云盘@Ruach",
         "docs.qq.com/doc/DRHhIUkFqeWhGYmpT",
-        `${AIRANIME_RP_URL}/file/alid_ruach.json`
+        `${AIRANIME_RP_URL}/file/alipan.json`
+    ),
+    new SourceQuark(
+        "Anime/quark/夸克网盘@Ruach",
+        "docs.qq.com/doc/DRHhIUkFqeWhGYmpT",
+        `${AIRANIME_RP_URL}/file/quark.json`
     ),
     new SourceGuguFan(
         "Anime/gugufan/咕咕番",

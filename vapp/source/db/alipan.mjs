@@ -1,6 +1,6 @@
 import SourceDB from "./root.mjs";
 
-export default class SourceAlidRuach extends SourceDB {
+export default class SourceAlipan extends SourceDB {
     async get(keyword, amount) {
         const data = await this.update(false);
         const r = [];

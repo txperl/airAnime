@@ -1,8 +1,8 @@
-"""Parse raw.docx (alipan anime list) into alid.json + alid_ruach.json.
+"""Parse raw.docx (quark anime list) into quark.json + quark_full.json.
 
 Output (next to this script):
-  alid.json        — [{title, link: full URL}]
-  alid_ruach.json  — [{title, link: share ID}]
+  quark.json       — [{title, link: share ID}]
+  quark_full.json  — [{title, link: full URL}]
   dups.txt         — duplicate audit report
 """
 
@@ -16,14 +16,16 @@ from collections import Counter, OrderedDict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DOCX = os.path.join(HERE, "raw.docx")
-OUT_RAW = os.path.join(HERE, "alid.json")
-OUT_PURE = os.path.join(HERE, "alid_ruach.json")
+OUT_RAW = os.path.join(HERE, "quark_full.json")
+OUT_PURE = os.path.join(HERE, "quark.json")
 OUT_DUPS = os.path.join(HERE, "dups.txt")
 
 PARA_RE = re.compile(r"<w:p\b[^>]*>.*?</w:p>", re.S)
 TEXT_RE = re.compile(r"<w:t[^>]*>([^<]*)</w:t>")
-HYPERLINK_RE = re.compile(r"<w:instrText[^>]*>\s*HYPERLINK\s+(https?://\S+)")
-ALI_RE = re.compile(r"^https?://(?:www\.)?(?:alipan|aliyundrive)\.com/s/([A-Za-z0-9]+)")
+HYPERLINK_RE = re.compile(
+    r'<w:instrText[^>]*>\s*HYPERLINK\s+&quot;(https?://[^\s<&]+)&quot;'
+)
+QUARK_RE = re.compile(r"^https?://pan\.quark\.cn/s/([0-9a-f]{12})$")
 TITLE_STRIP = "✨⭐● \t"
 
 
@@ -35,12 +37,12 @@ def load_paragraphs():
 
 def para_info(p):
     text = "".join(TEXT_RE.findall(p)).strip()
-    ali = []
+    quark = []
     for url in HYPERLINK_RE.findall(p):
-        m = ALI_RE.match(url)
+        m = QUARK_RE.match(url)
         if m:
-            ali.append((url, m.group(1)))
-    return text, ali
+            quark.append((url, m.group(1)))
+    return text, quark
 
 
 def clean_title(t):
@@ -54,14 +56,14 @@ def parse():
     prev_text = None
 
     for p in paragraphs:
-        text, ali = para_info(p)
+        text, quark = para_info(p)
 
-        if not ali:
+        if not quark:
             prev_text = text if text else None
             continue
 
-        if len(ali) == 1:
-            full, sid = ali[0]
+        if len(quark) == 1:
+            full, sid = quark[0]
             if text == full:
                 # C: legacy — title is in the previous paragraph (✨...)
                 if prev_text and prev_text.startswith("✨"):
@@ -84,8 +86,8 @@ def parse():
         else:
             # B: multiple titles separated by 2+ spaces, paired with multiple links
             titles = re.split(r"\s{2,}", text)
-            if len(titles) == len(ali):
-                for ti, (full, sid) in zip(titles, ali):
+            if len(titles) == len(quark):
+                for ti, (full, sid) in zip(titles, quark):
                     ti = clean_title(ti)
                     if ti:
                         records.append((ti, full, sid))
@@ -96,7 +98,7 @@ def parse():
                 counts["B_mismatch"] += 1
                 counts["skip"] += 1
                 print(
-                    f"  warn: B-class title/url count mismatch: text={text!r} urls={[u for u,_ in ali]}",
+                    f"  warn: B-class title/url count mismatch: text={text!r} urls={[u for u,_ in quark]}",
                     file=sys.stderr,
                 )
 
