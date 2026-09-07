@@ -19,7 +19,12 @@
   因为太怕痛就全点防御力了  ->  ['ynzoJGj5XHx', 'Z7e9cAdugsJ']
   夏日重现  ->  ['PHwNTxz86su', 'hupWmsWuV73']
   地球外少年少女  ->  ['ZWGjoGecJ3q', 'vAKzHDDR82p']
+  成神之日  ->  ['sMd8XEVnEeb', 'PjG4b993su8']
+  COP CRAFT 全缉毒狂潮  ->  ['Czm1tw4u1e7', 'WHQ3qTphCrg']
   妖怪旅馆营业中  ->  ['5QTi12PZ8fR', 'oWGLaVNoDF3']
+  比宇宙更远的地方  ->  ['1KdFRYKigNX', '1hbdkdGFJWs']
+  博多豚骨拉面团  ->  ['BnX2DmfTJet', 'uoYUYsD9Ek2']
+  春宵苦短，少女前进吧！  ->  ['DCPhBKiYSk6', '58waPv9xSqx']
 
 ======================================================================
 [3] KEPT — same share_id, different titles (alias / bundled)
@@ -34,10 +39,12 @@
   9P17jPjLsZ5  ->  ['赛马娘 第三季', '赛马娘']
   DorYQ8TZZuP  ->  ['堤亚穆帝国物语～', '堤亚穆帝国物语～从断头台开始，公主重生后的逆转人生～']
   z2WHkDfqWdL  ->  ['位于恋爱光谱极端的我们', '经验丰富的你和经验为零的我交往的故事(位于恋爱光谱极端的我们)']
+  EcTMJMHWkTi  ->  ['蓝色巨星 BLUE GIANT', 'BLUE GIANT 蓝色巨星']
   VkCK4CfEALe  ->  ['范马刃牙 第二季', '范马刃牙']
   UKmGtJVr85A  ->  ['冰海战记 / 海盗战记 第二季', '冰海战记/海盗战记']
   9g2TLk4jP1W  ->  ['魔王学院的不适任者 第二季', '魔王学院的不适合者 第二季']
   MBpgaHhJe8Y  ->  ['魔术士奥芬的无赖之旅 第三季', '魔术士欧菲流浪之旅 基姆拉克篇', '魔术士欧菲 流浪之旅']
+  BGpQzb9nc3x  ->  ['飙速宅男 LIMIT BREAK 第五季', '飙速宅男']
   bA2Nw5x7ZBd  ->  ['Muv-Luv Alternative 第二期', 'Muv-Luv Alternative']
   x8TrLgXtT4S  ->  ['寒蝉鸣泣之时 卒', '寒蝉鸣泣之时 业']
   4aJqG468dqT  ->  ['厨神小当家 第二季', '厨神小当家']

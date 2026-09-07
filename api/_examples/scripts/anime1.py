@@ -3,7 +3,7 @@ import re
 from zhconv import convert
 import json
 
-playlist_url = "https://d1zquzjgwo9yb.cloudfront.net/"
+playlist_url = "https://anime1.me/animelist.json"
 playlist_data = requests.get(playlist_url).json()
 
 r = []
